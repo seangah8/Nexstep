@@ -1,0 +1,6 @@
+@use './vars';
+
+.app{
+    color: vars.$blue;
+    font-size: 1.5rem;
+}
