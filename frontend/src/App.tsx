@@ -1,8 +1,17 @@
+import { Route, HashRouter as Router, Routes } from 'react-router-dom'
+
+import TimelinePage from "./pages/TimeLinePage.tsx"
+
+
 function App() {
 
   return (
     <section className='app'>
-      <h1>Nextep</h1>
+      <Router>
+        <Routes>
+          <Route path='/' element={<TimelinePage />} />
+        </Routes>
+      </Router>
     </section>
   )
 }
