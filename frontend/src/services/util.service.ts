@@ -1,5 +1,6 @@
 export const utilService = {
     describeArc,
+    createId
 }
 
 function describeArc(cx : number, cy : number, r : number, startAngle : number, endAngle : number) {
@@ -13,6 +14,19 @@ function describeArc(cx : number, cy : number, r : number, startAngle : number, 
         "A", r, r, 0, largeArcFlag, 0, end.x, end.y
     ].join(" ")
 }
+
+function createId(length = 8) {
+    var txt = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+
+    return txt
+}
+
+// private functions
 
 function _polarToCartesian(cx : number, cy : number, r: number, angleDeg : number) {
     const angleRad = (angleDeg - 90) * (Math.PI / 180)
