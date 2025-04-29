@@ -24,21 +24,48 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEdit
             let newSteps = allSteps.map(step => 
                 (step.id === stepToEdit.step.id) ? newStepToEdit.step : step)
             
-            if(preEnd !== newStepToEdit.step.end)
-                newSteps = changeChildrensEnd(newSteps, stepToEdit.step.id, (newStepToEdit.step.end-stepToEdit.start)/(preEnd-stepToEdit.start))
+            if(preEnd !== newStepToEdit.step.end){
+                newSteps = changeChildrensEnd(
+                    newSteps, 
+                    stepToEdit.step.id, 
+                    stepToEdit.start,
+                    preEnd,
+                    stepToEdit.start, // start not change
+                    newStepToEdit.step.end
+                )
+
+                if(stepToEdit.nextStep){
+                    newSteps = changeChildrensEnd(
+                        newSteps, 
+                        stepToEdit.nextStep.id, 
+                        preEnd,
+                        stepToEdit.nextStep.end,
+                        newStepToEdit.step.end,
+                        stepToEdit.nextStep.end // end not change
+                    )
+                }
+            }
+                
 
             onUpdateSteps(newSteps)
         }
         onUpdateEditModal(null)
     }
 
-    function changeChildrensEnd(allSteps: StepModel[], changedStepId: string, ratio: number): StepModel[] {
+    function changeChildrensEnd(allSteps: StepModel[], 
+        changedStepId: string, 
+        preStart: number, 
+        preEnd: number, 
+        postStart: number, 
+        postEnd : number
+    ) : StepModel[] {
+        
         const updatedSteps = allSteps.map(step =>  ({...step})) //deep copy
       
         function updateChildren(parentId: string) {
           for (const step of updatedSteps) {
             if (step.parent === parentId) {
-              step.end = Math.floor((step.end-stepToEdit.start)*ratio) + stepToEdit.start
+              step.end = Math.floor(postStart + (postEnd-postStart) * (step.end-preStart)/(preEnd-preStart))
               console.log('Updated Step', step)
               updateChildren(step.id)
             }

@@ -13,4 +13,5 @@ export interface MainStepModel extends  StepModel{
 export interface editModalModel{
   step: StepModel
   start: number
+  nextStep: StepModel | null
 }

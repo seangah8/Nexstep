@@ -1,6 +1,6 @@
 import { utilService } from "../services/util.service"
 import { useState } from "react";
-import { StepModel, MainStepModel } from "../models/timeline.models";
+import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
 
@@ -28,7 +28,7 @@ function Timeline() {
 
 
   const [mainStep, setMainStep] = useState<MainStepModel>({...steps[0], start: createTime})
-  const [editModal, setEditModal] = useState<{step: StepModel, start: number} | null>(null)
+  const [editModal, setEditModal] = useState<editModalModel | null>(null)
 
   // some UI controle
   const svgSize = 600
@@ -42,7 +42,7 @@ function Timeline() {
     setSteps(newSteps)
   }
 
-  function onUpdateEditModal(newEditModal : {step: StepModel, start: number} | null) : void{
+  function onUpdateEditModal(newEditModal : editModalModel | null) : void{
     setEditModal(newEditModal)
   }
   
@@ -71,9 +71,9 @@ function Timeline() {
     }
   }
 
-  function handleRightClick(event: React.MouseEvent, step: StepModel, prevEnd: number) {
+  function handleRightClick(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
     event.preventDefault()
-    setEditModal({step: step, start: prevEnd})
+    setEditModal({step: step, start: prevEnd, nextStep: nextStep})
   }
 
 
@@ -96,6 +96,7 @@ function Timeline() {
 
           const renderedSteps = stepsToShow.map((step, index) => {
             const prevEnd = stepsToShow[index - 1]?.end ?? mainStep.start
+            const nextStep = stepsToShow[index + 1] ?? null
             const stepDays = step.end - prevEnd
             const stepAngle = (stepDays / totalDays) * angleRange
             const startAngle = spaceDeg / 2 + (accumulated / totalDays) * angleRange
@@ -110,7 +111,7 @@ function Timeline() {
               <g key={step.id} 
                 onClick={()=>onSelectStep(step, prevEnd, stepsToShow)} 
                 onWheel={event=>handleZoomIn(event,step, prevEnd, stepsToShow)}
-                onContextMenu={event=>handleRightClick(event,step,prevEnd)}>
+                onContextMenu={event=>handleRightClick(event,step,prevEnd, nextStep)}>
                 <path
                   d={utilService.describeArc(pathCenter.x, pathCenter.y, radius, startAngle, endAngle)}
                   stroke={index % 2 === 0 ? "blue" : "red"}
