@@ -2,27 +2,33 @@ import { utilService } from "../services/util.service"
 import { useState } from "react";
 import { StepModel, MainStepModel } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
+import { EditStepModal } from "./EditStepModal";
 
 function Timeline() {
 
 
 
-  const steps : StepModel[] = [
-    { id: 'idUserGoal', title:'Users Goal', parent: null, end: 350},
-    {id: 'idS1', parent: 'idUserGoal', title: 'S1', end: 150},
-    {id: 'idS2' ,parent: 'idUserGoal', title: 'S2', end: 180},
-    {id: 'idS3' ,parent: 'idUserGoal', title: 'S3', end: 240},
-    {id: 'idS4' ,parent: 'idUserGoal', title: 'S4', end: 330},
-    {id: 'idG' ,parent: 'idUserGoal', title: 'G', end: 350},
-    {id: 'idG.F' ,parent: 'idG', title: 'G.F', end: 335},
-    {id: 'idG.G' ,parent: 'idG', title: 'G.G', end: 350}
-  ]
+  const [steps, setSteps] = useState<StepModel[]>(
+    [
+      { id: 'idUserGoal', title:'Users Goal', parent: null, end: 350},
+      {id: 'idS1', parent: 'idUserGoal', title: 'S1', end: 150},
+      {id: 'idS1.S1' ,parent: 'idS1', title: 'S1.S1', end: 105},
+      {id: 'idS1.S2' ,parent: 'idS1', title: 'S1.S2', end: 115},
+      {id: 'idS1.N2' ,parent: 'idS1', title: 'S1', end: 150},
+      {id: 'idS2' ,parent: 'idUserGoal', title: 'S2', end: 180},
+      {id: 'idS3' ,parent: 'idUserGoal', title: 'S3', end: 240},
+      {id: 'idS4' ,parent: 'idUserGoal', title: 'S4', end: 330},
+      {id: 'idG' ,parent: 'idUserGoal', title: 'G', end: 350},
+      {id: 'idG.F' ,parent: 'idG', title: 'G.F', end: 335},
+      {id: 'idG.G' ,parent: 'idG', title: 'G.G', end: 350}
+    ]
+  ) 
 
   const createTime = 100
 
 
   const [mainStep, setMainStep] = useState<MainStepModel>({...steps[0], start: createTime})
-
+  const [editModal, setEditModal] = useState<{step: StepModel, start: number} | null>(null)
 
   // some UI controle
   const svgSize = 600
@@ -32,7 +38,17 @@ function Timeline() {
   const strokeWidth = 30
   const circlesSize = 35
 
+  function onUpdateSteps(newSteps : StepModel[]) : void{
+    setSteps(newSteps)
+  }
+
+  function onUpdateEditModal(newEditModal : {step: StepModel, start: number} | null) : void{
+    setEditModal(newEditModal)
+  }
+  
+
   function onSelectStep(selectStep : StepModel, prevEnd: number, stepsToShow : StepModel[]){
+    console.log('selectStep', {...selectStep, start: prevEnd})
     if(stepsToShow.length <= 1) throw new Error('There are no further steps!')
     else setMainStep({...selectStep, start: prevEnd})
   }
@@ -54,6 +70,13 @@ function Timeline() {
       onSelectStep(selectStep, prevEnd, stepsToShow)
     }
   }
+
+  function handleRightClick(event: React.MouseEvent, step: StepModel, prevEnd: number) {
+    event.preventDefault()
+    setEditModal({step: step, start: prevEnd})
+  }
+
+
 
 
   return (
@@ -84,7 +107,10 @@ function Timeline() {
             const stepCircleY = pathCenter.y + radius * Math.sin(angleRad)
 
             return (
-              <g key={step.id} onClick={()=>onSelectStep(step, prevEnd, stepsToShow)} onWheel={event=>handleZoomIn(event,step, prevEnd, stepsToShow)}>
+              <g key={step.id} 
+                onClick={()=>onSelectStep(step, prevEnd, stepsToShow)} 
+                onWheel={event=>handleZoomIn(event,step, prevEnd, stepsToShow)}
+                onContextMenu={event=>handleRightClick(event,step,prevEnd)}>
                 <path
                   d={utilService.describeArc(pathCenter.x, pathCenter.y, radius, startAngle, endAngle)}
                   stroke={index % 2 === 0 ? "blue" : "red"}
@@ -116,7 +142,13 @@ function Timeline() {
           return renderedSteps.reverse() // Reverse the JSX elements so circles will be in front
         })()}
       </svg>
-
+      
+      {
+        editModal && <EditStepModal editModal={editModal} 
+        allSteps={steps}
+        onUpdateSteps={onUpdateSteps} 
+        onUpdateEditModal={onUpdateEditModal}/>
+      }
 
     </section>
   )

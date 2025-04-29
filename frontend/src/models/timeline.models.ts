@@ -7,5 +7,10 @@ export interface StepModel {
   }
   
 export interface MainStepModel extends  StepModel{
-start: number
+  start: number
+}
+
+export interface editModalModel{
+  step: StepModel
+  start: number
 }
