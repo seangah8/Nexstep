@@ -10,17 +10,17 @@ function Timeline() {
 
   const [steps, setSteps] = useState<StepModel[]>(
     [
-      { id: 'idUserGoal', title:'Users Goal', parent: null, end: 350},
-      {id: 'idS1', parent: 'idUserGoal', title: 'S1', end: 150},
-      {id: 'idS1.S1' ,parent: 'idS1', title: 'S1.S1', end: 105},
-      {id: 'idS1.S2' ,parent: 'idS1', title: 'S1.S2', end: 115},
-      {id: 'idS1.N2' ,parent: 'idS1', title: 'S1', end: 150},
-      {id: 'idS2' ,parent: 'idUserGoal', title: 'S2', end: 180},
-      {id: 'idS3' ,parent: 'idUserGoal', title: 'S3', end: 240},
-      {id: 'idS4' ,parent: 'idUserGoal', title: 'S4', end: 330},
-      {id: 'idG' ,parent: 'idUserGoal', title: 'G', end: 350},
-      {id: 'idG.F' ,parent: 'idG', title: 'G.F', end: 335},
-      {id: 'idG.G' ,parent: 'idG', title: 'G.G', end: 350}
+      { id: 'idUserGoal', title:'Users Goal', parentId: null, end: 350},
+      {id: 'idS1', parentId: 'idUserGoal', title: 'S1', end: 150},
+      {id: 'idS1.S1' ,parentId: 'idS1', title: 'S1.S1', end: 105},
+      {id: 'idS1.S2' ,parentId: 'idS1', title: 'S1.S2', end: 115},
+      {id: 'idS1.N2' ,parentId: 'idS1', title: 'S1', end: 150},
+      {id: 'idS2' ,parentId: 'idUserGoal', title: 'S2', end: 180},
+      {id: 'idS3' ,parentId: 'idUserGoal', title: 'S3', end: 240},
+      {id: 'idS4' ,parentId: 'idUserGoal', title: 'S4', end: 330},
+      {id: 'idG' ,parentId: 'idUserGoal', title: 'G', end: 350},
+      {id: 'idG.F' ,parentId: 'idG', title: 'G.S1', end: 335},
+      {id: 'idG.G' ,parentId: 'idG', title: 'G', end: 350}
     ]
   ) 
 
@@ -38,8 +38,13 @@ function Timeline() {
   const strokeWidth = 30
   const circlesSize = 35
 
-  function onUpdateSteps(newSteps : StepModel[]) : void{
+  function onUpdateSteps(newSteps : StepModel[], postEnd: number) : void{
     setSteps(newSteps)
+
+    //updateing the main step as well for counter conflicts
+    const updatedMainStep = newSteps.find(step=> mainStep.id === step.id)
+    if(updatedMainStep)
+      setMainStep({...updatedMainStep, end: postEnd, start: mainStep.start})
   }
 
   function onUpdateEditModal(newEditModal : editModalModel | null) : void{
@@ -56,7 +61,7 @@ function Timeline() {
   function handleZoomOut(event: React.WheelEvent) {
 
     if (event.deltaY > 0) { // User scrolled DOWN
-      const parentStep = steps.find(step => step.id === mainStep.parent)
+      const parentStep = steps.find(step => step.id === mainStep.parentId)
       if (!parentStep) return
   
       // Go up to parent
@@ -88,7 +93,7 @@ function Timeline() {
           const angleRange = 360 - spaceDeg
           let accumulated = 0
 
-          const stepsToShow: StepModel[] = steps.filter(step=>step.parent === mainStep.id)
+          const stepsToShow: StepModel[] = steps.filter(step=>step.parentId === mainStep.id)
           if(stepsToShow.length <= 0) {
             const { start, ...mainStepWithoutStart } = mainStep
             stepsToShow.push(mainStepWithoutStart)

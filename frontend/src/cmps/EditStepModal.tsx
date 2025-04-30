@@ -4,7 +4,7 @@ import { StepModel, editModalModel } from "../models/timeline.models"
 interface EditStepModalProps{
     editModal : editModalModel
     allSteps : StepModel[]
-    onUpdateSteps : (newSteps : StepModel[]) => void
+    onUpdateSteps : (newSteps : StepModel[], postEnd: number) => void
     onUpdateEditModal : (newEditModal : editModalModel | null) => void
 }
 
@@ -25,9 +25,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEdit
                 (step.id === stepToEdit.step.id) ? newStepToEdit.step : step)
             
             if(preEnd !== newStepToEdit.step.end){
-                newSteps = changeChildrensEnd(
+                newSteps = changeChildrenAndParantsEnd(
                     newSteps, 
-                    stepToEdit.step.id, 
+                    stepToEdit.step, 
                     stepToEdit.start,
                     preEnd,
                     stepToEdit.start, // start not change
@@ -35,9 +35,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEdit
                 )
 
                 if(stepToEdit.nextStep){
-                    newSteps = changeChildrensEnd(
+                    newSteps = changeChildrenAndParantsEnd(
                         newSteps, 
-                        stepToEdit.nextStep.id, 
+                        stepToEdit.nextStep, 
                         preEnd,
                         stepToEdit.nextStep.end,
                         newStepToEdit.step.end,
@@ -47,35 +47,51 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEdit
             }
                 
 
-            onUpdateSteps(newSteps)
+            onUpdateSteps(newSteps, newStepToEdit.step.end)
         }
         onUpdateEditModal(null)
     }
 
-    function changeChildrensEnd(allSteps: StepModel[], 
-        changedStepId: string, 
-        preStart: number, 
-        preEnd: number, 
-        postStart: number, 
-        postEnd : number
-    ) : StepModel[] {
-        
-        const updatedSteps = allSteps.map(step =>  ({...step})) //deep copy
+    function changeChildrenAndParantsEnd(
+        allSteps: StepModel[],
+        changedStep: StepModel,
+        preStart: number,
+        preEnd: number,
+        postStart: number,
+        postEnd: number
+      ): StepModel[] {
+
+        const updatedSteps = allSteps.map(step => ({ ...step })) // deep copy
       
-        function updateChildren(parentId: string) {
-          for (const step of updatedSteps) {
-            if (step.parent === parentId) {
-              step.end = Math.floor(postStart + (postEnd-postStart) * (step.end-preStart)/(preEnd-preStart))
-              console.log('Updated Step', step)
-              updateChildren(step.id)
-            }
+        function updateChildren(parent: StepModel) {
+          const children = updatedSteps.filter(step => step.parentId === parent.id)
+        
+          for (const child of children) {
+            // Recursively update this child's children first
+            updateChildren(child)
+        
+            // Update this child's end
+            child.end = Math.floor(
+              postStart + ((postEnd - postStart) * (child.end - preStart)) / (preEnd - preStart)
+            )
           }
         }
-      
-        updateChildren(changedStepId)
 
+        function updateParents(changedStep : StepModel){
+          const parent = updatedSteps.find(step=>step.id === changedStep.parentId)
+          if(parent && preEnd === parent.end){
+            parent.end = postEnd
+            updateParents(parent)
+          }
+        }
+        
+        updateParents(changedStep)
+        updateChildren(changedStep)
+        // updateLastParents(changedStep)
+      
         return updatedSteps
-    }
+      }
+      
       
 
     return(

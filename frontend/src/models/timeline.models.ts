@@ -1,7 +1,7 @@
 
 export interface StepModel {
     id: string
-    parent: string | null
+    parentId: string | null
     title: string
     end: number
   }
