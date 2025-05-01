@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { StepModel, editModalModel } from "../models/timeline.models"
+import { timelineService } from "../services/timeline.service"
 
 interface EditStepModalProps{
     editModal : editModalModel
@@ -23,6 +24,7 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
         event.preventDefault()
         if(editModal){
 
+          // first change the step you edited
           let newSteps = allSteps.map(step => 
               (step.id === stepToEdit.id) ? stepToEdit : step)
           
@@ -32,7 +34,8 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
             if((editModal.nextStep && (stepToEdit.end >= editModal.nextStep.end)) || (stepToEdit.end <= editModal.start))
               throw new Error('cant change step end beyond boundries')
             
-            newSteps = changeChildrenAndParantsEnd(
+            //change step's children
+            newSteps = timelineService.changeChildrenAndParentsEnd(
                 newSteps, 
                 stepToEdit, 
                 editModal.start,
@@ -41,8 +44,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                 stepToEdit.end
             )
 
+            //change next step's children as well
             if(editModal.nextStep){
-                newSteps = changeChildrenAndParantsEnd(
+                newSteps = timelineService.changeChildrenAndParentsEnd(
                     newSteps, 
                     editModal.nextStep, 
                     preEnd,
@@ -52,62 +56,35 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                 )
             } 
 
-
+            // update the main step in case you changed the last step in it 
+            // (so it wont get messy for not re-rendering it)
             if(!editModal.nextStep)
               onUpdateMainStepEnd(stepToEdit.end)
           }
-                
+          //update all steps with your changed
           onUpdateSteps(newSteps)
-
         }
+        //close modal
         onUpdateEditModal(null)
-    }
-
-    function changeChildrenAndParantsEnd(
-        allSteps: StepModel[],
-        changedStep: StepModel,
-        preStart: number,
-        preEnd: number,
-        postStart: number,
-        postEnd: number
-      ): StepModel[] {
-
-        const updatedSteps = allSteps.map(step => ({ ...step })) // deep copy
-      
-        function updateChildren(parent: StepModel) {
-          const children = updatedSteps.filter(step => step.parentId === parent.id)
-        
-          for (const child of children) {
-            updateChildren(child)
-            child.end = Math.floor(
-              postStart + ((postEnd - postStart) * (child.end - preStart)) / (preEnd - preStart)
-            )
-          }
-        }
-
-        function updateParents(changedStep : StepModel){
-          const parent = updatedSteps.find(step=>step.id === changedStep.parentId)
-          if(parent && preEnd === parent.end){
-            parent.end = postEnd
-            updateParents(parent)
-          }
-        }
-        
-        updateParents(changedStep)
-        updateChildren(changedStep)
-        // updateLastParents(changedStep)
-      
-        return updatedSteps
-      }
-      
+    }  
       
 
     return(
         <section className="edit-step-modal">
-            <h3>Edit Step Modal Here</h3>
+            <h3>Edit Step Modal</h3>
 
-            <form onSubmit={event=>onUpdateStep(event)}>
-                <input type="number" value={stepToEdit.end} onChange={handleChange} name="end"/>
+            <form onSubmit={onUpdateStep}>
+              <label htmlFor="end">End Time</label>
+              <input
+                id="end"
+                type="number"
+                value={stepToEdit.end}
+                onChange={handleChange}
+                name="end"
+                min={editModal.start + 1}
+                max={editModal.nextStep?.end ?? Number.MAX_SAFE_INTEGER}
+              />
+              <button type="submit">Save</button>
             </form>
 
 
