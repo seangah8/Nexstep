@@ -1,5 +1,5 @@
 import { utilService } from "../services/util.service"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
@@ -30,6 +30,7 @@ function Timeline() {
   const [mainStep, setMainStep] = useState<MainStepModel>({...steps[0], start: createTime})
   const [editModal, setEditModal] = useState<editModalModel | null>(null)
 
+
   // some UI controle
   const svgSize = 600
   const pathCenter = {x: 300, y: 300}
@@ -38,13 +39,16 @@ function Timeline() {
   const strokeWidth = 30
   const circlesSize = 35
 
-  function onUpdateSteps(newSteps : StepModel[], postEnd: number) : void{
-    setSteps(newSteps)
+  useEffect(()=>{
+    console.log('mainStep', mainStep)
+  },[mainStep])
 
-    //updateing the main step as well for counter conflicts
-    const updatedMainStep = newSteps.find(step=> mainStep.id === step.id)
-    if(updatedMainStep)
-      setMainStep({...updatedMainStep, end: postEnd, start: mainStep.start})
+  function onUpdateSteps(newSteps : StepModel[]) : void{
+    setSteps(newSteps)
+  }
+
+  function onUpdateMainStepEnd(end: number) : void{
+    setMainStep(prev =>  ({...prev, end: end}))
   }
 
   function onUpdateEditModal(newEditModal : editModalModel | null) : void{
@@ -153,6 +157,7 @@ function Timeline() {
         editModal && <EditStepModal editModal={editModal} 
         allSteps={steps}
         onUpdateSteps={onUpdateSteps} 
+        onUpdateMainStepEnd={onUpdateMainStepEnd}
         onUpdateEditModal={onUpdateEditModal}/>
       }
 

@@ -4,50 +4,61 @@ import { StepModel, editModalModel } from "../models/timeline.models"
 interface EditStepModalProps{
     editModal : editModalModel
     allSteps : StepModel[]
-    onUpdateSteps : (newSteps : StepModel[], postEnd: number) => void
+    onUpdateSteps : (newSteps : StepModel[]) => void
+    onUpdateMainStepEnd : (end : number) => void
     onUpdateEditModal : (newEditModal : editModalModel | null) => void
 }
 
-export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEditModal } : EditStepModalProps){
+export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainStepEnd, onUpdateEditModal } : EditStepModalProps){
 
-    const [stepToEdit, setStepToEdit] = useState<editModalModel>(editModal)
+    const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const preEnd = editModal.step.end
 
     function handleChange(event : ChangeEvent<HTMLInputElement>) : void{
         const endNumber = +event.target.value
-        setStepToEdit({...stepToEdit, step: {...stepToEdit.step, end: endNumber}})
+        setStepToEdit({...stepToEdit, end: endNumber})
     }
 
-    function onUpdateStep(event: FormEvent<HTMLFormElement>, newStepToEdit: editModalModel) : void{
+    function onUpdateStep(event: FormEvent<HTMLFormElement>) : void{
         event.preventDefault()
         if(editModal){
-            let newSteps = allSteps.map(step => 
-                (step.id === stepToEdit.step.id) ? newStepToEdit.step : step)
+
+          let newSteps = allSteps.map(step => 
+              (step.id === stepToEdit.id) ? stepToEdit : step)
+          
+          // when end is beening changed
+          if(preEnd !== stepToEdit.end){
+
+            if((editModal.nextStep && (stepToEdit.end >= editModal.nextStep.end)) || (stepToEdit.end <= editModal.start))
+              throw new Error('cant change step end beyond boundries')
             
-            if(preEnd !== newStepToEdit.step.end){
+            newSteps = changeChildrenAndParantsEnd(
+                newSteps, 
+                stepToEdit, 
+                editModal.start,
+                preEnd,
+                editModal.start, // start not change
+                stepToEdit.end
+            )
+
+            if(editModal.nextStep){
                 newSteps = changeChildrenAndParantsEnd(
                     newSteps, 
-                    stepToEdit.step, 
-                    stepToEdit.start,
+                    editModal.nextStep, 
                     preEnd,
-                    stepToEdit.start, // start not change
-                    newStepToEdit.step.end
+                    editModal.nextStep.end,
+                    stepToEdit.end,
+                    editModal.nextStep.end // end not change
                 )
+            } 
 
-                if(stepToEdit.nextStep){
-                    newSteps = changeChildrenAndParantsEnd(
-                        newSteps, 
-                        stepToEdit.nextStep, 
-                        preEnd,
-                        stepToEdit.nextStep.end,
-                        newStepToEdit.step.end,
-                        stepToEdit.nextStep.end // end not change
-                    )
-                }
-            }
+
+            if(!editModal.nextStep)
+              onUpdateMainStepEnd(stepToEdit.end)
+          }
                 
+          onUpdateSteps(newSteps)
 
-            onUpdateSteps(newSteps, newStepToEdit.step.end)
         }
         onUpdateEditModal(null)
     }
@@ -67,10 +78,7 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEdit
           const children = updatedSteps.filter(step => step.parentId === parent.id)
         
           for (const child of children) {
-            // Recursively update this child's children first
             updateChildren(child)
-        
-            // Update this child's end
             child.end = Math.floor(
               postStart + ((postEnd - postStart) * (child.end - preStart)) / (preEnd - preStart)
             )
@@ -98,8 +106,8 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps, onUpdateEdit
         <section className="edit-step-modal">
             <h3>Edit Step Modal Here</h3>
 
-            <form onSubmit={event=>onUpdateStep(event, stepToEdit)}>
-                <input type="number" value={stepToEdit.step.end} onChange={handleChange} name="end"/>
+            <form onSubmit={event=>onUpdateStep(event)}>
+                <input type="number" value={stepToEdit.end} onChange={handleChange} name="end"/>
             </form>
 
 
