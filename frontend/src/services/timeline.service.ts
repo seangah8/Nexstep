@@ -66,20 +66,30 @@ function changeChildrenAndParentsEnd(
   preStart: number,
   preEnd: number,
   postStart: number,
-  postEnd: number
+  postEnd: number,
+  today: number,
+  isTodayInside: boolean // !!!!!!!!!!!!!
+
 ): StepModel[] {
 
   const updatedSteps = allSteps.map(step => ({ ...step })) // deep copy
 
   // update all childrens end under the step you changed
-  function updateChildren(parent: StepModel) : void {
+
+  function updateChildrenEnd(parent: StepModel) : void {
     const children = updatedSteps.filter(step => step.parentId === parent.id)
   
     for (const child of children) {
-      updateChildren(child)
-      child.end = Math.floor(
-        postStart + ((postEnd - postStart) * (child.end - preStart)) / (preEnd - preStart)
-      )
+      updateChildrenEnd(child)
+      if (child.end > today) {
+        child.end = 
+        isTodayInside ? 
+        Math.floor(
+          today + (postEnd - postStart - (today-preStart)) * ((child.end - preStart - (today-preStart)) / (preEnd - preStart - (today-preStart))))
+        :
+        Math.floor(
+          postStart + (postEnd - postStart) * ((child.end - preStart) / (preEnd - preStart)))
+      }
     }
   }
 
@@ -93,7 +103,7 @@ function changeChildrenAndParentsEnd(
   }
   
   updateParents(changedStep)
-  updateChildren(changedStep)
+  updateChildrenEnd(changedStep)
   // updateLastParents(changedStep)
 
   return updatedSteps

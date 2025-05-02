@@ -33,6 +33,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
 
             if((editModal.nextStep && (stepToEdit.end >= editModal.nextStep.end)) || (stepToEdit.end <= editModal.start))
               throw new Error('cant change step end beyond boundries')
+
+            const isTodayInside = editModal.start < editModal.today 
+                && editModal.today < preEnd
             
             //change step's children
             newSteps = timelineService.changeChildrenAndParentsEnd(
@@ -41,7 +44,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                 editModal.start,
                 preEnd,
                 editModal.start, // start not change
-                stepToEdit.end
+                stepToEdit.end,
+                editModal.today,
+                isTodayInside
             )
 
             //change next step's children as well
@@ -52,7 +57,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                     preEnd,
                     editModal.nextStep.end,
                     stepToEdit.end,
-                    editModal.nextStep.end // end not change
+                    editModal.nextStep.end, // end not change
+                    editModal.today,
+                    isTodayInside
                 )
             } 
 
@@ -81,7 +88,7 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                 value={stepToEdit.end}
                 onChange={handleChange}
                 name="end"
-                min={editModal.start + 1}
+                min={Math.max(editModal.start + 1, editModal.today)}
                 max={editModal.nextStep?.end ?? Number.MAX_SAFE_INTEGER}
               />
               <button type="submit">Save</button>

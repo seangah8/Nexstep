@@ -11,7 +11,7 @@ function Timeline() {
 
   // The time the timeline was created (unchangeable)
   const createTime = 100
-  const today = 200
+  const today = 120
 
   const [steps, setSteps] = useState<StepModel[]>(timelineService.getStepsDatabase)
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
@@ -58,7 +58,8 @@ function Timeline() {
 
   function handleRightClick(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
     event.preventDefault()
-    setEditModal({ step: step, start: prevEnd, nextStep: nextStep })
+    if(step.end > today)
+      setEditModal({ step: step, start: prevEnd, nextStep: nextStep, today: today })
   }
 
   return (
@@ -96,7 +97,7 @@ function Timeline() {
                 onContextMenu={event => handleRightClick(event, step, prevEnd, nextStep)}>
                 <path
                   d={utilService.describeArc(pathCenter.x, pathCenter.y, radius, startAngle, endAngle)}
-                  stroke={index % 2 === 0 ? "blue" : "red"}
+                  stroke={step.end < today ? "green" : "#389BBA"}
                   strokeWidth={strokeWidth}
                   fill='none'
                 />
@@ -104,7 +105,7 @@ function Timeline() {
                   cx={stepCircleX}
                   cy={stepCircleY}
                   r={circlesSize}
-                  fill={index % 2 === 0 ? "blue" : "red"}
+                  fill={step.end < today ? "green" : "#389BBA"}
                   stroke="black"
                   strokeWidth='2'
                 />
@@ -149,7 +150,7 @@ function Timeline() {
                       stroke="black"
                       strokeWidth="2"
                     />
-                  )
+                  ) 
                 })()
               }
             </>

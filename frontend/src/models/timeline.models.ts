@@ -14,4 +14,5 @@ export interface editModalModel{
   step: StepModel
   start: number
   nextStep: StepModel | null
+  today: number
 }
