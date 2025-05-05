@@ -13,7 +13,6 @@ interface EditStepModalProps{
 export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainStepEnd, onUpdateEditModal } : EditStepModalProps){
 
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
-    const preEnd = editModal.step.end
 
     function handleChange(event : ChangeEvent<HTMLInputElement>) : void{
         const endNumber = +event.target.value
@@ -24,44 +23,19 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
         event.preventDefault()
         if(editModal){
 
+        const changeAll = true
+
           // first change the step you edited
           let newSteps = allSteps.map(step => 
               (step.id === stepToEdit.id) ? stepToEdit : step)
           
           // when end is beening changed
-          if(preEnd !== stepToEdit.end){
+          if(editModal.step.end !== stepToEdit.end){
 
-            if((editModal.nextStep && (stepToEdit.end >= editModal.nextStep.end)) || (stepToEdit.end <= editModal.start))
-              throw new Error('cant change step end beyond boundries')
-
-            const isTodayInside = editModal.start < editModal.today 
-                && editModal.today < preEnd
-            
-            //change step's children
-            newSteps = timelineService.changeChildrenAndParentsEnd(
-                newSteps, 
-                stepToEdit, 
-                editModal.start,
-                preEnd,
-                editModal.start, // start not change
-                stepToEdit.end,
-                editModal.today,
-                isTodayInside
-            )
-
-            //change next step's children as well
-            if(editModal.nextStep){
-                newSteps = timelineService.changeChildrenAndParentsEnd(
-                    newSteps, 
-                    editModal.nextStep, 
-                    preEnd,
-                    editModal.nextStep.end,
-                    stepToEdit.end,
-                    editModal.nextStep.end, // end not change
-                    editModal.today,
-                    isTodayInside
-                )
-            } 
+            if(!changeAll)
+                newSteps = timelineService.changeCurrantAndNextStepsEnd(editModal,newSteps,stepToEdit)
+            else
+                newSteps = timelineService.changeAllStepsEnd(editModal,newSteps,stepToEdit)
 
             // update the main step in case you changed the last step in it 
             // (so it wont get messy for not re-rendering it)

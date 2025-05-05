@@ -1,11 +1,12 @@
-import { StepModel } from "../models/timeline.models";
+import { StepModel, editModalModel } from "../models/timeline.models";
 
 
 export const timelineService = {
   getStepsDatabase,
   getTimelineUISettings,
   findParentStart,
-  changeChildrenAndParentsEnd
+  changeCurrantAndNextStepsEnd,
+  changeAllStepsEnd,
 }
 
 const stepsDatabase =     [
@@ -58,9 +59,146 @@ function findParentStart(allSteps: StepModel[], parent: StepModel, createTime: n
 }
 
 
+function changeCurrantAndNextStepsEnd(
+    editModal : editModalModel,
+    newSteps: StepModel[],
+    changedStep: StepModel,
+) : StepModel[]{
+
+  const isTodayInside = editModal.start < editModal.today 
+    && editModal.today < editModal.step.end
+
+  let allSteps = [...newSteps]
+
+  //change step's children
+  allSteps = _changeChildrenAndParentsEnd(
+    allSteps, 
+    changedStep, 
+    editModal.start,
+    editModal.step.end,
+    editModal.start, // start not change
+    changedStep.end,
+    editModal.today,
+    isTodayInside
+  )
+
+  //change next step's children as well
+  if(editModal.nextStep){
+    allSteps = _changeChildrenAndParentsEnd(
+        allSteps, 
+        editModal.nextStep, 
+        editModal.step.end,
+        editModal.nextStep.end,
+        changedStep.end,
+        editModal.nextStep.end, // end not change
+        editModal.today,
+        false // not possible
+    )
+  } 
+
+  return allSteps
+}
+
+
+
+function changeAllStepsEnd(
+  editModal: editModalModel,
+  newSteps: StepModel[],
+  changedStep: StepModel
+): StepModel[] {
+  
+  let allSteps = structuredClone(newSteps)
+
+  // for all siblings
+
+  const siblings = _sortByEnd(
+    allSteps.filter(step => step.parentId === editModal.step.parentId)
+  )
+
+  const parent = allSteps.find(step => step.id === editModal.step.parentId)
+  const parentStart = parent
+    ? findParentStart(allSteps, parent, editModal.createTime)
+    : editModal.createTime
+  const parentEnd = parent
+    ? parent.end
+    : siblings[siblings.length - 1]?.end ?? editModal.createTime
+
+  const isTodayInsideParent =
+    parentStart < editModal.today &&
+    (parent ? editModal.today < parent.end : true)
+
+  const beforeChangedStepRatio = isTodayInsideParent
+    ? (changedStep.end - editModal.today)/ (editModal.step.end - editModal.today)
+    : (changedStep.end - parentStart)/(editModal.step.end - parentStart)
+
+  const afterChangedStepRatio = 
+    (parentEnd - changedStep.end)/(parentEnd - editModal.step.end)
+
+  let postStart = parentStart
+
+  // for each sibling
+
+  for (let i = 0; i < siblings.length; i++) {
+    const step = siblings[i]
+    const prevStep = siblings[i - 1]
+
+    const isChangedStep = step.id === changedStep.id
+    const isNextStep = step.id === editModal.nextStep?.id
+
+    const preStart = isNextStep
+      ? editModal.step.end
+      : i === 0
+      ? parentStart
+      : prevStep.end
+
+    const preEnd = isChangedStep ? editModal.step.end : step.end
+
+    const refPoint = isTodayInsideParent ? editModal.today : parentStart
+
+    const postEnd = isChangedStep
+      ? changedStep.end
+      : step.end <= editModal.step.end
+      ? Math.floor(refPoint + (step.end - refPoint) * beforeChangedStepRatio)
+      : Math.floor(parentEnd - (parentEnd - step.end) * afterChangedStepRatio)
+
+    const isTodayInside =
+      isTodayInsideParent && preStart < editModal.today && editModal.today < step.end
+
+    // Update end of current step if needed
+    if (step.end > editModal.today) {
+      allSteps = allSteps.map(s =>
+        s.id === step.id ? { ...s, end: postEnd } : s
+      )
+    }
+
+    // Recursively update children & parents
+    allSteps = _changeChildrenAndParentsEnd(
+      allSteps,
+      step,
+      preStart,
+      preEnd,
+      postStart,
+      postEnd,
+      editModal.today,
+      isTodayInside
+    )
+
+    postStart = postEnd
+  }
+
+  return allSteps
+}
+
+
+
+
+
+
+
+
 // when changing steps end youll have to change its children and 
 // event mabye parents end to make sense to your timeline
-function changeChildrenAndParentsEnd(
+function _changeChildrenAndParentsEnd(
   allSteps: StepModel[],
   changedStep: StepModel,
   preStart: number,
@@ -68,7 +206,7 @@ function changeChildrenAndParentsEnd(
   postStart: number,
   postEnd: number,
   today: number,
-  isTodayInside: boolean // !!!!!!!!!!!!!
+  isTodayInside: boolean
 
 ): StepModel[] {
 
@@ -108,6 +246,16 @@ function changeChildrenAndParentsEnd(
 
   return updatedSteps
 }
+
+function _sortByEnd(arr : StepModel[]) {
+  return [...arr].sort((a, b) => {
+    if (a.end < b.end) return -1
+    if (a.end > b.end) return 1
+    return 0;
+  })
+}
+
+
 
 
 

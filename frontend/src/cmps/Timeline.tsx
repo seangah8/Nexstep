@@ -59,7 +59,12 @@ function Timeline() {
   function handleRightClick(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
     event.preventDefault()
     if(step.end > today)
-      setEditModal({ step: step, start: prevEnd, nextStep: nextStep, today: today })
+      setEditModal({ 
+        step: step, 
+        start: prevEnd, 
+        nextStep: nextStep, 
+        today: today, 
+        createTime: createTime })
   }
 
   return (
