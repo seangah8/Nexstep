@@ -13,6 +13,7 @@ interface EditStepModalProps{
 export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainStepEnd, onUpdateEditModal } : EditStepModalProps){
 
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
+    const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
 
     function handleChange(event : ChangeEvent<HTMLInputElement>) : void{
         const endNumber = +event.target.value
@@ -23,8 +24,6 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
         event.preventDefault()
         if(editModal){
 
-        const changeAll = true
-
           // first change the step you edited
           let newSteps = allSteps.map(step => 
               (step.id === stepToEdit.id) ? stepToEdit : step)
@@ -32,7 +31,7 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
           // when end is beening changed
           if(editModal.step.end !== stepToEdit.end){
 
-            if(!changeAll)
+            if(!changeAllEnds)
                 newSteps = timelineService.changeCurrantAndNextStepsEnd(editModal,newSteps,stepToEdit)
             else
                 newSteps = timelineService.changeAllStepsEnd(editModal,newSteps,stepToEdit)
@@ -55,6 +54,7 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
             <h3>Edit Step Modal</h3>
 
             <form onSubmit={onUpdateStep}>
+
               <label htmlFor="end">End Time</label>
               <input
                 id="end"
@@ -65,6 +65,16 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                 min={Math.max(editModal.start + 1, editModal.today)}
                 max={editModal.nextStep?.end ?? Number.MAX_SAFE_INTEGER}
               />
+
+              <label htmlFor="change-all">Change All</label>
+              <input
+                id="change-all"
+                type="checkbox"
+                checked={changeAllEnds}
+                onChange={()=>setChangeAllEnds(prev=>!prev)}
+                name="change-all"
+              />
+
               <button type="submit">Save</button>
             </form>
 
