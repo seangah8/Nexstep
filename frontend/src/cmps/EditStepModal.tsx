@@ -31,6 +31,11 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
           // when end is beening changed
           if(editModal.step.end !== stepToEdit.end){
 
+            if(!changeAllEnds && 
+                (stepToEdit.end < Math.max(editModal.start + 1, editModal.today) ||
+                editModal.nextStep && (stepToEdit.end > editModal.nextStep.end))
+            ) throw new Error('cant end this step at that time')
+
             if(!changeAllEnds)
                 newSteps = timelineService.changeCurrantAndNextStepsEnd(editModal,newSteps,stepToEdit)
             else
@@ -62,8 +67,6 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                 value={stepToEdit.end}
                 onChange={handleChange}
                 name="end"
-                min={Math.max(editModal.start + 1, editModal.today)}
-                max={editModal.nextStep?.end ?? Number.MAX_SAFE_INTEGER}
               />
 
               <label htmlFor="change-all">Change All</label>
