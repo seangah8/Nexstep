@@ -1,4 +1,4 @@
-import { StepModel, editModalModel } from "../models/timeline.models";
+import { MainStepModel, StepModel, editModalModel } from "../models/timeline.models";
 
 
 export const timelineService = {
@@ -7,6 +7,8 @@ export const timelineService = {
   findParentStart,
   changeCurrantAndNextStepsEnd,
   changeAllStepsEnd,
+  DayToStepLocation,
+  DayToTodayLocation,
 }
 
 const stepsDatabase =     [
@@ -25,7 +27,7 @@ const stepsDatabase =     [
 
 const timelineUISettings = {
   svgSize: 600,
-  pathCenter: {x: 300, y: 300},
+  svgCenter: {x: 300, y: 300},
   radius: 250,
   spaceDeg: 60,
   strokeWidth: 30,
@@ -170,6 +172,7 @@ function changeAllStepsEnd(
         s.id === step.id ? { ...s, end: postEnd } : s
       )
     }
+    
 
     // Recursively update children & parents
     allSteps = _changeChildrenAndParentsEnd(
@@ -187,6 +190,51 @@ function changeAllStepsEnd(
   }
 
   return allSteps
+}
+
+
+function DayToStepLocation( step : StepModel,
+  svgCenter: {x: number, y: number},
+  totalDays: number,
+  spaceDeg: number,
+  radius: number,
+  prevEnd: number,
+  accumulated: number
+){
+  const angleRange = 360 - spaceDeg
+  const stepDays = step.end - prevEnd
+  const stepAngle = (stepDays / totalDays) * angleRange
+  const startAngle = spaceDeg / 2 + (accumulated / totalDays) * angleRange
+  const endAngle = startAngle + stepAngle
+  accumulated += stepDays
+
+  const angleRad = (endAngle - 90) * (Math.PI / 180)
+  const stepCircleX = svgCenter.x + radius * Math.cos(angleRad)
+  const stepCircleY = svgCenter.y + radius * Math.sin(angleRad)
+
+  return {angleRange: {start: startAngle, end: endAngle}, 
+    circleLocation: {x: stepCircleX, y: stepCircleY}}
+  
+}
+
+function DayToTodayLocation( 
+  svgCenter: {x: number, y: number},
+  mainStep: MainStepModel,
+  spaceDeg: number,
+  radius: number,
+  today: number
+){
+  const totalDays = mainStep.end - mainStep.start
+  const angleRange = 360 - spaceDeg
+  const daysFromStart = today - mainStep.start
+  const todayAngle = spaceDeg / 2 + (daysFromStart / totalDays) * angleRange
+
+  const todayRad = (todayAngle - 90) * (Math.PI / 180)
+  const todayX = svgCenter.x + radius * Math.cos(todayRad)
+  const todayY = svgCenter.y + radius * Math.sin(todayRad)
+
+  return {x: todayX, y: todayY}
+  
 }
 
 
