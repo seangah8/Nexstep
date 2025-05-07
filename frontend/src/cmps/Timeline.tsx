@@ -15,12 +15,14 @@ function Timeline() {
 
   const [steps, setSteps] = useState<StepModel[]>(timelineService.getStepsDatabase)
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
+  const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<editModalModel | null>(null)
   const [isDragging, setIsDragging] = useState<number | null>(null)
 
   useEffect(() => {
+    setStepsToShow(steps.filter(step=>step.parentId === mainStep.id))
     console.log('mainStep', mainStep)
-  }, [mainStep])
+  }, [mainStep, steps])
 
   function onUpdateSteps(newSteps: StepModel[]): void {
     setSteps(newSteps)
@@ -105,6 +107,8 @@ function Timeline() {
     }
   }
 
+  if(!stepsToShow) return <h2>Loading...</h2>
+
   return (
     <section className='time-line' 
     onWheel={handleZoomOut} 
@@ -117,10 +121,9 @@ function Timeline() {
           const totalDays = mainStep.end - mainStep.start
           let accumulated = 0
 
-          const stepsToShow: StepModel[] = steps.filter(step => step.parentId === mainStep.id)
           if (stepsToShow.length <= 0) {
             const { start, ...mainStepWithoutStart } = mainStep
-            stepsToShow.push(mainStepWithoutStart)
+            setStepsToShow([mainStepWithoutStart])
           }
 
           const renderedSteps = stepsToShow.map((step, index) => {

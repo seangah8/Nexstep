@@ -85,3 +85,9 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
         </section>
     )
 }
+
+
+// next : 1. use the first function you created to convert the distance
+// in rightDrag function into a location of the step and its path and print it on console
+
+// 2. change them accurendly to the drag canges (one step changes)
