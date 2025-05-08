@@ -17,12 +17,14 @@ function Timeline() {
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<editModalModel | null>(null)
-  const [isDragging, setIsDragging] = useState<number | null>(null)
+  const [dragging, setDragging] = useState<{startPoint: number, druggingStep: StepModel} | null>(null)
 
   useEffect(() => {
-    setStepsToShow(steps.filter(step=>step.parentId === mainStep.id))
-    console.log('mainStep', mainStep)
-  }, [mainStep, steps])
+    if(!dragging)
+      setStepsToShow(timelineService.sortByEnd(
+        steps.filter(step=>step.parentId === mainStep.id)
+      ))
+  }, [steps, mainStep])
 
   function onUpdateSteps(newSteps: StepModel[]): void {
     setSteps(newSteps)
@@ -59,39 +61,66 @@ function Timeline() {
     }
   }
 
-  function handleRightDown(event: React.MouseEvent){
+  function handleRightDown(event: React.MouseEvent, step: StepModel){
     event.preventDefault()
     if(event.button === 2)
-      if(!isDragging){
-        setIsDragging(event.pageX)
+      if(!dragging && step.end >= today){
+        setDragging({startPoint: event.pageX, druggingStep: step })
       } 
   }
 
   function handleRightUpOutsideStep(event: React.MouseEvent){
     event.preventDefault()
     if(event.button === 2)
-      setIsDragging(null) 
+      setDragging(null) 
   }
 
   function handleRightUpInsideStep(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel){
     event.preventDefault()
     if(event.button === 2){
-      if(isDragging){
-        const distance = event.clientX - isDragging
+      if(dragging){
+        const distance = event.clientX - dragging.startPoint
         if(Math.abs(distance) < 5)
           handleRightClick(event, step, prevEnd, nextStep)
       }
-      setIsDragging(null)
+      setDragging(null)
     }
       
   }
 
   function handleRightDrag(event: React.MouseEvent){
     event.preventDefault()
-    if(isDragging){
-        const distance = event.clientX - isDragging
+    if(dragging && stepsToShow){
+        const distance = event.clientX - dragging.startPoint
         const move = (distance >= 5) ? distance - 5 : (distance <= -5) ? distance + 5 : 0
-        console.log('move', move)
+        const totalDays = mainStep.end - mainStep.start
+        const stepIndex = stepsToShow.findIndex(step => step.id === dragging.druggingStep.id)
+        let newEnd = dragging.druggingStep.end - ((move / 1000) * totalDays)
+
+        if(stepIndex === 0 && newEnd < mainStep.start)
+           newEnd = mainStep.start
+        else if (stepIndex !== 0 && newEnd <= stepsToShow[stepIndex-1].end)
+          newEnd = stepsToShow[stepIndex-1].end + 1
+        else if (stepIndex !== stepsToShow.length-1 && newEnd >= stepsToShow[stepIndex+1].end)
+          newEnd = stepsToShow[stepIndex+1].end - 1
+        if(newEnd <= today)
+          newEnd = today + 1
+        if(stepIndex === stepsToShow.length-1){
+          setMainStep(prev=> ({...prev, end: newEnd}))
+        }
+
+
+
+        setStepsToShow(prev => {
+          if (!prev) return prev
+          return prev.map(step =>
+            step.id === dragging.druggingStep.id
+              ? { ...step, end: newEnd }
+              : step
+          )
+        })
+
+        console.log('move', move, 'stepsToShow', stepsToShow)
     }
   }
 
@@ -138,7 +167,7 @@ function Timeline() {
               <g key={step.id}
                 onClick={() => onSelectStep(step, prevEnd, stepsToShow)}
                 onWheel={event => handleZoomIn(event, step, prevEnd, stepsToShow)}
-                onMouseDown={event =>handleRightDown(event)}
+                onMouseDown={event =>handleRightDown(event, step)}
                 onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
                 >
                 
@@ -220,3 +249,7 @@ function Timeline() {
 }
 
 export default Timeline
+
+
+// 2. make sense when drag the last
+// 3. after dragging, update on storage!

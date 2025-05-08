@@ -9,6 +9,7 @@ export const timelineService = {
   changeAllStepsEnd,
   DayToStepLocation,
   DayToTodayLocation,
+  sortByEnd,
 }
 
 const stepsDatabase =     [
@@ -113,7 +114,7 @@ function changeAllStepsEnd(
 
   // for all siblings
 
-  const siblings = _sortByEnd(
+  const siblings = sortByEnd(
     allSteps.filter(step => step.parentId === editModal.step.parentId)
   )
 
@@ -237,6 +238,14 @@ function DayToTodayLocation(
   
 }
 
+function sortByEnd(arr : StepModel[]) {
+  return [...arr].sort((a, b) => {
+    if (a.end < b.end) return -1
+    if (a.end > b.end) return 1
+    return 0;
+  })
+}
+
 
 
 
@@ -295,13 +304,7 @@ function _changeChildrenAndParentsEnd(
   return updatedSteps
 }
 
-function _sortByEnd(arr : StepModel[]) {
-  return [...arr].sort((a, b) => {
-    if (a.end < b.end) return -1
-    if (a.end > b.end) return 1
-    return 0;
-  })
-}
+
 
 
 
