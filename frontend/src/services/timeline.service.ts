@@ -63,13 +63,15 @@ function findParentStart(allSteps: StepModel[], parent: StepModel, createTime: n
 
 
 function changeCurrantAndNextStepsEnd(
-    editModal : editModalModel,
+    preStart: number,
+    preEnd: number,
+    today: number,
     newSteps: StepModel[],
     changedStep: StepModel,
+    nextStep: StepModel | null,
 ) : StepModel[]{
 
-  const isTodayInside = editModal.start < editModal.today 
-    && editModal.today < editModal.step.end
+  const isTodayInside = preStart < today && today < preEnd
 
   let allSteps = [...newSteps]
 
@@ -77,25 +79,25 @@ function changeCurrantAndNextStepsEnd(
   allSteps = _changeChildrenAndParentsEnd(
     allSteps, 
     changedStep, 
-    editModal.start,
-    editModal.step.end,
-    editModal.start, // start not change
+    preStart,
+    preEnd,
+    preStart, // start not change
     changedStep.end,
-    editModal.today,
+    today,
     isTodayInside
   )
 
   //change next step's children as well
-  if(editModal.nextStep){
+  if(nextStep){
     allSteps = _changeChildrenAndParentsEnd(
         allSteps, 
-        editModal.nextStep, 
-        editModal.step.end,
-        editModal.nextStep.end,
+        nextStep, 
+        preEnd,
+        nextStep.end,
         changedStep.end,
-        editModal.nextStep.end, // end not change
-        editModal.today,
-        false // not possible
+        nextStep.end, // end not change
+        today,
+        false // not possible to have today inside
     )
   } 
 

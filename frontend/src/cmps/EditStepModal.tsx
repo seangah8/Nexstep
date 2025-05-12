@@ -37,7 +37,14 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
             ) throw new Error('cant end this step at that time')
 
             if(!changeAllEnds)
-                newSteps = timelineService.changeCurrantAndNextStepsEnd(editModal,newSteps,stepToEdit)
+                newSteps = timelineService.changeCurrantAndNextStepsEnd(
+                    editModal.start,
+                    editModal.step.end,
+                    editModal.today,
+                    newSteps,
+                    stepToEdit,
+                    editModal.nextStep,
+                )
             else
                 newSteps = timelineService.changeAllStepsEnd(editModal,newSteps,stepToEdit)
 

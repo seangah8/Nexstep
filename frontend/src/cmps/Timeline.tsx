@@ -20,10 +20,12 @@ function Timeline() {
   const [dragging, setDragging] = useState<{startPoint: number, druggingStep: StepModel} | null>(null)
 
   useEffect(() => {
-    if(!dragging)
+    if(!dragging){
+      console.log('steps', steps)
       setStepsToShow(timelineService.sortByEnd(
         steps.filter(step=>step.parentId === mainStep.id)
       ))
+    }
   }, [steps, mainStep])
 
   function onUpdateSteps(newSteps: StepModel[]): void {
@@ -69,21 +71,44 @@ function Timeline() {
       } 
   }
 
-  function handleRightUpOutsideStep(event: React.MouseEvent){
+  function handleRightUp(event: React.MouseEvent){
     event.preventDefault()
-    if(event.button === 2)
-      setDragging(null) 
+    if(event.button === 2 && stepsToShow && dragging){
+
+      const stepIndex = stepsToShow.findIndex(step => 
+        step.id === dragging.druggingStep.id)
+      const changedStep = {...dragging.druggingStep, end: stepsToShow[stepIndex].end}
+      
+      // first change the step user edited
+      let newSteps = steps.map(step => 
+        (step.id === dragging.druggingStep.id) 
+        ? changedStep
+        : step
+      )
+              
+      const preStart = (stepIndex === 0) ? mainStep.start : stepsToShow[stepIndex-1].end
+      const nextStep = (stepIndex === stepsToShow.length-1) ? null : stepsToShow[stepIndex+1]
+      newSteps = timelineService.changeCurrantAndNextStepsEnd(
+        preStart,
+        dragging.druggingStep.end,
+        today,
+        newSteps,
+        changedStep,
+        nextStep,
+      )
+
+      setSteps(newSteps)
+      setDragging(null)
+    }
+ 
   }
 
   function handleRightUpInsideStep(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel){
     event.preventDefault()
-    if(event.button === 2){
-      if(dragging){
-        const distance = event.clientX - dragging.startPoint
-        if(Math.abs(distance) < 5)
-          handleRightClick(event, step, prevEnd, nextStep)
-      }
-      setDragging(null)
+    if(event.button === 2 && dragging){
+      const distance = event.clientX - dragging.startPoint
+      if(Math.abs(distance) < 5)
+        handleRightClick(event, step, prevEnd, nextStep)
     }
       
   }
@@ -91,25 +116,26 @@ function Timeline() {
   function handleRightDrag(event: React.MouseEvent){
     event.preventDefault()
     if(dragging && stepsToShow){
+
         const distance = event.clientX - dragging.startPoint
         const move = (distance >= 5) ? distance - 5 : (distance <= -5) ? distance + 5 : 0
         const totalDays = mainStep.end - mainStep.start
         const stepIndex = stepsToShow.findIndex(step => step.id === dragging.druggingStep.id)
-        let newEnd = dragging.druggingStep.end - ((move / 1000) * totalDays)
+        let newEnd = Math.floor(dragging.druggingStep.end - ((move / 1000) * totalDays))
 
         if(stepIndex === 0 && newEnd < mainStep.start)
-           newEnd = mainStep.start
+          newEnd = mainStep.start
         else if (stepIndex !== 0 && newEnd <= stepsToShow[stepIndex-1].end)
           newEnd = stepsToShow[stepIndex-1].end + 1
         else if (stepIndex !== stepsToShow.length-1 && newEnd >= stepsToShow[stepIndex+1].end)
           newEnd = stepsToShow[stepIndex+1].end - 1
         if(newEnd <= today)
           newEnd = today + 1
+
+
         if(stepIndex === stepsToShow.length-1){
           setMainStep(prev=> ({...prev, end: newEnd}))
         }
-
-
 
         setStepsToShow(prev => {
           if (!prev) return prev
@@ -119,8 +145,6 @@ function Timeline() {
               : step
           )
         })
-
-        console.log('move', move, 'stepsToShow', stepsToShow)
     }
   }
 
@@ -142,7 +166,7 @@ function Timeline() {
     <section className='time-line' 
     onWheel={handleZoomOut} 
     onMouseMove={event => handleRightDrag(event)}  
-    onMouseUp={event =>handleRightUpOutsideStep(event)}>
+    onMouseUp={event =>handleRightUp(event)}>
 
       <h2>Timeline</h2>
       <svg width={svgSize} height={svgSize}>
