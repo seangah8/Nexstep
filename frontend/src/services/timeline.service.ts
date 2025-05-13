@@ -107,9 +107,12 @@ function changeCurrantAndNextStepsEnd(
 
 
 function changeAllStepsEnd(
-  editModal: editModalModel,
-  newSteps: StepModel[],
-  changedStep: StepModel
+    preEnd: number,
+    today: number,
+    newSteps: StepModel[],
+    changedStep: StepModel,
+    nextStep: StepModel | null,
+    createTime: number
 ): StepModel[] {
   
   let allSteps = structuredClone(newSteps)
@@ -117,29 +120,29 @@ function changeAllStepsEnd(
   // for all siblings
 
   const siblings = sortByEnd(
-    allSteps.filter(step => step.parentId === editModal.step.parentId)
+    allSteps.filter(step => step.parentId === changedStep.parentId)
   )
 
-  const parent = allSteps.find(step => step.id === editModal.step.parentId)
+  const parent = allSteps.find(step => step.id === changedStep.parentId)
   const parentStart = parent
-    ? findParentStart(allSteps, parent, editModal.createTime)
-    : editModal.createTime
+    ? findParentStart(allSteps, parent, createTime)
+    : createTime
   const parentEnd = parent
     ? parent.end
-    : siblings[siblings.length - 1]?.end ?? editModal.createTime
+    : siblings[siblings.length - 1]?.end ?? createTime
 
   const isTodayInsideParent =
-    parentStart < editModal.today &&
-    (parent ? editModal.today < parent.end : true)
+    parentStart < today &&
+    (parent ? today < parent.end : true)
 
   const beforeChangedStepRatio = isTodayInsideParent
-    ? (changedStep.end - editModal.today)/ (editModal.step.end - editModal.today)
-    : (changedStep.end - parentStart)/(editModal.step.end - parentStart)
+    ? (changedStep.end - today)/ (preEnd - today)
+    : (changedStep.end - parentStart)/(preEnd - parentStart)
 
   const afterChangedStepRatio = 
-    (parentEnd - changedStep.end)/(parentEnd - editModal.step.end)
+    (parentEnd - changedStep.end)/(parentEnd - preEnd)
 
-  let postStart = parentStart
+  let postSiblingStart = parentStart
 
   // for each sibling
 
@@ -148,48 +151,47 @@ function changeAllStepsEnd(
     const prevStep = siblings[i - 1]
 
     const isChangedStep = step.id === changedStep.id
-    const isNextStep = step.id === editModal.nextStep?.id
+    const isNextStep = step.id === nextStep?.id
 
-    const preStart = isNextStep
-      ? editModal.step.end
+    const preSiblingStart = isNextStep
+      ? preEnd
       : i === 0
       ? parentStart
       : prevStep.end
 
-    const preEnd = isChangedStep ? editModal.step.end : step.end
+    const preSiblingEnd = isChangedStep ? preEnd : step.end
 
-    const refPoint = isTodayInsideParent ? editModal.today : parentStart
+    const refPoint = isTodayInsideParent ? today : parentStart
 
-    const postEnd = isChangedStep
+    const postSiblingEnd = isChangedStep
       ? changedStep.end
-      : step.end <= editModal.step.end
+      : step.end <= preEnd
       ? Math.floor(refPoint + (step.end - refPoint) * beforeChangedStepRatio)
       : Math.floor(parentEnd - (parentEnd - step.end) * afterChangedStepRatio)
 
     const isTodayInside =
-      isTodayInsideParent && preStart < editModal.today && editModal.today < step.end
+      isTodayInsideParent && preSiblingStart < today && today < step.end
 
-    // Update end of current step if needed
-    if (step.end > editModal.today) {
+    // update end of current sibling step
+    if (step.end > today) {
       allSteps = allSteps.map(s =>
-        s.id === step.id ? { ...s, end: postEnd } : s
+        s.id === step.id ? { ...s, end: postSiblingEnd } : s
       )
     }
-    
 
     // Recursively update children & parents
     allSteps = _changeChildrenAndParentsEnd(
       allSteps,
       step,
-      preStart,
-      preEnd,
-      postStart,
-      postEnd,
-      editModal.today,
+      preSiblingStart,
+      preSiblingEnd,
+      postSiblingStart,
+      postSiblingEnd,
+      today,
       isTodayInside
     )
 
-    postStart = postEnd
+    postSiblingStart = postSiblingEnd
   }
 
   return allSteps
@@ -204,6 +206,7 @@ function DayToStepLocation( step : StepModel,
   prevEnd: number,
   accumulated: number
 ){
+
   const angleRange = 360 - spaceDeg
   const stepDays = step.end - prevEnd
   const stepAngle = (stepDays / totalDays) * angleRange

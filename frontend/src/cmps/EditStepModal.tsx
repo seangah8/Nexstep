@@ -46,7 +46,14 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
                     editModal.nextStep,
                 )
             else
-                newSteps = timelineService.changeAllStepsEnd(editModal,newSteps,stepToEdit)
+                newSteps = timelineService.changeAllStepsEnd(
+                    editModal.step.end,
+                    editModal.today,
+                    newSteps,
+                    stepToEdit,
+                    editModal.nextStep,
+                    editModal.createTime
+                )
 
             // update the main step in case you changed the last step in it 
             // (so it wont get messy for not re-rendering it)
