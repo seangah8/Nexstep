@@ -26,7 +26,10 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
 
           // first change the step you edited
           let newSteps = allSteps.map(step => 
-              (step.id === stepToEdit.id) ? stepToEdit : step)
+            (step.id === stepToEdit.id) 
+            ? stepToEdit
+            : step
+          )
           
           // when end is beening changed
           if(editModal.step.end !== stepToEdit.end){
@@ -57,8 +60,10 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
 
             // update the main step in case you changed the last step in it 
             // (so it wont get messy for not re-rendering it)
-            if(!editModal.nextStep)
-              onUpdateMainStepEnd(stepToEdit.end)
+            if(!editModal.nextStep){
+              const changedStep = newSteps.find(step=>step.id===stepToEdit.id)
+              onUpdateMainStepEnd(changedStep?.end ?? stepToEdit.end)
+            }
           }
           //update all steps with your changed
           onUpdateSteps(newSteps)

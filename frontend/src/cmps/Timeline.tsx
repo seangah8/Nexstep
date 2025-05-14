@@ -213,7 +213,7 @@ function Timeline() {
 
           if (stepsToShow.length <= 0) {
             const { start, ...mainStepWithoutStart } = mainStep
-            setStepsToShow([mainStepWithoutStart])
+            setStepsToShow([{...mainStepWithoutStart, id: `${mainStep.id}-dummy`, parentId: mainStep.id}])
           }
 
           const renderedSteps = stepsToShow.map((step, index) => {

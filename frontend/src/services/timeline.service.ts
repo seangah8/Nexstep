@@ -1,4 +1,4 @@
-import { MainStepModel, StepModel, editModalModel } from "../models/timeline.models";
+import { MainStepModel, StepModel } from "../models/timeline.models";
 
 
 export const timelineService = {
@@ -10,6 +10,7 @@ export const timelineService = {
   DayToStepLocation,
   DayToTodayLocation,
   sortByEnd,
+  findStepMaxEnd,
 }
 
 const stepsDatabase =     [
@@ -75,6 +76,15 @@ function changeCurrantAndNextStepsEnd(
 
   let allSteps = [...newSteps]
 
+  // prevent from step end to get over next parent start
+  allSteps = allSteps.map(step=> {
+    if (step.id === changedStep.id){
+      const newChangedStep = _preventGetOverMaxEnd(allSteps, step, preEnd)
+      changedStep = newChangedStep
+      return newChangedStep
+    }
+    else return step
+  })
   //change step's children
   allSteps = _changeChildrenAndParentsEnd(
     allSteps, 
@@ -116,6 +126,17 @@ function changeAllStepsEnd(
 ): StepModel[] {
   
   let allSteps = structuredClone(newSteps)
+
+  // prevent from step end to get over next parent start
+  allSteps = allSteps.map(step=> {
+    if (step.id === changedStep.id){
+      const newChangedStep = _preventGetOverMaxEnd(allSteps, step, preEnd)
+      changedStep = newChangedStep
+      return newChangedStep
+    }
+    else return step
+  })
+
 
   // for all siblings
 
@@ -252,6 +273,16 @@ function sortByEnd(arr : StepModel[]) {
 }
 
 
+function findStepMaxEnd(allSteps : StepModel[], step: StepModel) : number{
+  const siblings = allSteps.filter(s=> s.parentId === step.parentId)
+
+  return siblings.reduce((acc, sibling)=>{
+    if(sibling.end > step.end && sibling.end < acc)
+      return sibling.end
+    return acc
+
+  },Number.MAX_SAFE_INTEGER)
+}
 
 
 
@@ -297,7 +328,8 @@ function _changeChildrenAndParentsEnd(
   function updateParents(changedStep : StepModel) : void{
     const parent = updatedSteps.find(step=>step.id === changedStep.parentId)
     if(parent && preEnd === parent.end){
-      parent.end = postEnd
+      const maxEnd = findStepMaxEnd(allSteps, parent)
+      parent.end = (postEnd > (maxEnd - 1)) ? maxEnd - 1 : postEnd
       updateParents(parent)
     }
   }
@@ -308,6 +340,20 @@ function _changeChildrenAndParentsEnd(
 
   return updatedSteps
 }
+
+
+function _preventGetOverMaxEnd(allSteps :StepModel[], step: StepModel, preEnd: number) : StepModel{
+
+  const parent = allSteps.find(s=>s.id === step.parentId)
+
+  if(preEnd === parent?.end){
+      const maxEnd = timelineService.findStepMaxEnd(allSteps, parent)
+      return {...step, end: Math.min(maxEnd-1, step.end)}
+  }
+
+  else return step
+}
+
 
 
 
