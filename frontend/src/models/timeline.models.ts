@@ -17,3 +17,10 @@ export interface editModalModel{
   today: number
   createTime: number
 }
+
+export interface draggingModal{
+    startPoint: number, 
+    druggingStep: StepModel, 
+    onShift: boolean,
+    prevStepsToSow: StepModel[]
+}

@@ -1,8 +1,9 @@
 import { utilService } from "../services/util.service"
 import { useState, useEffect, useRef } from "react";
-import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models";
+import { StepModel, MainStepModel, editModalModel, draggingModal } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
+import { StepPreview } from "./stepPreview";
 
 function Timeline() {
 
@@ -17,10 +18,7 @@ function Timeline() {
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<editModalModel | null>(null)
-  const [dragging, setDragging] = useState<{startPoint: number, 
-    druggingStep: StepModel, 
-    onShift: boolean,
-    prevStepsToSow: StepModel[]} | null>(null)
+  const [dragging, setDragging] = useState<draggingModal | null>(null)
   
   const svgRef = useRef<SVGSVGElement | null>(null)
 
@@ -33,19 +31,19 @@ function Timeline() {
     }
   }, [steps, mainStep])
 
-  function onUpdateSteps(newSteps: StepModel[]): void {
+  function onSetSteps(newSteps: StepModel[]): void {
     setSteps(newSteps)
   }
 
-  function onUpdateMainStep(newMainStep : MainStepModel){
+  function onSetMainStep(newMainStep : MainStepModel){
     setMainStep(newMainStep)
   }
 
-  function onUpdateMainStepEnd(end: number): void {
+  function onSetMainStepEnd(end: number): void {
     setMainStep(prev => ({ ...prev, end: end }))
   }
 
-  function onUpdateEditModal(newEditModal: editModalModel | null): void {
+  function onSetEditModal(newEditModal: editModalModel | null): void {
     setEditModal(newEditModal)
   }
 
@@ -53,10 +51,8 @@ function Timeline() {
     setSteps(prev=> [...prev, newStep])
   }
 
-  function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
-    console.log('selectStep', { ...selectStep, start: prevEnd })
-    if (stepsToShow.length <= 1) throw new Error('There are no further steps!')
-    else setMainStep({ ...selectStep, start: prevEnd })
+  function onSetDragging(newDragging: draggingModal | null){
+    setDragging(newDragging)
   }
 
   function handleZoomOut(event: React.WheelEvent) {
@@ -68,23 +64,6 @@ function Timeline() {
       const prevParentEnd = timelineService.findParentStart(steps, parentStep, createTime)
       setMainStep({ ...parentStep, start: prevParentEnd })
     }
-  }
-
-  function handleZoomIn(event: React.WheelEvent, selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
-    if (event.deltaY < 0) { // User scrolled Up
-      onSelectStep(selectStep, prevEnd, stepsToShow)
-    }
-  }
-
-  function handleRightDown(event: React.MouseEvent, step: StepModel){
-    event.preventDefault()
-    if(event.button === 2 && stepsToShow)
-      if(!dragging && step.end >= today){
-        setDragging({startPoint: event.pageX, 
-          druggingStep: step, 
-          onShift: event.shiftKey,
-          prevStepsToSow: stepsToShow })
-      } 
   }
 
   function handleRightUp(event: React.MouseEvent){
@@ -128,15 +107,6 @@ function Timeline() {
       setDragging(null)
     }
  
-  }
-
-  function handleRightUpInsideStep(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel){
-    event.preventDefault()
-    if(event.button === 2 && dragging){
-      const distance = event.clientX - dragging.startPoint
-      if(Math.abs(distance) < 5)
-        handleRightClickOnCircle(event, step, prevEnd, nextStep)
-    }
   }
 
   function handleRightDrag(event: React.MouseEvent){
@@ -195,49 +165,6 @@ function Timeline() {
     }
   }
 
-  function handleRightClickOnCircle(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
-    event.preventDefault()
-    if(event.button === 2 && step.end > today){
-        setEditModal({ 
-          step: step, 
-          start: prevEnd, 
-          nextStep: nextStep, 
-          today: today, 
-          createTime: createTime })
-    }
-  }
-
-  function handleRightClickOnPath(event: React.MouseEvent, nextStep: StepModel, prevEnd: number) {
-    event.preventDefault()
-    if(event.button === 2 && svgRef.current){
-      const svgRect = svgRef.current.getBoundingClientRect()
-      const svgLocation = {x: svgRect.x, y: svgRect.y}
-      const Mouselocation = {x: event.pageX, y: event.pageY}
-      const newStepEnd = timelineService.locationToDay(
-        svgCenter, 
-        svgLocation, 
-        mainStep, 
-        spaceDeg, 
-        Mouselocation
-      )
-      const newStep : StepModel = {
-        id: utilService.createId(),
-        parentId: nextStep.parentId,
-        title: 'new',
-        end: newStepEnd
-      }
-
-      onAddingStep(newStep)
-
-      setEditModal({ 
-        step: newStep, 
-        start: prevEnd, 
-        nextStep: nextStep, 
-        today: today, 
-        createTime: createTime })
-    }
-  }
-
   if(!stepsToShow) return <h2>Loading...</h2>
 
   return (
@@ -266,46 +193,23 @@ function Timeline() {
             accumulated += step.end - prevEnd
 
             return (
-              <g key={step.id}
-                onClick={() => onSelectStep(step, prevEnd, stepsToShow)}
-                onWheel={event => handleZoomIn(event, step, prevEnd, stepsToShow)}
-                >
-                
-                <path
-                  onMouseDown={event =>handleRightClickOnPath(event, step, prevEnd)}
-                  d={utilService.describeArc(svgCenter.x, 
-                    svgCenter.y, 
-                    radius, 
-                    stepLocation.angleRange.start, 
-                    stepLocation.angleRange.end)}
-
-                  stroke={step.end < today ? "green" : "#389BBA"}
-                  strokeWidth={strokeWidth}
-                  fill='none'
-                />
-                <circle
-                  onMouseDown={event =>handleRightDown(event, step)}
-                  onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
-                  cx={stepLocation.circleLocation.x}
-                  cy={stepLocation.circleLocation.y}
-                  r={circlesSize}
-                  fill={step.end < today ? "green" : "#389BBA"}
-                  stroke="black"
-                  strokeWidth='2'
-                />
-                <text
-                  onMouseDown={event =>handleRightDown(event, step)}
-                  onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
-                  x={stepLocation.circleLocation.x}
-                  y={stepLocation.circleLocation.y + 6}
-                  textAnchor="middle"
-                  fontSize="16"
-                  fill="white"
-                  fontFamily="Arial"
-                >
-                  {step.title}
-                </text>
-              </g>
+              <StepPreview
+                key={step.id}
+                step = {step}
+                nextStep = {nextStep}
+                mainStep = {mainStep}
+                stepsToShow = {stepsToShow}
+                prevEnd = {prevEnd}
+                stepLocation = {stepLocation}
+                today = {today}
+                createTime = {createTime}
+                svgRef = {svgRef}
+                dragging = {dragging}
+                onSetMainStep = {onSetMainStep}
+                onSetEditModal = {onSetEditModal}
+                onSetDragging = {onSetDragging}
+                onAddingStep= {onAddingStep}
+              />
             )
           })
 
@@ -343,9 +247,9 @@ function Timeline() {
         <EditStepModal
           editModal={editModal}
           allSteps={steps}
-          onUpdateSteps={onUpdateSteps}
-          onUpdateMainStepEnd={onUpdateMainStepEnd}
-          onUpdateEditModal={onUpdateEditModal}
+          onSetSteps={onSetSteps}
+          onSetMainStepEnd={onSetMainStepEnd}
+          onSetEditModal={onSetEditModal}
         />
       }
 

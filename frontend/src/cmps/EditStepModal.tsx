@@ -5,12 +5,12 @@ import { timelineService } from "../services/timeline.service"
 interface EditStepModalProps{
     editModal : editModalModel
     allSteps : StepModel[]
-    onUpdateSteps : (newSteps : StepModel[]) => void
-    onUpdateMainStepEnd : (end : number) => void
-    onUpdateEditModal : (newEditModal : editModalModel | null) => void
+    onSetSteps : (newSteps : StepModel[]) => void
+    onSetMainStepEnd : (end : number) => void
+    onSetEditModal : (newEditModal : editModalModel | null) => void
 }
 
-export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainStepEnd, onUpdateEditModal } : EditStepModalProps){
+export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEnd, onSetEditModal } : EditStepModalProps){
 
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
@@ -62,14 +62,14 @@ export function EditStepModal({ editModal, allSteps, onUpdateSteps,onUpdateMainS
             // (so it wont get messy for not re-rendering it)
             if(!editModal.nextStep){
               const changedStep = newSteps.find(step=>step.id===stepToEdit.id)
-              onUpdateMainStepEnd(changedStep?.end ?? stepToEdit.end)
+              onSetMainStepEnd(changedStep?.end ?? stepToEdit.end)
             }
           }
           //update all steps with your changed
-          onUpdateSteps(newSteps)
+          onSetSteps(newSteps)
         }
         //close modal
-        onUpdateEditModal(null)
+        onSetEditModal(null)
     }  
       
 

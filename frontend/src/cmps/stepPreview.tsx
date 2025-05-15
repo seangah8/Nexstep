@@ -1,0 +1,168 @@
+import { editModalModel, MainStepModel, StepModel, draggingModal } from "../models/timeline.models"
+import { timelineService } from "../services/timeline.service"
+import { utilService } from "../services/util.service"
+
+
+interface stepPreviewProps{
+    step : StepModel
+    nextStep: StepModel
+    mainStep : MainStepModel
+    stepsToShow: StepModel[]
+    prevEnd: number
+    stepLocation: {
+        angleRange: {start: number, end: number}
+        circleLocation: {x: number, y: number}
+    }
+    today : number
+    createTime : number
+    svgRef : React.RefObject<SVGSVGElement | null>
+    dragging : draggingModal | null
+    onSetMainStep: (mainStep : MainStepModel) => void
+    onSetEditModal: (newEditModal : editModalModel) => void
+    onSetDragging: (newDragging : draggingModal | null) => void
+    onAddingStep: (step : StepModel) => void
+
+
+
+}
+
+export function StepPreview({
+    step, 
+    nextStep,
+    mainStep,
+    stepsToShow,  
+    prevEnd, 
+    stepLocation, 
+    today,
+    createTime,
+    svgRef,
+    dragging,
+    onSetMainStep,
+    onSetEditModal,
+    onSetDragging,
+    onAddingStep,
+
+
+} : stepPreviewProps){
+
+    // Load UI settings from timeline service
+    const { svgSize, svgCenter, radius, spaceDeg, strokeWidth, circlesSize } = timelineService.getTimelineUISettings()
+
+    function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
+        console.log('selectStep', { ...selectStep, start: prevEnd })
+        if (stepsToShow.length <= 1) throw new Error('There are no further steps!')
+        else onSetMainStep({ ...selectStep, start: prevEnd })
+    }
+
+    function handleZoomIn(event: React.WheelEvent, selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
+        if (event.deltaY < 0) // User scrolled Up
+            onSelectStep(selectStep, prevEnd, stepsToShow)
+    }
+
+    function handleRightDown(event: React.MouseEvent, step: StepModel){
+        event.preventDefault()
+        if(event.button === 2 && stepsToShow){
+            if(!dragging && step.end >= today){
+                onSetDragging({startPoint: event.pageX, 
+                druggingStep: step, 
+                onShift: event.shiftKey,
+                prevStepsToSow: stepsToShow })
+            } 
+        }
+    }
+
+    function handleRightClickOnPath(event: React.MouseEvent, nextStep: StepModel, prevEnd: number) {
+        event.preventDefault()
+        if(event.button === 2 && svgRef.current){
+        const svgRect = svgRef.current.getBoundingClientRect()
+        const svgLocation = {x: svgRect.x, y: svgRect.y}
+        const Mouselocation = {x: event.pageX, y: event.pageY}
+        const newStepEnd = timelineService.locationToDay(
+            svgCenter, 
+            svgLocation, 
+            mainStep, 
+            spaceDeg, 
+            Mouselocation
+        )
+        const newStep : StepModel = {
+            id: utilService.createId(),
+            parentId: nextStep.parentId,
+            title: 'new',
+            end: newStepEnd
+        }
+
+        onAddingStep(newStep)
+
+        onSetEditModal({ 
+            step: newStep, 
+            start: prevEnd, 
+            nextStep: nextStep, 
+            today: today, 
+            createTime: createTime })
+        }
+    }
+
+    function handleRightClickOnCircle(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
+        event.preventDefault()
+        if(event.button === 2 && step.end > today){
+            onSetEditModal({ 
+            step: step, 
+            start: prevEnd, 
+            nextStep: nextStep, 
+            today: today, 
+            createTime: createTime })
+        }
+    }
+
+    function handleRightUpInsideStep(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel){
+        event.preventDefault()
+        if(event.button === 2 && dragging){
+        const distance = event.clientX - dragging.startPoint
+        if(Math.abs(distance) < 5)
+            handleRightClickOnCircle(event, step, prevEnd, nextStep)
+        }
+    }
+
+    return(
+        <g
+            onClick={() => onSelectStep(step, prevEnd, stepsToShow)}
+            onWheel={event => handleZoomIn(event, step, prevEnd, stepsToShow)}
+            >
+            
+            <path
+                onMouseDown={event =>handleRightClickOnPath(event, step, prevEnd)}
+                d={utilService.describeArc(svgCenter.x, 
+                svgCenter.y, 
+                radius, 
+                stepLocation.angleRange.start, 
+                stepLocation.angleRange.end)}
+
+                stroke={step.end < today ? "green" : "#389BBA"}
+                strokeWidth={strokeWidth}
+                fill='none'
+            />
+            <circle
+                onMouseDown={event =>handleRightDown(event, step)}
+                onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
+                cx={stepLocation.circleLocation.x}
+                cy={stepLocation.circleLocation.y}
+                r={circlesSize}
+                fill={step.end < today ? "green" : "#389BBA"}
+                stroke="black"
+                strokeWidth='2'
+            />
+            <text
+                onMouseDown={event =>handleRightDown(event, step)}
+                onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
+                x={stepLocation.circleLocation.x}
+                y={stepLocation.circleLocation.y + 6}
+                textAnchor="middle"
+                fontSize="16"
+                fill="white"
+                fontFamily="Arial"
+            >
+                {step.title}
+            </text>
+        </g>
+    )
+}
