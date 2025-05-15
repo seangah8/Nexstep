@@ -1,5 +1,5 @@
 import { utilService } from "../services/util.service"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
@@ -21,6 +21,8 @@ function Timeline() {
     druggingStep: StepModel, 
     onShift: boolean,
     prevStepsToSow: StepModel[]} | null>(null)
+  
+  const svgRef = useRef<SVGSVGElement | null>(null)
 
   useEffect(() => {
     if(!dragging){
@@ -35,12 +37,20 @@ function Timeline() {
     setSteps(newSteps)
   }
 
+  function onUpdateMainStep(newMainStep : MainStepModel){
+    setMainStep(newMainStep)
+  }
+
   function onUpdateMainStepEnd(end: number): void {
     setMainStep(prev => ({ ...prev, end: end }))
   }
 
   function onUpdateEditModal(newEditModal: editModalModel | null): void {
     setEditModal(newEditModal)
+  }
+
+  function onAddingStep(newStep : StepModel){
+    setSteps(prev=> [...prev, newStep])
   }
 
   function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
@@ -125,7 +135,7 @@ function Timeline() {
     if(event.button === 2 && dragging){
       const distance = event.clientX - dragging.startPoint
       if(Math.abs(distance) < 5)
-        handleRightClick(event, step, prevEnd, nextStep)
+        handleRightClickOnCircle(event, step, prevEnd, nextStep)
     }
   }
 
@@ -185,7 +195,7 @@ function Timeline() {
     }
   }
 
-  function handleRightClick(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
+  function handleRightClickOnCircle(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel) {
     event.preventDefault()
     if(event.button === 2 && step.end > today){
         setEditModal({ 
@@ -194,6 +204,37 @@ function Timeline() {
           nextStep: nextStep, 
           today: today, 
           createTime: createTime })
+    }
+  }
+
+  function handleRightClickOnPath(event: React.MouseEvent, nextStep: StepModel, prevEnd: number) {
+    event.preventDefault()
+    if(event.button === 2 && svgRef.current){
+      const svgRect = svgRef.current.getBoundingClientRect()
+      const svgLocation = {x: svgRect.x, y: svgRect.y}
+      const Mouselocation = {x: event.pageX, y: event.pageY}
+      const newStepEnd = timelineService.locationToDay(
+        svgCenter, 
+        svgLocation, 
+        mainStep, 
+        spaceDeg, 
+        Mouselocation
+      )
+      const newStep : StepModel = {
+        id: utilService.createId(),
+        parentId: nextStep.parentId,
+        title: 'new',
+        end: newStepEnd
+      }
+
+      onAddingStep(newStep)
+
+      setEditModal({ 
+        step: newStep, 
+        start: prevEnd, 
+        nextStep: nextStep, 
+        today: today, 
+        createTime: createTime })
     }
   }
 
@@ -206,7 +247,7 @@ function Timeline() {
     onMouseUp={event =>handleRightUp(event)}>
 
       <h2>Timeline</h2>
-      <svg width={svgSize} height={svgSize}>
+      <svg width={svgSize} height={svgSize} ref={svgRef}>
         {(() => {
           const totalDays = mainStep.end - mainStep.start
           let accumulated = 0
@@ -219,7 +260,7 @@ function Timeline() {
           const renderedSteps = stepsToShow.map((step, index) => {
             const prevEnd = stepsToShow[index - 1]?.end ?? mainStep.start
             const nextStep = stepsToShow[index + 1] ?? null
-            const stepLocation = timelineService.DayToStepLocation(
+            const stepLocation = timelineService.dayToStepLocation(
               step, svgCenter, totalDays, spaceDeg, radius, prevEnd, accumulated)
 
             accumulated += step.end - prevEnd
@@ -228,11 +269,10 @@ function Timeline() {
               <g key={step.id}
                 onClick={() => onSelectStep(step, prevEnd, stepsToShow)}
                 onWheel={event => handleZoomIn(event, step, prevEnd, stepsToShow)}
-                onMouseDown={event =>handleRightDown(event, step)}
-                onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
                 >
                 
                 <path
+                  onMouseDown={event =>handleRightClickOnPath(event, step, prevEnd)}
                   d={utilService.describeArc(svgCenter.x, 
                     svgCenter.y, 
                     radius, 
@@ -244,6 +284,8 @@ function Timeline() {
                   fill='none'
                 />
                 <circle
+                  onMouseDown={event =>handleRightDown(event, step)}
+                  onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
                   cx={stepLocation.circleLocation.x}
                   cy={stepLocation.circleLocation.y}
                   r={circlesSize}
@@ -252,6 +294,8 @@ function Timeline() {
                   strokeWidth='2'
                 />
                 <text
+                  onMouseDown={event =>handleRightDown(event, step)}
+                  onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
                   x={stepLocation.circleLocation.x}
                   y={stepLocation.circleLocation.y + 6}
                   textAnchor="middle"
@@ -274,7 +318,7 @@ function Timeline() {
                 (() => {
                   if (today < mainStep.start || today > mainStep.end) return null
 
-                  const todayLocation = timelineService.DayToTodayLocation(
+                  const todayLocation = timelineService.dayToLocation(
                     svgCenter, mainStep, spaceDeg, radius, today)
 
                   return (
@@ -310,7 +354,3 @@ function Timeline() {
 }
 
 export default Timeline
-
-
-// 2. make sense when drag the last
-// 3. after dragging, update on storage!

@@ -7,8 +7,9 @@ export const timelineService = {
   findParentStart,
   changeCurrantAndNextStepsEnd,
   changeAllStepsEnd,
-  DayToStepLocation,
-  DayToTodayLocation,
+  dayToStepLocation,
+  dayToLocation,
+  locationToDay,
   sortByEnd,
   findStepMaxEnd,
 }
@@ -219,7 +220,7 @@ function changeAllStepsEnd(
 }
 
 
-function DayToStepLocation( step : StepModel,
+function dayToStepLocation( step : StepModel,
   svgCenter: {x: number, y: number},
   totalDays: number,
   spaceDeg: number,
@@ -244,16 +245,16 @@ function DayToStepLocation( step : StepModel,
   
 }
 
-function DayToTodayLocation( 
+function dayToLocation( 
   svgCenter: {x: number, y: number},
   mainStep: MainStepModel,
   spaceDeg: number,
   radius: number,
-  today: number
+  day: number
 ){
   const totalDays = mainStep.end - mainStep.start
   const angleRange = 360 - spaceDeg
-  const daysFromStart = today - mainStep.start
+  const daysFromStart = day - mainStep.start
   const todayAngle = spaceDeg / 2 + (daysFromStart / totalDays) * angleRange
 
   const todayRad = (todayAngle - 90) * (Math.PI / 180)
@@ -263,6 +264,34 @@ function DayToTodayLocation(
   return {x: todayX, y: todayY}
   
 }
+
+function locationToDay(
+  svgCenter: {x: number, y: number},
+  svgLocation: {x: number, y: number},
+  mainStep: {start: number, end: number},
+  spaceDeg: number,
+  location: {x: number, y: number}
+) {
+
+  // get angle from center to location (in degrees)
+  const dx = location.x - (svgCenter.x + svgLocation.x)
+  const dy = location.y - (svgCenter.y + svgLocation.y)
+  let angle = Math.atan2(dy, dx) * (180 / Math.PI)
+  angle = (angle + 450) % 360 // Normalize to [0, 360), rotating so 0 is "top" (12 o'clock)
+
+  // clamp angle within the relevant range
+  const clampedAngle = Math.max(spaceDeg / 2, Math.min(360 - spaceDeg / 2, angle))
+
+  // convert angle to a day
+  const totalDays = mainStep.end - mainStep.start
+  const angleRange = 360 - spaceDeg
+  const relativeAngle = clampedAngle - spaceDeg / 2
+  const progress = relativeAngle / angleRange
+  const day = mainStep.start + progress * totalDays
+
+  return Math.floor(day)
+}
+
 
 function sortByEnd(arr : StepModel[]) {
   return [...arr].sort((a, b) => {
