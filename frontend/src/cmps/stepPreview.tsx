@@ -6,6 +6,7 @@ import { utilService } from "../services/util.service"
 interface stepPreviewProps{
     step : StepModel
     nextStep: StepModel
+    allSteps: StepModel[]
     mainStep : MainStepModel
     stepsToShow: StepModel[]
     prevEnd: number
@@ -17,18 +18,17 @@ interface stepPreviewProps{
     createTime : number
     svgRef : React.RefObject<SVGSVGElement | null>
     dragging : draggingModal | null
+    onSetSteps: (newSteps : StepModel[]) => void
     onSetMainStep: (mainStep : MainStepModel) => void
     onSetEditModal: (newEditModal : editModalModel) => void
     onSetDragging: (newDragging : draggingModal | null) => void
     onAddingStep: (step : StepModel) => void
-
-
-
 }
 
 export function StepPreview({
     step, 
     nextStep,
+    allSteps,
     mainStep,
     stepsToShow,  
     prevEnd, 
@@ -37,16 +37,16 @@ export function StepPreview({
     createTime,
     svgRef,
     dragging,
+    onSetSteps,
     onSetMainStep,
     onSetEditModal,
     onSetDragging,
-    onAddingStep,
 
 
 } : stepPreviewProps){
 
     // Load UI settings from timeline service
-    const { svgSize, svgCenter, radius, spaceDeg, strokeWidth, circlesSize } = timelineService.getTimelineUISettings()
+    const { svgCenter, radius, spaceDeg, strokeWidth, circlesSize } = timelineService.getTimelineUISettings()
 
     function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
         console.log('selectStep', { ...selectStep, start: prevEnd })
@@ -84,6 +84,9 @@ export function StepPreview({
             spaceDeg, 
             Mouselocation
         )
+
+        // later make it impossible to click before today!!!
+
         const newStep : StepModel = {
             id: utilService.createId(),
             parentId: nextStep.parentId,
@@ -91,7 +94,20 @@ export function StepPreview({
             end: newStepEnd
         }
 
-        onAddingStep(newStep)
+        const isTodayInside = newStepEnd < today
+
+        const newSteps = timelineService.changeChildrenAndParentsEnd(
+            allSteps,
+            nextStep,
+            prevEnd,
+            nextStep.end,
+            newStepEnd,
+            nextStep.end,
+            today,
+            isTodayInside
+        )
+
+        onSetSteps([...newSteps, newStep])
 
         onSetEditModal({ 
             step: newStep, 

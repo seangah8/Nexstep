@@ -5,6 +5,7 @@ export const timelineService = {
   getStepsDatabase,
   getTimelineUISettings,
   findParentStart,
+  changeChildrenAndParentsEnd,
   changeCurrantAndNextStepsEnd,
   changeAllStepsEnd,
   dayToStepLocation,
@@ -87,7 +88,7 @@ function changeCurrantAndNextStepsEnd(
     else return step
   })
   //change step's children
-  allSteps = _changeChildrenAndParentsEnd(
+  allSteps = changeChildrenAndParentsEnd(
     allSteps, 
     changedStep, 
     preStart,
@@ -100,7 +101,7 @@ function changeCurrantAndNextStepsEnd(
 
   //change next step's children as well
   if(nextStep){
-    allSteps = _changeChildrenAndParentsEnd(
+    allSteps = changeChildrenAndParentsEnd(
         allSteps, 
         nextStep, 
         preEnd,
@@ -202,7 +203,7 @@ function changeAllStepsEnd(
     }
 
     // Recursively update children & parents
-    allSteps = _changeChildrenAndParentsEnd(
+    allSteps = changeChildrenAndParentsEnd(
       allSteps,
       step,
       preSiblingStart,
@@ -320,7 +321,7 @@ function findStepMaxEnd(allSteps : StepModel[], step: StepModel) : number{
 
 // when changing steps end youll have to change its children and 
 // event mabye parents end to make sense to your timeline
-function _changeChildrenAndParentsEnd(
+function changeChildrenAndParentsEnd(
   allSteps: StepModel[],
   changedStep: StepModel,
   preStart: number,
@@ -333,6 +334,7 @@ function _changeChildrenAndParentsEnd(
 ): StepModel[] {
 
   const updatedSteps = allSteps.map(step => ({ ...step })) // deep copy
+  console.log('changedStep', changedStep, 'isTodayInside', isTodayInside)
 
   // update all childrens end under the step you changed
 
@@ -341,9 +343,10 @@ function _changeChildrenAndParentsEnd(
   
     for (const child of children) {
       updateChildrenEnd(child)
-      if (child.end > today) {
+      if (child.end > today || postStart > today) {
         child.end = 
         isTodayInside ? 
+        
         Math.floor(
           today + (postEnd - postStart - (today-preStart)) * ((child.end - preStart - (today-preStart)) / (preEnd - preStart - (today-preStart))))
         :

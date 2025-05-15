@@ -1,14 +1,14 @@
-import { utilService } from "../services/util.service"
+
 import { useState, useEffect, useRef } from "react";
 import { StepModel, MainStepModel, editModalModel, draggingModal } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
-import { StepPreview } from "./stepPreview";
+import { StepPreview } from "./StepPreview";
 
 function Timeline() {
 
   // Load UI settings from timeline service
-  const { svgSize, svgCenter, radius, spaceDeg, strokeWidth, circlesSize } = timelineService.getTimelineUISettings()
+  const { svgSize, svgCenter, radius, spaceDeg, strokeWidth } = timelineService.getTimelineUISettings()
 
   // The time the timeline was created (unchangeable)
   const createTime = 100
@@ -193,10 +193,10 @@ function Timeline() {
             accumulated += step.end - prevEnd
 
             return (
-              <StepPreview
-                key={step.id}
+              <StepPreview key={step.id}
                 step = {step}
                 nextStep = {nextStep}
+                allSteps = {steps}
                 mainStep = {mainStep}
                 stepsToShow = {stepsToShow}
                 prevEnd = {prevEnd}
@@ -205,6 +205,7 @@ function Timeline() {
                 createTime = {createTime}
                 svgRef = {svgRef}
                 dragging = {dragging}
+                onSetSteps = {onSetSteps}
                 onSetMainStep = {onSetMainStep}
                 onSetEditModal = {onSetEditModal}
                 onSetDragging = {onSetDragging}
