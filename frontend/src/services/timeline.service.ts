@@ -334,7 +334,6 @@ function changeChildrenAndParentsEnd(
 ): StepModel[] {
 
   const updatedSteps = allSteps.map(step => ({ ...step })) // deep copy
-  console.log('changedStep', changedStep, 'isTodayInside', isTodayInside)
 
   // update all childrens end under the step you changed
 

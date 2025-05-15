@@ -95,19 +95,33 @@ export function StepPreview({
         }
 
         const isTodayInside = newStepEnd < today
+        
+        const isMainEmpty = nextStep.id.slice(-5) === 'dummy'
 
-        const newSteps = timelineService.changeChildrenAndParentsEnd(
-            allSteps,
-            nextStep,
-            prevEnd,
-            nextStep.end,
-            newStepEnd,
-            nextStep.end,
-            today,
-            isTodayInside
-        )
+        if(!isMainEmpty){
+            const newSteps = timelineService.changeChildrenAndParentsEnd(
+                allSteps,
+                nextStep,
+                prevEnd,
+                nextStep.end,
+                newStepEnd,
+                nextStep.end,
+                today,
+                isTodayInside
+            )
+            onSetSteps([...newSteps, newStep])
+        }
 
-        onSetSteps([...newSteps, newStep])
+        else{
+            const extraStep = {
+                id: utilService.createId(),
+                parentId: mainStep.id,
+                title: mainStep.title,
+                end: mainStep.end
+            }
+            onSetSteps([...allSteps, newStep, extraStep])
+        }
+
 
         onSetEditModal({ 
             step: newStep, 
