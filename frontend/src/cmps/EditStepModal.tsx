@@ -46,7 +46,6 @@ export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEn
                 if (step.id === stepToEdit.id){
                   const maxPossibleEnd = timelineService.findStepTotalMaxEnd(allSteps, step)
                   const newStepToEdit = {...stepToEdit, end: Math.min(stepToEdit.end, maxPossibleEnd)}
-                  setStepToEdit(newStepToEdit)
                   return newStepToEdit
                 }
                 else return step
@@ -87,26 +86,27 @@ export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEn
     }  
 
     function onDeleteStep(){
-      let newSteps = timelineService.deleteStep(allSteps, editModal.step.id)
 
+      // if the step is last in main dlete the fater and bring the user back
+      const stepToDelete = timelineService.findRightStepToDelete(allSteps, editModal.step)
+
+      // deleting the step
+      let newSteps = timelineService.deleteStep(allSteps, stepToDelete.id)
+
+      // ajust next step children
       if(editModal.nextStep){
-        console.log('editModal.nextStep.end', editModal.nextStep.end)
-
-        // 1. before&after no today 2. before&after today 3. before no today after yes
-        // and need to think about how to act if deleteing last step
 
         newSteps = timelineService.changeChildrenAndParentsEnd(
-        newSteps,
-        editModal.nextStep,
-        editModal.step.end,
-        editModal.nextStep.end,
-        editModal.start,
-        editModal.nextStep.end,
-        editModal.today,
-        editModal.start < editModal.today
+          newSteps,
+          editModal.nextStep,
+          editModal.step.end,
+          editModal.nextStep.end,
+          editModal.start,
+          editModal.nextStep.end,
+          editModal.today,
+          editModal.start < editModal.today
         )
       }
-
     
       onSetSteps(newSteps)
       onSetEditModal(null)

@@ -266,10 +266,9 @@ export default Timeline
 
 Things need to be add
 
-0. remove isTodayInside from changeChildrenAndParentsEnd?
-1. delete button for steps
-2. make drag calculate with locationToDay (so it wont be x axes only)
-3. fix the drag befor main start problem
+1. make so when user delete last step it throw him back to parent as main step
+2. fix the drag befor main start problem
+3. make drag calculate with locationToDay (so it wont be x axes only)
 4. edit steps end with date
 5. add description, image and more props to steps and make it possible to edit
 6. replace title on the timeline with the image

@@ -71,6 +71,7 @@ export function StepPreview({
         }
     }
 
+    // adding new step
     function handleRightClickOnPath(event: React.MouseEvent, nextStep: StepModel, prevEnd: number) {
         event.preventDefault()
         if(event.button === 2 && svgRef.current){
@@ -94,12 +95,11 @@ export function StepPreview({
             title: 'new',
             end: newStepEnd
         }
-
-        const isTodayInside = newStepEnd < today
         
         const isMainEmpty = nextStep.id.slice(-5) === 'dummy'
 
         if(!isMainEmpty){
+            // update nextStep with new start
             const newSteps = timelineService.changeChildrenAndParentsEnd(
                 allSteps,
                 nextStep,
@@ -108,7 +108,7 @@ export function StepPreview({
                 newStepEnd,
                 nextStep.end,
                 today,
-                isTodayInside
+                false, // always be flase
             )
             onSetSteps([...newSteps, newStep])
         }

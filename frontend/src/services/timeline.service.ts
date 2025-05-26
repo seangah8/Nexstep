@@ -15,6 +15,7 @@ export const timelineService = {
   findStepMaxEnd,
   deleteStep,
   findStepTotalMaxEnd,
+  findRightStepToDelete,
 }
 
 const stepsDatabase =     [
@@ -175,7 +176,7 @@ function changeAllStepsEnd(
       : Math.floor(parentEnd - (parentEnd - step.end) * afterChangedStepRatio)
 
     const isTodayInside =
-      isTodayInsideParent && preSiblingStart < today && today < step.end
+      isTodayInsideParent && preSiblingStart < today && today < preSiblingEnd
 
     // update end of current sibling step
     if (step.end > today) {
@@ -323,11 +324,12 @@ function changeChildrenAndParentsEnd(
   
     for (const child of children) {
       updateChildrenEnd(child)
-      // in case of today exists after start
+      // in special delete case when today exists after start change
       if(preStart > today && postStart < today){
         child.end = 
-          today + (postEnd - today) * ((child.end - preStart) / (preEnd - preStart))
+          Math.floor(today + (postEnd - today) * ((child.end - preStart) / (preEnd - preStart)))
       }
+      // in normal cases
       else{
         if (child.end > today || postStart > today) {
           child.end = isTodayInside 
@@ -390,6 +392,21 @@ function findStepTotalMaxEnd(allSteps :StepModel[], step: StepModel) : number{
       : maxParentEnd - 1
   }
   else return Number.MAX_SAFE_INTEGER
+}
+
+function findRightStepToDelete(allSteps: StepModel[], stepToDelete: StepModel): StepModel {
+
+  const parent = allSteps.find(step => step.id === stepToDelete.parentId)
+  if (!parent) 
+    throw new Error(`Parent not found for step ${stepToDelete.id}`)
+
+  const grandparent = allSteps.find(step => step.id === parent.parentId)
+  if (!grandparent && stepToDelete.end === parent.end) 
+    throw new Error('Cannot delete the main goal.')
+
+  return (stepToDelete.end === parent.end)
+    ? findRightStepToDelete(allSteps, parent)
+    : stepToDelete
 }
 
 
