@@ -259,3 +259,25 @@ function Timeline() {
 }
 
 export default Timeline
+
+
+
+/*
+
+Things need to be add
+
+0. remove isTodayInside from changeChildrenAndParentsEnd?
+1. delete button for steps
+2. make drag calculate with locationToDay (so it wont be x axes only)
+3. fix the drag befor main start problem
+4. edit steps end with date
+5. add description, image and more props to steps and make it possible to edit
+6. replace title on the timeline with the image
+7. add hover to steps with given information about it
+8. add number of days og the mainstep above the timeline
+
+9. design
+
+10. add backend + auth
+
+ */

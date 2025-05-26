@@ -39,6 +39,20 @@ export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEn
                 editModal.nextStep && (stepToEdit.end > editModal.nextStep.end))
             ) throw new Error('cant end this step at that time')
 
+            // if chaned step is last in main
+            if(!editModal.nextStep){
+              // prevent from step end to get over next parent start
+              newSteps = newSteps.map(step=> {
+                if (step.id === stepToEdit.id){
+                  const maxPossibleEnd = timelineService.findStepTotalMaxEnd(allSteps, step)
+                  const newStepToEdit = {...stepToEdit, end: Math.min(stepToEdit.end, maxPossibleEnd)}
+                  setStepToEdit(newStepToEdit)
+                  return newStepToEdit
+                }
+                else return step
+              })
+            }
+
             if(!changeAllEnds)
                 newSteps = timelineService.changeCurrantAndNextStepsEnd(
                     editModal.start,
@@ -71,6 +85,32 @@ export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEn
         //close modal
         onSetEditModal(null)
     }  
+
+    function onDeleteStep(){
+      let newSteps = timelineService.deleteStep(allSteps, editModal.step.id)
+
+      if(editModal.nextStep){
+        console.log('editModal.nextStep.end', editModal.nextStep.end)
+
+        // 1. before&after no today 2. before&after today 3. before no today after yes
+        // and need to think about how to act if deleteing last step
+
+        newSteps = timelineService.changeChildrenAndParentsEnd(
+        newSteps,
+        editModal.nextStep,
+        editModal.step.end,
+        editModal.nextStep.end,
+        editModal.start,
+        editModal.nextStep.end,
+        editModal.today,
+        editModal.start < editModal.today
+        )
+      }
+
+    
+      onSetSteps(newSteps)
+      onSetEditModal(null)
+    }
       
 
     return(
@@ -97,7 +137,10 @@ export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEn
                 name="change-all"
               />
 
+
+
               <button type="submit">Save</button>
+              <button onClick={onDeleteStep}>Delete</button>
             </form>
 
 

@@ -85,7 +85,8 @@ export function StepPreview({
             Mouselocation
         )
 
-        // later make it impossible to click before today!!!
+        if(newStepEnd < today) 
+            throw new Error('cant add step before today date!')
 
         const newStep : StepModel = {
             id: utilService.createId(),

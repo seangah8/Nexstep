@@ -13,6 +13,8 @@ export const timelineService = {
   locationToDay,
   sortByEnd,
   findStepMaxEnd,
+  deleteStep,
+  findStepTotalMaxEnd,
 }
 
 const stepsDatabase =     [
@@ -78,15 +80,6 @@ function changeCurrantAndNextStepsEnd(
 
   let allSteps = [...newSteps]
 
-  // prevent from step end to get over next parent start
-  allSteps = allSteps.map(step=> {
-    if (step.id === changedStep.id){
-      const newChangedStep = _preventGetOverMaxEnd(allSteps, step, preEnd)
-      changedStep = newChangedStep
-      return newChangedStep
-    }
-    else return step
-  })
   //change step's children
   allSteps = changeChildrenAndParentsEnd(
     allSteps, 
@@ -128,17 +121,6 @@ function changeAllStepsEnd(
 ): StepModel[] {
   
   let allSteps = structuredClone(newSteps)
-
-  // prevent from step end to get over next parent start
-  allSteps = allSteps.map(step=> {
-    if (step.id === changedStep.id){
-      const newChangedStep = _preventGetOverMaxEnd(allSteps, step, preEnd)
-      changedStep = newChangedStep
-      return newChangedStep
-    }
-    else return step
-  })
-
 
   // for all siblings
 
@@ -302,7 +284,7 @@ function sortByEnd(arr : StepModel[]) {
   })
 }
 
-
+// this is not related to any parents limitations
 function findStepMaxEnd(allSteps : StepModel[], step: StepModel) : number{
   const siblings = allSteps.filter(s=> s.parentId === step.parentId)
 
@@ -319,8 +301,7 @@ function findStepMaxEnd(allSteps : StepModel[], step: StepModel) : number{
 
 
 
-// when changing steps end youll have to change its children and 
-// event mabye parents end to make sense to your timeline
+
 function changeChildrenAndParentsEnd(
   allSteps: StepModel[],
   changedStep: StepModel,
@@ -342,15 +323,19 @@ function changeChildrenAndParentsEnd(
   
     for (const child of children) {
       updateChildrenEnd(child)
-      if (child.end > today || postStart > today) {
+      // in case of today exists after start
+      if(preStart > today && postStart < today){
         child.end = 
-        isTodayInside ? 
-        
-        Math.floor(
-          today + (postEnd - postStart - (today-preStart)) * ((child.end - preStart - (today-preStart)) / (preEnd - preStart - (today-preStart))))
-        :
-        Math.floor(
-          postStart + (postEnd - postStart) * ((child.end - preStart) / (preEnd - preStart)))
+          today + (postEnd - today) * ((child.end - preStart) / (preEnd - preStart))
+      }
+      else{
+        if (child.end > today || postStart > today) {
+          child.end = isTodayInside 
+          ? Math.floor(
+            today + (postEnd - today) * ((child.end - today) / (preEnd - today)))
+          : Math.floor(
+            postStart + (postEnd - postStart) * ((child.end - preStart) / (preEnd - preStart)))
+        }
       }
     }
   }
@@ -372,17 +357,39 @@ function changeChildrenAndParentsEnd(
   return updatedSteps
 }
 
+function deleteStep(allSteps: StepModel[], stepId: string): StepModel[] {
 
-function _preventGetOverMaxEnd(allSteps :StepModel[], step: StepModel, preEnd: number) : StepModel{
+  // a Set is a built-in object that stores unique values — no duplicates allowed.
+  // no duplicates allowed!
+  // very fast - "has()" search much faster than array.includes() which is linear.
+  const idsToDelete = new Set<string>()
 
-  const parent = allSteps.find(s=>s.id === step.parentId)
-
-  if(preEnd === parent?.end){
-      const maxEnd = timelineService.findStepMaxEnd(allSteps, parent)
-      return {...step, end: Math.min(maxEnd-1, step.end)}
+  function collectChildrenId(id: string) {
+    idsToDelete.add(id)
+    allSteps.forEach(step => {
+      if (step.parentId === id) {
+        collectChildrenId(step.id)
+      }
+    })
   }
 
-  else return step
+  collectChildrenId(stepId)
+
+  return allSteps.filter(step => !idsToDelete.has(step.id))
+}
+
+// relate to any parents limitations
+function findStepTotalMaxEnd(allSteps :StepModel[], step: StepModel) : number{
+
+  const parent = allSteps.find(s=>s.id === step.parentId)
+  if(parent){
+    const maxParentEnd = findStepMaxEnd(allSteps, parent)
+    // is parent last?
+    return (maxParentEnd === Number.MAX_SAFE_INTEGER)
+      ? findStepTotalMaxEnd(allSteps, parent)
+      : maxParentEnd - 1
+  }
+  else return Number.MAX_SAFE_INTEGER
 }
 
 
