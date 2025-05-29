@@ -16,6 +16,7 @@ export const timelineService = {
   deleteStep,
   findStepTotalMaxEnd,
   findRightStepToDelete,
+  extractFinishedChildrenFromStep,
 }
 
 const stepsDatabase =     [
@@ -359,7 +360,7 @@ function changeChildrenAndParentsEnd(
   return updatedSteps
 }
 
-function deleteStep(allSteps: StepModel[], stepId: string): StepModel[] {
+function deleteStep(allSteps: StepModel[], step: StepModel, today: number): StepModel[] {
 
   // a Set is a built-in object that stores unique values — no duplicates allowed.
   // no duplicates allowed!
@@ -368,16 +369,21 @@ function deleteStep(allSteps: StepModel[], stepId: string): StepModel[] {
 
   function collectChildrenId(id: string) {
     idsToDelete.add(id)
-    allSteps.forEach(step => {
-      if (step.parentId === id) {
-        collectChildrenId(step.id)
+    allSteps.forEach(s => {
+      if (s.parentId === id) {
+        // if step already finished don't delete it
+        // and if its step child bring it up
+        if(s.end >= today)
+          collectChildrenId(s.id)
+        else if(s.parentId === step.id)
+            s.parentId = step.parentId 
       }
     })
   }
 
-  collectChildrenId(stepId)
+  collectChildrenId(step.id)
 
-  return allSteps.filter(step => !idsToDelete.has(step.id))
+  return allSteps.filter(s => !idsToDelete.has(s.id))
 }
 
 // relate to any parents limitations
@@ -408,6 +414,25 @@ function findRightStepToDelete(allSteps: StepModel[], stepToDelete: StepModel): 
     ? findRightStepToDelete(allSteps, parent)
     : stepToDelete
 }
+
+function extractFinishedChildrenFromStep(
+  allSteps: StepModel[],
+  step: StepModel,
+  today: number
+): StepModel[] {
+
+  const extractedChildren: StepModel[] = []
+  const remainingSteps: StepModel[] = []
+
+  for (const s of allSteps) {
+    if (s.parentId === step.id && s.end < today) 
+      extractedChildren.push({ ...s, parentId: step.parentId })
+    else remainingSteps.push(s)
+  }
+
+  return [...remainingSteps, ...sortByEnd(extractedChildren)]
+}
+
 
 
 

@@ -100,7 +100,7 @@ export function EditStepModal({
       const stepToDelete = timelineService.findRightStepToDelete(allSteps, editModal.step)
 
       // deleting the step
-      let newSteps = timelineService.deleteStep(allSteps, stepToDelete.id)
+      let newSteps = timelineService.deleteStep(allSteps, stepToDelete, editModal.today)
 
       // ajust next step children
       if(editModal.nextStep){
@@ -117,13 +117,15 @@ export function EditStepModal({
         )
       }
 
-      // deleting last step move user back to stepToDelete parent
+      // deleting last step zoom out to stepToDelete parent
       if(stepToDelete.id !== editModal.step.id){
         const parent = allSteps.find(step=> step.id === stepToDelete.parentId)
         if(parent) onSetMainStep({...parent, 
           start: timelineService.findParentStart(allSteps, parent, editModal.createTime)
         })
       }
+
+
     
       onSetSteps(newSteps)
       onSetEditModal(null)
