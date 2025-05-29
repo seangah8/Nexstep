@@ -1,16 +1,25 @@
 import { ChangeEvent, FormEvent, useState } from "react"
-import { StepModel, editModalModel } from "../models/timeline.models"
+import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models"
 import { timelineService } from "../services/timeline.service"
 
 interface EditStepModalProps{
     editModal : editModalModel
     allSteps : StepModel[]
     onSetSteps : (newSteps : StepModel[]) => void
+    onSetMainStep : (newSteps : MainStepModel) => void
     onSetMainStepEnd : (end : number) => void
     onSetEditModal : (newEditModal : editModalModel | null) => void
 }
 
-export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEnd, onSetEditModal } : EditStepModalProps){
+export function EditStepModal({ 
+  editModal, 
+  allSteps, 
+  onSetSteps, 
+  onSetMainStep, 
+  onSetMainStepEnd, 
+  onSetEditModal 
+
+} : EditStepModalProps){
 
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
@@ -106,6 +115,14 @@ export function EditStepModal({ editModal, allSteps, onSetSteps, onSetMainStepEn
           editModal.today,
           editModal.start < editModal.today
         )
+      }
+
+      // deleting last step move user back to stepToDelete parent
+      if(stepToDelete.id !== editModal.step.id){
+        const parent = allSteps.find(step=> step.id === stepToDelete.parentId)
+        if(parent) onSetMainStep({...parent, 
+          start: timelineService.findParentStart(allSteps, parent, editModal.createTime)
+        })
       }
     
       onSetSteps(newSteps)
