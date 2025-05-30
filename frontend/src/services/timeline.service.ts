@@ -16,7 +16,7 @@ export const timelineService = {
   deleteStep,
   findStepTotalMaxEnd,
   findRightStepToDelete,
-  extractFinishedChildrenFromStep,
+  extractWhenCreateNewStep,
 }
 
 const stepsDatabase =     [
@@ -372,7 +372,7 @@ function deleteStep(allSteps: StepModel[], step: StepModel, today: number): Step
     allSteps.forEach(s => {
       if (s.parentId === id) {
         // if step already finished don't delete it
-        // and if its step child bring it up
+        // and if its step's child bring it up
         if(s.end >= today)
           collectChildrenId(s.id)
         else if(s.parentId === step.id)
@@ -415,24 +415,67 @@ function findRightStepToDelete(allSteps: StepModel[], stepToDelete: StepModel): 
     : stepToDelete
 }
 
-function extractFinishedChildrenFromStep(
-  allSteps: StepModel[],
-  step: StepModel,
-  today: number
-): StepModel[] {
+//1. extract the step the user done
+//2. spred the other childrens in nexstep logicly
+function extractWhenCreateNewStep(
+  allSteps: StepModel[], 
+  nextStep: StepModel, 
+  today: number,
+  prevEnd: number,
+  createTime: number,
 
-  const extractedChildren: StepModel[] = []
-  const remainingSteps: StepModel[] = []
+) : StepModel[]{
+  let lastFinishedDay = 0
+  let firstUnfinishedStep = nextStep
 
-  for (const s of allSteps) {
-    if (s.parentId === step.id && s.end < today) 
-      extractedChildren.push({ ...s, parentId: step.parentId })
-    else remainingSteps.push(s)
+  // extract finished childrens
+  let newSteps = allSteps.map(step=>{
+      if(step.parentId === nextStep.id){
+          if(step.end < today){
+              lastFinishedDay = Math.max(lastFinishedDay, step.end)
+              return {...step, parentId: nextStep.parentId} 
+          }
+          else {
+              firstUnfinishedStep = 
+              step.end < firstUnfinishedStep.end 
+              ? step
+              : firstUnfinishedStep
+              return step
+          }
+      }
+      else return step
+  })
+
+
+  // if there is finished and unfinished childrens
+  // adjust unfinished childrens to more logical end
+  if(lastFinishedDay !== 0 && firstUnfinishedStep.id !== nextStep.id){
+      const ratio = 
+          (nextStep.end-prevEnd - (firstUnfinishedStep.end-prevEnd))
+          /(nextStep.end-prevEnd - (lastFinishedDay-prevEnd))
+      const FirstUnfinishedStepNewEnd = 
+          Math.floor(prevEnd + (nextStep.end - prevEnd) - ratio * (nextStep.end - prevEnd))
+
+      const childrens = allSteps.filter(step=>step.parentId === nextStep.id)
+      let nextUnfinishedDay = nextStep.end + 1
+      const nextUnfinishedStep = childrens.reduce((acc, step)=>{
+          if(step.end > firstUnfinishedStep.end && step.end < nextUnfinishedDay)
+              return step
+          return acc
+      },firstUnfinishedStep)
+
+      newSteps = timelineService.changeAllStepsEnd(
+        firstUnfinishedStep.end,
+        today,
+        newSteps,
+        {...firstUnfinishedStep, end: FirstUnfinishedStepNewEnd},
+        nextUnfinishedStep,
+        createTime
+      )
   }
 
-  return [...remainingSteps, ...sortByEnd(extractedChildren)]
+  return newSteps
 }
-
 
 
 

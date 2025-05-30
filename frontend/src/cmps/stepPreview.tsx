@@ -99,9 +99,19 @@ export function StepPreview({
         const isMainEmpty = nextStep.id.slice(-5) === 'dummy'
 
         if(!isMainEmpty){
+
+            // extract and orgenize next step
+            let newSteps = timelineService.extractWhenCreateNewStep(
+                allSteps, 
+                nextStep, 
+                today, 
+                prevEnd, 
+                createTime
+            )
+
             // update nextStep with new start
-            const newSteps = timelineService.changeChildrenAndParentsEnd(
-                allSteps,
+            newSteps = timelineService.changeChildrenAndParentsEnd(
+                newSteps,
                 nextStep,
                 prevEnd,
                 nextStep.end,
