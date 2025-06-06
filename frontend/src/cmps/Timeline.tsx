@@ -111,57 +111,65 @@ function Timeline() {
 
   function handleRightDrag(event: React.MouseEvent){
     event.preventDefault()
-    if(dragging && stepsToShow){
+    if(dragging){
+      const distance = Math.sqrt(
+        (event.clientX - dragging.startPoint.x) ** 2 + 
+        (event.clientY - dragging.startPoint.y) ** 2)
 
-      const distance = event.clientX - dragging.startPoint
-      const move = (distance >= 5) ? distance - 5 : (distance <= -5) ? distance + 5 : 0
-      const totalDays = mainStep.end - mainStep.start
-      const stepIndex = stepsToShow.findIndex(step => step.id === dragging.druggingStep.id)
-      const minEnd = stepIndex === 0 ? mainStep.start : stepsToShow[stepIndex-1].end
-      const maxEnd = stepIndex === stepsToShow.length-1 ? Number.MAX_SAFE_INTEGER : stepsToShow[stepIndex+1].end
-      let newEnd = Math.floor(dragging.druggingStep.end - ((move / 1000) * totalDays))
+      if(distance >= 5 && stepsToShow && svgRef.current) {
+        // calculate the new position
+        const svgRect = svgRef.current.getBoundingClientRect()
+        const svgLocation = {x: svgRect.x, y: svgRect.y}
+        const Mouselocation = {x: event.pageX, y: event.pageY}
+        let newEnd = timelineService.locationToDay(svgCenter, svgLocation, mainStep, spaceDeg, Mouselocation)
 
-      // borders
-      if (newEnd <= minEnd)
-        newEnd = minEnd + 1
-      else if (newEnd >= maxEnd)
-        newEnd = maxEnd - 1
-      if(newEnd <= today)
-        newEnd = today + 1
+        const stepIndex = stepsToShow.findIndex(step => step.id === dragging.druggingStep.id)
+        const minEnd = stepIndex === 0 ? mainStep.start : stepsToShow[stepIndex-1].end
+        const maxEnd = stepIndex === stepsToShow.length-1 ? Number.MAX_SAFE_INTEGER : stepsToShow[stepIndex+1].end
 
-      // last step drag
-      if(stepIndex === stepsToShow.length-1)
-        setMainStep(prev=> ({...prev, end: newEnd}))
-      
-      setStepsToShow(prev => {
-        if (!prev) return prev
-        return prev.map((step, index) =>{
-          if(step.id === dragging.druggingStep.id)
-            return { ...step, end: newEnd }
-          else {
-            // if the user shift while drag
-            if(dragging.onShift && step.end >= today){
 
-              // steps before the changed one
-              if(step.end < newEnd){
-                const isTodayInsideMainstep = (today > mainStep.start && today < mainStep.end)
-                const refPoint = isTodayInsideMainstep ? today : mainStep.start
-                const ratio = (newEnd - refPoint)/(dragging.druggingStep.end - refPoint)
-                return {...step, end: Math.floor(refPoint + (dragging.prevStepsToSow[index].end - refPoint) * ratio)}
+        // borders
+        if (newEnd <= minEnd)
+          newEnd = minEnd + 1
+        else if (newEnd >= maxEnd)
+          newEnd = maxEnd - 1
+        if(newEnd <= today)
+          newEnd = today + 1
+
+        // last step drag
+        if(stepIndex === stepsToShow.length-1)
+          setMainStep(prev=> ({...prev, end: newEnd}))
+        
+        setStepsToShow(prev => {
+          if (!prev) return prev
+          return prev.map((step, index) =>{
+            if(step.id === dragging.druggingStep.id)
+              return { ...step, end: newEnd }
+            else {
+              // if the user shift while drag
+              if(dragging.onShift && step.end >= today){
+
+                // steps before the changed one
+                if(step.end < newEnd){
+                  const isTodayInsideMainstep = (today > mainStep.start && today < mainStep.end)
+                  const refPoint = isTodayInsideMainstep ? today : mainStep.start
+                  const ratio = (newEnd - refPoint)/(dragging.druggingStep.end - refPoint)
+                  return {...step, end: Math.floor(refPoint + (dragging.prevStepsToSow[index].end - refPoint) * ratio)}
+                }
+
+                // steps after the changed one
+                else{
+                  const ratio = (mainStep.end - newEnd)/(mainStep.end - dragging.druggingStep.end)
+                  return {...step, end: Math.floor(mainStep.end - (mainStep.end - dragging.prevStepsToSow[index].end) * ratio)}
+                }
               }
 
-              // steps after the changed one
-              else{
-                const ratio = (mainStep.end - newEnd)/(mainStep.end - dragging.druggingStep.end)
-                return {...step, end: Math.floor(mainStep.end - (mainStep.end - dragging.prevStepsToSow[index].end) * ratio)}
-              }
-            }
-
-            // if the user dont shift while drag
-            else return step
-          }  
+              // if the user dont shift while drag
+              else return step
+            }  
+          })
         })
-      })
+      }
     }
   }
 
@@ -267,14 +275,14 @@ export default Timeline
 
 Things need to be add
 
-1. make drag calculate with locationToDay (so it wont be x axes only)
-2. edit steps end with date
-3. add description, image and more props to steps and make it possible to edit
-4. replace title on the timeline with the image
-5. add hover to steps with given information about it
-6. add number of days on the mainstep above the timeline
+1. in modal - edit steps end with date
+2. add description, image and more props to steps and make it possible to edit them
+3. replace title on the timeline with the image
+4. add hover to steps with given information about it
+5. add number of days on the mainstep above the timeline
 
-7. add backend + auth
+6. add state management of timeline and user
+7. add backend of timeline and user + auth
 8. design
 
 

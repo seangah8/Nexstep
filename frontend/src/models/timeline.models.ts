@@ -19,7 +19,7 @@ export interface editModalModel{
 }
 
 export interface draggingModal{
-    startPoint: number, 
+    startPoint: {x:number, y:number}, 
     druggingStep: StepModel, 
     onShift: boolean,
     prevStepsToSow: StepModel[]

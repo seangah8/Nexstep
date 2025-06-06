@@ -63,7 +63,7 @@ export function StepPreview({
         event.preventDefault()
         if(event.button === 2 && stepsToShow){
             if(!dragging && step.end >= today){
-                onSetDragging({startPoint: event.pageX, 
+                onSetDragging({startPoint: {x: event.pageX, y: event.pageY}, 
                 druggingStep: step, 
                 onShift: event.shiftKey,
                 prevStepsToSow: stepsToShow })
@@ -158,8 +158,10 @@ export function StepPreview({
     function handleRightUpInsideStep(event: React.MouseEvent, step: StepModel, prevEnd: number, nextStep: StepModel){
         event.preventDefault()
         if(event.button === 2 && dragging){
-        const distance = event.clientX - dragging.startPoint
-        if(Math.abs(distance) < 5)
+        const distance = Math.sqrt(
+            (event.clientX - dragging.startPoint.x) ** 2 + 
+            (event.clientY - dragging.startPoint.y) ** 2)
+        if(distance < 5)
             handleRightClickOnCircle(event, step, prevEnd, nextStep)
         }
     }
