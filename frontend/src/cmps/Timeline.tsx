@@ -117,15 +117,15 @@ function Timeline() {
       const move = (distance >= 5) ? distance - 5 : (distance <= -5) ? distance + 5 : 0
       const totalDays = mainStep.end - mainStep.start
       const stepIndex = stepsToShow.findIndex(step => step.id === dragging.druggingStep.id)
+      const minEnd = stepIndex === 0 ? mainStep.start : stepsToShow[stepIndex-1].end
+      const maxEnd = stepIndex === stepsToShow.length-1 ? Number.MAX_SAFE_INTEGER : stepsToShow[stepIndex+1].end
       let newEnd = Math.floor(dragging.druggingStep.end - ((move / 1000) * totalDays))
 
       // borders
-      if(stepIndex === 0 && newEnd < mainStep.start)
-        newEnd = mainStep.start
-      else if (stepIndex !== 0 && newEnd <= stepsToShow[stepIndex-1].end)
-        newEnd = stepsToShow[stepIndex-1].end + 1
-      else if (stepIndex !== stepsToShow.length-1 && newEnd >= stepsToShow[stepIndex+1].end)
-        newEnd = stepsToShow[stepIndex+1].end - 1
+      if (newEnd <= minEnd)
+        newEnd = minEnd + 1
+      else if (newEnd >= maxEnd)
+        newEnd = maxEnd - 1
       if(newEnd <= today)
         newEnd = today + 1
 
@@ -267,16 +267,15 @@ export default Timeline
 
 Things need to be add
 
-1. fix the drag of empty main before its start
-2. make drag calculate with locationToDay (so it wont be x axes only)
-3. edit steps end with date
-4. add description, image and more props to steps and make it possible to edit
-5. replace title on the timeline with the image
-6. add hover to steps with given information about it
-7. add number of days on the mainstep above the timeline
+1. make drag calculate with locationToDay (so it wont be x axes only)
+2. edit steps end with date
+3. add description, image and more props to steps and make it possible to edit
+4. replace title on the timeline with the image
+5. add hover to steps with given information about it
+6. add number of days on the mainstep above the timeline
 
-8. add backend + auth
-9. design
+7. add backend + auth
+8. design
 
 
 
