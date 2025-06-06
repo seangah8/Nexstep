@@ -267,17 +267,16 @@ export default Timeline
 
 Things need to be add
 
-1. when deleting step/add make sure to create step hout of finished children
-2. fix the drag befor main start problem
-3. make drag calculate with locationToDay (so it wont be x axes only)
-4. edit steps end with date
-5. add description, image and more props to steps and make it possible to edit
-6. replace title on the timeline with the image
-7. add hover to steps with given information about it
-8. add number of days on the mainstep above the timeline
+1. fix the drag of empty main before its start
+2. make drag calculate with locationToDay (so it wont be x axes only)
+3. edit steps end with date
+4. add description, image and more props to steps and make it possible to edit
+5. replace title on the timeline with the image
+6. add hover to steps with given information about it
+7. add number of days on the mainstep above the timeline
 
-9. add backend + auth
-10. design
+8. add backend + auth
+9. design
 
 
 

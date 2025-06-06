@@ -126,8 +126,10 @@ function changeAllStepsEnd(
 
   // for all siblings
 
-  const siblings = sortByEnd(
-    allSteps.filter(step => step.parentId === changedStep.parentId)
+  const siblings = sortByEndWithChangedStep(
+    allSteps.filter(step => step.parentId === changedStep.parentId),
+    changedStep,
+    preEnd
   )
 
   const parent = allSteps.find(step => step.id === changedStep.parentId)
@@ -278,12 +280,25 @@ function locationToDay(
 }
 
 
-function sortByEnd(arr : StepModel[]) {
+function sortByEnd(arr : StepModel[]) : StepModel[] {
   return [...arr].sort((a, b) => {
     if (a.end < b.end) return -1
     if (a.end > b.end) return 1
     return 0;
   })
+}
+
+function sortByEndWithChangedStep(
+  steps: StepModel[], 
+  changedStep: StepModel, 
+  preEnd: number,
+) : StepModel[]{
+
+  const oldSteps = steps.map(step=>
+    step.id === changedStep.id ? {...step, end: preEnd} : step)
+  const sortedSteps = sortByEnd(oldSteps)
+  return sortedSteps.map(step=>
+    step.id === changedStep.id ? {...step, end: changedStep.end} : step)
 }
 
 // this is not related to any parents limitations
