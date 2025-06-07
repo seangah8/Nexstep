@@ -4,6 +4,8 @@ import { MainStepModel, StepModel } from "../models/timeline.models";
 export const timelineService = {
   getStepsDatabase,
   getTimelineUISettings,
+  getToday,
+  getCreateTime,
   findParentStart,
   changeChildrenAndParentsEnd,
   changeCurrantAndNextStepsEnd,
@@ -17,20 +19,25 @@ export const timelineService = {
   findStepTotalMaxEnd,
   findRightStepToDelete,
   extractWhenCreateNewStep,
+  formatDateFromEnd,
 }
 
+const createTime = 20215 // just some random time for test
+const todaysDate = new Date()
+const today = Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
+
 const stepsDatabase =     [
-  { id: 'idUserGoal', title:'Users Goal', parentId: null, end: 350},
-  {id: 'idS1', parentId: 'idUserGoal', title: 'S1', end: 150},
-  {id: 'idS1.S1' ,parentId: 'idS1', title: 'S1.S1', end: 105},
-  {id: 'idS1.S2' ,parentId: 'idS1', title: 'S1.S2', end: 115},
-  {id: 'idS1.N2' ,parentId: 'idS1', title: 'S1', end: 150},
-  {id: 'idS2' ,parentId: 'idUserGoal', title: 'S2', end: 180},
-  {id: 'idS3' ,parentId: 'idUserGoal', title: 'S3', end: 240},
-  {id: 'idS4' ,parentId: 'idUserGoal', title: 'S4', end: 330},
-  {id: 'idG' ,parentId: 'idUserGoal', title: 'G', end: 350},
-  {id: 'idG.F' ,parentId: 'idG', title: 'G.S1', end: 335},
-  {id: 'idG.G' ,parentId: 'idG', title: 'G', end: 350}
+  { id: 'idUserGoal', title:'Users Goal', parentId: null, end: createTime + 250},
+  {id: 'idS1', parentId: 'idUserGoal', title: 'S1', end: createTime + 50},
+  {id: 'idS1.S1' ,parentId: 'idS1', title: 'S1.S1', end: createTime + 5},
+  {id: 'idS1.S2' ,parentId: 'idS1', title: 'S1.S2', end: createTime + 15},
+  {id: 'idS1.N2' ,parentId: 'idS1', title: 'S1', end: createTime + 50},
+  {id: 'idS2' ,parentId: 'idUserGoal', title: 'S2', end: createTime + 80},
+  {id: 'idS3' ,parentId: 'idUserGoal', title: 'S3', end: createTime + 140},
+  {id: 'idS4' ,parentId: 'idUserGoal', title: 'S4', end: createTime + 230},
+  {id: 'idG' ,parentId: 'idUserGoal', title: 'G', end: createTime + 250},
+  {id: 'idG.F' ,parentId: 'idG', title: 'G.S1', end: createTime + 235},
+  {id: 'idG.G' ,parentId: 'idG', title: 'G', end: createTime + 250}
 ]
 
 const timelineUISettings = {
@@ -48,6 +55,14 @@ function getStepsDatabase(){
 
 function getTimelineUISettings(){
   return timelineUISettings
+}
+
+function getToday(){
+  return today
+}
+
+function getCreateTime(){
+  return createTime
 }
 
 
@@ -490,6 +505,15 @@ function extractWhenCreateNewStep(
   }
 
   return newSteps
+}
+
+function formatDateFromEnd(end: number): string {
+
+  const date = new Date(end * 24 * 60 * 60 * 1000)
+  const year = date.getFullYear()
+  const month = `${date.getMonth() + 1}`.padStart(2, '0')
+  const day = `${date.getDate()}`.padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
 
 

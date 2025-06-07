@@ -1,6 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react"
+import { FormEvent, useState } from "react"
 import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models"
 import { timelineService } from "../services/timeline.service"
+import { utilService } from "../services/util.service"
 
 interface EditStepModalProps{
     editModal : editModalModel
@@ -24,9 +25,15 @@ export function EditStepModal({
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
 
-    function handleChange(event : ChangeEvent<HTMLInputElement>) : void{
-        const endNumber = +event.target.value
-        setStepToEdit({...stepToEdit, end: endNumber})
+    function handleChange({target} : {target: HTMLInputElement}) : void {
+      const field : string = target.name
+      let value : string | number =  target.value
+      switch (field) {
+        case 'end':
+          const date = new Date(value)
+          value = Math.floor(date.getTime() / (1000 * 60 * 60 * 24))
+      }
+      setStepToEdit(prev => ({ ...prev, [field]: value }))
     }
 
     function onUpdateStep(event: FormEvent<HTMLFormElement>) : void{
@@ -138,11 +145,11 @@ export function EditStepModal({
 
             <form onSubmit={onUpdateStep}>
 
-              <label htmlFor="end">End Time</label>
+              <label htmlFor="end">End Date</label>
               <input
                 id="end"
-                type="number"
-                value={stepToEdit.end}
+                type="date"
+                value={timelineService.formatDateFromEnd(stepToEdit.end)}
                 onChange={handleChange}
                 name="end"
               />

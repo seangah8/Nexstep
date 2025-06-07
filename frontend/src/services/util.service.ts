@@ -1,6 +1,6 @@
 export const utilService = {
     describeArc,
-    createId
+    createId,
 }
 
 function describeArc(cx : number, cy : number, r : number, startAngle : number, endAngle : number) {

@@ -11,8 +11,8 @@ function Timeline() {
   const { svgSize, svgCenter, radius, spaceDeg, strokeWidth } = timelineService.getTimelineUISettings()
 
   // The time the timeline was created (unchangeable)
-  const createTime = 100
-  const today = 120
+  const createTime = timelineService.getCreateTime()
+  const today = timelineService.getToday()
 
   const [steps, setSteps] = useState<StepModel[]>(timelineService.getStepsDatabase)
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
