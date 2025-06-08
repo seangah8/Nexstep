@@ -3,6 +3,7 @@ export interface StepModel {
     id: string
     parentId: string | null
     title: string
+    description: string
     end: number
   }
   

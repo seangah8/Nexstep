@@ -26,18 +26,18 @@ const createTime = 20215 // just some random time for test
 const todaysDate = new Date()
 const today = Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
 
-const stepsDatabase =     [
-  { id: 'idUserGoal', title:'Users Goal', parentId: null, end: createTime + 250},
-  {id: 'idS1', parentId: 'idUserGoal', title: 'S1', end: createTime + 50},
-  {id: 'idS1.S1' ,parentId: 'idS1', title: 'S1.S1', end: createTime + 5},
-  {id: 'idS1.S2' ,parentId: 'idS1', title: 'S1.S2', end: createTime + 15},
-  {id: 'idS1.N2' ,parentId: 'idS1', title: 'S1', end: createTime + 50},
-  {id: 'idS2' ,parentId: 'idUserGoal', title: 'S2', end: createTime + 80},
-  {id: 'idS3' ,parentId: 'idUserGoal', title: 'S3', end: createTime + 140},
-  {id: 'idS4' ,parentId: 'idUserGoal', title: 'S4', end: createTime + 230},
-  {id: 'idG' ,parentId: 'idUserGoal', title: 'G', end: createTime + 250},
-  {id: 'idG.F' ,parentId: 'idG', title: 'G.S1', end: createTime + 235},
-  {id: 'idG.G' ,parentId: 'idG', title: 'G', end: createTime + 250}
+const stepsDatabase : StepModel[] =     [
+  {id: 'idUserGoal', title:'Users Goal', parentId: null, end: createTime + 250, description: 'Users Goal description'},
+  {id: 'idS1', parentId: 'idUserGoal', title: 'S1', end: createTime + 50, description: 'S1 description'},
+  {id: 'idS1.S1' ,parentId: 'idS1', title: 'S1.S1', end: createTime + 5, description: 'S1.S1 description'},
+  {id: 'idS1.S2' ,parentId: 'idS1', title: 'S1.S2', end: createTime + 15, description: 'S1.S2 description'},
+  {id: 'idS1.N2' ,parentId: 'idS1', title: 'S1', end: createTime + 50, description: 'S1 description'},
+  {id: 'idS2' ,parentId: 'idUserGoal', title: 'S2', end: createTime + 80, description: 'S2 description'},
+  {id: 'idS3' ,parentId: 'idUserGoal', title: 'S3', end: createTime + 140, description: 'S3 description'},
+  {id: 'idS4' ,parentId: 'idUserGoal', title: 'S4', end: createTime + 230, description: 'S4 description'},
+  {id: 'idG' ,parentId: 'idUserGoal', title: 'G', end: createTime + 250, description: 'G description'},
+  {id: 'idG.F' ,parentId: 'idG', title: 'G.S1', end: createTime + 235, description: 'G.S1 description'},
+  {id: 'idG.G' ,parentId: 'idG', title: 'G', end: createTime + 250, description: 'G description'}
 ]
 
 const timelineUISettings = {

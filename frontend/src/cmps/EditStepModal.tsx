@@ -145,6 +145,15 @@ export function EditStepModal({
 
             <form onSubmit={onUpdateStep}>
 
+              <label htmlFor="title">Title</label>
+              <input
+                id="title"
+                type="text"
+                value={stepToEdit.title}
+                onChange={handleChange}
+                name="title"
+              />
+
               <label htmlFor="end">End Date</label>
               <input
                 id="end"
@@ -162,8 +171,6 @@ export function EditStepModal({
                 onChange={()=>setChangeAllEnds(prev=>!prev)}
                 name="change-all"
               />
-
-
 
               <button type="submit">Save</button>
               <button onClick={onDeleteStep}>Delete</button>

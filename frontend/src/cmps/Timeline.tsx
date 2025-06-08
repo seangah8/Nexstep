@@ -118,10 +118,22 @@ function Timeline() {
 
       if(distance >= 5 && stepsToShow && svgRef.current) {
         // calculate the new position
-        const svgRect = svgRef.current.getBoundingClientRect()
-        const svgLocation = {x: svgRect.x, y: svgRect.y}
         const Mouselocation = {x: event.pageX, y: event.pageY}
-        let newEnd = timelineService.locationToDay(svgCenter, svgLocation, mainStep, spaceDeg, Mouselocation)
+        let newEnd = 0
+
+        // if you drag the last step in main
+        if(dragging.druggingStep.id === stepsToShow[stepsToShow.length-1].id){
+          const Interval = (event.clientX - dragging.startPoint.x) - (event.clientY - dragging.startPoint.y)
+          const move = (Interval >= 5) ? Interval - 5 : (Interval <= -5) ? Interval + 5 : 0
+          const totalDays = mainStep.end - mainStep.start
+          newEnd = Math.floor(dragging.druggingStep.end + ((move / 750) * totalDays))
+        }
+        // if you drag any other step
+        else{
+          const svgRect = svgRef.current.getBoundingClientRect()
+          const svgLocation = {x: svgRect.x, y: svgRect.y}
+          newEnd = timelineService.locationToDay(svgCenter, svgLocation, mainStep, spaceDeg, Mouselocation)
+        }
 
         const stepIndex = stepsToShow.findIndex(step => step.id === dragging.druggingStep.id)
         const minEnd = stepIndex === 0 ? mainStep.start : stepsToShow[stepIndex-1].end
@@ -275,15 +287,15 @@ export default Timeline
 
 Things need to be add
 
-1. in modal - edit steps end with date
-2. add description, image and more props to steps and make it possible to edit them
-3. replace title on the timeline with the image
-4. add hover to steps with given information about it
-5. add number of days on the mainstep above the timeline
+0. fix last step drag
+1. add description, image and more props to steps and make it possible to edit them
+2. replace title on the timeline with the image
+3. add hover to steps w ith given information about it
+4. add number of days on the mainstep above the timeline
 
-6. add state management of timeline and user
-7. add backend of timeline and user + auth
-8. design
+5. add state management of timeline and user
+6. add backend of timeline and user + auth
+7. design
 
 
 
