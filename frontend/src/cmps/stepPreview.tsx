@@ -93,6 +93,7 @@ export function StepPreview({
             id: utilService.createId(),
             parentId: nextStep.parentId,
             title: 'new',
+            description: '',
             end: newStepEnd
         }
         
@@ -128,6 +129,7 @@ export function StepPreview({
                 id: utilService.createId(),
                 parentId: mainStep.id,
                 title: mainStep.title,
+                description: mainStep.description,
                 end: mainStep.end
             }
             onSetSteps([...allSteps, newStep, extraStep])

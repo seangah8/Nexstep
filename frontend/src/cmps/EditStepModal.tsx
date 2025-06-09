@@ -24,7 +24,7 @@ export function EditStepModal({
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
 
-    function handleChange({target} : {target: HTMLInputElement}) : void {
+    function handleChange({target} : {target: HTMLInputElement | HTMLTextAreaElement}) : void {
       const field : string = target.name
       let value : string | number =  target.value
       switch (field) {
@@ -157,6 +157,14 @@ export function EditStepModal({
                 value={stepToEdit.title}
                 onChange={handleChange}
                 name="title"
+              />
+
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                value={stepToEdit.description}
+                onChange={handleChange}
+                name="description"
               />
 
               <label htmlFor="end">End Date</label>
