@@ -287,7 +287,6 @@ export default Timeline
 
 Things need to be add
 
-0. fix last step drag
 1. add description, image and more props to steps and make it possible to edit them
 2. replace title on the timeline with the image
 3. add hover to steps w ith given information about it

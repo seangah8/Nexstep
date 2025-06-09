@@ -20,6 +20,7 @@ export const timelineService = {
   findRightStepToDelete,
   extractWhenCreateNewStep,
   formatDateFromEnd,
+  updateParentsExceptEnd,
 }
 
 const createTime = 20215 // just some random time for test
@@ -374,16 +375,16 @@ function changeChildrenAndParentsEnd(
   }
 
   // if the step was the last one make sure to update its end to obove parents
-  function updateParents(changedStep : StepModel) : void{
+  function updateParentsEnd(changedStep : StepModel) : void{
     const parent = updatedSteps.find(step=>step.id === changedStep.parentId)
     if(parent && preEnd === parent.end){
       const maxEnd = findStepMaxEnd(allSteps, parent)
       parent.end = (postEnd > (maxEnd - 1)) ? maxEnd - 1 : postEnd
-      updateParents(parent)
+      updateParentsEnd(parent)
     }
   }
   
-  updateParents(changedStep)
+  updateParentsEnd(changedStep)
   updateChildrenEnd(changedStep)
   // updateLastParents(changedStep)
 
@@ -515,6 +516,27 @@ function formatDateFromEnd(end: number): string {
   const day = `${date.getDate()}`.padStart(2, '0')
   return `${year}-${month}-${day}`
 }
+
+function updateParentsExceptEnd(
+  allSteps: StepModel[], 
+  changedStep: StepModel, 
+  currentStep: StepModel, 
+  preEnd: number): StepModel[] {
+
+  const parent = allSteps.find(step => step.id === currentStep.parentId);
+  if (parent && preEnd === parent.end) {
+    allSteps = allSteps.map(step =>
+      step.id === parent.id
+        ? { ...changedStep, id: step.id, parentId: step.parentId, end: step.end }
+        : step
+    );
+    return updateParentsExceptEnd(allSteps, changedStep, parent, preEnd);
+  }
+  return allSteps;
+}
+
+
+
 
 
 

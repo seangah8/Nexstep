@@ -1,7 +1,6 @@
 import { FormEvent, useState } from "react"
 import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models"
 import { timelineService } from "../services/timeline.service"
-import { utilService } from "../services/util.service"
 
 interface EditStepModalProps{
     editModal : editModalModel
@@ -46,6 +45,12 @@ export function EditStepModal({
             ? stepToEdit
             : step
           )
+
+          // if child is last make sure to update it parent's 
+          // title, description, image, etc..
+          if(!editModal.nextStep)
+            newSteps = timelineService.updateParentsExceptEnd(
+              newSteps, stepToEdit, stepToEdit, editModal.step.end)
           
           // when end is beening changed
           if(editModal.step.end !== stepToEdit.end){
