@@ -94,6 +94,7 @@ export function StepPreview({
             parentId: nextStep.parentId,
             title: 'new',
             description: '',
+            image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png',
             end: newStepEnd
         }
         
@@ -130,6 +131,7 @@ export function StepPreview({
                 parentId: mainStep.id,
                 title: mainStep.title,
                 description: mainStep.description,
+                image: mainStep.image,
                 end: mainStep.end
             }
             onSetSteps([...allSteps, newStep, extraStep])

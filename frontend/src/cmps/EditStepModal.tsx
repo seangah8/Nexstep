@@ -27,10 +27,17 @@ export function EditStepModal({
     function handleChange({target} : {target: HTMLInputElement | HTMLTextAreaElement}) : void {
       const field : string = target.name
       let value : string | number =  target.value
+
       switch (field) {
         case 'end':
           const date = new Date(value)
           value = Math.floor(date.getTime() / (1000 * 60 * 60 * 24))
+          break
+        case 'image':
+          if(target instanceof HTMLInputElement) {
+            const file = target.files?.[0]
+            if (file) value = URL.createObjectURL(file);
+          }
       }
       setStepToEdit(prev => ({ ...prev, [field]: value }))
     }
@@ -166,6 +173,15 @@ export function EditStepModal({
                 onChange={handleChange}
                 name="description"
               />
+
+              <label htmlFor="image">Image</label>
+              <input
+                id="image"
+                type="file"
+                onChange={handleChange}
+                name="image"
+              />
+              <img src={stepToEdit.image} alt="step's image"/>
 
               <label htmlFor="end">End Date</label>
               <input

@@ -287,14 +287,13 @@ export default Timeline
 
 Things need to be add
 
-1. add description, image and more props to steps and make it possible to edit them
-2. replace title on the timeline with the image
-3. add hover to steps w ith given information about it
-4. add number of days on the mainstep above the timeline
+1. replace title on the timeline with the image
+2. add hover to steps w ith given information about it
+3. add number of days on the mainstep above the timeline
 
-5. add state management of timeline and user
-6. add backend of timeline and user + auth
-7. design
+4. add state management of timeline and user
+5. add backend of timeline and user + auth
+6. design
 
 
 
