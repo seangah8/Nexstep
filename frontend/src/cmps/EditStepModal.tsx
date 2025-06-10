@@ -55,8 +55,13 @@ export function EditStepModal({
 
           // if child is last make sure to update it parent's 
           // title, description, image, etc..
-          if(!editModal.nextStep)
+          if(!editModal.nextStep){
             newSteps = timelineService.updateParentsExceptEnd(
+              newSteps, stepToEdit, stepToEdit, editModal.step.end)
+          }
+
+          // update last childrens of the changed step
+          newSteps = timelineService.updateLastChildrensExceptEnd(
               newSteps, stepToEdit, stepToEdit, editModal.step.end)
           
           // when end is beening changed

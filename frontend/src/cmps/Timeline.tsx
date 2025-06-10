@@ -72,7 +72,11 @@ function Timeline() {
 
       const stepIndex = stepsToShow.findIndex(step => 
         step.id === dragging.druggingStep.id)
-      const changedStep = {...dragging.druggingStep, end: stepsToShow[stepIndex].end}
+      const parentLimit = timelineService.findStepTotalMaxEnd(steps,
+        {...dragging.druggingStep, end: stepsToShow[stepIndex].end})
+      const changedStep = {...dragging.druggingStep, 
+        end: Math.min(stepsToShow[stepIndex].end, parentLimit)
+      }
       
       // first change the step user edited
       let newSteps = steps.map(step => 
@@ -102,6 +106,9 @@ function Timeline() {
           nextStep,
           createTime
         )
+
+      if(mainStep.end > parentLimit)
+        onSetMainStep({...mainStep, end: parentLimit})
 
       setSteps(newSteps)
       setDragging(null)
@@ -287,6 +294,7 @@ export default Timeline
 
 Things need to be add
 
+0. fix so parent changes will move to the last child
 1. replace title on the timeline with the image
 2. add hover to steps w ith given information about it
 3. add number of days on the mainstep above the timeline

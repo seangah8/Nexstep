@@ -198,18 +198,15 @@ export function StepPreview({
                 stroke="black"
                 strokeWidth='2'
             />
-            <text
+            <image
+                href={step.image}
                 onMouseDown={event =>handleRightDown(event, step)}
                 onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
-                x={stepLocation.circleLocation.x}
-                y={stepLocation.circleLocation.y + 6}
-                textAnchor="middle"
-                fontSize="16"
-                fill="white"
-                fontFamily="Arial"
-            >
-                {step.title}
-            </text>
+                x={stepLocation.circleLocation.x - circlesSize/2}
+                y={stepLocation.circleLocation.y - circlesSize/2}
+                width={circlesSize}
+                height={circlesSize}
+            />
         </g>
     )
 }

@@ -21,6 +21,7 @@ export const timelineService = {
   extractWhenCreateNewStep,
   formatDateFromEnd,
   updateParentsExceptEnd,
+  updateLastChildrensExceptEnd,
 }
 
 const createTime = 20215 // just some random time for test
@@ -537,6 +538,25 @@ function updateParentsExceptEnd(
   return allSteps;
 }
 
+
+function updateLastChildrensExceptEnd(
+  allSteps: StepModel[], 
+  changedStep: StepModel, 
+  currentStep: StepModel, 
+  preEnd: number): StepModel[] {
+
+  const lastChild = allSteps.find(step => step.parentId === currentStep.id && step.end === preEnd)
+  console.log(lastChild)
+  if (lastChild) {
+    allSteps = allSteps.map(step =>
+      step.id === lastChild.id
+        ? { ...changedStep, id: step.id, parentId: step.parentId, end: step.end }
+        : step
+    )
+    return updateParentsExceptEnd(allSteps, changedStep, lastChild, preEnd)
+  }
+  return allSteps
+}
 
 
 
