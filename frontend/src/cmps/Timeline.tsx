@@ -1,9 +1,10 @@
 
 import { useState, useEffect, useRef } from "react";
-import { StepModel, MainStepModel, editModalModel, draggingModal } from "../models/timeline.models";
+import { StepModel, MainStepModel, editModalModel, draggingModel } from "../models/timeline.models";
 import { timelineService } from "../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
 import { StepPreview } from "./StepPreview";
+import { HoverModal } from "./HoverModal";
 
 function Timeline() {
 
@@ -18,7 +19,8 @@ function Timeline() {
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<editModalModel | null>(null)
-  const [dragging, setDragging] = useState<draggingModal | null>(null)
+  const [dragging, setDragging] = useState<draggingModel | null>(null)
+  const [hoveredStep, setHoveredStep] = useState<StepModel | null>(null)
   
   const svgRef = useRef<SVGSVGElement | null>(null)
 
@@ -28,6 +30,7 @@ function Timeline() {
       setStepsToShow(timelineService.sortByEnd(
         steps.filter(step=>step.parentId === mainStep.id)
       ))
+      onSetHoveredStep(null)
     }
   }, [steps, mainStep])
 
@@ -51,8 +54,12 @@ function Timeline() {
     setSteps(prev=> [...prev, newStep])
   }
 
-  function onSetDragging(newDragging: draggingModal | null){
+  function onSetDragging(newDragging: draggingModel | null){
     setDragging(newDragging)
+  }
+
+  function onSetHoveredStep(step: StepModel | null){
+    setHoveredStep(step)
   }
 
   function handleZoomOut(event: React.WheelEvent) {
@@ -236,7 +243,8 @@ function Timeline() {
                 onSetMainStep = {onSetMainStep}
                 onSetEditModal = {onSetEditModal}
                 onSetDragging = {onSetDragging}
-                onAddingStep= {onAddingStep}
+                onAddingStep = {onAddingStep}
+                onSetHoveredStep = {onSetHoveredStep}
               />
             )
           })
@@ -270,7 +278,8 @@ function Timeline() {
         })()}
       </svg>
 
-      {
+      { // edit modal 
+
         editModal &&
         <EditStepModal
           editModal={editModal}
@@ -279,6 +288,15 @@ function Timeline() {
           onSetMainStep={onSetMainStep}
           onSetMainStepEnd={onSetMainStepEnd}
           onSetEditModal={onSetEditModal}
+        />
+      }
+
+      { // hover modal
+
+        hoveredStep && !editModal &&
+        <HoverModal
+          step={hoveredStep}
+          today={today}
         />
       }
 
@@ -294,14 +312,11 @@ export default Timeline
 
 Things need to be add
 
-0. fix so parent changes will move to the last child
-1. replace title on the timeline with the image
-2. add hover to steps w ith given information about it
-3. add number of days on the mainstep above the timeline
+1. add number of days on the mainstep above the timeline
 
-4. add state management of timeline and user
-5. add backend of timeline and user + auth
-6. design
+2. add state management of timeline and user
+3. add backend of timeline and user + auth
+4. design
 
 
 

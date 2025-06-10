@@ -1,4 +1,4 @@
-import { editModalModel, MainStepModel, StepModel, draggingModal } from "../models/timeline.models"
+import { editModalModel, MainStepModel, StepModel, draggingModel } from "../models/timeline.models"
 import { timelineService } from "../services/timeline.service"
 import { utilService } from "../services/util.service"
 
@@ -17,12 +17,13 @@ interface stepPreviewProps{
     today : number
     createTime : number
     svgRef : React.RefObject<SVGSVGElement | null>
-    dragging : draggingModal | null
+    dragging : draggingModel | null
     onSetSteps: (newSteps : StepModel[]) => void
     onSetMainStep: (mainStep : MainStepModel) => void
     onSetEditModal: (newEditModal : editModalModel) => void
-    onSetDragging: (newDragging : draggingModal | null) => void
+    onSetDragging: (newDragging : draggingModel | null) => void
     onAddingStep: (step : StepModel) => void
+    onSetHoveredStep: (step : StepModel | null) => void
 }
 
 export function StepPreview({
@@ -41,6 +42,7 @@ export function StepPreview({
     onSetMainStep,
     onSetEditModal,
     onSetDragging,
+    onSetHoveredStep
 
 
 } : stepPreviewProps){
@@ -188,25 +190,29 @@ export function StepPreview({
                 strokeWidth={strokeWidth}
                 fill='none'
             />
-            <circle
+            <g
+                onMouseEnter={()=>onSetHoveredStep(step)}
+                onMouseLeave={()=>onSetHoveredStep(null)}
                 onMouseDown={event =>handleRightDown(event, step)}
                 onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
-                cx={stepLocation.circleLocation.x}
-                cy={stepLocation.circleLocation.y}
-                r={circlesSize}
-                fill={step.end < today ? "green" : "#389BBA"}
-                stroke="black"
-                strokeWidth='2'
-            />
-            <image
-                href={step.image}
-                onMouseDown={event =>handleRightDown(event, step)}
-                onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
-                x={stepLocation.circleLocation.x - circlesSize/2}
-                y={stepLocation.circleLocation.y - circlesSize/2}
-                width={circlesSize}
-                height={circlesSize}
-            />
+            >
+                <circle
+
+                    cx={stepLocation.circleLocation.x}
+                    cy={stepLocation.circleLocation.y}
+                    r={circlesSize}
+                    fill={step.end < today ? "green" : "#389BBA"}
+                    stroke="black"
+                    strokeWidth='2'
+                />
+                <image
+                    href={step.image}
+                    x={stepLocation.circleLocation.x - circlesSize/2}
+                    y={stepLocation.circleLocation.y - circlesSize/2}
+                    width={circlesSize}
+                    height={circlesSize}
+                />
+            </g>
         </g>
     )
 }

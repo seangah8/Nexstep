@@ -546,7 +546,6 @@ function updateLastChildrensExceptEnd(
   preEnd: number): StepModel[] {
 
   const lastChild = allSteps.find(step => step.parentId === currentStep.id && step.end === preEnd)
-  console.log(lastChild)
   if (lastChild) {
     allSteps = allSteps.map(step =>
       step.id === lastChild.id

@@ -20,7 +20,7 @@ export interface editModalModel{
   createTime: number
 }
 
-export interface draggingModal{
+export interface draggingModel{
     startPoint: {x:number, y:number}, 
     druggingStep: StepModel, 
     onShift: boolean,
