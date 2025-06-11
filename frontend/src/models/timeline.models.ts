@@ -6,13 +6,13 @@ export interface StepModel {
     description: string
     image: string
     end: number
-  }
+}
   
 export interface MainStepModel extends  StepModel{
   start: number
 }
 
-export interface editModalModel{
+export interface EditModalModel{
   step: StepModel
   start: number
   nextStep: StepModel | null
@@ -20,7 +20,7 @@ export interface editModalModel{
   createTime: number
 }
 
-export interface draggingModel{
+export interface DraggingModel{
     startPoint: {x:number, y:number}, 
     druggingStep: StepModel, 
     onShift: boolean,

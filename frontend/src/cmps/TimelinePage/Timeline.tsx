@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
-import { StepModel, MainStepModel, editModalModel, draggingModel } from "../../models/timeline.models";
+import { StepModel, MainStepModel, EditModalModel, DraggingModel } from "../../models/timeline.models";
 import { timelineService } from "../../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
 import { StepPreview } from "./StepPreview";
@@ -18,8 +18,8 @@ export function Timeline() {
   const [steps, setSteps] = useState<StepModel[]>(timelineService.getStepsDatabase)
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
-  const [editModal, setEditModal] = useState<editModalModel | null>(null)
-  const [dragging, setDragging] = useState<draggingModel | null>(null)
+  const [editModal, setEditModal] = useState<EditModalModel | null>(null)
+  const [dragging, setDragging] = useState<DraggingModel | null>(null)
   const [hoveredStep, setHoveredStep] = useState<StepModel | null>(null)
   
   const svgRef = useRef<SVGSVGElement | null>(null)
@@ -46,7 +46,7 @@ export function Timeline() {
     setMainStep(prev => ({ ...prev, end: end }))
   }
 
-  function onSetEditModal(newEditModal: editModalModel | null): void {
+  function onSetEditModal(newEditModal: EditModalModel | null): void {
     setEditModal(newEditModal)
   }
 
@@ -54,7 +54,7 @@ export function Timeline() {
     setSteps(prev=> [...prev, newStep])
   }
 
-  function onSetDragging(newDragging: draggingModel | null){
+  function onSetDragging(newDragging: DraggingModel | null){
     setDragging(newDragging)
   }
 

@@ -1,4 +1,4 @@
-import { editModalModel, MainStepModel, StepModel, draggingModel } from "../../models/timeline.models"
+import { EditModalModel, MainStepModel, StepModel, DraggingModel } from "../../models/timeline.models"
 import { timelineService } from "../../services/timeline.service"
 import { utilService } from "../../services/util.service"
 
@@ -17,11 +17,11 @@ interface stepPreviewProps{
     today : number
     createTime : number
     svgRef : React.RefObject<SVGSVGElement | null>
-    dragging : draggingModel | null
+    dragging : DraggingModel | null
     onSetSteps: (newSteps : StepModel[]) => void
     onSetMainStep: (mainStep : MainStepModel) => void
-    onSetEditModal: (newEditModal : editModalModel) => void
-    onSetDragging: (newDragging : draggingModel | null) => void
+    onSetEditModal: (newEditModal : EditModalModel) => void
+    onSetDragging: (newDragging : DraggingModel | null) => void
     onAddingStep: (step : StepModel) => void
     onSetHoveredStep: (step : StepModel | null) => void
 }
