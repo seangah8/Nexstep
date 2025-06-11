@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react"
-import { StepModel, MainStepModel, editModalModel } from "../models/timeline.models"
-import { timelineService } from "../services/timeline.service"
+import { StepModel, MainStepModel, editModalModel } from "../../models/timeline.models"
+import { timelineService } from "../../services/timeline.service"
 
 interface EditStepModalProps{
     editModal : editModalModel

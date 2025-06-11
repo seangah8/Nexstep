@@ -1,6 +1,6 @@
-import Timeline from "../cmps/Timeline.tsx"
+import { Timeline } from "../cmps/TimelinePage/Timeline.tsx"
 
-function TimelinePage() {
+export function TimelinePage() {
 
     return (
       <section className='time-line-page'  onContextMenu={e => e.preventDefault()}>
@@ -8,6 +8,5 @@ function TimelinePage() {
       </section>
     )
   }
-  
-  export default TimelinePage
+
   

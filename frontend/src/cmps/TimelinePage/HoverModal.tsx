@@ -1,5 +1,5 @@
-import { timelineService } from "../services/timeline.service"
-import { StepModel } from "../models/timeline.models"
+import { timelineService } from "../../services/timeline.service"
+import { StepModel } from "../../models/timeline.models"
 
 interface HoverModalProps{
     step : StepModel

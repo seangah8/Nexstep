@@ -1,6 +1,6 @@
-import { editModalModel, MainStepModel, StepModel, draggingModel } from "../models/timeline.models"
-import { timelineService } from "../services/timeline.service"
-import { utilService } from "../services/util.service"
+import { editModalModel, MainStepModel, StepModel, draggingModel } from "../../models/timeline.models"
+import { timelineService } from "../../services/timeline.service"
+import { utilService } from "../../services/util.service"
 
 
 interface stepPreviewProps{

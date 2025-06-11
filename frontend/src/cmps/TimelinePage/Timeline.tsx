@@ -1,12 +1,12 @@
 
 import { useState, useEffect, useRef } from "react";
-import { StepModel, MainStepModel, editModalModel, draggingModel } from "../models/timeline.models";
-import { timelineService } from "../services/timeline.service";
+import { StepModel, MainStepModel, editModalModel, draggingModel } from "../../models/timeline.models";
+import { timelineService } from "../../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
 import { StepPreview } from "./StepPreview";
 import { HoverModal } from "./HoverModal";
 
-function Timeline() {
+export function Timeline() {
 
   // Load UI settings from timeline service
   const { svgSize, svgCenter, radius, spaceDeg, strokeWidth } = timelineService.getTimelineUISettings()
@@ -303,21 +303,3 @@ function Timeline() {
     </section>
   )
 }
-
-export default Timeline
-
-
-
-/*
-
-Things need to be add
-
-1. add number of days on the mainstep above the timeline
-
-2. add state management of timeline and user
-3. add backend of timeline and user + auth
-4. design
-
-
-
- */
