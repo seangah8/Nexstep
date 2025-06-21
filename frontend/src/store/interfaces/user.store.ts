@@ -4,19 +4,19 @@ import { UserModel } from "../../models/user.models";
 
 // define the shape of the user slice of the Redux state
 export interface UserState {
-    user: UserModel | null
+    loggedInUser: UserModel | null
 }
 
 // define all possible action types for the user state
 export enum UserActionsType {
-    CHANGE_USERNAME = 'CHANGE_USERNAME'
+    SET_USER = 'SET_USER'
 }
 
 // define the structure of the CHANGE_USERNAME action
-interface ChangeUsernameAction {
-    type: UserActionsType.CHANGE_USERNAME
-    username: string
+interface SetUserAction {
+    type: UserActionsType.SET_USER
+    loggedInUser: UserModel | null
 }
 
 // Combine all user-related actions into a single type
-export type UserAction = ChangeUsernameAction
+export type UserAction = SetUserAction

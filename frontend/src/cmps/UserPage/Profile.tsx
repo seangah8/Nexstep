@@ -2,14 +2,10 @@ import { UserModel } from "../../models/user.models"
 
 interface ProfileProps{
     user : UserModel
-    onSetUser : (user : UserModel | null) => void
+    onLogout : () => void
 }
 
-export function Profile({ user, onSetUser } : ProfileProps){
-
-    function onLogout(){
-        onSetUser(null)
-    }
+export function Profile({ user, onLogout } : ProfileProps){
 
     return(
         <section className="profile">

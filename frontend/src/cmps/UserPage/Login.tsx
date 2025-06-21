@@ -1,21 +1,16 @@
 import { useState } from "react"
-import { UserModel, CredentialsModel } from "../../models/user.models"
+import { CredentialsModel } from "../../models/user.models"
 import { userService } from "../../services/user.service"
 
 interface LoginProps{
-    onSetUser : (user : UserModel) => void
+    onLogin : (credentials : CredentialsModel) => void
 }
 
-export function Login( { onSetUser } : LoginProps ){
+export function Login( { onLogin } : LoginProps ){
 
     const [credentials, setCredentials] = useState<CredentialsModel>(
         userService.getEmptyCredentials()
     )
-
-    function onLogin() : void{
-        const user = userService.login(credentials)
-        onSetUser(user)
-    }
 
     function handleChange({target} : {target: HTMLInputElement}) : void {
       const field : string = target.name
@@ -25,7 +20,7 @@ export function Login( { onSetUser } : LoginProps ){
 
     return(
         <section className="login">
-            <form onSubmit={onLogin}>
+            <form onSubmit={()=>onLogin(credentials)}>
                 <label htmlFor="username"/>
                 <input
                     id="username"

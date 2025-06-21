@@ -207,7 +207,6 @@ export function Timeline() {
     onMouseMove={event => handleRightDrag(event)}  
     onMouseUp={event =>handleRightUp(event)}>
 
-      <h2>Timeline</h2>
       <svg width={svgSize} height={svgSize} ref={svgRef}>
         {(() => {
           const totalDays = mainStep.end - mainStep.start

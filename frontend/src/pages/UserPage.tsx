@@ -1,15 +1,22 @@
-import { useState } from "react"
-import { UserModel } from "../models/user.models"
+import { useSelector } from 'react-redux'
+import { RootState } from '../store/store'
+import { CredentialsModel } from '../models/user.models'
 import { Login } from "../cmps/UserPage/Login"
 import { Profile } from "../cmps/UserPage/Profile"
+import { userActions } from '../store/actions/user.actions'
 
 
 export function UserPage(){
 
-    const [user, setUser] = useState<UserModel | null>(null)
+    const user = useSelector((storeState : RootState) => 
+        storeState.userModule.loggedInUser)
 
-    function onSetUser(user : UserModel | null) : void{
-        setUser(user)
+    function onLogin(credentials : CredentialsModel) : void{
+        userActions.login(credentials)
+    }
+
+    function onLogout() : void {
+        userActions.logout()
     }
 
     return(
@@ -19,11 +26,11 @@ export function UserPage(){
 
                 ? <Profile
                     user={user}
-                    onSetUser={onSetUser}
+                    onLogout={onLogout}
                 /> 
 
                 : <Login
-                    onSetUser={onSetUser}
+                    onLogin={onLogin}
                 />
             }
         </section>

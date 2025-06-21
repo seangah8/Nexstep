@@ -10,5 +10,5 @@ function getEmptyCredentials() : CredentialsModel{
 }
 
 function login(credentials : CredentialsModel) : UserModel {
-    return {username : credentials.username}
+    return { username : credentials.username }
 }
