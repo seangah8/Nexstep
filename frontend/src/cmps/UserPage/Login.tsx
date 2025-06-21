@@ -18,10 +18,8 @@ export function Login( { onSetUser } : LoginProps ){
     }
 
     function handleChange({target} : {target: HTMLInputElement}) : void {
-
       const field : string = target.name
       let value : string =  target.value
-
       setCredentials(prev => ({ ...prev, [field]: value }))
     } 
 
