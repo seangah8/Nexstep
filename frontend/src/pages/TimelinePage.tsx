@@ -7,10 +7,13 @@ export function TimelinePage() {
   const user = useSelector((storeState : RootState) => 
     storeState.userModule.loggedInUser)
 
+  const steps = useSelector((storeState: RootState) => 
+    storeState.timelineModule.steps)
+
     return (
       <section className='time-line-page'  onContextMenu={e => e.preventDefault()}>
         <h3>{`${user?.username}'s TimeLine: `}</h3>
-        <Timeline/>
+        <Timeline steps={steps}/>
       </section>
     )
   }

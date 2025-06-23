@@ -33,8 +33,6 @@ export default App
 
 Things need to be add
 
-1. add timeline state on redux + show goal left days on user page
-
 a. add state management of timeline and user
 b. add backend of timeline and user + auth
 c. design

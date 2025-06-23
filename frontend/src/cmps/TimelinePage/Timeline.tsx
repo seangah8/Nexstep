@@ -5,8 +5,13 @@ import { timelineService } from "../../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
 import { StepPreview } from "./StepPreview";
 import { HoverModal } from "./HoverModal";
+import { timelineActions } from "../../store/actions/timeline.actions";
 
-export function Timeline() {
+interface TimelineProps{
+    steps : StepModel[]
+}
+
+export function Timeline( {steps} : TimelineProps) {
 
   // Load UI settings from timeline service
   const { svgSize, svgCenter, radius, spaceDeg, strokeWidth } = timelineService.getTimelineUISettings()
@@ -15,7 +20,7 @@ export function Timeline() {
   const createTime = timelineService.getCreateTime()
   const today = timelineService.getToday()
 
-  const [steps, setSteps] = useState<StepModel[]>(timelineService.getStepsDatabase)
+  // const [steps, setSteps] = useState<StepModel[]>(timelineService.getDefultStepsDatabase)
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<EditModalModel | null>(null)
@@ -35,7 +40,7 @@ export function Timeline() {
   }, [steps, mainStep])
 
   function onSetSteps(newSteps: StepModel[]): void {
-    setSteps(newSteps)
+    timelineActions.saveSteps(newSteps)
   }
 
   function onSetMainStep(newMainStep : MainStepModel){
@@ -51,7 +56,7 @@ export function Timeline() {
   }
 
   function onAddingStep(newStep : StepModel){
-    setSteps(prev=> [...prev, newStep])
+    onSetSteps([...steps, newStep])
   }
 
   function onSetDragging(newDragging: DraggingModel | null){
@@ -117,7 +122,7 @@ export function Timeline() {
       if(mainStep.end > parentLimit)
         onSetMainStep({...mainStep, end: parentLimit})
 
-      setSteps(newSteps)
+      onSetSteps(newSteps)
       setDragging(null)
     }
  

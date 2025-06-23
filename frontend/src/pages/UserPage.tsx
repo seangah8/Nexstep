@@ -11,6 +11,9 @@ export function UserPage(){
     const user = useSelector((storeState : RootState) => 
         storeState.userModule.loggedInUser)
 
+    const steps = useSelector((storeState : RootState) => 
+        storeState.timelineModule.steps)
+
     function onLogin(credentials : CredentialsModel) : void{
         userActions.login(credentials)
     }
@@ -26,6 +29,7 @@ export function UserPage(){
 
                 ? <Profile
                     user={user}
+                    goal={steps[0]}
                     onLogout={onLogout}
                 /> 
 

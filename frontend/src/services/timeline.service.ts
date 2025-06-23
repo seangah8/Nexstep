@@ -2,7 +2,7 @@ import { MainStepModel, StepModel } from "../models/timeline.models";
 
 
 export const timelineService = {
-  getStepsDatabase,
+  getDefultStepsDatabase,
   getTimelineUISettings,
   getToday,
   getCreateTime,
@@ -53,7 +53,7 @@ const timelineUISettings = {
   circlesSize: 35
 }
 
-function getStepsDatabase(){
+function getDefultStepsDatabase(){
   return stepsDatabase
 }
 
