@@ -33,7 +33,6 @@ export default App
 
 Things need to be add
 
-a. add state management of timeline and user
 b. add backend of timeline and user + auth
 c. design
 

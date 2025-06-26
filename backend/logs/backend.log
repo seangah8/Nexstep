@@ -1,0 +1,104 @@
+26.6.2025, 2:41:14 - INFO - Up and running on http://localhost:3000
+26.6.2025, 2:41:32 - INFO - Up and running on http://localhost:3000
+26.6.2025, 5:54:17 - INFO - Up and running on http://localhost:3000
+26.6.2025, 5:55:06 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:00:13 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:02:30 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:11:18 - ERROR - res.send is not a function
+26.6.2025, 6:11:44 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:11:46 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:11:52 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:12:22 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:12:29 - ERROR - res.send is not a function
+26.6.2025, 6:13:16 - ERROR - res.send is not a function
+26.6.2025, 6:27:03 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:28:04 - INFO - Up and running on http://localhost:3000
+26.6.2025, 6:28:21 - INFO - Visited route | /:userId
+26.6.2025, 6:28:21 - ERROR - while finding user by id: 67f5e646dcdda5eefd4df5e8 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:39:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 6:28:21 - ERROR - user not found!
+26.6.2025, 22:25:32 - INFO - Up and running on http://localhost:3000
+26.6.2025, 22:25:59 - INFO - Visited route | /:userId
+26.6.2025, 22:25:59 - ERROR - while finding user by id: 67f5e646dcdda5eefd4df5e8 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:39:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:25:59 - ERROR - user not found!
+26.6.2025, 22:26:35 - INFO - Visited route | /
+26.6.2025, 22:26:35 - DEBUG - auth.service - signup with username: u1
+26.6.2025, 22:26:35 - ERROR - while finding user by username: u1 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:26:35 - DEBUG - auth.route - new account created: {"username":"u1","_id":"685d9eeb4ef6b687e376fbdf"}
+26.6.2025, 22:26:35 - INFO - User signup: | {"_id":"685d9eeb4ef6b687e376fbdf","username":"u1"}
+26.6.2025, 22:27:16 - INFO - Visited route | /:userId
+26.6.2025, 22:27:20 - INFO - Visited route | /:userId
+26.6.2025, 22:27:20 - ERROR - while finding user by id: 685d9eeb4ef6b687e376fbd4 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:39:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:27:20 - ERROR - user not found!
+26.6.2025, 22:28:39 - INFO - Visited route | /:userId
+26.6.2025, 22:29:02 - INFO - Visited route | /:userId
+26.6.2025, 22:29:35 - INFO - Visited route | /:userId
+26.6.2025, 22:32:04 - INFO - Visited route | /login
+26.6.2025, 22:32:04 - ERROR - while finding user by username: seangah8 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:32:04 - ERROR - Failed to login: Unknown username
+26.6.2025, 22:32:38 - INFO - Visited route | /
+26.6.2025, 22:32:38 - DEBUG - auth.service - signup with username: u1
+26.6.2025, 22:32:38 - ERROR - while finding user by username: u1 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:32:39 - DEBUG - auth.route - new account created: {"username":"u1","_id":"685da0574ef6b687e376fbe0"}
+26.6.2025, 22:32:39 - INFO - User signup: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+26.6.2025, 22:32:52 - INFO - Visited route | /login
+26.6.2025, 22:32:52 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+26.6.2025, 22:35:00 - INFO - Visited route | /logout
+26.6.2025, 22:37:44 - INFO - Visited route | /login
+26.6.2025, 22:37:44 - ERROR - while finding user by username: u21 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:37:44 - ERROR - Failed to login: Unknown username
+26.6.2025, 22:37:56 - INFO - Visited route | /login
+26.6.2025, 22:37:56 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+26.6.2025, 22:39:22 - INFO - Up and running on http://localhost:3000
+26.6.2025, 22:39:42 - INFO - Visited route | /logout
+26.6.2025, 22:39:44 - INFO - Visited route | /login
+26.6.2025, 22:39:45 - ERROR - Failed to login: Invalid username or password
+26.6.2025, 22:41:29 - INFO - Visited route | /signup
+26.6.2025, 22:41:29 - DEBUG - auth.service - signup with username: u2
+26.6.2025, 22:41:29 - ERROR - while finding user by username: u2 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+26.6.2025, 22:41:30 - DEBUG - auth.route - new account created: {"username":"u2","_id":"685da26ae50354670ea889c4"}
+26.6.2025, 22:41:30 - INFO - User signup: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+26.6.2025, 22:41:47 - INFO - Visited route | /logout
+26.6.2025, 22:41:51 - INFO - Visited route | /login
+26.6.2025, 22:41:51 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+26.6.2025, 22:41:54 - INFO - Visited route | /login
+26.6.2025, 22:41:55 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
