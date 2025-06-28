@@ -102,3 +102,238 @@ Error: User not found
 26.6.2025, 22:41:51 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
 26.6.2025, 22:41:54 - INFO - Visited route | /login
 26.6.2025, 22:41:55 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 0:53:39 - INFO - Up and running on http://localhost:3000
+27.6.2025, 0:54:03 - INFO - Visited route | /login
+27.6.2025, 0:54:03 - ERROR - while finding user by username: sean | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+27.6.2025, 0:54:03 - ERROR - Failed to login: Unknown username
+27.6.2025, 0:54:27 - INFO - Visited route | /login
+27.6.2025, 0:54:27 - ERROR - Failed to login: Invalid username or password
+27.6.2025, 0:54:50 - INFO - Visited route | /
+27.6.2025, 0:54:50 - DEBUG - auth.service - signup with username: u
+27.6.2025, 0:54:50 - ERROR - Failed to signup: Missing required signup information
+27.6.2025, 1:54:20 - INFO - Visited route | /login
+27.6.2025, 1:54:20 - ERROR - Failed to login: Invalid username or password
+27.6.2025, 1:54:45 - INFO - Visited route | /login
+27.6.2025, 1:54:46 - ERROR - Failed to login: Invalid username or password
+27.6.2025, 1:54:54 - INFO - Visited route | /login
+27.6.2025, 1:54:54 - ERROR - Failed to login: Unknown username
+27.6.2025, 1:54:54 - ERROR - while finding user by username: eafa | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+27.6.2025, 1:55:04 - INFO - Visited route | /login
+27.6.2025, 1:55:04 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 1:57:09 - INFO - Visited route | /login
+27.6.2025, 1:57:09 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 1:58:13 - INFO - Visited route | /login
+27.6.2025, 1:58:13 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 1:58:25 - INFO - Visited route | /login
+27.6.2025, 1:58:25 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 1:58:46 - INFO - Visited route | /login
+27.6.2025, 1:58:46 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 1:59:04 - INFO - Visited route | /login
+27.6.2025, 1:59:04 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 1:59:09 - INFO - Visited route | /login
+27.6.2025, 1:59:10 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 1:59:23 - INFO - Visited route | /login
+27.6.2025, 1:59:24 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 1:59:33 - INFO - Visited route | /login
+27.6.2025, 1:59:33 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 1:59:50 - INFO - Visited route | /login
+27.6.2025, 1:59:50 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 1:59:56 - INFO - Visited route | /login
+27.6.2025, 1:59:56 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:00:16 - INFO - Visited route | /login
+27.6.2025, 2:00:16 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:00:24 - INFO - Visited route | /login
+27.6.2025, 2:00:24 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:06:52 - INFO - Visited route | /login
+27.6.2025, 2:06:52 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:07:00 - INFO - Visited route | /login
+27.6.2025, 2:07:00 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:07:32 - INFO - Visited route | /login
+27.6.2025, 2:07:33 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:08:13 - INFO - Visited route | /login
+27.6.2025, 2:08:13 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:08:50 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:08:55 - INFO - Visited route | /login
+27.6.2025, 2:08:55 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:10:16 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:10:22 - INFO - Visited route | /login
+27.6.2025, 2:10:22 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:10:41 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:10:45 - INFO - Visited route | /login
+27.6.2025, 2:10:45 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:10:51 - INFO - Visited route | /login
+27.6.2025, 2:10:51 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:11:22 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:13:09 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:13:18 - INFO - Visited route | /login
+27.6.2025, 2:13:18 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:14:26 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:14:33 - INFO - Visited route | /login
+27.6.2025, 2:14:33 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:14:52 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:15:04 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:18:13 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:19:10 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:19:20 - INFO - Visited route | /login
+27.6.2025, 2:19:20 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:19:28 - INFO - Visited route | /login
+27.6.2025, 2:19:28 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:19:50 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:20:33 - INFO - Visited route | /login
+27.6.2025, 2:20:34 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:27:36 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:32:14 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:32:20 - INFO - Visited route | /login
+27.6.2025, 2:32:20 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:32:30 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:32:49 - INFO - Visited route | /login
+27.6.2025, 2:32:49 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:34:19 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:34:36 - INFO - Visited route | /login
+27.6.2025, 2:34:36 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:37:33 - INFO - Visited route | /login
+27.6.2025, 2:37:33 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:37:49 - INFO - Visited route | /logout
+27.6.2025, 2:37:55 - INFO - Visited route | /login
+27.6.2025, 2:37:56 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:38:11 - INFO - Visited route | /login
+27.6.2025, 2:38:11 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:38:16 - INFO - Visited route | /login
+27.6.2025, 2:38:17 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:41:09 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:41:16 - INFO - Visited route | /login
+27.6.2025, 2:41:17 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:41:32 - INFO - Visited route | /login
+27.6.2025, 2:41:32 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:41:40 - INFO - Visited route | /login
+27.6.2025, 2:41:40 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:41:49 - INFO - Visited route | /login
+27.6.2025, 2:41:50 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:42:05 - INFO - Visited route | /login
+27.6.2025, 2:42:05 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:42:10 - INFO - Visited route | /login
+27.6.2025, 2:42:10 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:42:36 - INFO - Visited route | /login
+27.6.2025, 2:42:36 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:42:43 - INFO - Visited route | /login
+27.6.2025, 2:42:43 - ERROR - while finding user by username: p1 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+27.6.2025, 2:42:43 - ERROR - Failed to login: Unknown username
+27.6.2025, 2:42:49 - INFO - Visited route | /login
+27.6.2025, 2:42:49 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:42:56 - INFO - Visited route | /login
+27.6.2025, 2:42:56 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:43:05 - INFO - Visited route | /login
+27.6.2025, 2:43:05 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:43:10 - INFO - Visited route | /login
+27.6.2025, 2:43:10 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:45:23 - INFO - Visited route | /login
+27.6.2025, 2:45:24 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:45:32 - INFO - Visited route | /login
+27.6.2025, 2:45:32 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:45:38 - INFO - Visited route | /login
+27.6.2025, 2:45:38 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:51:27 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:51:34 - INFO - Visited route | /login
+27.6.2025, 2:51:34 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:52:02 - INFO - Up and running on http://localhost:3000
+27.6.2025, 2:52:08 - INFO - Visited route | /login
+27.6.2025, 2:52:08 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+27.6.2025, 2:52:17 - INFO - Visited route | /login
+27.6.2025, 2:52:17 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+27.6.2025, 2:54:15 - INFO - Up and running on http://localhost:3000
+28.6.2025, 23:48:16 - INFO - Up and running on http://localhost:3000
+28.6.2025, 23:50:57 - INFO - Visited route | /login
+28.6.2025, 23:50:57 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+28.6.2025, 23:52:55 - INFO - Up and running on http://localhost:3000
+28.6.2025, 23:53:01 - INFO - Visited route | /login
+28.6.2025, 23:53:01 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+28.6.2025, 23:53:19 - INFO - Visited route | /login
+28.6.2025, 23:53:19 - ERROR - Failed to login: Invalid username or password
+28.6.2025, 23:53:25 - INFO - Visited route | /login
+28.6.2025, 23:53:25 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+28.6.2025, 23:59:31 - INFO - Up and running on http://localhost:3000
+29.6.2025, 0:05:45 - INFO - Up and running on http://localhost:3000
+29.6.2025, 0:06:37 - INFO - Visited route | /login
+29.6.2025, 0:06:37 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:06:44 - INFO - Visited route | /login
+29.6.2025, 0:06:44 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:07:25 - INFO - Up and running on http://localhost:3000
+29.6.2025, 0:07:33 - INFO - Visited route | /login
+29.6.2025, 0:07:33 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:07:39 - INFO - Visited route | /login
+29.6.2025, 0:07:39 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:07:44 - INFO - Visited route | /login
+29.6.2025, 0:07:44 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:10:55 - INFO - Visited route | /login
+29.6.2025, 0:10:55 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:11:02 - INFO - Visited route | /login
+29.6.2025, 0:11:02 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:12:43 - INFO - Visited route | /login
+29.6.2025, 0:12:43 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:15:00 - INFO - Visited route | /login
+29.6.2025, 0:15:00 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:17:05 - INFO - Up and running on http://localhost:3000
+29.6.2025, 0:17:10 - INFO - Up and running on http://localhost:3000
+29.6.2025, 0:30:33 - INFO - Visited route | /login
+29.6.2025, 0:30:33 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:30:39 - INFO - Visited route | /login
+29.6.2025, 0:30:39 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:30:49 - INFO - Visited route | /login
+29.6.2025, 0:30:49 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:30:54 - INFO - Visited route | /login
+29.6.2025, 0:30:54 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:35:00 - INFO - Visited route | /login
+29.6.2025, 0:35:00 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:35:07 - INFO - Visited route | /login
+29.6.2025, 0:35:07 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:39:12 - INFO - Visited route | /login
+29.6.2025, 0:39:12 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:39:25 - INFO - Visited route | /login
+29.6.2025, 0:39:25 - INFO - User login: | {"_id":"685da26ae50354670ea889c4","username":"u2"}
+29.6.2025, 0:39:33 - INFO - Visited route | /login
+29.6.2025, 0:39:33 - ERROR - Failed to login: Invalid username or password
+29.6.2025, 0:39:42 - INFO - Visited route | /login
+29.6.2025, 0:39:42 - ERROR - Failed to login: Invalid username or password
+29.6.2025, 0:40:02 - INFO - Visited route | /login
+29.6.2025, 0:40:02 - ERROR - while finding user by username: u3 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+29.6.2025, 0:40:02 - ERROR - Failed to login: Unknown username
+29.6.2025, 0:42:06 - INFO - Visited route | /login
+29.6.2025, 0:42:06 - ERROR - while finding user by username: asd | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+29.6.2025, 0:42:06 - ERROR - Failed to login: Unknown username
+29.6.2025, 0:45:28 - INFO - Visited route | /login
+29.6.2025, 0:45:28 - ERROR - while finding user by username: dfgdf | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nexstep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+29.6.2025, 0:45:28 - ERROR - Failed to login: Unknown username
+29.6.2025, 0:46:39 - INFO - Visited route | /login
+29.6.2025, 0:46:40 - INFO - User login: | {"_id":"685da0574ef6b687e376fbe0","username":"u1"}
+29.6.2025, 0:46:45 - INFO - Visited route | /login
+29.6.2025, 0:46:45 - ERROR - Failed to login: Invalid username or password

@@ -14,7 +14,8 @@ export function UserPage(){
     const steps = useSelector((storeState : RootState) => 
         storeState.timelineModule.steps)
 
-    function onLogin(credentials : CredentialsModel) : void{
+    function onLogin(ev: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel) : void{
+        ev.preventDefault()
         userActions.login(credentials)
     }
 

@@ -54,7 +54,9 @@ async function getByUsername(username: string): Promise<UserWithPasswordModel | 
     const collection = await dbService.getCollection<UserWithPasswordModel>('user')
     const userWithPassword = await collection.findOne({ username })
     if (!userWithPassword) throw new Error('User not found')
-    return userWithPassword
+    const user : UserWithPasswordModel = {...userWithPassword,
+      _id: userWithPassword._id.toString()}
+    return user
 
   } catch (err) {
     loggerService.error(`while finding user by username: ${username}`, err)

@@ -9,9 +9,9 @@ export const userActions = {
 }
 
 
-function login(credentials: CredentialsModel) : void {
+async function login(credentials: CredentialsModel) : Promise<void> {
     try {
-        const user = userService.login(credentials) // do it in backend
+        const user = await userService.login(credentials)
         store.dispatch({
             type: UserActionsType.SET_USER,
             loggedInUser: user
@@ -22,9 +22,9 @@ function login(credentials: CredentialsModel) : void {
     }
 }
 
-function logout() : void {
+async function logout() : Promise<void> {
     try {
-        // userService.logout() // do it in backend
+        await userService.logout()
         store.dispatch({
             type: UserActionsType.SET_USER,
             loggedInUser: null
