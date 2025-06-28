@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/store'
 import { CredentialsModel } from '../models/user.models'
-import { Login } from "../cmps/UserPage/Login"
+import { LoginSignup } from "../cmps/UserPage/LoginSignup"
 import { Profile } from "../cmps/UserPage/Profile"
 import { userActions } from '../store/actions/user.actions'
 
@@ -19,6 +19,11 @@ export function UserPage(){
         userActions.login(credentials)
     }
 
+    function onSignup(ev: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel): void{
+        ev.preventDefault()
+        userActions.signup(credentials)
+    }
+
     function onLogout() : void {
         userActions.logout()
     }
@@ -34,8 +39,9 @@ export function UserPage(){
                     onLogout={onLogout}
                 /> 
 
-                : <Login
+                : <LoginSignup
                     onLogin={onLogin}
+                    onSignup={onSignup}
                 />
             }
         </section>
