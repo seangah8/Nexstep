@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import { loggerService } from './services/logger.service'
 import { userRoutes } from './api/user/user.routs'
 import { authRoutes } from './api/auth/auth.routs'
+import { timelineRoutes } from './api/timeline/timeline.routs'
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware'
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(cors(corsOptions))
 app.use(setupAsyncLocalStorage)
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/timeline', timelineRoutes)
 
 //* Open Server
 const PORT: number = Number(process.env.PORT) || 3000
@@ -34,7 +36,7 @@ app.listen(PORT, () => {
 
 /*
 
-1. finish backend only with postman
-2. connect frontent and the models with it
+1. connect backend timeline to frontend
+
 
 */

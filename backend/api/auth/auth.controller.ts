@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { authService } from './auth.service'
 import { loggerService } from '../../services/logger.service'
-import { UserModel, CredentialsModel } from '../../models/user.model'
+import { UserModel, CredentialsModel } from '../../models/user.models'
 
 export const authController = {
     login,

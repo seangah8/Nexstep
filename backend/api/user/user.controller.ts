@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { loggerService } from '../../services/logger.service'
 import { userService } from './user.service'
 import { authController } from '../auth/auth.controller'
-import { CredentialsModel, UserModel } from '../../models/user.model'
+import { CredentialsModel, UserModel } from '../../models/user.models'
 
 export async function getUsers(req: Request, res: Response): Promise<void> {
   try {

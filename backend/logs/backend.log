@@ -386,3 +386,153 @@ Error: User not found
 29.6.2025, 2:02:40 - INFO - User signup: | {"_id":"6860749045a5b753ace1869d","username":"u4"}
 29.6.2025, 2:02:48 - INFO - Visited route | /login
 29.6.2025, 2:02:48 - INFO - User login: | {"_id":"6860749045a5b753ace1869d","username":"u4"}
+29.6.2025, 2:08:31 - INFO - Up and running on http://localhost:3000
+29.6.2025, 2:08:32 - INFO - Up and running on http://localhost:3000
+29.6.2025, 2:08:34 - INFO - Up and running on http://localhost:3000
+4.7.2025, 23:54:12 - INFO - Up and running on http://localhost:3000
+4.7.2025, 23:54:24 - INFO - Visited route | /login
+4.7.2025, 23:54:24 - ERROR - while finding user by username: u1 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+4.7.2025, 23:54:24 - ERROR - Failed to login: Unknown username
+4.7.2025, 23:54:34 - INFO - Visited route | /signup
+4.7.2025, 23:54:34 - DEBUG - auth.service - signup with username: u1
+4.7.2025, 23:54:34 - ERROR - while finding user by username: u1 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+4.7.2025, 23:54:35 - DEBUG - auth.route - new account created: {"username":"u1","_id":"68683f8a0e158a67c6c88afa"}
+4.7.2025, 23:54:35 - INFO - User signup: | {"_id":"68683f8a0e158a67c6c88afa","username":"u1"}
+4.7.2025, 23:54:45 - INFO - Visited route | /login
+4.7.2025, 23:54:45 - INFO - User login: | {"_id":"68683f8a0e158a67c6c88afa","username":"u1"}
+4.7.2025, 23:54:52 - INFO - Visited route | /login
+4.7.2025, 23:54:53 - ERROR - Failed to login: Invalid username or password
+4.7.2025, 23:54:59 - INFO - Visited route | /login
+4.7.2025, 23:54:59 - ERROR - Failed to login: Unknown username
+4.7.2025, 23:54:59 - ERROR - while finding user by username: u2 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+4.7.2025, 23:55:02 - INFO - Visited route | /login
+4.7.2025, 23:55:02 - INFO - User login: | {"_id":"68683f8a0e158a67c6c88afa","username":"u1"}
+4.7.2025, 23:55:08 - INFO - Visited route | /signup
+4.7.2025, 23:55:08 - DEBUG - auth.service - signup with username: u2
+4.7.2025, 23:55:08 - ERROR - while finding user by username: u2 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+4.7.2025, 23:55:08 - DEBUG - auth.route - new account created: {"username":"u2","_id":"68683fac0e158a67c6c88afb"}
+4.7.2025, 23:55:08 - INFO - User signup: | {"_id":"68683fac0e158a67c6c88afb","username":"u2"}
+4.7.2025, 23:55:17 - INFO - Visited route | /login
+4.7.2025, 23:55:17 - ERROR - Failed to login: Invalid username or password
+4.7.2025, 23:55:21 - INFO - Visited route | /login
+4.7.2025, 23:55:21 - INFO - User login: | {"_id":"68683fac0e158a67c6c88afb","username":"u2"}
+6.7.2025, 6:35:26 - INFO - Up and running on http://localhost:3000
+6.7.2025, 6:35:40 - INFO - Visited route | /:userId
+6.7.2025, 6:36:03 - INFO - Up and running on http://localhost:3000
+6.7.2025, 6:36:14 - INFO - Visited route | /:userId
+6.7.2025, 6:36:14 - ERROR - while finding timeline by user: id123456789 | input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+    at new ObjectId (C:\Users\seang\Documents\Study\React\Nextep\backend\node_modules\bson\src\objectid.ts:120:15)
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:31:33)
+    at Generator.next (<anonymous>)
+    at C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:4:12)
+    at Object.getByUserId (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:38:12)
+    at C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.controller.ts:21:44
+    at Generator.next (<anonymous>)
+    at C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.controller.ts:8:71
+6.7.2025, 6:36:14 - ERROR - timeline not found!
+6.7.2025, 6:36:28 - INFO - Visited route | /
+6.7.2025, 6:36:30 - INFO - Visited route | /
+6.7.2025, 6:36:33 - INFO - Visited route | /
+6.7.2025, 6:37:54 - INFO - Visited route | /login
+6.7.2025, 6:37:55 - INFO - User login: | {"_id":"68683f8a0e158a67c6c88afa","username":"u1"}
+6.7.2025, 6:38:07 - INFO - Visited route | /
+6.7.2025, 6:39:40 - INFO - Visited route | /:userId
+6.7.2025, 6:39:40 - ERROR - while finding timeline by user: 6869ef9f105d448b261b332d | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.7.2025, 6:39:40 - ERROR - timeline not found!
+6.7.2025, 6:41:10 - INFO - Visited route | /:userId
+6.7.2025, 6:41:54 - INFO - Visited route | /
+6.7.2025, 6:42:21 - INFO - Visited route | /
+6.7.2025, 6:42:24 - INFO - Visited route | /:userId
+6.7.2025, 6:42:24 - ERROR - timeline not found!
+6.7.2025, 6:42:24 - ERROR - while finding timeline by user: 68683f8a0e158a67c6c88afa | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.7.2025, 6:42:40 - INFO - Visited route | /:userId
+6.7.2025, 6:42:40 - ERROR - while finding timeline by user: 68683f8a0e158a67c6c88afa | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.7.2025, 6:42:40 - ERROR - timeline not found!
+6.7.2025, 6:46:29 - INFO - Visited route | /:userId
+6.7.2025, 6:46:29 - ERROR - while finding timeline by user: 68683f8a0e158a67c6c88afa | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.7.2025, 6:46:29 - ERROR - timeline not found!
+6.7.2025, 6:46:42 - INFO - Visited route | /
+6.7.2025, 6:46:47 - INFO - Visited route | /
+6.7.2025, 6:47:02 - INFO - Visited route | /:userId
+6.7.2025, 6:47:04 - INFO - Visited route | /:userId
+6.7.2025, 6:47:05 - INFO - Visited route | /:userId
+6.7.2025, 6:47:06 - INFO - Visited route | /:userId
+6.7.2025, 6:47:07 - INFO - Visited route | /:userId
+6.7.2025, 6:47:08 - INFO - Visited route | /:userId
+6.7.2025, 6:47:08 - INFO - Visited route | /:userId
+6.7.2025, 6:47:11 - INFO - Visited route | /
+6.7.2025, 6:47:40 - INFO - Up and running on http://localhost:3000
+6.7.2025, 6:47:42 - INFO - Visited route | /
+6.7.2025, 6:47:44 - INFO - Visited route | /
+6.7.2025, 6:47:45 - INFO - Visited route | /
+6.7.2025, 6:47:46 - INFO - Visited route | /
+6.7.2025, 6:47:47 - INFO - Visited route | /
+6.7.2025, 6:47:48 - INFO - Visited route | /
+6.7.2025, 6:47:53 - INFO - Visited route | /
+6.7.2025, 6:49:35 - INFO - Visited route | /
+6.7.2025, 6:49:44 - INFO - Visited route | /
+6.7.2025, 6:49:46 - INFO - Visited route | /
+6.7.2025, 6:49:50 - INFO - Visited route | /
+6.7.2025, 6:49:54 - INFO - Visited route | /
+6.7.2025, 6:49:58 - INFO - Visited route | /:userId
+6.7.2025, 6:49:58 - ERROR - while finding timeline by user: 68683f8a0e158a67c6c88afa | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.7.2025, 6:49:58 - ERROR - timeline not found!
+6.7.2025, 6:50:21 - INFO - Visited route | /
+6.7.2025, 6:50:35 - INFO - Visited route | /
+6.7.2025, 6:50:49 - INFO - Visited route | /
+6.7.2025, 6:51:34 - INFO - Visited route | /
+6.7.2025, 6:53:44 - INFO - Up and running on http://localhost:3000
+6.7.2025, 6:54:05 - INFO - Visited route | /
+6.7.2025, 6:54:12 - INFO - Visited route | /:userId
+6.7.2025, 6:54:19 - INFO - Visited route | /
+6.7.2025, 6:54:28 - INFO - Visited route | /
+6.7.2025, 6:54:41 - INFO - Visited route | /
+6.7.2025, 6:56:00 - INFO - Up and running on http://localhost:3000

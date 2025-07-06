@@ -2,7 +2,7 @@ import { OptionalId } from 'mongodb'
 import { loggerService } from "../../services/logger.service"
 import { dbService } from '../../services/db.service'
 import { ObjectId } from 'mongodb'
-import { UserModel, UserWithPasswordModel } from '../../models/user.model'
+import { UserModel, UserWithPasswordModel } from '../../models/user.models'
 
 export const userService = {
   query,

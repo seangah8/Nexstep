@@ -3,7 +3,8 @@ import bcrypt from 'bcrypt'
 
 import { userService } from '../user/user.service'
 import { loggerService } from '../../services/logger.service'
-import { UserModel, UserWithPasswordModel, CredentialsModel } from '../../models/user.model'
+import { UserModel, UserWithPasswordModel, CredentialsModel } from '../../models/user.models'
+import { LoginTokenModel } from '../../models/alsStore.models'
 
 const cryptr = new Cryptr(process.env.SECRET1 || 'Secret-Puk-1234')
 
@@ -20,10 +21,10 @@ function pushLoginToken(user: UserModel): string {
   return encryptedStr
 }
 
-function validateToken(token: string): UserModel | null {
+function validateToken(token: string): LoginTokenModel | null {
   try {
     const json = cryptr.decrypt(token)
-    const loggedinUser: UserModel = JSON.parse(json)
+    const loggedinUser: LoginTokenModel = JSON.parse(json)
     return loggedinUser
 
   } catch (err) {
