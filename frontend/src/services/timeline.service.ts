@@ -1,11 +1,14 @@
-import { MainStepModel, StepModel } from "../models/timeline.models";
-
+import { TimelineModel, MainStepModel, StepModel } from "../models/timeline.models";
+import { httpService } from "./http.service";
 
 export const timelineService = {
-  getDefultStepsDatabase,
+  query,
+  get,
+  remove,
+  add,
+  update,
   getTimelineUISettings,
   getToday,
-  getCreateTime,
   findParentStart,
   changeChildrenAndParentsEnd,
   changeCurrantAndNextStepsEnd,
@@ -24,49 +27,42 @@ export const timelineService = {
   updateLastChildrensExceptEnd,
 }
 
-const createTime = 20215 // just some random time for test
-const todaysDate = new Date()
-const today = Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
-
-const defultStepImage = 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png'
-
-const stepsDatabase : StepModel[] =     [
-  {id: 'idUserGoal', title:'Users Goal', parentId: null, end: createTime + 250, description: 'Users Goal description', image: defultStepImage},
-  {id: 'idS1', parentId: 'idUserGoal', title: 'S1', end: createTime + 50, description: 'S1 description', image: defultStepImage},
-  {id: 'idS1.S1' ,parentId: 'idS1', title: 'S1.S1', end: createTime + 5, description: 'S1.S1 description', image: defultStepImage},
-  {id: 'idS1.S2' ,parentId: 'idS1', title: 'S1.S2', end: createTime + 15, description: 'S1.S2 description', image: defultStepImage},
-  {id: 'idS1.N2' ,parentId: 'idS1', title: 'S1', end: createTime + 50, description: 'S1 description', image: defultStepImage},
-  {id: 'idS2' ,parentId: 'idUserGoal', title: 'S2', end: createTime + 80, description: 'S2 description', image: defultStepImage},
-  {id: 'idS3' ,parentId: 'idUserGoal', title: 'S3', end: createTime + 140, description: 'S3 description', image: defultStepImage},
-  {id: 'idS4' ,parentId: 'idUserGoal', title: 'S4', end: createTime + 230, description: 'S4 description', image: defultStepImage},
-  {id: 'idG' ,parentId: 'idUserGoal', title: 'G', end: createTime + 250, description: 'G description', image: defultStepImage},
-  {id: 'idG.F' ,parentId: 'idG', title: 'G.S1', end: createTime + 235, description: 'G.S1 description', image: defultStepImage},
-  {id: 'idG.G' ,parentId: 'idG', title: 'G', end: createTime + 250, description: 'G description', image: defultStepImage}
-]
-
-const timelineUISettings = {
-  svgSize: 600,
-  svgCenter: {x: 300, y: 300},
-  radius: 250,
-  spaceDeg: 60,
-  strokeWidth: 30,
-  circlesSize: 35
+async function query(): Promise<TimelineModel[]> {
+  return await httpService.get(`timeline`)
 }
 
-function getDefultStepsDatabase(){
-  return stepsDatabase
+// get by owner id
+async function get(ownerId : string) : Promise<TimelineModel> {
+  return await httpService.get(`timeline/${ownerId}`)
+}
+
+async function remove() : Promise<void> {
+  await httpService.delete(`timeline`)
+}
+
+async function add() : Promise<TimelineModel> {
+  return await httpService.post('timeline')
+}
+
+async function update(timeline : TimelineModel) : Promise<TimelineModel> {
+  return await httpService.put(`timeline`, timeline)
 }
 
 function getTimelineUISettings(){
+  const timelineUISettings = {
+    svgSize: 600,
+    svgCenter: {x: 300, y: 300},
+    radius: 250,
+    spaceDeg: 60,
+    strokeWidth: 30,
+    circlesSize: 35
+  }
   return timelineUISettings
 }
 
 function getToday(){
-  return today
-}
-
-function getCreateTime(){
-  return createTime
+  const todaysDate = new Date()
+  return Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
 }
 
 

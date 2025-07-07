@@ -74,7 +74,11 @@ async function update(timeline: TimelineModel): Promise<TimelineModel> {
 
 async function add(timelineToAdd: Omit<TimelineModel, '_id'>): Promise<TimelineModel> {
   try {
+    const criteria = { ownerId: new ObjectId(timelineToAdd.ownerId) }
     const collection = await dbService.getCollection<OptionalId<TimelineModel>>('timeline')
+    const timeline = await collection.findOne(criteria)
+    if(timeline) throw new Error('this user already has a timeline')
+      
     const insertedTimeline = await collection.insertOne(
       {...timelineToAdd, ownerId: new ObjectId(timelineToAdd.ownerId)})
     const addedTimeline: TimelineModel = {...timelineToAdd, _id: insertedTimeline.insertedId.toString()}

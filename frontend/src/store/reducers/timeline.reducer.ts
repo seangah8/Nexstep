@@ -1,20 +1,19 @@
 
 import { TimelineAction, TimelineActionsType, TimelineState } from "../interfaces/timeline.store.ts"
-import { timelineService } from "../../services/timeline.service.ts"
 
 const initialState: TimelineState = {
-    steps: timelineService.getDefultStepsDatabase(),
+    timeline: null
 }
 
 export function timelineReducer(state = initialState, cmd = {} as TimelineAction): TimelineState {
     switch (cmd.type) {
 
-        case TimelineActionsType.SET_TIMELINE_STEPS:
+        case TimelineActionsType.SET_TIMELINE:
             return {
                 ...state,
-                steps: cmd.steps
+                timeline: cmd.timeline
             }      
-       
+
         default:
             return state
     }

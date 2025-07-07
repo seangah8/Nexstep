@@ -5,23 +5,23 @@ import { timelineService } from "../../services/timeline.service";
 import { EditStepModal } from "./EditStepModal";
 import { StepPreview } from "./StepPreview";
 import { HoverModal } from "./HoverModal";
+import { TimelineModel } from "../../models/timeline.models";
 import { timelineActions } from "../../store/actions/timeline.actions";
 
+
 interface TimelineProps{
-    steps : StepModel[]
+    timeline : TimelineModel
 }
 
-export function Timeline( {steps} : TimelineProps) {
+export function Timeline( {timeline } : TimelineProps) {
 
   // Load UI settings from timeline service
   const { svgSize, svgCenter, radius, spaceDeg, strokeWidth } = timelineService.getTimelineUISettings()
 
-  // The time the timeline was created (unchangeable)
-  const createTime = timelineService.getCreateTime()
   const today = timelineService.getToday()
 
   // const [steps, setSteps] = useState<StepModel[]>(timelineService.getDefultStepsDatabase)
-  const [mainStep, setMainStep] = useState<MainStepModel>({ ...steps[0], start: createTime })
+  const [mainStep, setMainStep] = useState<MainStepModel>({ ...timeline.steps[0], start: timeline.createdAt })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<EditModalModel | null>(null)
   const [dragging, setDragging] = useState<DraggingModel | null>(null)
@@ -31,16 +31,16 @@ export function Timeline( {steps} : TimelineProps) {
 
   useEffect(() => {
     if(!dragging){
-      console.log('steps', steps)
+      console.log('steps', timeline.steps)
       setStepsToShow(timelineService.sortByEnd(
-        steps.filter(step=>step.parentId === mainStep.id)
+        timeline.steps.filter(step=>step.parentId === mainStep.id)
       ))
       onSetHoveredStep(null)
     }
-  }, [steps, mainStep])
-
+  }, [timeline.steps, mainStep])
+  
   function onSetSteps(newSteps: StepModel[]): void {
-    timelineActions.saveSteps(newSteps)
+    timelineActions.saveTimeline({...timeline, steps: newSteps})
   }
 
   function onSetMainStep(newMainStep : MainStepModel){
@@ -56,7 +56,7 @@ export function Timeline( {steps} : TimelineProps) {
   }
 
   function onAddingStep(newStep : StepModel){
-    onSetSteps([...steps, newStep])
+    onSetSteps([...timeline.steps, newStep])
   }
 
   function onSetDragging(newDragging: DraggingModel | null){
@@ -69,11 +69,11 @@ export function Timeline( {steps} : TimelineProps) {
 
   function handleZoomOut(event: React.WheelEvent) {
     if (event.deltaY > 0) { // User scrolled DOWN
-      const parentStep = steps.find(step => step.id === mainStep.parentId)
+      const parentStep = timeline.steps.find(step => step.id === mainStep.parentId)
       if (!parentStep) return
 
       // Go up to parent
-      const prevParentEnd = timelineService.findParentStart(steps, parentStep, createTime)
+      const prevParentEnd = timelineService.findParentStart(timeline.steps, parentStep, timeline.createdAt)
       setMainStep({ ...parentStep, start: prevParentEnd })
     }
   }
@@ -84,14 +84,14 @@ export function Timeline( {steps} : TimelineProps) {
 
       const stepIndex = stepsToShow.findIndex(step => 
         step.id === dragging.druggingStep.id)
-      const parentLimit = timelineService.findStepTotalMaxEnd(steps,
+      const parentLimit = timelineService.findStepTotalMaxEnd(timeline.steps,
         {...dragging.druggingStep, end: stepsToShow[stepIndex].end})
       const changedStep = {...dragging.druggingStep, 
         end: Math.min(stepsToShow[stepIndex].end, parentLimit)
       }
       
       // first change the step user edited
-      let newSteps = steps.map(step => 
+      let newSteps = timeline.steps.map(step => 
         (step.id === dragging.druggingStep.id) 
         ? changedStep
         : step
@@ -116,7 +116,7 @@ export function Timeline( {steps} : TimelineProps) {
           newSteps,
           changedStep,
           nextStep,
-          createTime
+          timeline.createdAt
         )
 
       if(mainStep.end > parentLimit)
@@ -234,13 +234,13 @@ export function Timeline( {steps} : TimelineProps) {
               <StepPreview key={step.id}
                 step = {step}
                 nextStep = {nextStep}
-                allSteps = {steps}
+                allSteps = {timeline.steps}
                 mainStep = {mainStep}
                 stepsToShow = {stepsToShow}
                 prevEnd = {prevEnd}
                 stepLocation = {stepLocation}
                 today = {today}
-                createTime = {createTime}
+                createTime = {timeline.createdAt}
                 svgRef = {svgRef}
                 dragging = {dragging}
                 onSetSteps = {onSetSteps}
@@ -287,7 +287,7 @@ export function Timeline( {steps} : TimelineProps) {
         editModal &&
         <EditStepModal
           editModal={editModal}
-          allSteps={steps}
+          allSteps={timeline.steps}
           onSetSteps={onSetSteps}
           onSetMainStep={onSetMainStep}
           onSetMainStepEnd={onSetMainStepEnd}

@@ -1,4 +1,12 @@
 
+export interface TimelineModel {
+    _id: string
+    steps: StepModel[]
+    ownerId: string
+    createdAt: number
+}
+
+
 export interface StepModel {
     id: string
     parentId: string | null

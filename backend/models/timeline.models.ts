@@ -4,6 +4,7 @@ export interface TimelineModel {
     _id: string | ObjectId
     steps: StepModel[]
     ownerId: string | ObjectId
+    createdAt: number
 }
 
 export interface StepModel {

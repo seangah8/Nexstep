@@ -31,12 +31,3 @@ const PORT: number = Number(process.env.PORT) || 3000
 app.listen(PORT, () => {
   loggerService.info('Up and running on ' + `http://localhost:${PORT}`)
 })
-
-
-
-/*
-
-1. connect backend timeline to frontend
-
-
-*/

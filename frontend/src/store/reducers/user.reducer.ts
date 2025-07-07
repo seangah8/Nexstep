@@ -1,9 +1,9 @@
 
 import { UserAction, UserActionsType, UserState } from "../interfaces/user.store.ts"
-
+import { userService } from "../../services/user.service.ts"
 
 const initialState: UserState = {
-    loggedInUser: null,
+    loggedInUser: userService.getLoggedinUser(),
 }
 
 export function userReducer(state = initialState, cmd = {} as UserAction): UserState {

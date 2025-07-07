@@ -1,22 +1,22 @@
 
-// defines the structure of a user object 
-import { StepModel } from "../../models/timeline.models"
+// defines the structure of a timeline object 
+import { TimelineModel } from "../../models/timeline.models"
 
-// define the shape of the user slice of the Redux state
+// define the shape of the timeline slice of the Redux state
 export interface TimelineState {
-    steps: StepModel[]
+    timeline : TimelineModel | null
 }
 
-// define all possible action types for the user state
+// define all possible action types for the timeline state
 export enum TimelineActionsType {
-    SET_TIMELINE_STEPS = 'SET_TIMELINE_STEPS'
+    SET_TIMELINE = 'SET_TIMELINE'
 }
 
-// define the structure of the CHANGE_USERNAME action
-interface SetTimelineStepsAction {
-    type: TimelineActionsType.SET_TIMELINE_STEPS
-    steps: StepModel[]
+// define the structure of the SET_TIMELINE action
+interface SetTimelineAction {
+    type: TimelineActionsType.SET_TIMELINE
+    timeline: TimelineModel
 }
 
-// Combine all user-related actions into a single type
-export type TimelineAction = SetTimelineStepsAction
+// Combine all timeline-related actions into a single type
+export type TimelineAction = SetTimelineAction

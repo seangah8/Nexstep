@@ -15,7 +15,7 @@ export async function getTimelines(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function getTimeline(req: Request, res: Response): Promise<void> {
+export async function getTimelineByUserId(req: Request, res: Response): Promise<void> {
   const { userId } = req.params
   try {
     const timeline = await timelineService.getByUserId(userId)
@@ -32,9 +32,22 @@ export async function addTimeline(req: Request, res: Response): Promise<void> {
   const loggedinUserId = alsStore.loggedinUser?._id
   try {
     if(!loggedinUserId) throw new Error('no user logged in')
+    const todaysDate = new Date()
+    const today = Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
+    const defultStepImage = 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png'
     const newTimeline : Omit<TimelineModel,'_id'> = {
-      steps: [],
-      ownerId: loggedinUserId
+      steps: [
+        {
+          id: 'idUserGoal', 
+          title:'Users Goal', 
+          parentId: null, 
+          end: today + 1000, 
+          description: 'goal description', 
+          image: defultStepImage
+        }
+      ],
+      ownerId: loggedinUserId,
+      createdAt: today
     }
 
     const timeline = await timelineService.add(newTimeline)
