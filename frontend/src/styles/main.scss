@@ -1,7 +1,8 @@
 @use './App';
+@use './Timeline';
 @use './vars';
 
 body{
-    background-color: vars.$gray;
+    background-color: vars.$warm;
 }
 

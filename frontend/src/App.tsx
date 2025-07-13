@@ -33,7 +33,16 @@ export default App
 
 Things need to be add
 
-c. design
+1. add 2 main colors and a complite third
+2. add backeground color
+3. add 3 colors to steps
+4. add color to finished step
+
+a. choose colors <--
+a. design timeline
+b. design modals
+c. design use page
+d. add ai
 
 
 

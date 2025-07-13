@@ -186,7 +186,7 @@ export function StepPreview({
                 stepLocation.angleRange.start, 
                 stepLocation.angleRange.end)}
 
-                stroke={step.end < today ? "green" : "#389BBA"}
+                stroke={step.end < today ? "#c69a3c" : "#006769"}
                 strokeWidth={strokeWidth}
                 fill='none'
             />
@@ -201,7 +201,7 @@ export function StepPreview({
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesSize}
-                    fill={step.end < today ? "green" : "#389BBA"}
+                    fill={step.end < today ? "#c69a3c" : "#006769"}
                     stroke="black"
                     strokeWidth='2'
                 />
