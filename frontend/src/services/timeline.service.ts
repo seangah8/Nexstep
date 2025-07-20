@@ -55,7 +55,9 @@ function getTimelineUISettings(){
     radius: 250,
     spaceDeg: 60,
     strokeWidth: 30,
-    circlesSize: 35
+    circlesRadius: 45,
+    circlesPadding: 12,
+    fadeTimeSeconds: 0.1,
   }
   return timelineUISettings
 }

@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { StepModel, MainStepModel, EditModalModel, DraggingModel } from "../../models/timeline.models";
 import { timelineService } from "../../services/timeline.service";
+import { utilService } from "../../services/util.service";
 import { EditStepModal } from "./EditStepModal";
 import { StepPreview } from "./StepPreview";
 import { HoverModal } from "./HoverModal";
@@ -16,7 +17,7 @@ interface TimelineProps{
 export function Timeline( {timeline } : TimelineProps) {
 
   // Load UI settings from timeline service
-  const { svgSize, svgCenter, radius, spaceDeg, strokeWidth } = timelineService.getTimelineUISettings()
+  const { svgSize, svgCenter, radius, spaceDeg, strokeWidth, fadeTimeSeconds } = timelineService.getTimelineUISettings()
 
   const today = timelineService.getToday()
 
@@ -67,14 +68,17 @@ export function Timeline( {timeline } : TimelineProps) {
     setHoveredStep(step)
   }
 
-  function handleZoomOut(event: React.WheelEvent) {
+  async function handleZoomOut(event: React.WheelEvent) {
     if (event.deltaY > 0) { // User scrolled DOWN
       const parentStep = timeline.steps.find(step => step.id === mainStep.parentId)
       if (!parentStep) return
 
       // Go up to parent
+      svgFadeOutAnimation()
+      await utilService.delay(fadeTimeSeconds*1000)
       const prevParentEnd = timelineService.findParentStart(timeline.steps, parentStep, timeline.createdAt)
       setMainStep({ ...parentStep, start: prevParentEnd })
+      svgFadeInAnimation()
     }
   }
 
@@ -204,6 +208,20 @@ export function Timeline( {timeline } : TimelineProps) {
     }
   }
 
+  function svgFadeOutAnimation(){
+    if(svgRef.current){
+      svgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-out`
+      svgRef.current.style.opacity = '0'
+    }
+  }
+
+  function svgFadeInAnimation(){
+    if(svgRef.current){
+      svgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-in`
+      svgRef.current.style.opacity = '1'
+    }
+  }
+
   if(!stepsToShow) return <h2>Loading...</h2>
 
   return (
@@ -249,6 +267,8 @@ export function Timeline( {timeline } : TimelineProps) {
                 onSetDragging = {onSetDragging}
                 onAddingStep = {onAddingStep}
                 onSetHoveredStep = {onSetHoveredStep}
+                svgFadeOutAnimation={svgFadeOutAnimation}
+                svgFadeInAnimation={svgFadeInAnimation}
               />
             )
           })

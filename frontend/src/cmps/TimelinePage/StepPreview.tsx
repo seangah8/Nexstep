@@ -24,6 +24,8 @@ interface stepPreviewProps{
     onSetDragging: (newDragging : DraggingModel | null) => void
     onAddingStep: (step : StepModel) => void
     onSetHoveredStep: (step : StepModel | null) => void
+    svgFadeOutAnimation: () => void
+    svgFadeInAnimation: () => void
 }
 
 export function StepPreview({
@@ -42,18 +44,24 @@ export function StepPreview({
     onSetMainStep,
     onSetEditModal,
     onSetDragging,
-    onSetHoveredStep
-
+    onSetHoveredStep,
+    svgFadeOutAnimation,
+    svgFadeInAnimation,
 
 } : stepPreviewProps){
 
     // Load UI settings from timeline service
-    const { svgCenter, radius, spaceDeg, strokeWidth, circlesSize } = timelineService.getTimelineUISettings()
+    const { svgCenter, radius, spaceDeg, strokeWidth, circlesRadius, circlesPadding, fadeTimeSeconds } = timelineService.getTimelineUISettings()
 
-    function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
+    async function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
         console.log('selectStep', { ...selectStep, start: prevEnd })
         if (stepsToShow.length <= 1) throw new Error('There are no further steps!')
-        else onSetMainStep({ ...selectStep, start: prevEnd })
+        else {
+            svgFadeOutAnimation()
+            await utilService.delay(fadeTimeSeconds*1000)
+            onSetMainStep({ ...selectStep, start: prevEnd })
+            svgFadeInAnimation()
+        }
     }
 
     function handleZoomIn(event: React.WheelEvent, selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
@@ -183,7 +191,7 @@ export function StepPreview({
                     <circle
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
-                    r={circlesSize * 0.8}
+                    r={circlesRadius - circlesPadding}
                     />
                 </clipPath>
             </defs>
@@ -210,17 +218,25 @@ export function StepPreview({
 
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
-                    r={circlesSize}
+                    r={circlesRadius}
                     fill={step.end < today ? "#c69a3c" : "#006769"}
+                    stroke="black"
+                    strokeWidth='2'
+                />
+                <circle
+                    cx={stepLocation.circleLocation.x}
+                    cy={stepLocation.circleLocation.y}
+                    r={circlesRadius - circlesPadding}
+                    fill='#daa88b'
                     stroke="black"
                     strokeWidth='2'
                 />
                 <image
                     href={step.image}
-                    x={stepLocation.circleLocation.x - circlesSize}
-                    y={stepLocation.circleLocation.y - circlesSize}
-                    width={circlesSize*2}
-                    height={circlesSize*2}
+                    x={stepLocation.circleLocation.x - circlesRadius}
+                    y={stepLocation.circleLocation.y - circlesRadius}
+                    width={circlesRadius*2}
+                    height={circlesRadius*2}
                     clipPath={`url(#circleClip-${step.id})`}
                 />
             </g>

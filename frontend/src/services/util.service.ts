@@ -2,6 +2,7 @@ export const utilService = {
     describeArc,
     createId,
     uploadImg,
+    delay,
 }
 
 function describeArc(cx : number, cy : number, r : number, startAngle : number, endAngle : number) {
@@ -52,6 +53,10 @@ async function uploadImg(target: HTMLInputElement) {
     console.error('Failed to upload image:', err)
     throw err
   }
+}
+
+function delay(ms: number) : Promise<void>{
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 
