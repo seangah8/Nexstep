@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react"
 import { StepModel, MainStepModel, EditModalModel } from "../../models/timeline.models"
 import { timelineService } from "../../services/timeline.service"
+import { utilService } from "../../services/util.service"
 
 interface EditStepModalProps{
     editModal : EditModalModel
@@ -35,8 +36,10 @@ export function EditStepModal({
           break
         case 'image':
           if(target instanceof HTMLInputElement) {
-            const file = target.files?.[0]
-            if (file) value = URL.createObjectURL(file);
+            utilService.uploadImg(target).then((url) => {
+              if (!url) return
+              setStepToEdit(prev => ({...prev,image: url,}))
+            })
           }
       }
       setStepToEdit(prev => ({ ...prev, [field]: value }))

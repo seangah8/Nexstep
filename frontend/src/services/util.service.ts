@@ -1,6 +1,7 @@
 export const utilService = {
     describeArc,
     createId,
+    uploadImg,
 }
 
 function describeArc(cx : number, cy : number, r : number, startAngle : number, endAngle : number) {
@@ -25,6 +26,34 @@ function createId(length = 8) {
 
     return txt
 }
+
+async function uploadImg(target: HTMLInputElement) {
+  const CLOUD_NAME = 'dwql9coem'
+  const UPLOAD_PRESET = 'sean_preset'
+  const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+
+  try {
+    const file = target.files?.[0]
+    if (!file) return
+
+    const formData = new FormData()
+    formData.append('upload_preset', UPLOAD_PRESET)
+    formData.append('file', file)
+
+    const res = await fetch(UPLOAD_URL, {
+      method: 'POST',
+      body: formData,
+    })
+
+    const data = await res.json()
+    console.log('Uploaded image:', data.secure_url)
+    return data.secure_url // the permanent URL saved in MongoDB
+  } catch (err) {
+    console.error('Failed to upload image:', err)
+    throw err
+  }
+}
+
 
 // private functions
 

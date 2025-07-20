@@ -176,7 +176,17 @@ export function StepPreview({
         <g
             onClick={() => onSelectStep(step, prevEnd, stepsToShow)}
             onWheel={event => handleZoomIn(event, step, prevEnd, stepsToShow)}
-            >
+        >
+            
+            <defs>
+                <clipPath id={`circleClip-${step.id}`}>
+                    <circle
+                    cx={stepLocation.circleLocation.x}
+                    cy={stepLocation.circleLocation.y}
+                    r={circlesSize * 0.8}
+                    />
+                </clipPath>
+            </defs>
             
             <path
                 onMouseDown={event =>handleRightClickOnPath(event, step, prevEnd)}
@@ -207,10 +217,11 @@ export function StepPreview({
                 />
                 <image
                     href={step.image}
-                    x={stepLocation.circleLocation.x - circlesSize/2}
-                    y={stepLocation.circleLocation.y - circlesSize/2}
-                    width={circlesSize}
-                    height={circlesSize}
+                    x={stepLocation.circleLocation.x - circlesSize}
+                    y={stepLocation.circleLocation.y - circlesSize}
+                    width={circlesSize*2}
+                    height={circlesSize*2}
+                    clipPath={`url(#circleClip-${step.id})`}
                 />
             </g>
         </g>

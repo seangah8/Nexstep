@@ -33,12 +33,15 @@ export default App
 
 Things need to be add
 
-1. add 2 main colors and a complite third
-2. add backeground color
-3. add 3 colors to steps
-4. add color to finished step
+1. design circles
+2. round first path start
+3. design today circle
+4. make animation for path
+5. add animation color taking path over
+6. make animation for circles 
+  (when they get shown at first \ hover on them)
+7. add day counter
 
-a. choose colors <--
 a. design timeline
 b. design modals
 c. design use page
