@@ -17,7 +17,7 @@ interface TimelineProps{
 export function Timeline( {timeline } : TimelineProps) {
 
   // Load UI settings from timeline service
-  const { svgSize, svgCenter, radius, spaceDeg, strokeWidth, fadeTimeSeconds } = timelineService.getTimelineUISettings()
+  const { svgSize, svgCenter, radius, spaceDeg, fadeTimeSeconds } = timelineService.getTimelineUISettings()
 
   const today = timelineService.getToday()
 
@@ -284,15 +284,19 @@ export function Timeline( {timeline } : TimelineProps) {
 
                   const todayLocation = timelineService.dayToLocation(
                     svgCenter, mainStep, spaceDeg, radius, today)
+                  const todayAngle = spaceDeg / 2 + (today - mainStep.start) / totalDays * (360 - spaceDeg)
+                  const traingelPoints = timelineService.getTrianglePoints(todayAngle, 40)
 
                   return (
-                    <circle
-                      cx={todayLocation.x}
-                      cy={todayLocation.y}
-                      r={strokeWidth/2}
-                      fill="yellow"
-                      stroke="black"
-                      strokeWidth="2"
+                    <polygon
+                      points={`${traingelPoints.tip.x + todayLocation.x},${traingelPoints.tip.y + todayLocation.y} 
+                      ${traingelPoints.right.x + todayLocation.x},${traingelPoints.right.y + todayLocation.y}
+                      ${traingelPoints.left.x + todayLocation.x},${traingelPoints.left.y + todayLocation.y}
+                      `}
+                      fill="#702228"
+                      stroke="white"
+                      strokeWidth='3'
+                      
                     />
                   ) 
                 })()

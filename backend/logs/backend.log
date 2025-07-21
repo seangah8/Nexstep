@@ -1287,3 +1287,27 @@ Error: User not found
 21.7.2025, 1:47:10 - INFO - Visited route | /
 21.7.2025, 1:47:19 - INFO - Visited route | /:userId
 21.7.2025, 1:47:19 - INFO - Visited route | /
+21.7.2025, 5:45:25 - INFO - Up and running on http://localhost:3000
+21.7.2025, 5:47:47 - INFO - Visited route | /login
+21.7.2025, 5:47:47 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+21.7.2025, 5:47:48 - INFO - Visited route | /:userId
+21.7.2025, 5:47:49 - INFO - Visited route | /
+21.7.2025, 5:49:43 - INFO - Visited route | /
+21.7.2025, 5:49:45 - INFO - Visited route | /:userId
+21.7.2025, 5:49:45 - INFO - Visited route | /
+22.7.2025, 1:09:49 - INFO - Up and running on http://localhost:3000
+22.7.2025, 1:11:23 - INFO - Visited route | /login
+22.7.2025, 1:11:23 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+22.7.2025, 1:11:24 - INFO - Visited route | /:userId
+22.7.2025, 1:11:25 - INFO - Visited route | /
+22.7.2025, 1:11:36 - INFO - Visited route | /
+22.7.2025, 1:11:37 - INFO - Visited route | /
+22.7.2025, 1:12:04 - INFO - Visited route | /
+22.7.2025, 1:14:26 - INFO - Visited route | /
+22.7.2025, 1:14:30 - INFO - Visited route | /
+22.7.2025, 1:24:17 - INFO - Visited route | /
+22.7.2025, 1:24:32 - INFO - Visited route | /
+22.7.2025, 1:38:05 - INFO - Visited route | /
+22.7.2025, 1:38:28 - INFO - Visited route | /
+22.7.2025, 1:38:54 - INFO - Visited route | /
+22.7.2025, 1:39:03 - INFO - Visited route | /

@@ -33,14 +33,9 @@ export default App
 
 Things need to be add
 
-1. design circles
-2. round first path start
-3. design today circle
-4. make animation for path
-5. add animation color taking path over
-6. make animation for circles 
-  (when they get shown at first \ hover on them)
-7. add day counter
+2. design today circle
+3. make animation for circles (hover on them)
+4. add day counter
 
 a. design timeline
 b. design modals
