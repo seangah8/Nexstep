@@ -8,6 +8,7 @@ import { StepPreview } from "./StepPreview";
 import { HoverModal } from "./HoverModal";
 import { TimelineModel } from "../../models/timeline.models";
 import { timelineActions } from "../../store/actions/timeline.actions";
+import { TodayPointer } from "./TodayPointer";
 
 
 interface TimelineProps{
@@ -28,11 +29,11 @@ export function Timeline( {timeline } : TimelineProps) {
   const [dragging, setDragging] = useState<DraggingModel | null>(null)
   const [hoveredStep, setHoveredStep] = useState<StepModel | null>(null)
   
-  const svgRef = useRef<SVGSVGElement | null>(null)
+  const timelineSvgRef = useRef<SVGSVGElement | null>(null)
+  const todayPointerSvgRef = useRef<SVGSVGElement | null>(null)
 
   useEffect(() => {
     if(!dragging){
-      console.log('steps', timeline.steps)
       setStepsToShow(timelineService.sortByEnd(
         timeline.steps.filter(step=>step.parentId === mainStep.id)
       ))
@@ -139,7 +140,7 @@ export function Timeline( {timeline } : TimelineProps) {
         (event.clientX - dragging.startPoint.x) ** 2 + 
         (event.clientY - dragging.startPoint.y) ** 2)
 
-      if(distance >= 5 && stepsToShow && svgRef.current) {
+      if(distance >= 5 && stepsToShow && timelineSvgRef.current) {
         // calculate the new position
         const Mouselocation = {x: event.pageX, y: event.pageY}
         let newEnd = 0
@@ -153,7 +154,7 @@ export function Timeline( {timeline } : TimelineProps) {
         }
         // if you drag any other step
         else{
-          const svgRect = svgRef.current.getBoundingClientRect()
+          const svgRect = timelineSvgRef.current.getBoundingClientRect()
           const svgLocation = {x: svgRect.x, y: svgRect.y}
           newEnd = timelineService.locationToDay(svgCenter, svgLocation, mainStep, spaceDeg, Mouselocation)
         }
@@ -209,16 +210,26 @@ export function Timeline( {timeline } : TimelineProps) {
   }
 
   function svgFadeOutAnimation(){
-    if(svgRef.current){
-      svgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-out`
-      svgRef.current.style.opacity = '0'
+    if(timelineSvgRef.current){
+      timelineSvgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-out`
+      timelineSvgRef.current.style.opacity = '0'
+
+      if(todayPointerSvgRef.current){
+        todayPointerSvgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-out`
+        todayPointerSvgRef.current.style.opacity = '0'
+      }
     }
   }
 
   function svgFadeInAnimation(){
-    if(svgRef.current){
-      svgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-in`
-      svgRef.current.style.opacity = '1'
+    if(timelineSvgRef.current){
+      timelineSvgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-in`
+      timelineSvgRef.current.style.opacity = '1'
+
+      if(todayPointerSvgRef.current){
+        todayPointerSvgRef.current.style.transition = `opacity ${fadeTimeSeconds}s ease-in`
+        todayPointerSvgRef.current.style.opacity = '1'
+      }
     }
   }
 
@@ -230,7 +241,7 @@ export function Timeline( {timeline } : TimelineProps) {
     onMouseMove={event => handleRightDrag(event)}  
     onMouseUp={event =>handleRightUp(event)}>
 
-      <svg width={svgSize} height={svgSize} ref={svgRef}>
+      <svg width={svgSize} height={svgSize} ref={timelineSvgRef}>
         {(() => {
           const totalDays = mainStep.end - mainStep.start
           let accumulated = 0
@@ -259,7 +270,7 @@ export function Timeline( {timeline } : TimelineProps) {
                 stepLocation = {stepLocation}
                 today = {today}
                 createTime = {timeline.createdAt}
-                svgRef = {svgRef}
+                svgRef = {timelineSvgRef}
                 dragging = {dragging}
                 onSetSteps = {onSetSteps}
                 onSetMainStep = {onSetMainStep}
@@ -273,38 +284,24 @@ export function Timeline( {timeline } : TimelineProps) {
             )
           })
 
-          return (
-            <>
-              {renderedSteps.reverse()}
+          return ( <> {renderedSteps.reverse()} </>)
 
-              {/* Yellow "Today" circle */}
-              {
-                (() => {
-                  if (today < mainStep.start || today > mainStep.end) return null
-
-                  const todayLocation = timelineService.dayToLocation(
-                    svgCenter, mainStep, spaceDeg, radius, today)
-                  const todayAngle = spaceDeg / 2 + (today - mainStep.start) / totalDays * (360 - spaceDeg)
-                  const traingelPoints = timelineService.getTrianglePoints(todayAngle, 40)
-
-                  return (
-                    <polygon
-                      points={`${traingelPoints.tip.x + todayLocation.x},${traingelPoints.tip.y + todayLocation.y} 
-                      ${traingelPoints.right.x + todayLocation.x},${traingelPoints.right.y + todayLocation.y}
-                      ${traingelPoints.left.x + todayLocation.x},${traingelPoints.left.y + todayLocation.y}
-                      `}
-                      fill="#702228"
-                      stroke="white"
-                      strokeWidth='3'
-                      
-                    />
-                  ) 
-                })()
-              }
-            </>
-          )
         })()}
       </svg>
+
+      {
+        (today >= mainStep.start && today <= mainStep.end) &&
+        <TodayPointer
+          svgCenter={svgCenter}
+          spaceDeg={spaceDeg}
+          radius={radius}
+          totalDays={mainStep.end - mainStep.start}
+          mainStep={mainStep}
+          today={today}
+          svgRef={todayPointerSvgRef}
+        />
+      }
+
 
       { // edit modal 
 

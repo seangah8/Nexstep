@@ -1,6 +1,9 @@
 @use './App';
-@use './Timeline';
+@use './Timeline.scss';
+@use './TodayPointer.scss';
 @use './vars';
+
+
 
 body{
     background-color: vars.$warm;
