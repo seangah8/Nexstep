@@ -1311,3 +1311,34 @@ Error: User not found
 22.7.2025, 1:38:28 - INFO - Visited route | /
 22.7.2025, 1:38:54 - INFO - Visited route | /
 22.7.2025, 1:39:03 - INFO - Visited route | /
+13.9.2025, 18:29:05 - INFO - Up and running on http://localhost:3000
+13.9.2025, 18:29:41 - INFO - Visited route | /login
+13.9.2025, 18:29:41 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+13.9.2025, 18:32:16 - INFO - Visited route | /:userId
+13.9.2025, 18:32:16 - INFO - Visited route | /
+13.9.2025, 18:33:16 - INFO - Visited route | /signup
+13.9.2025, 18:33:16 - DEBUG - auth.service - signup with username: u2
+13.9.2025, 18:33:16 - ERROR - Failed to signup: Username already taken
+13.9.2025, 18:33:33 - INFO - Visited route | /login
+13.9.2025, 18:33:34 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+13.9.2025, 18:34:23 - INFO - Visited route | /:userId
+13.9.2025, 18:34:23 - INFO - Visited route | /
+13.9.2025, 18:34:52 - INFO - Visited route | /login
+13.9.2025, 18:34:52 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+13.9.2025, 18:35:00 - INFO - Visited route | /login
+13.9.2025, 18:35:00 - INFO - User login: | {"_id":"686c5cbdb91fdc4de46d736e","username":"u2"}
+13.9.2025, 18:35:04 - INFO - Visited route | /login
+13.9.2025, 18:35:04 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+13.9.2025, 18:35:06 - INFO - Visited route | /:userId
+13.9.2025, 18:35:06 - INFO - Visited route | /
+13.9.2025, 18:35:13 - INFO - Visited route | /login
+13.9.2025, 18:35:13 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+13.9.2025, 18:39:22 - INFO - Visited route | /:userId
+13.9.2025, 18:39:22 - INFO - Visited route | /
+13.9.2025, 18:40:03 - INFO - Visited route | /login
+13.9.2025, 18:40:03 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+13.9.2025, 18:40:03 - INFO - Visited route | /:userId
+13.9.2025, 18:40:03 - INFO - Visited route | /
+13.9.2025, 18:40:39 - INFO - Visited route | /
+13.9.2025, 18:40:41 - INFO - Visited route | /:userId
+13.9.2025, 18:40:41 - INFO - Visited route | /

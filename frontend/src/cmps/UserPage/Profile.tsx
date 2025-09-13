@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { TimelineModel } from "../../models/timeline.models"
 import { UserModel } from "../../models/user.models"
 import { timelineService } from "../../services/timeline.service"
@@ -6,10 +7,15 @@ interface ProfileProps{
     loggedInUser : UserModel
     timeline: TimelineModel | null
     onLogout : () => void
+    loadTimeline : () => void
 }
 
-export function Profile({ loggedInUser, timeline, onLogout } : ProfileProps){
+export function Profile({ loggedInUser, timeline, onLogout, loadTimeline } : ProfileProps){
 
+    useEffect(()=>{
+        if(!timeline)
+            loadTimeline()
+    },[])
 
     if(!timeline) return <h5>Loading...</h5>
 

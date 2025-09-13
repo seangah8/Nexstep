@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store/store'
 import { CredentialsModel } from '../models/user.models'
@@ -17,11 +16,6 @@ export function UserPage(){
 
     const timeline = useSelector((storeState : RootState) => 
         storeState.timelineModule.timeline)
-
-    useEffect(()=>{
-        if(!timeline)
-            loadTimeline()
-    },[])
 
     async function loadTimeline(){
         if(loggedInUser){
@@ -55,6 +49,7 @@ export function UserPage(){
                     loggedInUser={loggedInUser}
                     timeline={timeline}
                     onLogout={onLogout}
+                    loadTimeline={loadTimeline}
                 /> 
 
                 : <LoginSignup
