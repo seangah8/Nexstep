@@ -233,6 +233,11 @@ export function Timeline( {timeline } : TimelineProps) {
     }
   }
 
+  function daysFontRems(days : number) : number{
+    const digitCount = Math.floor(Math.log10(Math.abs(days))) + 1 
+    return digitCount > 5 ? 2.5 - ((digitCount - 5) / 8) : 2.5
+  }
+
   if(!stepsToShow) return <h2>Loading...</h2>
 
   return (
@@ -288,6 +293,13 @@ export function Timeline( {timeline } : TimelineProps) {
 
         })()}
       </svg>
+
+      <p className="main-step-days">
+        <span style={{fontSize: `${daysFontRems(mainStep.end - mainStep.start)}rem`}}>
+          {mainStep.end - mainStep.start}
+        </span>
+        <span>Days</span>
+      </p>
 
       {
         (today >= mainStep.start && today <= mainStep.end) &&

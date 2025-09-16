@@ -37,7 +37,7 @@ export function TodayPointer({
                 height='100px' 
                 viewBox="0 -2.3 26.50 26.50" 
                 stroke="white"
-                strokeWidth="0.5" 
+                strokeWidth="0.65" 
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <path 

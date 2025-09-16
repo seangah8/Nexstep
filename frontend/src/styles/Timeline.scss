@@ -1,6 +1,19 @@
 @use './vars';
 
-.some-name{
-    color: vars.$green;
-    font-size: 1.5rem;
+.time-line{
+    position: relative;
+
+    .main-step-days{
+        position: absolute;
+        top: 10px;
+        left: 255px;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 2.5rem;
+        font-weight: 600;
+
+        span{ line-height:1; }
+    }
 }
