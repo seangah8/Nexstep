@@ -15,7 +15,7 @@ export function TimelinePage() {
     storeState.timelineModule.timeline)
 
   useEffect(()=>{
-    if(loggedInUser && !timeline)
+    if(loggedInUser)
       loadTimeline()
   },[])
 

@@ -15,14 +15,13 @@ interface TimelineProps{
     timeline : TimelineModel
 }
 
-export function Timeline( {timeline } : TimelineProps) {
+export function Timeline( { timeline } : TimelineProps) {
 
   // Load UI settings from timeline service
   const { svgSize, svgCenter, radius, spaceDeg, fadeTimeSeconds } = timelineService.getTimelineUISettings()
 
   const today = timelineService.getToday()
 
-  // const [steps, setSteps] = useState<StepModel[]>(timelineService.getDefultStepsDatabase)
   const [mainStep, setMainStep] = useState<MainStepModel>({ ...timeline.steps[0], start: timeline.createdAt })
   const [stepsToShow, setStepsToShow] = useState<StepModel[] | null>(null)
   const [editModal, setEditModal] = useState<EditModalModel | null>(null)
@@ -31,6 +30,12 @@ export function Timeline( {timeline } : TimelineProps) {
   
   const timelineSvgRef = useRef<SVGSVGElement | null>(null)
   const todayPointerSvgRef = useRef<SVGSVGElement | null>(null)
+
+  // in case you connect to diffrent user change the main step
+  useEffect(()=>{
+    if(!mainStep.parentId && mainStep !== timeline.steps[0])
+      setMainStep({ ...timeline.steps[0], start: timeline.createdAt })
+  },[timeline])
 
   useEffect(() => {
     if(!dragging){
