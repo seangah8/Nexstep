@@ -32,7 +32,6 @@ export function TimelinePage() {
 
   return (
     <section className='time-line-page'  onContextMenu={e => e.preventDefault()}>
-      <h3>{`${loggedInUser.username}'s TimeLine: `}</h3>
       <Timeline timeline={timeline}/>
     </section>
   )

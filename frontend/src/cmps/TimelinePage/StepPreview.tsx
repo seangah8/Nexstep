@@ -209,6 +209,7 @@ export function StepPreview({
                 strokeLinecap="round" 
             />
             <g
+                className="step-circle"
                 onMouseEnter={()=>onSetHoveredStep(step)}
                 onMouseLeave={()=>onSetHoveredStep(null)}
                 onMouseDown={event =>handleRightDown(event, step)}
@@ -220,7 +221,7 @@ export function StepPreview({
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius}
                     fill={step.end < today ? "#c69a3c" : "#006769"}
-                    stroke="black"
+                    stroke={step.end < today ? "#987323ff" : "#015758ff"}
                     strokeWidth='2'
                 />
                 {/* inner circle */}
@@ -229,8 +230,8 @@ export function StepPreview({
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius - circlesPadding}
                     fill='#daa88b'
-                    stroke="black"
-                    strokeWidth='2'
+                    // stroke="black"
+                    // strokeWidth='2'
                 />
                 <image
                     href={step.image}

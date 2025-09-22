@@ -33,9 +33,6 @@ export default App
 
 Things need to be add
 
-1. fit images in circles
-2. make animation for circles (hover on them)
-
 a. design timeline
 b. design modals
 c. design use page
