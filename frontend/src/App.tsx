@@ -33,9 +33,8 @@ export default App
 
 Things need to be add
 
-2. design today circle
-3. make animation for circles (hover on them)
-4. add day counter
+1. fit images in circles
+2. make animation for circles (hover on them)
 
 a. design timeline
 b. design modals

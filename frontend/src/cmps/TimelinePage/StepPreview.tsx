@@ -239,6 +239,7 @@ export function StepPreview({
                     width={circlesRadius*2}
                     height={circlesRadius*2}
                     clipPath={`url(#circleClip-${step.id})`}
+                    preserveAspectRatio="xMidYMid slice"
                 />
             </g>
         </g>

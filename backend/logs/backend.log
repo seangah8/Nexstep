@@ -2222,3 +2222,25 @@ Error: User not found
 16.9.2025, 22:04:34 - INFO - User login: | {"_id":"686c5cbdb91fdc4de46d736e","username":"u2"}
 16.9.2025, 22:04:35 - INFO - Visited route | /:userId
 16.9.2025, 22:04:35 - INFO - Visited route | /
+22.9.2025, 20:06:26 - INFO - Up and running on http://localhost:3000
+22.9.2025, 20:08:35 - INFO - Visited route | /login
+22.9.2025, 20:08:35 - INFO - User login: | {"_id":"686c5cbdb91fdc4de46d736e","username":"u2"}
+22.9.2025, 20:08:36 - INFO - Visited route | /:userId
+22.9.2025, 20:08:36 - INFO - Visited route | /
+22.9.2025, 20:08:36 - INFO - Visited route | /:userId
+22.9.2025, 20:08:37 - INFO - Visited route | /
+22.9.2025, 20:08:44 - INFO - Visited route | /
+22.9.2025, 20:25:25 - INFO - Visited route | /
+22.9.2025, 20:25:27 - INFO - Visited route | /
+22.9.2025, 20:25:40 - INFO - Visited route | /
+22.9.2025, 20:25:50 - INFO - Visited route | /
+22.9.2025, 20:25:52 - INFO - Visited route | /
+22.9.2025, 20:25:58 - INFO - Visited route | /
+22.9.2025, 20:26:04 - INFO - Visited route | /
+22.9.2025, 20:26:15 - INFO - Visited route | /
+22.9.2025, 20:27:08 - INFO - Visited route | /
+22.9.2025, 20:27:26 - INFO - Visited route | /:userId
+22.9.2025, 20:27:26 - INFO - Visited route | /
+22.9.2025, 20:27:38 - INFO - Visited route | /
+22.9.2025, 20:27:40 - INFO - Visited route | /
+22.9.2025, 20:27:51 - INFO - Visited route | /
