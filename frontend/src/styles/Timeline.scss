@@ -1,28 +1,45 @@
 @use './vars';
 
-.time-line{
-    position: relative;
+.timeline{
 
-    .main-step-days{
-        position: absolute;
-        top: 10px;
-        left: 255px;
-        width: 100px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 2.5rem;
-        font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    height: 94vh;
 
-        span{ line-height:1; }
+    .timeline-body{
+        position: relative;
+
+        .main-step-days{
+            position: absolute;
+            top: 10px;
+            left: 255px;
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+
+            span{ line-height:1; }
+        }
+
+        .step-circle {
+            transition: transform 0.15s ease;
+            transform-origin: center;
+
+            &:hover {
+                transform: scale(1.03);
+            }
+        }
     }
 
-    .step-circle {
-        transition: transform 0.15s ease;
-        transform-origin: center;
+    .timeline-modals{
+        position: relative;
+        top: -38px;
+        position: relative;
+        width: 40vw;
+        height: 100vh;
+        overflow-y: hidden;
 
-        &:hover {
-            transform: scale(1.03);
-        }
     }
 }

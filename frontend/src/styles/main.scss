@@ -1,13 +1,16 @@
+@use './vars';
 @use './App';
 @use './Timeline.scss';
 @use './TodayPointer.scss';
-@use './vars';
+@use './HoverModal.scss';
+
 
 
 
 body{
+    margin: 0;
     background-color: vars.$warm;
     font-family: "Saira Condensed", sans-serif;
-    p{margin: 0;}
+    h1, h2, h3, h4, h5, h6, p{margin: 0;}
 }
 

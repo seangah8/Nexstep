@@ -33,7 +33,6 @@ export default App
 
 Things need to be add
 
-a. design timeline
 b. design modals
 c. design use page
 d. add ai

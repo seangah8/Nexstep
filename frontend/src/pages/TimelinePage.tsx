@@ -31,7 +31,7 @@ export function TimelinePage() {
   if(!timeline) return <h3>Loading...</h3>
 
   return (
-    <section className='time-line-page'  onContextMenu={e => e.preventDefault()}>
+    <section className='timeline-page'  onContextMenu={e => e.preventDefault()}>
       <Timeline timeline={timeline}/>
     </section>
   )

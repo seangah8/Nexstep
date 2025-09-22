@@ -246,101 +246,110 @@ export function Timeline( { timeline } : TimelineProps) {
   if(!stepsToShow) return <h2>Loading...</h2>
 
   return (
-    <section className='time-line' 
+    <section className='timeline' 
     onWheel={handleZoomOut} 
     onMouseMove={event => handleRightDrag(event)}  
     onMouseUp={event =>handleRightUp(event)}>
 
-      <svg width={svgSize} height={svgSize} ref={timelineSvgRef}>
-        {(() => {
-          const totalDays = mainStep.end - mainStep.start
-          let accumulated = 0
+      <div className="timeline-body">
 
-          if (stepsToShow.length <= 0) {
-            const { start, ...mainStepWithoutStart } = mainStep
-            setStepsToShow([{...mainStepWithoutStart, id: `${mainStep.id}-dummy`, parentId: mainStep.id}])
-          }
+        <svg width={svgSize} height={svgSize} ref={timelineSvgRef}>
+          {(() => {
+            const totalDays = mainStep.end - mainStep.start
+            let accumulated = 0
 
-          const renderedSteps = stepsToShow.map((step, index) => {
-            const prevEnd = stepsToShow[index - 1]?.end ?? mainStep.start
-            const nextStep = stepsToShow[index + 1] ?? null
-            const stepLocation = timelineService.dayToStepLocation(
-              step, svgCenter, totalDays, spaceDeg, radius, prevEnd, accumulated)
+            if (stepsToShow.length <= 0) {
+              const { start, ...mainStepWithoutStart } = mainStep
+              setStepsToShow([{...mainStepWithoutStart, id: `${mainStep.id}-dummy`, parentId: mainStep.id}])
+            }
 
-            accumulated += step.end - prevEnd
+            const renderedSteps = stepsToShow.map((step, index) => {
+              const prevEnd = stepsToShow[index - 1]?.end ?? mainStep.start
+              const nextStep = stepsToShow[index + 1] ?? null
+              const stepLocation = timelineService.dayToStepLocation(
+                step, svgCenter, totalDays, spaceDeg, radius, prevEnd, accumulated)
 
-            return (
-              <StepPreview key={step.id}
-                step = {step}
-                nextStep = {nextStep}
-                allSteps = {timeline.steps}
-                mainStep = {mainStep}
-                stepsToShow = {stepsToShow}
-                prevEnd = {prevEnd}
-                stepLocation = {stepLocation}
-                today = {today}
-                createTime = {timeline.createdAt}
-                svgRef = {timelineSvgRef}
-                dragging = {dragging}
-                onSetSteps = {onSetSteps}
-                onSetMainStep = {onSetMainStep}
-                onSetEditModal = {onSetEditModal}
-                onSetDragging = {onSetDragging}
-                onAddingStep = {onAddingStep}
-                onSetHoveredStep = {onSetHoveredStep}
-                svgFadeOutAnimation={svgFadeOutAnimation}
-                svgFadeInAnimation={svgFadeInAnimation}
-              />
-            )
-          })
+              accumulated += step.end - prevEnd
 
-          return ( <> {renderedSteps.reverse()} </>)
+              return (
+                <StepPreview key={step.id}
+                  step = {step}
+                  nextStep = {nextStep}
+                  allSteps = {timeline.steps}
+                  mainStep = {mainStep}
+                  stepsToShow = {stepsToShow}
+                  prevEnd = {prevEnd}
+                  stepLocation = {stepLocation}
+                  today = {today}
+                  createTime = {timeline.createdAt}
+                  svgRef = {timelineSvgRef}
+                  dragging = {dragging}
+                  onSetSteps = {onSetSteps}
+                  onSetMainStep = {onSetMainStep}
+                  onSetEditModal = {onSetEditModal}
+                  onSetDragging = {onSetDragging}
+                  onAddingStep = {onAddingStep}
+                  onSetHoveredStep = {onSetHoveredStep}
+                  svgFadeOutAnimation={svgFadeOutAnimation}
+                  svgFadeInAnimation={svgFadeInAnimation}
+                />
+              )
+            })
 
-        })()}
-      </svg>
+            return ( <> {renderedSteps.reverse()} </>)
 
-      <p className="main-step-days">
-        <span style={{fontSize: `${daysFontRems(mainStep.end - mainStep.start)}rem`}}>
-          {mainStep.end - mainStep.start}
-        </span>
-        <span>Days</span>
-      </p>
+          })()}
+        </svg>
 
-      {
-        (today >= mainStep.start && today <= mainStep.end) &&
-        <TodayPointer
-          svgCenter={svgCenter}
-          spaceDeg={spaceDeg}
-          radius={radius}
-          totalDays={mainStep.end - mainStep.start}
-          mainStep={mainStep}
-          today={today}
-          svgRef={todayPointerSvgRef}
-        />
-      }
+        <p className="main-step-days">
+          <span style={{fontSize: `${daysFontRems(mainStep.end - mainStep.start)}rem`}}>
+            {mainStep.end - mainStep.start}
+          </span>
+          <span>Days</span>
+        </p>
 
+        {
+          (today >= mainStep.start && today <= mainStep.end) &&
+          <TodayPointer
+            svgCenter={svgCenter}
+            spaceDeg={spaceDeg}
+            radius={radius}
+            totalDays={mainStep.end - mainStep.start}
+            mainStep={mainStep}
+            today={today}
+            svgRef={todayPointerSvgRef}
+          />
+        }
 
-      { // edit modal 
+      </div>
 
-        editModal &&
-        <EditStepModal
-          editModal={editModal}
-          allSteps={timeline.steps}
-          onSetSteps={onSetSteps}
-          onSetMainStep={onSetMainStep}
-          onSetMainStepEnd={onSetMainStepEnd}
-          onSetEditModal={onSetEditModal}
-        />
-      }
+     
+      <div className="timeline-modals">
 
-      { // hover modal
+        { // edit modal 
 
-        hoveredStep && !editModal &&
-        <HoverModal
-          step={hoveredStep}
-          today={today}
-        />
-      }
+          editModal &&
+          <EditStepModal
+            editModal={editModal}
+            allSteps={timeline.steps}
+            onSetSteps={onSetSteps}
+            onSetMainStep={onSetMainStep}
+            onSetMainStepEnd={onSetMainStepEnd}
+            onSetEditModal={onSetEditModal}
+          />
+        }
+
+        { // hover modal
+
+          hoveredStep && !editModal &&
+          <HoverModal
+            step={hoveredStep}
+            today={today}
+          />
+        }
+      </div>
+
+      
 
     </section>
   )
