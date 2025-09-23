@@ -1,0 +1,158 @@
+@use './vars';
+
+.edit-step-modal{
+    padding: 30px;
+    height: calc(100% - 60px);
+
+    form{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: none
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #006769;
+            border-radius: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: #004d4d;
+        }
+
+        .image-area{
+            margin-top: 50px;
+            margin-bottom: 15px;
+            width: 115px;
+            height: 115px;
+            background-color: vars.$green;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0; // don’t allow shrinking
+            border-radius: 50%;
+
+
+            img{
+                cursor: pointer;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+
+
+        input{
+            height: 20px;
+            width: 50%;
+            padding: 10px;
+            outline: none;
+            border: solid vars.$green 2px;
+            border-radius: 10px;
+            font-family: "Saira Condensed", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: vars.$green;
+        }
+
+        textarea{
+            flex-shrink: 0;
+            max-width: 90%;
+            height: 150px;
+            resize:none;
+            padding: 5px;
+            border: solid vars.$green 2px;
+            border-radius: 10px;
+            font-family: "Saira Condensed", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: vars.$green;
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: none
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #006769;
+                border-radius: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background-color: #004d4d;
+            }
+        }
+
+        .date-area{
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            input{
+                width: 150px;
+                margin-left: 0px
+            }
+
+            input[type="checkbox"] {
+                width: 30px;
+            }
+        }
+
+        .buttons-area{
+            position: absolute;
+            top: 80px;
+            height: 90px;
+            width: 125px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            button{
+                cursor: pointer;
+                height: 30px;
+                border-color: transparent;
+                border-radius: 15px;
+                background-color: vars.$green;
+                color: white;
+                font-family: "Saira Condensed", sans-serif;
+                font-size: 1rem;
+
+                &:hover{
+                    background-color: vars.$dark-green;
+                }
+            }
+
+
+            .delete-button{
+                background-color: vars.$red;
+
+                &:hover{
+                    background-color: vars.$dark-red;
+                }
+            }
+
+        }
+
+
+    }
+
+}

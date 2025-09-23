@@ -161,56 +161,63 @@ export function EditStepModal({
 
     return(
         <section className="edit-step-modal">
-            <h3>Edit Step Modal</h3>
-
             <form onSubmit={onUpdateStep}>
 
-              <label htmlFor="title">Title</label>
+              <label htmlFor="image" className="image-area">
+                <img src={stepToEdit.image} alt="step's image"/>
+              </label>
+              <input
+                id="image"
+                type="file"
+                onChange={handleChange}
+                name="image"
+                style={{display: 'none'}}
+              />
+
               <input
                 id="title"
                 type="text"
                 value={stepToEdit.title}
                 onChange={handleChange}
                 name="title"
+                placeholder="Title"
               />
 
-              <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 value={stepToEdit.description}
                 onChange={handleChange}
                 name="description"
+                placeholder="Description"
               />
 
-              <label htmlFor="image">Image</label>
-              <input
-                id="image"
-                type="file"
-                onChange={handleChange}
-                name="image"
-              />
-              <img src={stepToEdit.image} alt="step's image"/>
+              <div className="date-area">
 
-              <label htmlFor="end">End Date</label>
-              <input
-                id="end"
-                type="date"
-                value={timelineService.formatDateFromEnd(stepToEdit.end)}
-                onChange={handleChange}
-                name="end"
-              />
+                  <label htmlFor="end">Due </label>
+                  <input
+                    id="end"
+                    type="date"
+                    value={timelineService.formatDateFromEnd(stepToEdit.end)}
+                    onChange={handleChange}
+                    name="end"
+                  />
 
-              <label htmlFor="change-all">Change All</label>
-              <input
-                id="change-all"
-                type="checkbox"
-                checked={changeAllEnds}
-                onChange={()=>setChangeAllEnds(prev=>!prev)}
-                name="change-all"
-              />
+                  <label htmlFor="change-all">Change All</label>
+                  <input
+                    id="change-all"
+                    type="checkbox"
+                    checked={changeAllEnds}
+                    onChange={()=>setChangeAllEnds(prev=>!prev)}
+                    name="change-all"
+                  />
+              </div>
 
-              <button type="submit">Save</button>
-              <button onClick={onDeleteStep}>Delete</button>
+              <div className="buttons-area">
+                <button type="submit">Save</button>
+                <button className="delete-button" onClick={onDeleteStep}>Delete</button>
+              </div>
+
+
             </form>
 
 

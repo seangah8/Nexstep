@@ -301,7 +301,7 @@ export function Timeline( { timeline } : TimelineProps) {
           })()}
         </svg>
 
-        <p className="main-step-days">
+        <p className="main-step-days" style={today > mainStep.end ? {color: '#c69a3c'} : {}}>
           <span style={{fontSize: `${daysFontRems(mainStep.end - mainStep.start)}rem`}}>
             {mainStep.end - mainStep.start}
           </span>

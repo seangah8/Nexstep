@@ -33,6 +33,10 @@ export default App
 
 Things need to be add
 
+1. design edit modal
+2. fix so you can click from one edit to another
+3. fix so draging step close edit modal / change there the date
+
 b. design modals
 c. design use page
 d. add ai
