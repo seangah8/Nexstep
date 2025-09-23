@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { StepModel, MainStepModel, EditModalModel } from "../../models/timeline.models"
 import { timelineService } from "../../services/timeline.service"
 import { utilService } from "../../services/util.service"
@@ -24,6 +24,10 @@ export function EditStepModal({
 
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
+
+    useEffect(()=>{
+      setStepToEdit(editModal.step)
+    },[editModal])
 
     function handleChange({target} : {target: HTMLInputElement | HTMLTextAreaElement}) : void {
       const field : string = target.name
