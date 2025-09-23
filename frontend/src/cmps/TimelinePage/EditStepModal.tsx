@@ -165,66 +165,69 @@ export function EditStepModal({
 
     return(
         <section className="edit-step-modal">
-            <form onSubmit={onUpdateStep}>
 
-              <label htmlFor="image" className="image-area">
-                <img src={stepToEdit.image} alt="step's image"/>
-              </label>
-              <input
-                id="image"
-                type="file"
-                onChange={handleChange}
-                name="image"
-                style={{display: 'none'}}
-              />
+          <button className="exit-button" onClick={()=>onSetEditModal(null)}>
+            X
+          </button>
 
-              <input
-                id="title"
-                type="text"
-                value={stepToEdit.title}
-                onChange={handleChange}
-                name="title"
-                placeholder="Title"
-              />
+          <form onSubmit={onUpdateStep}>
 
-              <textarea
-                id="description"
-                value={stepToEdit.description}
-                onChange={handleChange}
-                name="description"
-                placeholder="Description"
-              />
+            <label htmlFor="image" className="image-area">
+              <img src={stepToEdit.image} alt="step's image"/>
+            </label>
+            <input
+              id="image"
+              type="file"
+              onChange={handleChange}
+              name="image"
+              style={{display: 'none'}}
+            />
 
-              <div className="date-area">
+            <input
+              id="title"
+              type="text"
+              value={stepToEdit.title}
+              onChange={handleChange}
+              name="title"
+              placeholder="Title"
+            />
 
-                  <label htmlFor="end">Due </label>
-                  <input
-                    id="end"
-                    type="date"
-                    value={timelineService.formatDateFromEnd(stepToEdit.end)}
-                    onChange={handleChange}
-                    name="end"
-                  />
+            <textarea
+              id="description"
+              value={stepToEdit.description}
+              onChange={handleChange}
+              name="description"
+              placeholder="Description"
+            />
 
-                  <label htmlFor="change-all">Change All</label>
-                  <input
-                    id="change-all"
-                    type="checkbox"
-                    checked={changeAllEnds}
-                    onChange={()=>setChangeAllEnds(prev=>!prev)}
-                    name="change-all"
-                  />
-              </div>
+            <div className="date-area">
 
-              <div className="buttons-area">
-                <button type="submit">Save</button>
-                <button className="delete-button" onClick={onDeleteStep}>Delete</button>
-              </div>
+                <label htmlFor="end">Due </label>
+                <input
+                  id="end"
+                  type="date"
+                  value={timelineService.formatDateFromEnd(stepToEdit.end)}
+                  onChange={handleChange}
+                  name="end"
+                />
+
+                <label htmlFor="change-all">Change All</label>
+                <input
+                  id="change-all"
+                  type="checkbox"
+                  checked={changeAllEnds}
+                  onChange={()=>setChangeAllEnds(prev=>!prev)}
+                  name="change-all"
+                />
+            </div>
+
+            <div className="buttons-area">
+              <button type="submit">Save</button>
+              <button className="delete-button" onClick={onDeleteStep}>Delete</button>
+            </div>
 
 
-            </form>
-
-
+          </form>
         </section>
     )
 }
