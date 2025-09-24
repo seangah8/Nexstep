@@ -81,9 +81,22 @@ export function EditStepModal({
           // when end is beening changed
           if(editModal.step.end !== stepToEdit.end){
 
-            if(!changeAllEnds && 
+
+            const parent = allSteps.find(step=>step.id === stepToEdit.parentId) 
+            // when unvalid end
+            if(
+
+              // when changing one step
+              (!changeAllEnds && 
                 (stepToEdit.end < Math.max(editModal.start + 1, editModal.today) ||
-                editModal.nextStep && (stepToEdit.end > editModal.nextStep.end))
+                editModal.nextStep && (stepToEdit.end >= editModal.nextStep.end))
+              ) ||
+              // when changing all steps
+              (changeAllEnds && parent && 
+                ((stepToEdit.end < editModal.today) ||
+                stepToEdit.end >= parent.end)
+              )
+
             ) throw new Error('cant end this step at that time')
 
             // if chaned step is last in main
