@@ -1,6 +1,6 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 
-import { Navigator } from './cmps/General/Navigator'
+import { Menu } from './cmps/General/Menu'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 
@@ -14,7 +14,7 @@ function App() {
     <section className='app'>
       <Provider store={store}>
         <Router>
-          <Navigator />
+          <Menu/>
           <Routes>
             <Route path='/' element={<TimelinePage />} />
             <Route path='/timeline' element={<TimelinePage />} />
@@ -32,9 +32,6 @@ export default App
 /*
 
 Things need to be add
-
-
-1. fix so draging step close edit modal / change there the date
 
 a. design
 b. add step choises

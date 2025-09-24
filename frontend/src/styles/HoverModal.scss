@@ -2,13 +2,12 @@
 .hover-modal{
     position: relative;
     height: calc(100% - 60px);
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
 
     .image-area{
-        margin-top: 50px;
         position: relative;
         width: 115px;
         height: 115px;

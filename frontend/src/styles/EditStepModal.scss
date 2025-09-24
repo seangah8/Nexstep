@@ -1,14 +1,13 @@
 @use './vars';
 
 .edit-step-modal{
-    padding: 30px;
     height: calc(100% - 60px);
 
 
     .exit-button{
         position: absolute;
-        top: 80px;
-        right: 30px;
+        top: 15px;
+        right: 15px;
         cursor: pointer;
         background-color: transparent;
         border: none;
@@ -22,6 +21,7 @@
 
     form{
         height: 100%;
+        width: 30vw;
         display: flex;
         flex-direction: column;
         gap: 30px;
@@ -46,7 +46,6 @@
         }
 
         .image-area{
-            margin-top: 50px;
             margin-bottom: 15px;
             width: 115px;
             height: 115px;
@@ -134,7 +133,7 @@
 
         .buttons-area{
             position: absolute;
-            top: 80px;
+            top: 15px;
             height: 90px;
             width: 125px;
             display: flex;
