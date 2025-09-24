@@ -29,6 +29,13 @@ export function EditStepModal({
       setStepToEdit(editModal.step)
     },[editModal])
 
+    // after dragging step - update edit step due
+    useEffect(()=>{
+      const updatedStep = allSteps.find(step => step.id === stepToEdit.id)
+      if(updatedStep && updatedStep.end !== stepToEdit.end)
+        setStepToEdit({...stepToEdit, end: updatedStep.end})
+    },[allSteps])
+
     function handleChange({target} : {target: HTMLInputElement | HTMLTextAreaElement}) : void {
       const field : string = target.name
       let value : string | number =  target.value
