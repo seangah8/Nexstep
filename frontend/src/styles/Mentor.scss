@@ -1,0 +1,11 @@
+@use './vars';
+
+.mentor{
+    position: absolute;
+
+    .mentor-chat{
+        position: absolute;
+        border-radius: 50%;
+        background-color: vars.$dark-green;
+    }
+}

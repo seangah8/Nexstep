@@ -59,6 +59,8 @@ function getTimelineUISettings(){
     circlesRadius: 40,
     circlesPadding: 6,
     fadeTimeSeconds: 0.1,
+    mentorRadius: 430,
+    chatRadiuse: 150,
   }
   return timelineUISettings
 }

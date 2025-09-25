@@ -9,6 +9,7 @@ import { HoverModal } from "./HoverModal";
 import { TimelineModel } from "../../models/timeline.models";
 import { timelineActions } from "../../store/actions/timeline.actions";
 import { TodayPointer } from "./TodayPointer";
+import { Mentor } from "./Mentor";
 
 
 interface TimelineProps{
@@ -320,6 +321,10 @@ export function Timeline( { timeline } : TimelineProps) {
             svgRef={todayPointerSvgRef}
           />
         }
+
+        <Mentor
+          svgSize={svgSize}
+        />
 
       </div>
 
