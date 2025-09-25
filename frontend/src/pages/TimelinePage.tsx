@@ -27,7 +27,12 @@ export function TimelinePage() {
     }
   }
 
-  if(!loggedInUser) return <h3>Login First</h3>
+  if(!loggedInUser) return (
+    <div className="login-first-container">
+      <h3>Login First</h3>
+    </div>
+  )
+
   if(!timeline) return <h3>Loading...</h3>
 
   return (
