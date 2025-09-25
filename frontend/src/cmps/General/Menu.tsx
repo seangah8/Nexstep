@@ -1,8 +1,13 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/store'
 import { NavLink } from 'react-router-dom'
 import { userActions } from '../../store/actions/user.actions'
 
 export function Menu(){
+
+    const loggedInUser = useSelector((storeState: RootState) => 
+        storeState.userModule.loggedInUser)
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -21,8 +26,8 @@ export function Menu(){
                 isOpen && 
                 <section className='menu-window'>
                     <NavLink onClick={()=>setIsOpen(false)} to="/timeline">Timeline</NavLink> 
-                    <NavLink onClick={()=>setIsOpen(false)} to="/user">Profile</NavLink> 
-                    <NavLink onClick={onLogout} to="/user">Logout</NavLink> 
+                    <NavLink onClick={()=>setIsOpen(false)} to="/user">{loggedInUser ? 'Profile' : 'Login'}</NavLink> 
+                    { loggedInUser && <NavLink onClick={onLogout} to="/user">Logout</NavLink> }
                 </section>
             }
 

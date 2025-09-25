@@ -6,15 +6,42 @@
     top: 30px;
     left: 30px;
 
+    button{
+        width: 40px;
+        height: 40px;
+        border: solid gray 1px;
+        border-radius: 50%;
+        background-color: white;
+
+        &:hover{
+            background-color: rgb(245, 245, 245);
+        }
+
+        i{
+            color: gray;
+        }
+    }
+
+
     .menu-window{
-        background-color: aliceblue;
+        margin-top: 5px;
+        width: 150px;
         padding: 10px;
+        border: solid gray 1px;
+        border-radius: 10px;
+        background-color: white;
         display: flex;
         flex-direction: column;
 
         a{
+            padding: 0px 5px 0px 5px;
+            border-radius: 10px;
             text-decoration: none;
-            color: vars.$green;
+            color: rgb(100, 100, 100);
+            &:hover{
+                background-color: rgb(245, 245, 245);
+            }
+            font-size: 1.2rem;
         }
     }
 }
