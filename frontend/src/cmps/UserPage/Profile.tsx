@@ -6,11 +6,10 @@ import { timelineService } from "../../services/timeline.service"
 interface ProfileProps{
     loggedInUser : UserModel
     timeline: TimelineModel | null
-    onLogout : () => void
     loadTimeline : () => void
 }
 
-export function Profile({ loggedInUser, timeline, onLogout, loadTimeline } : ProfileProps){
+export function Profile({ loggedInUser, timeline, loadTimeline } : ProfileProps){
 
     useEffect(()=>{
         if(!timeline)
@@ -24,7 +23,6 @@ export function Profile({ loggedInUser, timeline, onLogout, loadTimeline } : Pro
             <h4>Profile</h4>
             <h5>{`Username: ${loggedInUser.username}`}</h5>
             <h5>{`Days until goal: ${timeline.steps[0].end - timelineService.getToday()}`}</h5>
-            <button onClick={onLogout}>Logout</button>
         </section>
     )
 }

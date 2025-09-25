@@ -36,10 +36,6 @@ export function UserPage(){
         timelineActions.createTimeline()
     }
 
-    function onLogout() : void {
-        userActions.logout()
-    }
-
     return(
         <section className="user-page">
             {
@@ -48,7 +44,6 @@ export function UserPage(){
                 ? <Profile
                     loggedInUser={loggedInUser}
                     timeline={timeline}
-                    onLogout={onLogout}
                     loadTimeline={loadTimeline}
                 /> 
 
