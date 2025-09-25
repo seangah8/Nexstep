@@ -3168,3 +3168,66 @@ Error: User not found
 25.9.2025, 17:43:46 - INFO - Visited route | /
 25.9.2025, 17:43:47 - INFO - Visited route | /
 25.9.2025, 17:43:49 - INFO - Visited route | /
+25.9.2025, 18:00:04 - INFO - Visited route | /login
+25.9.2025, 18:00:04 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:00:04 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:00:05 - INFO - Visited route | /login
+25.9.2025, 18:00:05 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:00:05 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:00:05 - INFO - Visited route | /login
+25.9.2025, 18:00:05 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:00:05 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:00:05 - INFO - Visited route | /login
+25.9.2025, 18:00:05 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:00:05 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:00:05 - INFO - Visited route | /login
+25.9.2025, 18:00:05 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:00:05 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:00:13 - INFO - Visited route | /login
+25.9.2025, 18:00:13 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:00:13 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:15:53 - INFO - Visited route | /login
+25.9.2025, 18:15:53 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+25.9.2025, 18:15:53 - ERROR - Failed to login: Unknown username
+25.9.2025, 18:30:39 - INFO - Visited route | /login
+25.9.2025, 18:30:39 - INFO - User login: | {"_id":"686c5c65b91fdc4de46d736c","username":"u1"}
+25.9.2025, 18:30:44 - INFO - Visited route | /:userId
+25.9.2025, 18:30:44 - INFO - Visited route | /
+25.9.2025, 18:30:46 - INFO - Visited route | /
+25.9.2025, 18:30:47 - INFO - Visited route | /
+25.9.2025, 18:30:47 - INFO - Visited route | /

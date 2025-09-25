@@ -29,34 +29,39 @@ export function LoginSignup( { onLogin, onSignup } : LoginProps ){
         <section className="login-signup">
             <h4>{signingUp ? `Signup` : `Login`}</h4>
             <form onSubmit={ev=>signingUp ? onSignup(ev ,credentials) : onLogin(ev ,credentials)}>
-                <label htmlFor="username">Username:</label>
-                <input
-                    id="username"
-                    type="text"
-                    name="username"
-                    value={credentials.username}
-                    onChange={handleChange}
-                />
 
-                <label htmlFor="password">Password:</label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    value={credentials.password}
-                    onChange={handleChange}
-                />
+                <div className="input-area">
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        value={credentials.username}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="input-area">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={credentials.password}
+                        onChange={handleChange}
+                    />
+                </div>
 
                 <button>{signingUp ? `Signup` : `Login`}</button>
             </form>
 
-            <button onClick={toggleLoginSignup}>
+            <a onClick={toggleLoginSignup}>
                 {
                 signingUp 
                 ? `have user? login here` 
                 : `don't have account? signup here`
                 }
-            </button>
+            </a>
         </section>
     )
 }
