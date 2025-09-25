@@ -25,9 +25,24 @@ export function Menu(){
             {
                 isOpen && 
                 <section className='menu-window'>
-                    <NavLink onClick={()=>setIsOpen(false)} to="/timeline">Timeline</NavLink> 
-                    <NavLink onClick={()=>setIsOpen(false)} to="/user">{loggedInUser ? 'Profile' : 'Login'}</NavLink> 
-                    { loggedInUser && <NavLink onClick={onLogout} to="/user">Logout</NavLink> }
+
+                    <NavLink onClick={()=>setIsOpen(false)} to="/timeline">
+                        <i className="fa-regular fa-calendar"></i>
+                        Timeline
+                    </NavLink> 
+
+                    <NavLink onClick={()=>setIsOpen(false)} to="/user">
+                        <i className="fa-regular fa-user"></i>
+                        {loggedInUser ? 'Profile' : 'Login'}
+                    </NavLink> 
+
+                    { 
+                    loggedInUser && 
+                    <NavLink onClick={onLogout} to="/user">
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </NavLink> 
+                    }
                 </section>
             }
 

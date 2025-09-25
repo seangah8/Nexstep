@@ -38,10 +38,19 @@
             border-radius: 10px;
             text-decoration: none;
             color: rgb(100, 100, 100);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            
             &:hover{
                 background-color: rgb(245, 245, 245);
             }
-            font-size: 1.2rem;
+
+        }
+
+        i{
+            margin-right: 10px;
+            font-size: 1rem;
         }
     }
 }
