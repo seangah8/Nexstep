@@ -33,10 +33,15 @@ export default App
 
 Things need to be add
 
-a. design
-b. add step choises
-c. add ai
-d. add welcom/starting page
+1. add useState for hoverdSelector + show modal of it with info
+2. make so clicking in the middle of mento toggle the selectors
+3. opening selectors will start setion of choises - mabye (time, path type, path)
+4. when choosing path replace in the main step its chileds steps
+5. add open ai to the 3rd chosisess
+
+a. add step choises
+b. add ai
+c. add welcom/starting page
 
 
 

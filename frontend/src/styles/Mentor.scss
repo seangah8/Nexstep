@@ -12,11 +12,13 @@
     .mentor-selectors{
         .select-icon{
             pointer-events: none;
-            background-color: 'white';
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: vars.$dark-green-2;
+            color:  white;
+            transition: transform 0.2s ease;
         }
     }
 }

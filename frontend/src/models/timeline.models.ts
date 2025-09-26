@@ -34,3 +34,7 @@ export interface DraggingModel{
     onShift: boolean,
     prevStepsToSow: StepModel[]
 }
+
+export interface SelectoreModel{
+  icon: string | SVGAElement
+}
