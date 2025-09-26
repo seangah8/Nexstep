@@ -4,6 +4,7 @@
     position: absolute;
 
     .mentor-chat{
+        cursor: pointer;
         position: absolute;
         border-radius: 50%;
         background-color: vars.$dark-green;
@@ -18,7 +19,7 @@
             justify-content: center;
             background-color: vars.$dark-green-2;
             color:  white;
-            transition: transform 0.2s ease;
+            transition: opacity 0.3s ease, transform 0.2s ease;
         }
     }
 }

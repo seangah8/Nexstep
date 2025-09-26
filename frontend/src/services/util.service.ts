@@ -5,6 +5,7 @@ export const utilService = {
     delay,
     getCirclePoint,
     getPointByAngle,
+    sleep,
 }
 
 function describeArc(cx : number, cy : number, r : number, startAngle : number, endAngle : number) {
@@ -87,6 +88,10 @@ function getPointByAngle(
   const x = originX + distance * Math.cos(angleRad);
   const y = originY + distance * Math.sin(angleRad);
   return { x, y };
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 

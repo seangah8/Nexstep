@@ -3429,3 +3429,9 @@ Error: User not found
 27.9.2025, 0:15:57 - INFO - Visited route | /
 27.9.2025, 0:27:57 - INFO - Visited route | /:userId
 27.9.2025, 0:27:57 - INFO - Visited route | /
+27.9.2025, 2:29:16 - INFO - Visited route | /:userId
+27.9.2025, 2:29:16 - INFO - Visited route | /
+27.9.2025, 2:33:33 - INFO - Visited route | /:userId
+27.9.2025, 2:33:33 - INFO - Visited route | /
+27.9.2025, 2:50:45 - INFO - Visited route | /:userId
+27.9.2025, 2:50:45 - INFO - Visited route | /

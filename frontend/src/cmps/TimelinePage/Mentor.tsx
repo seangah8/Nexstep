@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { timelineService } from "../../services/timeline.service"
 import { MentorChat } from "./MentorChat"
 import { MentorSelectors } from "./MentorSelectors"
@@ -9,6 +10,7 @@ interface MentorProps{
 export function Mentor({svgSize} : MentorProps){
 
     const { mentorRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
+    const [openSelectors, setOpenSelectors] = useState<boolean>(false)
 
     return(
         <section className="mentor" 
@@ -23,13 +25,18 @@ export function Mentor({svgSize} : MentorProps){
             <MentorChat
                 mentorRadius={mentorRadius}
                 chatRadiuse={chatRadiuse}
+                toggleSelectors={()=>setOpenSelectors(prev=>!prev)}
             />
 
-            <MentorSelectors
-                mentorRadius={mentorRadius}
-                iconsPathRadius={iconsPathRadius}
-                iconsRadius={iconsRadius}
-            />
+            { 
+                openSelectors &&
+                <MentorSelectors
+                    mentorRadius={mentorRadius}
+                    iconsPathRadius={iconsPathRadius}
+                    iconsRadius={iconsRadius}
+                />
+            }
+
         
         
         </section>

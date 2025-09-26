@@ -6,7 +6,7 @@ import {
   Legend,
 } from 'chart.js'
 import { utilService } from '../../services/util.service'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -65,6 +65,26 @@ export function MentorSelectors({mentorRadius, iconsPathRadius, iconsRadius}: Me
   }
 
   const [hoverdSelectorIndex, setHoveredSelectorIndex] = useState<number | null>(null)
+  const [visibleCount, setVisibleCount] = useState(0)
+
+
+
+  useEffect(() => {
+    revealIcons()
+  }, [data.length])
+
+  // reveal icons one by one
+  async function revealIcons() {
+    const startDelay = 400 
+    const interval = 100
+
+    await utilService.sleep(startDelay)
+
+    for (let i = 0; i < data.length; i++) {
+      setVisibleCount(i + 1)
+      await utilService.sleep(interval)
+    }
+  }
 
   return (
     <section className="mentor-selectors">
@@ -106,6 +126,7 @@ export function MentorSelectors({mentorRadius, iconsPathRadius, iconsRadius}: Me
               mentorRadius / 2 - iconsRadius,
               mentorRadius / 2 - iconsRadius,
             )
+            const isVisible = index < visibleCount
 
             return (
               <div
@@ -121,6 +142,7 @@ export function MentorSelectors({mentorRadius, iconsPathRadius, iconsRadius}: Me
                     hoverdSelectorIndex === index
                       ? `translate(${utilService.getPointByAngle(angle, 10).x}px, ${utilService.getPointByAngle(angle, 10).y}px)`
                       : "translate(0, 0)",
+                  opacity: isVisible ? 1 : 0,
                 }}
               >
                 {dt.icon}
