@@ -3,6 +3,7 @@ export const utilService = {
     createId,
     uploadImg,
     delay,
+    getCirclePoint,
 }
 
 function describeArc(cx : number, cy : number, r : number, startAngle : number, endAngle : number) {
@@ -57,6 +58,20 @@ async function uploadImg(target: HTMLInputElement) {
 
 function delay(ms: number) : Promise<void>{
   return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export function getCirclePoint(
+  circleSize: number,
+  angleDeg: number,
+  centerX: number = circleSize / 2,
+  centerY: number = circleSize / 2
+): { x: number; y: number } {
+
+  const radius = circleSize / 2
+  const angleRad = (angleDeg * Math.PI) / 180
+  const x = centerX + radius * Math.cos(angleRad)
+  const y = centerY + radius * Math.sin(angleRad)
+  return { x, y }
 }
 
 

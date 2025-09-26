@@ -8,7 +8,7 @@ interface MentorProps{
 
 export function Mentor({svgSize} : MentorProps){
 
-    const { mentorRadius, chatRadiuse } = timelineService.getTimelineUISettings()
+    const { mentorRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
 
     return(
         <section className="mentor" 
@@ -25,7 +25,11 @@ export function Mentor({svgSize} : MentorProps){
                 chatRadiuse={chatRadiuse}
             />
 
-            <MentorSelectors/>
+            <MentorSelectors
+                mentorRadius={mentorRadius}
+                iconsPathRadius={iconsPathRadius}
+                iconsRadius={iconsRadius}
+            />
         
         
         </section>
