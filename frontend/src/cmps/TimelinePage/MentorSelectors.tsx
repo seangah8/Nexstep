@@ -40,14 +40,14 @@ export function MentorSelectors({mentorRadius, selectorsRadius, iconsPathRadius,
 
 
   const data = [
-    {icon: svg1},
-    {icon: <i className="fa-solid fa-bars"></i>},
-    {icon: <i className="fa-solid fa-bars"></i>},
-    {icon: svg1},
-    {icon: svg1},
-    {icon:  <i className="fa-solid fa-bars"></i>},
-    {icon: svg1},
-    {icon: svg1},
+    {icon: '1-3'},
+    {icon: '4-6'},
+    {icon: '7-10'},
+    {icon: '11-15'},
+    {icon: '15-20'},
+    {icon: '20-30'},
+    {icon: '30-40'},
+    {icon: '40+'},
   ]
 
   const doughnuData = {

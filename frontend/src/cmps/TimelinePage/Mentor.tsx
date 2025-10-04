@@ -23,6 +23,7 @@ export function Mentor({isMentorOpen, setIsMentorOpen} : MentorProps){
         >
 
             <MentorChat
+                isMentorOpen={isMentorOpen}
                 mentorRadius={mentorRadius}
                 chatRadiuse={chatRadiuse}
                 toggleSelectors={()=>setIsMentorOpen(prev=>!prev)}

@@ -3503,3 +3503,5 @@ Error: User not found
 4.10.2025, 4:21:06 - INFO - Visited route | /
 4.10.2025, 4:22:50 - INFO - Visited route | /:userId
 4.10.2025, 4:22:50 - INFO - Visited route | /
+4.10.2025, 4:58:07 - INFO - Visited route | /:userId
+4.10.2025, 4:58:07 - INFO - Visited route | /

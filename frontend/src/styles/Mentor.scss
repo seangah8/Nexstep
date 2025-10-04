@@ -2,6 +2,7 @@
 
 .mentor{
     position: absolute;
+    user-select: none;
 
     .mentor-chat{
         cursor: pointer;
@@ -14,6 +15,20 @@
         &:hover{
             background-color: vars.$dark-green-2;
         }
+
+        .text-area{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+
+            span{
+                font-weight: 600;
+            }
+        }
     }
 
     .mentor-selectors{
@@ -25,6 +40,7 @@
             justify-content: center;
             background-color: vars.$dark-green-2;
             color:  white;
+            font-size: 1.2rem;
             transition: opacity 0.3s ease, transform 0.2s ease;
         }
     }
