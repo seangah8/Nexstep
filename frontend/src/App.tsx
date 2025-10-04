@@ -33,8 +33,8 @@ export default App
 
 Things need to be add
 
-1. add useState for hoverdSelector + show modal of it with info
-2. make so clicking in the middle of mento toggle the selectors
+1. fix so you can have mentor and use the timeline
+2. show modal of it with info
 3. opening selectors will start setion of choises - mabye (time, path type, path)
   - WeeklyTimeAvailability (in hours) 
   - PreferredPace (with the given time we can shove more things and better the chances) 

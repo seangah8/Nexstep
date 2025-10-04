@@ -18,6 +18,7 @@ interface stepPreviewProps{
     createTime : number
     svgRef : React.RefObject<SVGSVGElement | null>
     dragging : DraggingModel | null
+    isMentorOpen : boolean
     onSetSteps: (newSteps : StepModel[]) => void
     onSetMainStep: (mainStep : MainStepModel) => void
     onSetEditModal: (newEditModal : EditModalModel) => void
@@ -40,6 +41,7 @@ export function StepPreview({
     createTime,
     svgRef,
     dragging,
+    isMentorOpen,
     onSetSteps,
     onSetMainStep,
     onSetEditModal,
@@ -203,7 +205,7 @@ export function StepPreview({
                 radius, 
                 stepLocation.angleRange.start, 
                 stepLocation.angleRange.end)}
-                stroke={step.end < today ? "#c69a3c" : "#006769"}
+                stroke={isMentorOpen ? '#702228' : step.end < today ? "#c69a3c" : "#006769"}
                 strokeWidth={strokeWidth}
                 fill='none'
                 strokeLinecap="round" 
@@ -220,8 +222,8 @@ export function StepPreview({
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius}
-                    fill={step.end < today ? "#c69a3c" : "#006769"}
-                    stroke={step.end < today ? "#987323ff" : "#015758ff"}
+                    fill={isMentorOpen ? '#702228' : step.end < today ? "#c69a3c" : "#006769"}
+                    stroke={isMentorOpen ? '#702228' : step.end < today ? "#987323ff" : "#015758ff"}
                     strokeWidth='2'
                 />
                 {/* inner circle */}

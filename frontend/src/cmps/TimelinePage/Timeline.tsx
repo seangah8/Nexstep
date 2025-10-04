@@ -28,6 +28,7 @@ export function Timeline( { timeline } : TimelineProps) {
   const [editModal, setEditModal] = useState<EditModalModel | null>(null)
   const [dragging, setDragging] = useState<DraggingModel | null>(null)
   const [hoveredStep, setHoveredStep] = useState<StepModel | null>(null)
+  const [isMentorOpen, setIsMentorOpen] = useState<boolean>(false)
   
   const timelineSvgRef = useRef<SVGSVGElement | null>(null)
   const todayPointerSvgRef = useRef<SVGSVGElement | null>(null)
@@ -76,7 +77,7 @@ export function Timeline( { timeline } : TimelineProps) {
   }
 
   async function handleZoomOut(event: React.WheelEvent) {
-    if (event.deltaY > 0) { // User scrolled DOWN
+    if (event.deltaY > 0 && !isMentorOpen) { // User scrolled DOWN
       const parentStep = timeline.steps.find(step => step.id === mainStep.parentId)
       if (!parentStep) return
 
@@ -285,6 +286,7 @@ export function Timeline( { timeline } : TimelineProps) {
                   createTime = {timeline.createdAt}
                   svgRef = {timelineSvgRef}
                   dragging = {dragging}
+                  isMentorOpen={isMentorOpen}
                   onSetSteps = {onSetSteps}
                   onSetMainStep = {onSetMainStep}
                   onSetEditModal = {onSetEditModal}
@@ -323,7 +325,8 @@ export function Timeline( { timeline } : TimelineProps) {
         }
 
         <Mentor
-          svgSize={svgSize}
+          isMentorOpen={isMentorOpen}
+          setIsMentorOpen={setIsMentorOpen}
         />
 
       </div>

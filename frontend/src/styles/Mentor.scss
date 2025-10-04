@@ -6,8 +6,14 @@
     .mentor-chat{
         cursor: pointer;
         position: absolute;
+        z-index: 1;
         border-radius: 50%;
         background-color: vars.$dark-green;
+        transition: background-color 0.3s ease;
+
+        &:hover{
+            background-color: vars.$dark-green-2;
+        }
     }
 
     .mentor-selectors{

@@ -12,15 +12,17 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 interface MentorSelectorsProps {
   mentorRadius: number
+  selectorsRadius: number
   iconsPathRadius: number
   iconsRadius: number
 }
 
-export function MentorSelectors({mentorRadius, iconsPathRadius, iconsRadius}: MentorSelectorsProps) {
+export function MentorSelectors({mentorRadius, selectorsRadius, iconsPathRadius, iconsRadius}: MentorSelectorsProps) {
 
+  // temporary
   const svg1 = <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
      xmlns="http://www.w3.org/2000/svg">
-  <g stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 
     <line x1="2" y1="9" x2="7" y2="9"/>
     <line x1="1" y1="12" x2="7" y2="12"/>
@@ -38,14 +40,14 @@ export function MentorSelectors({mentorRadius, iconsPathRadius, iconsRadius}: Me
 
 
   const data = [
-    {id: 'id1', icon: svg1},
-    {id: 'id2', icon: '2'},
-    {id: 'id3', icon: svg1},
-    {id: 'id4', icon: svg1},
-    {id: 'id5', icon: svg1},
-    {id: 'id6', icon:  <i className="fa-solid fa-bars"></i>},
-    {id: 'id7', icon: svg1},
-    {id: 'id8', icon: svg1},
+    {icon: svg1},
+    {icon: <i className="fa-solid fa-bars"></i>},
+    {icon: <i className="fa-solid fa-bars"></i>},
+    {icon: svg1},
+    {icon: svg1},
+    {icon:  <i className="fa-solid fa-bars"></i>},
+    {icon: svg1},
+    {icon: svg1},
   ]
 
   const doughnuData = {
@@ -88,7 +90,15 @@ export function MentorSelectors({mentorRadius, iconsPathRadius, iconsRadius}: Me
 
   return (
     <section className="mentor-selectors">
-        <div className='doughnut'>
+        <div className='doughnut' 
+          style={{
+            width: selectorsRadius, 
+            height: selectorsRadius,
+            position: 'relative',
+            top: (mentorRadius - selectorsRadius) / 2,
+            left: (mentorRadius - selectorsRadius) / 2,
+          }}
+        >
             <Doughnut 
                 data={doughnuData} 
                 options={{
