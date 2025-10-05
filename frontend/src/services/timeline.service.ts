@@ -1,4 +1,4 @@
-import { TimelineModel, MainStepModel, StepModel } from "../models/timeline.models";
+import { TimelineModel, MainStepModel, StepModel, MentorQuestionModal } from "../models/timeline.models";
 import { httpService } from "./http.service";
 
 export const timelineService = {
@@ -9,6 +9,7 @@ export const timelineService = {
   update,
   getTimelineUISettings,
   getToday,
+  getMentorQuestions,
   findParentStart,
   changeChildrenAndParentsEnd,
   changeCurrantAndNextStepsEnd,
@@ -71,6 +72,37 @@ function getTimelineUISettings(){
 function getToday(){
   const todaysDate = new Date()
   return Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
+}
+
+function getMentorQuestions() : MentorQuestionModal[]{
+  const mentorQuestions : MentorQuestionModal[] = [
+        {
+          question: 'How many *hours per week* are you willing to work on this goal?',
+          options: [
+              {icon: '1-3', value: '1-3'}, 
+              {icon: '4-6', value: '4-6'}, 
+              {icon: '7-9', value: '7-9'}, 
+              {icon: '10-14', value: '10-14'}, 
+              {icon: '15-19', value: '15-19'}, 
+              {icon: '20-29', value: '20-29'}, 
+              {icon: '30-39', value: '30-39'}, 
+              {icon: '40+', value: '40-49'}
+          ],
+          answer: null
+      },
+      {
+          question: 'How do you preffer your *workflow*?',
+          options: [
+              {icon: 'M', value: 'meticulous'},
+              {icon: 'D', value: 'deliberate'},
+              {icon: 'B', value: 'balanced'}, 
+              {icon: 'F', value: 'fast-paced'}, 
+              {icon: 'I', value: 'iterative'}, 
+          ],
+          answer: null
+      }
+  ]
+  return mentorQuestions
 }
 
 

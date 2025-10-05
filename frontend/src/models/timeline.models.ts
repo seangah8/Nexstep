@@ -6,7 +6,6 @@ export interface TimelineModel {
     createdAt: number
 }
 
-
 export interface StepModel {
     id: string
     parentId: string | null
@@ -35,6 +34,13 @@ export interface DraggingModel{
     prevStepsToSow: StepModel[]
 }
 
-export interface SelectoreModel{
-  icon: string | SVGAElement
+export interface OptionModal{
+  icon: string 
+  value: string
+}
+
+export interface MentorQuestionModal {
+  question: string
+  options: OptionModal[]
+  answer: string | null
 }

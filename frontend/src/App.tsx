@@ -37,8 +37,7 @@ Things need to be add
 2. show modal of it with info
 3. opening selectors will start setion of choises - mabye (time, path type, path)
   - WeeklyTimeAvailability (in hours) 
-  - PreferredPace (with the given time we can shove more things and better the chances) 
-  - WorkingStyle 
+  - PreferredPace (less steps but each invest more time in or rapid steps but a lot) 
   - RiskTolerance (this will not change the amount of knowing time we know the user have, it will simply give the user from a smooth conservative and stady path to an intresting risky one) 
   - WorkMode (solo / mixed / social) 
   - FocusAreas

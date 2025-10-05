@@ -7,6 +7,7 @@ import {
 } from 'chart.js'
 import { utilService } from '../../services/util.service'
 import { useEffect, useState } from 'react'
+import { OptionModal } from '../../models/timeline.models'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -15,47 +16,27 @@ interface MentorSelectorsProps {
   selectorsRadius: number
   iconsPathRadius: number
   iconsRadius: number
+  options: OptionModal[]
+  onClickOption: (answer : string) => void
 }
 
-export function MentorSelectors({mentorRadius, selectorsRadius, iconsPathRadius, iconsRadius}: MentorSelectorsProps) {
+export function MentorSelectors({
+  mentorRadius, 
+  selectorsRadius, 
+  iconsPathRadius, 
+  iconsRadius,
+  options,
+  onClickOption,
 
-  // temporary
-  const svg1 = <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
-     xmlns="http://www.w3.org/2000/svg">
-  <g stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+}: MentorSelectorsProps) {
 
-    <line x1="2" y1="9" x2="7" y2="9"/>
-    <line x1="1" y1="12" x2="7" y2="12"/>
-    <line x1="3" y1="15" x2="7" y2="15"/>
-
-    <circle cx="14" cy="12" r="8"/>
-
-    <ellipse cx="14" cy="12" rx="3" ry="8"/>
-
-    <path d="M6.5 9.5 Q14 7 21.5 9.5"/>
-    <path d="M6.5 14.5 Q14 17 21.5 14.5"/>
-  </g>
-</svg>
-
-
-
-  const data = [
-    {icon: '1-3'},
-    {icon: '4-6'},
-    {icon: '7-10'},
-    {icon: '11-15'},
-    {icon: '15-20'},
-    {icon: '20-30'},
-    {icon: '30-40'},
-    {icon: '40+'},
-  ]
 
   const doughnuData = {
     labels: ['Red', 'Blue', 'Yellow'],
     datasets: [
       {
         label: 'My First Dataset',
-        data: Array(data.length).fill(1),
+        data: Array(options.length).fill(1),
         backgroundColor: '#006769',     
         hoverBackgroundColor: '#00393a',
         hoverOffset: 30,
@@ -68,21 +49,24 @@ export function MentorSelectors({mentorRadius, selectorsRadius, iconsPathRadius,
 
   const [hoverdSelectorIndex, setHoveredSelectorIndex] = useState<number | null>(null)
   const [visibleCount, setVisibleCount] = useState(0)
-
+  const [showIcons, setShowIcons] = useState<boolean>(false)
 
 
   useEffect(() => {
+
     revealIcons()
-  }, [data.length])
+  }, [options])
 
   // reveal icons one by one
   async function revealIcons() {
     const startDelay = 400 
     const interval = 100
 
+    setShowIcons(false)
     await utilService.sleep(startDelay)
+    setShowIcons(true)
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < options.length; i++) {
       setVisibleCount(i + 1)
       await utilService.sleep(interval)
     }
@@ -102,14 +86,18 @@ export function MentorSelectors({mentorRadius, selectorsRadius, iconsPathRadius,
             <Doughnut 
                 data={doughnuData} 
                 options={{
+
                     layout: {
                         padding: 30,
                     },
+
                     cutout: '43%',
+
                     plugins:{
                         tooltip: { enabled: false },
                         legend: { display: false },
                     },
+
                     onHover: (event, elements) => {
                       const target = event.native?.target as HTMLCanvasElement | undefined;
                       if (!target) return;
@@ -123,13 +111,22 @@ export function MentorSelectors({mentorRadius, selectorsRadius, iconsPathRadius,
                         setHoveredSelectorIndex(null)
                       }
                     },
+
+                    onClick: ( _ , elements) => {
+                      if (elements.length > 0) {
+                        const optionIndex = elements[0].index
+                        const chosenOption = options[optionIndex]
+                        onClickOption(chosenOption.value)
+                      }
+                    },
                 }}
             />
         </div>
 
         {
-          data.map((dt, index) => {
-            const angle = -90 + (360 / data.length) * (index + 0.5);
+          showIcons &&
+          options.map((dt, index) => {
+            const angle = -90 + (360 / options.length) * (index + 0.5);
             const position = utilService.getCirclePoint(
               iconsPathRadius,
               angle,
