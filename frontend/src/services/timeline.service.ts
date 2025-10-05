@@ -93,7 +93,7 @@ function getMentorQuestions() : MentorQuestionModal[]{
       {
           question: 'How do you preffer your *workflow*?',
           options: [
-              {icon: 'M', value: 'meticulous'},
+              {icon: `<i class="fa-solid fa-bars"></i>`, value: 'meticulous'},
               {icon: 'D', value: 'deliberate'},
               {icon: 'B', value: 'balanced'}, 
               {icon: 'F', value: 'fast-paced'}, 

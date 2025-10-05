@@ -6,7 +6,7 @@ import {
   Legend,
 } from 'chart.js'
 import { utilService } from '../../services/util.service'
-import { useEffect, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { OptionModal } from '../../models/timeline.models'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -70,6 +70,14 @@ export function MentorSelectors({
       setVisibleCount(i + 1)
       await utilService.sleep(interval)
     }
+  }
+
+
+  function convertStringToElement(str: string): string | ReactElement {
+    const shouldConvert = str.trim().startsWith('<')
+    if (!shouldConvert) return str
+
+    return <span dangerouslySetInnerHTML={{ __html: str }} />
   }
 
   return (
@@ -152,7 +160,7 @@ export function MentorSelectors({
                   opacity: isVisible ? 1 : 0,
                 }}
               >
-                {dt.icon}
+                {convertStringToElement(dt.icon)}
               </div>
             )
           })

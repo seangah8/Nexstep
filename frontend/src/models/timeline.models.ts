@@ -35,7 +35,7 @@ export interface DraggingModel{
 }
 
 export interface OptionModal{
-  icon: string 
+  icon: string
   value: string
 }
 
