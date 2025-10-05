@@ -47,10 +47,10 @@ export function MentorSelectors({
     ],
   }
 
-  const [hoverdSelectorIndex, setHoveredSelectorIndex] = useState<number | null>(null)
+  const [hoverdOptionIndex, setHoverdOptionIndex] = useState<number | null>(null)
   const [visibleCount, setVisibleCount] = useState(0)
   const [showIcons, setShowIcons] = useState<boolean>(false)
-
+  const [chartKey, setChartKey] = useState(0)
 
   useEffect(() => {
 
@@ -80,6 +80,11 @@ export function MentorSelectors({
     return <span dangerouslySetInnerHTML={{ __html: str }} />
   }
 
+  function handleClickOption(value: string) {
+    onClickOption(value)
+    setChartKey(prev => prev + 1) // force re-mount of chart
+  }
+
   return (
     <section className="mentor-selectors">
         <div className='doughnut' 
@@ -92,6 +97,7 @@ export function MentorSelectors({
           }}
         >
             <Doughnut 
+                key={chartKey}
                 data={doughnuData} 
                 options={{
 
@@ -113,10 +119,10 @@ export function MentorSelectors({
                       if (elements.length) {
                         target.style.cursor = 'pointer'
                         const index = elements[0].index
-                        setHoveredSelectorIndex(index)
+                        setHoverdOptionIndex(index)
                       } else {
                         target.style.cursor = 'default'
-                        setHoveredSelectorIndex(null)
+                        setHoverdOptionIndex(null)
                       }
                     },
 
@@ -124,7 +130,7 @@ export function MentorSelectors({
                       if (elements.length > 0) {
                         const optionIndex = elements[0].index
                         const chosenOption = options[optionIndex]
-                        onClickOption(chosenOption.value)
+                        handleClickOption(chosenOption.value)
                       }
                     },
                 }}
@@ -146,7 +152,7 @@ export function MentorSelectors({
             return (
               <div
                 key={index}
-                className="select-icon"
+                className="option-icon"
                 style={{
                   width: iconsRadius * 2,
                   height: iconsRadius * 2,
@@ -154,7 +160,7 @@ export function MentorSelectors({
                   top: position.y,
                   left: position.x,
                   transform:
-                    hoverdSelectorIndex === index
+                    hoverdOptionIndex === index
                       ? `translate(${utilService.getPointByAngle(angle, 10).x}px, ${utilService.getPointByAngle(angle, 10).y}px)`
                       : "translate(0, 0)",
                   opacity: isVisible ? 1 : 0,

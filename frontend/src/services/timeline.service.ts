@@ -93,14 +93,34 @@ function getMentorQuestions() : MentorQuestionModal[]{
       {
           question: 'How do you preffer your *workflow*?',
           options: [
-              {icon: `<i class="fa-solid fa-bars"></i>`, value: 'meticulous'},
-              {icon: 'D', value: 'deliberate'},
-              {icon: 'B', value: 'balanced'}, 
-              {icon: 'F', value: 'fast-paced'}, 
-              {icon: 'I', value: 'iterative'}, 
+              {icon: '<i class="fa-solid fa-shield"></i>', value: 'meticulous'},
+              {icon: '<i class="fa-solid fa-lines-leaning"></i>', value: 'deliberate'},
+              {icon: '<i class="fa-solid fa-scale-balanced"></i>', value: 'balanced'}, 
+              {icon: '<i class="fa-solid fa-feather-pointed"></i>', value: 'fast-paced'}, 
+              {icon: '<i class="fa-solid fa-bolt"></i>', value: 'iterative'}, 
           ],
           answer: null
-      }
+      },
+      {
+          question: 'Do you prefer a *steady* path or one that takes *bold* leaps forward?',
+          options: [
+              {icon: '<i class="fa-solid fa-shield-halved"></i>', value: 'conservative'},
+              {icon: '<i class="fa-solid fa-scale-balanced"></i>', value: 'balanced'},
+              {icon: '<i class="fa-solid fa-compass"></i>', value: 'adaptive'}, 
+              {icon: '<i class="fa-solid fa-fire"></i>', value: 'bold'}, 
+              {icon: '<i class="fa-solid fa-rocket"></i>', value: 'adventurous'}, 
+          ],
+          answer: null
+      },
+      {
+          question: '*Solo* focus or *team* energy - what drives you?',
+          options: [
+              {icon: '<i class="fa-solid fa-street-view"></i>', value: 'solo'},
+              {icon: '<i class="fa-solid fa-handshake-angle"></i>', value: 'hybrid'},
+              {icon: '<i class="fa-solid fa-people-group"></i>', value: 'social'}, 
+          ],
+          answer: null
+      },
   ]
   return mentorQuestions
 }

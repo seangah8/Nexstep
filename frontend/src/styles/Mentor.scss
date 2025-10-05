@@ -18,6 +18,7 @@
 
         .text-area{
             height: 100%;
+            padding: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -32,7 +33,7 @@
     }
 
     .mentor-selectors{
-        .select-icon{
+        .option-icon{
             pointer-events: none;
             border-radius: 50%;
             display: flex;
