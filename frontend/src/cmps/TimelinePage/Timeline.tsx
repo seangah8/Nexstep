@@ -245,6 +245,48 @@ export function Timeline( { timeline } : TimelineProps) {
     return digitCount > 5 ? 2.5 - ((digitCount - 5) / 8) : 2.5
   }
 
+function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
+  let updatedSteps: StepModel[] = [...timeline.steps]
+  let newSteps: StepModel[] = [...steps]
+
+  // validate new steps to be under the main step
+  newSteps = newSteps.map(step => {
+    if (step.end > mainStep.end || step.end < mainStep.start || step.end < today) 
+      throw new Error('Invalid step date')
+    return { ...step, parentId: mainStep.id }
+  })
+
+  let isThereLastStep = false
+
+  // delete all steps under the current main step
+  timeline.steps.forEach(step => {
+    if(step.end === mainStep.end && step.id !== mainStep.id) isThereLastStep = true
+    if (step.parentId === mainStep.id && step.end < mainStep.end)
+      updatedSteps = timelineService.deleteStep(updatedSteps, step, today)
+  })
+
+  // if step was empty - add last child step
+  if(!isThereLastStep){
+    const lastChild : StepModel = {            
+      id: utilService.createId(),
+      parentId: mainStep.id,
+      title: mainStep.title,
+      description: mainStep.description,
+      image: mainStep.image,
+      end: mainStep.end
+    }
+
+    updatedSteps = [...updatedSteps, lastChild]
+  }
+
+  // add new steps
+  updatedSteps = [...updatedSteps, ...newSteps]
+
+  // update timeline steps
+  onSetSteps(updatedSteps)
+}
+
+
   if(!stepsToShow) return <h2>Loading...</h2>
 
   return (
@@ -327,6 +369,7 @@ export function Timeline( { timeline } : TimelineProps) {
         <Mentor
           isMentorOpen={isMentorOpen}
           setIsMentorOpen={setIsMentorOpen}
+          replaceSteps={replaceSubStepsWithMentorSteps}
         />
 
       </div>

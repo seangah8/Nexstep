@@ -7,7 +7,7 @@ import {
 } from 'chart.js'
 import { utilService } from '../../services/util.service'
 import { ReactElement, useEffect, useState } from 'react'
-import { OptionModal } from '../../models/timeline.models'
+import { OptionModal, StepModel } from '../../models/timeline.models'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -17,7 +17,7 @@ interface MentorSelectorsProps {
   iconsPathRadius: number
   iconsRadius: number
   options: OptionModal[]
-  onClickOption: (answer : string) => void
+  onClickOption: (answer : string | StepModel[]) => void
 }
 
 export function MentorSelectors({
@@ -80,7 +80,7 @@ export function MentorSelectors({
     return <span dangerouslySetInnerHTML={{ __html: str }} />
   }
 
-  function handleClickOption(value: string) {
+  function handleClickOption(value: string | StepModel[]) {
     onClickOption(value)
     setChartKey(prev => prev + 1) // force re-mount of chart
   }

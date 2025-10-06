@@ -36,11 +36,11 @@ export interface DraggingModel{
 
 export interface OptionModal{
   icon: string
-  value: string
+  value: string | StepModel[]
 }
 
 export interface MentorQuestionModal {
   question: string
   options: OptionModal[]
-  answer: string | null
+  answer: string | StepModel[] | null
 }

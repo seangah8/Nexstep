@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { timelineService } from "../../services/timeline.service"
 import { MentorChat } from "./MentorChat"
 import { MentorSelectors } from "./MentorSelectors"
-import { MentorQuestionModal, OptionModal } from "../../models/timeline.models"
+import { MentorQuestionModal, OptionModal, StepModel } from "../../models/timeline.models"
 
 interface MentorProps{
     isMentorOpen: boolean
     setIsMentorOpen: React.Dispatch<React.SetStateAction<boolean>>
+    replaceSteps: (steps : StepModel[]) => void
 }
 
-export function Mentor({isMentorOpen, setIsMentorOpen} : MentorProps){
+export function Mentor({isMentorOpen, setIsMentorOpen, replaceSteps} : MentorProps){
 
 
     const { svgSize, mentorRadiusClose, selectorsRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
@@ -19,14 +20,27 @@ export function Mentor({isMentorOpen, setIsMentorOpen} : MentorProps){
     const [options, setOptions] = useState<OptionModal[]>(mentorQuestions[0].options)
 
 
+    // after each time the user pick an option
     useEffect(() => {
         const emptyAnswerIndex = mentorQuestions.findIndex(q => q.answer === null)
-        if (emptyAnswerIndex === -1) return
-        setQuestion(mentorQuestions[emptyAnswerIndex].question)
-        setOptions(mentorQuestions[emptyAnswerIndex].options)
+
+        // there are still quations that havent been answered
+        if (emptyAnswerIndex !== -1){
+            setQuestion(mentorQuestions[emptyAnswerIndex].question)
+            setOptions(mentorQuestions[emptyAnswerIndex].options)
+        }
+
+        // when all questions have been answered
+        else  {
+            let newSteps = mentorQuestions[mentorQuestions.length - 1].answer
+            // check the answer indeed an array (steps)
+            if(Array.isArray(newSteps))
+                replaceSteps(newSteps)
+        }
+
     }, [mentorQuestions])
 
-    function onClickOption(answer : string){
+    function onClickOption(answer : string | StepModel[]){
         const emptyAnswerIndex = mentorQuestions.findIndex(q => q.answer === null)
         setMentorQuestions(prev =>
             prev.map((q, i) => i === emptyAnswerIndex ? { ...q, answer } : q)

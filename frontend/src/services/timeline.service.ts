@@ -121,6 +121,70 @@ function getMentorQuestions() : MentorQuestionModal[]{
           ],
           answer: null
       },
+      {
+          question: 'What *path* suits you best?',
+          options: [
+
+              {icon: '<i class="fa-solid fa-code-branch"></i>', value: [
+                {
+                  id: 'path1-id1', 
+                  parentId: 'idUserGoal', 
+                  title: 'path1-step1',
+                  description: 'path1-step1-description', 
+                  image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
+                  end: 20367
+                },
+                {
+                  id: 'path1-id2', 
+                  parentId: 'idUserGoal', 
+                  title: 'path1-step1',
+                  description: 'path1-step1-description', 
+                  image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
+                  end: 20398
+                }
+              ]},
+
+              {icon: '<i class="fa-solid fa-code-merge"></i>', value: [
+                {
+                  id: 'path2-id1', 
+                  parentId: 'idUserGoal', 
+                  title: 'path2-step1',
+                  description: 'path2-step1-description', 
+                  image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
+                  end: 20388
+                }
+              ]},
+
+              {icon: '<i class="fa-solid fa-code-fork"></i>', value: [
+                {
+                  id: 'path3-id1', 
+                  parentId: 'idUserGoal', 
+                  title: 'path3-step1',
+                  description: 'path3-step1-description', 
+                  image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
+                  end: 20375
+                },
+                {
+                  id: 'path3-id2', 
+                  parentId: 'idUserGoal', 
+                  title: 'path3-step1',
+                  description: 'path3-step1-description', 
+                  image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
+                  end: 20402
+                },
+                {
+                  id: 'path3-id3', 
+                  parentId: 'idUserGoal', 
+                  title: 'path3-step3',
+                  description: 'path3-step3-description', 
+                  image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
+                  end: 20450
+                }
+              ]},
+          ],
+          answer: null
+      },
+
   ]
   return mentorQuestions
 }
