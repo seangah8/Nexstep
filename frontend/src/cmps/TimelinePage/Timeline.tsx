@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
-import { StepModel, MainStepModel, EditModalModel, DraggingModel } from "../../models/timeline.models";
+import { StepModel, MainStepModel, EditModalModel, DraggingModel, OptionModal } from "../../models/timeline.models";
 import { timelineService } from "../../services/timeline.service";
 import { utilService } from "../../services/util.service";
 import { EditStepModal } from "./EditStepModal";
@@ -10,6 +10,7 @@ import { TimelineModel } from "../../models/timeline.models";
 import { timelineActions } from "../../store/actions/timeline.actions";
 import { TodayPointer } from "./TodayPointer";
 import { Mentor } from "./Mentor";
+import { HoverOptionModal } from "./HoverOptionModal";
 
 
 interface TimelineProps{
@@ -29,6 +30,7 @@ export function Timeline( { timeline } : TimelineProps) {
   const [dragging, setDragging] = useState<DraggingModel | null>(null)
   const [hoveredStep, setHoveredStep] = useState<StepModel | null>(null)
   const [isMentorOpen, setIsMentorOpen] = useState<boolean>(false)
+  const [hoveredOption, setHoveredOption] = useState<OptionModal | null>(null)
   
   const timelineSvgRef = useRef<SVGSVGElement | null>(null)
   const todayPointerSvgRef = useRef<SVGSVGElement | null>(null)
@@ -370,6 +372,7 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
           isMentorOpen={isMentorOpen}
           setIsMentorOpen={setIsMentorOpen}
           replaceSteps={replaceSubStepsWithMentorSteps}
+          setHoveredOption={setHoveredOption}
         />
 
       </div>
@@ -383,6 +386,7 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
           <EditStepModal
             editModal={editModal}
             allSteps={timeline.steps}
+            isMentorOpen={isMentorOpen}
             onSetSteps={onSetSteps}
             onSetMainStep={onSetMainStep}
             onSetMainStepEnd={onSetMainStepEnd}
@@ -398,6 +402,15 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
             today={today}
           />
         }
+
+
+        {
+          isMentorOpen &&
+          <HoverOptionModal 
+            option={hoveredOption}
+          />
+        }
+
       </div>
 
       

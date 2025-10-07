@@ -1,0 +1,54 @@
+@use './vars';
+
+.hover-option-modal{
+    width: 100%;
+    height: 100%;
+
+    .hexagon-background{
+        background-color: vars.$dark-green;
+        width: 100%;
+        height: 90%;
+        clip-path: polygon(
+            50% 0%,   /* top middle */
+            100% 25%, /* top right */
+            100% 75%, /* bottom right */
+            50% 100%, /* bottom middle */
+            0% 75%,   /* bottom left */
+            0% 25%    /* top left */
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .context{
+        width: 80%;
+        height: 80%;
+        color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        // icon
+        h3{
+            font-size: 2.5rem;
+            margin-top: 5%;
+        }
+
+        h4{
+            position: relative;
+            top: -15px;
+            font-size: 2.5rem;
+        }
+
+        // description
+        p{
+
+            position: relative;
+            height: 50%;
+            overflow-y: hidden;
+            font-size: 1.2rem;
+        }
+    }
+}

@@ -6,6 +6,7 @@ import { utilService } from "../../services/util.service"
 interface EditStepModalProps{
     editModal : EditModalModel
     allSteps : StepModel[]
+    isMentorOpen : boolean
     onSetSteps : (newSteps : StepModel[]) => void
     onSetMainStep : (newSteps : MainStepModel) => void
     onSetMainStepEnd : (end : number) => void
@@ -15,6 +16,7 @@ interface EditStepModalProps{
 export function EditStepModal({ 
   editModal, 
   allSteps, 
+  isMentorOpen,
   onSetSteps, 
   onSetMainStep, 
   onSetMainStepEnd, 
@@ -28,6 +30,11 @@ export function EditStepModal({
     useEffect(()=>{
       setStepToEdit(editModal.step)
     },[editModal])
+
+    useEffect(()=>{
+      if(isMentorOpen)
+        onSetEditModal(null)
+    },[isMentorOpen])
 
     // after dragging step - update edit step due
     useEffect(()=>{

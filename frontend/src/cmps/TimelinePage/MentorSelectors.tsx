@@ -18,6 +18,7 @@ interface MentorSelectorsProps {
   iconsRadius: number
   options: OptionModal[]
   onClickOption: (answer : string | StepModel[]) => void
+  setHoveredOption: (option : OptionModal | null) => void
 }
 
 export function MentorSelectors({
@@ -27,6 +28,7 @@ export function MentorSelectors({
   iconsRadius,
   options,
   onClickOption,
+  setHoveredOption,
 
 }: MentorSelectorsProps) {
 
@@ -56,6 +58,12 @@ export function MentorSelectors({
 
     revealIcons()
   }, [options])
+
+  useEffect(()=>{
+    hoverdOptionIndex !== null
+    ? setHoveredOption(options[hoverdOptionIndex])
+    : setHoveredOption(null)
+  },[hoverdOptionIndex])
 
   // reveal icons one by one
   async function revealIcons() {

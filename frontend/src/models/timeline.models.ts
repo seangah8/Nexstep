@@ -36,6 +36,8 @@ export interface DraggingModel{
 
 export interface OptionModal{
   icon: string
+  title: string
+  description: string
   value: string | StepModel[]
 }
 

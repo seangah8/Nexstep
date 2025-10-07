@@ -8,9 +8,15 @@ interface MentorProps{
     isMentorOpen: boolean
     setIsMentorOpen: React.Dispatch<React.SetStateAction<boolean>>
     replaceSteps: (steps : StepModel[]) => void
+    setHoveredOption: (option : OptionModal | null) => void
 }
 
-export function Mentor({isMentorOpen, setIsMentorOpen, replaceSteps} : MentorProps){
+export function Mentor({
+    isMentorOpen, 
+    setIsMentorOpen, 
+    replaceSteps, 
+    setHoveredOption
+} : MentorProps){
 
 
     const { svgSize, mentorRadiusClose, selectorsRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
@@ -86,6 +92,7 @@ export function Mentor({isMentorOpen, setIsMentorOpen, replaceSteps} : MentorPro
                     iconsRadius={iconsRadius}
                     options={options}
                     onClickOption={onClickOption}
+                    setHoveredOption={setHoveredOption}
                 />
             }
 
