@@ -15,7 +15,8 @@ export function Mentor({
     isMentorOpen, 
     setIsMentorOpen, 
     replaceSteps, 
-    setHoveredOption
+    setHoveredOption,
+    
 } : MentorProps){
 
 

@@ -33,20 +33,15 @@ export default App
 
 Things need to be add
 
-1. fix so you can have mentor and use the timeline
-2. show modal of it with info
-3. opening selectors will start setion of choises - mabye (time, path type, path)
-  - WeeklyTimeAvailability (in hours) 
-  - PreferredPace (less steps but each invest more time in or rapid steps but a lot) 
-  - RiskTolerance (this will not change the amount of knowing time we know the user have, it will simply give the user from a smooth conservative and stady path to an intresting risky one) 
-  - WorkMode (solo / mixed / social) 
-  - FocusAreas
-4. when choosing path replace in the main step its chileds steps
-5. add open ai to the 3rd chosisess
+0. when creating path with mentor make the main start from its start or the todays
+1. make function that gather all the info for ai when getting into path options
+2. make function that fake gadering the ai path options and appy on code
+3. learn how to use open ai api
+4. signup to use open ai api
+5. add open ai to project
 
-a. add step choises
-b. add ai
-c. add welcom/starting page
+a. add ai
+b. add welcom/starting page
 
 
 

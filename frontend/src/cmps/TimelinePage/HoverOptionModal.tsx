@@ -4,11 +4,13 @@ import { MainStepModel, OptionModal } from "../../models/timeline.models"
 interface HoverOptionModalProps{
     option: OptionModal | null
     mainStep: MainStepModel
+    today: number
 }
 
-export function HoverOptionModal({option, mainStep} : HoverOptionModalProps){
+export function HoverOptionModal({option, mainStep, today} : HoverOptionModalProps){
 
-    const totalDays = mainStep.end - mainStep.start
+    const startDay = Math.max(mainStep.start, today)
+    const totalDays = mainStep.end - startDay
 
     function convertStringToElement(str: string): string | ReactElement {
         const shouldConvert = str.trim().startsWith('<')
@@ -56,7 +58,7 @@ export function HoverOptionModal({option, mainStep} : HoverOptionModalProps){
                             <i className="fa-solid fa-circle-dot"></i>
                             <ul>
                                 {option.value.map(step => {
-                                    const precantage = 100* ((step.end - mainStep.start) / totalDays)
+                                    const precantage = 100* ((step.end - startDay) / totalDays)
                                     return(
                                     <div className="step" style={{top: `calc(${precantage}% - 25px)`}}>
                                         <i className="fa-solid fa-circle"></i>

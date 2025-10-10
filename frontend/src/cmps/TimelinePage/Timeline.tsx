@@ -260,10 +260,10 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
 
   let isThereLastStep = false
 
-  // delete all steps under the current main step
+  // delete all steps under the current main step - if not done yet
   timeline.steps.forEach(step => {
     if(step.end === mainStep.end && step.id !== mainStep.id) isThereLastStep = true
-    if (step.parentId === mainStep.id && step.end < mainStep.end)
+    if (step.parentId === mainStep.id && step.end < mainStep.end && step.end >= today)
       updatedSteps = timelineService.deleteStep(updatedSteps, step, today)
   })
 
@@ -409,6 +409,7 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
           <HoverOptionModal 
             option={hoveredOption}
             mainStep={mainStep}
+            today={today}
           />
         }
 

@@ -205,7 +205,7 @@ export function StepPreview({
                 radius, 
                 stepLocation.angleRange.start, 
                 stepLocation.angleRange.end)}
-                stroke={isMentorOpen ? '#702228' : step.end < today ? "#c69a3c" : "#006769"}
+                stroke={step.end < today ? '#c69a3c' :  isMentorOpen ? "#702228" : "#006769"}
                 strokeWidth={strokeWidth}
                 fill='none'
                 strokeLinecap="round" 
@@ -222,8 +222,8 @@ export function StepPreview({
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius}
-                    fill={isMentorOpen ? '#702228' : step.end < today ? "#c69a3c" : "#006769"}
-                    stroke={isMentorOpen ? '#702228' : step.end < today ? "#987323ff" : "#015758ff"}
+                    fill={step.end < today ? '#987323ff' :  isMentorOpen ? "#702228" : "#015758ff"}
+                    stroke={step.end < today ? '#987323ff' :  isMentorOpen ? "#702228" : "#015758ff"}
                     strokeWidth='2'
                 />
                 {/* inner circle */}
