@@ -125,28 +125,28 @@ function getMentorQuestions() : MentorQuestionModal[]{
         question: 'What *path* suits you best?',
         options: [
 
-            {icon: '<i class="fa-solid fa-code-branch"></i>', title: '', value: [
+            {icon: '<i class="fa-solid fa-code-branch"></i>', title: 'Path1', value: [
               {
                 id: 'path1-id1', 
                 parentId: 'idUserGoal', 
                 title: 'path1-step1',
                 description: 'path1-step1-description', 
                 image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20367
+                end: 20380
               },
               {
                 id: 'path1-id2', 
                 parentId: 'idUserGoal', 
-                title: 'path1-step1',
+                title: 'path1-step2',
                 description: 'path1-step1-description', 
                 image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
                 end: 20398
               }
             ], 
-            description: ''
+            description: 'path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description '
           },
 
-            {icon: '<i class="fa-solid fa-code-merge"></i>', title: '', value: [
+            {icon: '<i class="fa-solid fa-code-merge"></i>', title: 'Path2', value: [
               {
                 id: 'path2-id1', 
                 parentId: 'idUserGoal', 
@@ -156,10 +156,10 @@ function getMentorQuestions() : MentorQuestionModal[]{
                 end: 20388
               }
             ], 
-            description: ''
+            description: 'path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description '
           },
 
-            {icon: '<i class="fa-solid fa-code-fork"></i>', title: '', value: [
+            {icon: '<i class="fa-solid fa-code-fork"></i>', title: 'Path3', value: [
               {
                 id: 'path3-id1', 
                 parentId: 'idUserGoal', 
@@ -171,10 +171,10 @@ function getMentorQuestions() : MentorQuestionModal[]{
               {
                 id: 'path3-id2', 
                 parentId: 'idUserGoal', 
-                title: 'path3-step1',
+                title: 'path3-step2',
                 description: 'path3-step1-description', 
                 image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20402
+                end: 20385
               },
               {
                 id: 'path3-id3', 
@@ -182,10 +182,10 @@ function getMentorQuestions() : MentorQuestionModal[]{
                 title: 'path3-step3',
                 description: 'path3-step3-description', 
                 image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20450
+                end: 20410
               }
             ], 
-            description: ''
+            description: 'path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description '
           },
         ],
         answer: null

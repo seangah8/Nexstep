@@ -40,8 +40,10 @@ export function Mentor({
         else  {
             let newSteps = mentorQuestions[mentorQuestions.length - 1].answer
             // check the answer indeed an array (steps)
-            if(Array.isArray(newSteps))
+            if(Array.isArray(newSteps)){
                 replaceSteps(newSteps)
+                setIsMentorOpen(false)
+            }
         }
 
     }, [mentorQuestions])

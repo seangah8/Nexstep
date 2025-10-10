@@ -408,6 +408,7 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
           isMentorOpen &&
           <HoverOptionModal 
             option={hoveredOption}
+            mainStep={mainStep}
           />
         }
 
