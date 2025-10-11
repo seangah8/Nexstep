@@ -734,15 +734,29 @@ async function getPathsFromOpenAI(answers: string[], toatalDays: number, startDa
   return  options
 }
 
-async function addImagesFromOpenAI(steps : StepModel[]) : Promise<StepModel[]> {
+async function addImagesFromOpenAI(steps: StepModel[]): Promise<StepModel[]> {
 
+  // temporary urls to open ai generated images 
   const openAiAnswer = steps.reduce((acc, step) => {
     acc[step.id] = 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png'
     return acc
   }, {} as Record<string, string>)
 
-  let updatedSteps = [...steps]
-  return updatedSteps.map(step => ({...step, image: openAiAnswer[step.id]}))
+  // extract keys (to preserve order)
+  const stepIds = Object.keys(openAiAnswer)
+
+  // upload images
+  const uploadedUrls = await utilService.uploadImagesByUrls(
+    stepIds.map(id => openAiAnswer[id]))
+
+  // build a new record with the pemenant urls
+  const updatedOpenAiAnswer: Record<string, string> = {}
+  stepIds.forEach((id, index) => {
+    updatedOpenAiAnswer[id] = uploadedUrls[index]
+  })
+
+  // 5. Return steps with updated images
+  return steps.map(step => ({...step, image: updatedOpenAiAnswer[step.id]}))
 }
 
 

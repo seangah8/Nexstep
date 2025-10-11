@@ -54,7 +54,7 @@ export function EditStepModal({
           break
         case 'image':
           if(target instanceof HTMLInputElement) {
-            utilService.uploadImg(target).then((url) => {
+            utilService.uploadImgByInput(target).then((url) => {
               if (!url) return
               setStepToEdit(prev => ({...prev,image: url,}))
             })

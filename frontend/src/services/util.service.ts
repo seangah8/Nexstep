@@ -1,7 +1,8 @@
 export const utilService = {
     describeArc,
     createId,
-    uploadImg,
+    uploadImgByInput,
+    uploadImagesByUrls,
     delay,
     getCirclePoint,
     getPointByAngle,
@@ -31,7 +32,7 @@ function createId(length = 8) {
     return txt
 }
 
-async function uploadImg(target: HTMLInputElement) {
+async function uploadImgByInput(target: HTMLInputElement) {
   const CLOUD_NAME = 'dwql9coem'
   const UPLOAD_PRESET = 'sean_preset'
   const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
@@ -48,15 +49,36 @@ async function uploadImg(target: HTMLInputElement) {
       method: 'POST',
       body: formData,
     })
-
     const data = await res.json()
-    console.log('Uploaded image:', data.secure_url)
     return data.secure_url // the permanent URL saved in MongoDB
+    
   } catch (err) {
     console.error('Failed to upload image:', err)
     throw err
   }
 }
+
+async function uploadImagesByUrls(imageUrls: string[]) {
+  const CLOUD_NAME = 'dwql9coem'
+  const UPLOAD_PRESET = 'sean_preset'
+  const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+
+  const uploads = imageUrls.map(async (url) => {
+    const formData = new FormData()
+    formData.append('upload_preset', UPLOAD_PRESET)
+    formData.append('file', url)
+
+    const res = await fetch(UPLOAD_URL, { method: 'POST', body: formData })
+    if (!res.ok) throw new Error(`Failed to upload ${url}`)
+
+    const data = await res.json()
+    return data.secure_url
+  })
+
+  return Promise.all(uploads)
+}
+
+
 
 function delay(ms: number) : Promise<void>{
   return new Promise(resolve => setTimeout(resolve, ms))
