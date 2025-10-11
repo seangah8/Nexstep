@@ -43,11 +43,31 @@ export interface OptionModel{
 
 export interface MentorQuestionModel {
   question: string
-  options: OptionModel[]
-  answer: string | StepModel[] | null
+  key: string 
+  label: string
+  meaning: string  
+  options: OptionModel[]         
+  answer: string | StepModel[] | null  
 }
 
-export interface OpenAiPathsModel {
+export interface AnswerModel{
+  label: string
+  value: string
+  meaning: string
+}
+
+interface GoalInfo {
+  title: string
+  description: string
+  days_to_complete: number
+}
+
+export interface InfoForOpenAI {
+  goal: GoalInfo
+  [key: string]: AnswerModel | GoalInfo
+}
+
+export interface OpenAIPathsModel {
   title: string
   description: string
   icon: string

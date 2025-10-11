@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { timelineService } from "../../services/timeline.service"
 import { MentorChat } from "./MentorChat"
 import { MentorSelectors } from "./MentorSelectors"
-import { MainStepModel, MentorQuestionModel, OptionModel, StepModel } from "../../models/timeline.models"
+import { AnswerModel, MainStepModel, MentorQuestionModel, OptionModel, StepModel } from "../../models/timeline.models"
+import { getMentorQuestions } from "../../storage/mentorQuestions"
 
 interface MentorProps{
     isMentorOpen: boolean
@@ -26,7 +27,7 @@ export function Mentor({
 
     const { svgSize, mentorRadiusClose, selectorsRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
     const mentorRadius = isMentorOpen ? svgSize : mentorRadiusClose
-    const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModel[]>(timelineService.getMentorQuestions)
+    const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModel[]>(getMentorQuestions())
     const [question, setQuestion] = useState<string>(mentorQuestions[0].question)
     const [options, setOptions] = useState<OptionModel[]>(mentorQuestions[0].options)
 
@@ -76,10 +77,20 @@ export function Mentor({
     async function insertPathsOptions(){
         const startDay = Math.max(mainStep.start, today)
         const totalDays = mainStep.end - startDay
-        const answers = mentorQuestions.map(q => q.answer)
-        .filter(a => typeof a === 'string')
+
+        const answers = mentorQuestions.reduce((acc, q) => {
+            if (typeof q.answer === 'string') {
+                acc[q.key] = {
+                    label: q.options.find(opt => opt.value === q.answer)?.title || '',
+                    value: q.answer,
+                    meaning: q.meaning
+                }
+            }
+            return acc
+        }, {} as Record<string, AnswerModel>)
+
         const paths = await timelineService
-            .getPathsFromOpenAI(answers, totalDays, startDay, mainStep.id)
+            .getPathsFromOpenAI(answers, totalDays, startDay, mainStep)
         setOptions(paths)
     }
 
