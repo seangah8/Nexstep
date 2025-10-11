@@ -55,12 +55,16 @@ export function HoverOptionModal({option, mainStep, today} : HoverOptionModalPro
 
                         <div className="path-timeline">
                             <div className="vertical-line"/>
-                            <i className="fa-solid fa-circle-dot"></i>
+                            <div className="start-point">
+                                <i className="fa-solid fa-circle-dot"></i>
+                                {startDay === today && <p>now</p>}
+                            </div>
+                            
                             <ul>
                                 {option.value.map(step => {
                                     const precantage = 100* ((step.end - startDay) / totalDays)
                                     return(
-                                    <div className="step" style={{top: `calc(${precantage}% - 25px)`}}>
+                                    <div key={step.id} className="step" style={{top: `calc(${precantage}% + 4% - 25px)`}}>
                                         <i className="fa-solid fa-circle"></i>
                                         <li key={step.id}>
                                             {step.title}

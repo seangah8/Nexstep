@@ -2,17 +2,21 @@ import { useEffect, useState } from "react"
 import { timelineService } from "../../services/timeline.service"
 import { MentorChat } from "./MentorChat"
 import { MentorSelectors } from "./MentorSelectors"
-import { MentorQuestionModal, OptionModal, StepModel } from "../../models/timeline.models"
+import { MainStepModel, MentorQuestionModel, OptionModel, StepModel } from "../../models/timeline.models"
 
 interface MentorProps{
     isMentorOpen: boolean
+    mainStep: MainStepModel
+    today: number
     setIsMentorOpen: React.Dispatch<React.SetStateAction<boolean>>
     replaceSteps: (steps : StepModel[]) => void
-    setHoveredOption: (option : OptionModal | null) => void
+    setHoveredOption: (option : OptionModel | null) => void
 }
 
 export function Mentor({
     isMentorOpen, 
+    mainStep,
+    today,
     setIsMentorOpen, 
     replaceSteps, 
     setHoveredOption,
@@ -22,9 +26,9 @@ export function Mentor({
 
     const { svgSize, mentorRadiusClose, selectorsRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
     const mentorRadius = isMentorOpen ? svgSize : mentorRadiusClose
-    const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModal[]>(timelineService.getMentorQuestions)
+    const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModel[]>(timelineService.getMentorQuestions)
     const [question, setQuestion] = useState<string>(mentorQuestions[0].question)
-    const [options, setOptions] = useState<OptionModal[]>(mentorQuestions[0].options)
+    const [options, setOptions] = useState<OptionModel[]>(mentorQuestions[0].options)
 
 
     // after each time the user pick an option
@@ -34,11 +38,15 @@ export function Mentor({
         // there are still quations that havent been answered
         if (emptyAnswerIndex !== -1){
             setQuestion(mentorQuestions[emptyAnswerIndex].question)
-            setOptions(mentorQuestions[emptyAnswerIndex].options)
+            // if its any normal question
+            if(emptyAnswerIndex < mentorQuestions.length-1)
+                setOptions(mentorQuestions[emptyAnswerIndex].options)
+            // last question - pick a path
+            else InsertPathsOptions()
         }
 
         // when all questions have been answered
-        else  {
+        else {
             let newSteps = mentorQuestions[mentorQuestions.length - 1].answer
             // check the answer indeed an array (steps)
             if(Array.isArray(newSteps)){
@@ -65,6 +73,16 @@ export function Mentor({
     function toggleSelectors(){
         setIsMentorOpen(prev=>!prev)
         clearAnswers()
+    }
+
+    async function InsertPathsOptions(){
+        const startDay = Math.max(mainStep.start, today)
+        const totalDays = mainStep.end - startDay
+        const answers = mentorQuestions.map(q => q.answer)
+        .filter(a => typeof a === 'string')
+        const paths = await timelineService.getPathsFromOpenAI(answers, totalDays, startDay, mainStep.id)
+        console.log('paths', paths)
+        setOptions(paths)
     }
 
 

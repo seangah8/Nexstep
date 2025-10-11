@@ -34,15 +34,22 @@ export interface DraggingModel{
     prevStepsToSow: StepModel[]
 }
 
-export interface OptionModal{
+export interface OptionModel{
   icon: string
   title: string
   description: string
   value: string | StepModel[]
 }
 
-export interface MentorQuestionModal {
+export interface MentorQuestionModel {
   question: string
-  options: OptionModal[]
+  options: OptionModel[]
   answer: string | StepModel[] | null
+}
+
+export interface OpenAiPathsModel {
+  title: string
+  description: string
+  icon: string
+  value: {title: string, description: string, days: number}[]
 }

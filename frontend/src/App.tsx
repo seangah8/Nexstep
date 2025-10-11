@@ -33,7 +33,6 @@ export default App
 
 Things need to be add
 
-0. when creating path with mentor make the main start from its start or the todays
 1. make function that gather all the info for ai when getting into path options
 2. make function that fake gadering the ai path options and appy on code
 3. learn how to use open ai api

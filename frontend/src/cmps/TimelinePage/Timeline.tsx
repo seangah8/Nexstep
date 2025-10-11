@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
-import { StepModel, MainStepModel, EditModalModel, DraggingModel, OptionModal } from "../../models/timeline.models";
+import { StepModel, MainStepModel, EditModalModel, DraggingModel, OptionModel } from "../../models/timeline.models";
 import { timelineService } from "../../services/timeline.service";
 import { utilService } from "../../services/util.service";
 import { EditStepModal } from "./EditStepModal";
@@ -30,7 +30,7 @@ export function Timeline( { timeline } : TimelineProps) {
   const [dragging, setDragging] = useState<DraggingModel | null>(null)
   const [hoveredStep, setHoveredStep] = useState<StepModel | null>(null)
   const [isMentorOpen, setIsMentorOpen] = useState<boolean>(false)
-  const [hoveredOption, setHoveredOption] = useState<OptionModal | null>(null)
+  const [hoveredOption, setHoveredOption] = useState<OptionModel | null>(null)
   
   const timelineSvgRef = useRef<SVGSVGElement | null>(null)
   const todayPointerSvgRef = useRef<SVGSVGElement | null>(null)
@@ -370,6 +370,8 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
 
         <Mentor
           isMentorOpen={isMentorOpen}
+          mainStep={mainStep}
+          today={today}
           setIsMentorOpen={setIsMentorOpen}
           replaceSteps={replaceSubStepsWithMentorSteps}
           setHoveredOption={setHoveredOption}

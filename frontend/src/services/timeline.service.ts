@@ -1,5 +1,6 @@
-import { TimelineModel, MainStepModel, StepModel, MentorQuestionModal } from "../models/timeline.models";
+import { TimelineModel, MainStepModel, StepModel, MentorQuestionModel, OptionModel, OpenAiPathsModel } from "../models/timeline.models";
 import { httpService } from "./http.service";
+import { utilService } from "./util.service";
 
 export const timelineService = {
   query,
@@ -27,6 +28,7 @@ export const timelineService = {
   updateParentsExceptEnd,
   updateLastChildrensExceptEnd,
   getTrianglePoints,
+  getPathsFromOpenAI,
 }
 
 async function query(): Promise<TimelineModel[]> {
@@ -74,8 +76,8 @@ function getToday(){
   return Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
 }
 
-function getMentorQuestions() : MentorQuestionModal[]{
-  const mentorQuestions : MentorQuestionModal[] = [
+function getMentorQuestions() : MentorQuestionModel[]{
+  const mentorQuestions : MentorQuestionModel[] = [
       {
         question: 'How many *hours per week* are you willing to work on this goal?',
         options: [
@@ -121,73 +123,10 @@ function getMentorQuestions() : MentorQuestionModal[]{
         ],
         answer: null
       },
+
       {
         question: 'What *path* suits you best?',
-        options: [
-
-            {icon: '<i class="fa-solid fa-code-branch"></i>', title: 'Path1', value: [
-              {
-                id: 'path1-id1', 
-                parentId: 'idUserGoal', 
-                title: 'path1-step1',
-                description: 'path1-step1-description', 
-                image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20380
-              },
-              {
-                id: 'path1-id2', 
-                parentId: 'idUserGoal', 
-                title: 'path1-step2',
-                description: 'path1-step1-description', 
-                image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20398
-              }
-            ], 
-            description: 'path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description path1-description '
-          },
-
-            {icon: '<i class="fa-solid fa-code-merge"></i>', title: 'Path2', value: [
-              {
-                id: 'path2-id1', 
-                parentId: 'idUserGoal', 
-                title: 'path2-step1',
-                description: 'path2-step1-description', 
-                image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20388
-              }
-            ], 
-            description: 'path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description path2-description '
-          },
-
-            {icon: '<i class="fa-solid fa-code-fork"></i>', title: 'Path3', value: [
-              {
-                id: 'path3-id1', 
-                parentId: 'idUserGoal', 
-                title: 'path3-step1',
-                description: 'path3-step1-description', 
-                image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20375
-              },
-              {
-                id: 'path3-id2', 
-                parentId: 'idUserGoal', 
-                title: 'path3-step2',
-                description: 'path3-step1-description', 
-                image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20385
-              },
-              {
-                id: 'path3-id3', 
-                parentId: 'idUserGoal', 
-                title: 'path3-step3',
-                description: 'path3-step3-description', 
-                image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png', 
-                end: 20410
-              }
-            ], 
-            description: 'path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description path3-description '
-          },
-        ],
+        options: [],
         answer: null
       },
 
@@ -713,6 +652,85 @@ function getTrianglePoints(angleDeg : number, size : number)
     };
 
     return {tip, left, right};
+}
+
+async function getPathsFromOpenAI(answers: string[], toatalDays: number, startDay: number, parentId: string) : Promise<OptionModel[]> {
+
+  const openAiPaths : OpenAiPathsModel[] = [
+      {
+        title: 'Path1',
+        description: 'path1-description',
+        icon: '<i class="fa-solid fa-code-branch"></i>', 
+        value: [
+          {
+            title: 'path1-step1',
+            description: 'path1-step1-description', 
+            days: 35
+          },
+          {
+            title: 'path1-step2',
+            description: 'path1-step1-description', 
+            days: 60
+          }
+      ], 
+    },
+
+    { 
+      title: 'Path2',
+      description: 'path2-description',
+      icon: '<i class="fa-solid fa-code-merge"></i>',  
+      value: [
+        {
+          title: 'path2-step1',
+          description: 'path2-step1-description',  
+          days: 90
+        }
+      ], 
+    },
+
+    {
+      title: 'Path3', 
+      description: 'path3-description',
+      icon: '<i class="fa-solid fa-code-fork"></i>',  
+      value: [
+        {
+          title: 'path3-step1',
+          description: 'path3-step1-description', 
+          days: 10
+        },
+        {
+          title: 'path3-step2',
+          description: 'path3-step1-description', 
+          days: 62
+        },
+        { 
+          title: 'path3-step3',
+          description: 'path3-step3-description', 
+          days: 20
+        }
+      ], 
+    },
+  ]
+
+  // then convert the answers into options
+  const options : OptionModel[] = openAiPaths.map(path => {
+
+    const updatedPathValue : StepModel[] = path.value.map(step => {
+      const updatedStep : StepModel = {
+        id: utilService.createId(),
+        title: step.title,
+        description: step.description,
+        end: startDay + step.days,
+        parentId,
+        image: '',
+      }
+      return updatedStep
+    })
+
+    return {...path, value: updatedPathValue}
+  })
+
+  return  options
 }
 
 
