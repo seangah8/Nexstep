@@ -29,6 +29,7 @@ export const timelineService = {
   updateLastChildrensExceptEnd,
   getTrianglePoints,
   getPathsFromOpenAI,
+  addImagesFromOpenAI,
 }
 
 async function query(): Promise<TimelineModel[]> {
@@ -731,6 +732,17 @@ async function getPathsFromOpenAI(answers: string[], toatalDays: number, startDa
   })
 
   return  options
+}
+
+async function addImagesFromOpenAI(steps : StepModel[]) : Promise<StepModel[]> {
+
+  const openAiAnswer = steps.reduce((acc, step) => {
+    acc[step.id] = 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png'
+    return acc
+  }, {} as Record<string, string>)
+
+  let updatedSteps = [...steps]
+  return updatedSteps.map(step => ({...step, image: openAiAnswer[step.id]}))
 }
 
 

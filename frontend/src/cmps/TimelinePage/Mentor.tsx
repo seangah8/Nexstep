@@ -42,17 +42,15 @@ export function Mentor({
             if(emptyAnswerIndex < mentorQuestions.length-1)
                 setOptions(mentorQuestions[emptyAnswerIndex].options)
             // last question - pick a path
-            else InsertPathsOptions()
+            else insertPathsOptions()
         }
 
         // when all questions have been answered
         else {
             let newSteps = mentorQuestions[mentorQuestions.length - 1].answer
             // check the answer indeed an array (steps)
-            if(Array.isArray(newSteps)){
-                replaceSteps(newSteps)
-                setIsMentorOpen(false)
-            }
+            if(Array.isArray(newSteps))
+                onChossingPath(newSteps)
         }
 
     }, [mentorQuestions])
@@ -75,14 +73,20 @@ export function Mentor({
         clearAnswers()
     }
 
-    async function InsertPathsOptions(){
+    async function insertPathsOptions(){
         const startDay = Math.max(mainStep.start, today)
         const totalDays = mainStep.end - startDay
         const answers = mentorQuestions.map(q => q.answer)
         .filter(a => typeof a === 'string')
-        const paths = await timelineService.getPathsFromOpenAI(answers, totalDays, startDay, mainStep.id)
-        console.log('paths', paths)
+        const paths = await timelineService
+            .getPathsFromOpenAI(answers, totalDays, startDay, mainStep.id)
         setOptions(paths)
+    }
+
+    async function onChossingPath(steps : StepModel[]){
+        const stepsWithImages = await timelineService.addImagesFromOpenAI(steps)
+        replaceSteps(stepsWithImages)
+        setIsMentorOpen(false)
     }
 
 
