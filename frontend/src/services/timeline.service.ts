@@ -1,6 +1,8 @@
-import { TimelineModel, MainStepModel, StepModel, OptionModel, OpenAIPathsModel, AnswerModel, InfoForOpenAI } from "../models/timeline.models";
+import { TimelineModel, MainStepModel, StepModel, AnswerModel, InfoForOpenAIModel, OptionModel } from "../models/timeline.models";
 import { httpService } from "./http.service";
+import { openAIService } from "./openai.service";
 import { utilService } from "./util.service";
+
 
 export const timelineService = {
   query,
@@ -30,6 +32,7 @@ export const timelineService = {
   getPathsFromOpenAI,
   addImagesFromOpenAI,
 }
+
 
 async function query(): Promise<TimelineModel[]> {
   return await httpService.get(`timeline`)
@@ -596,10 +599,13 @@ function getTrianglePoints(angleDeg : number, size : number)
     return {tip, left, right};
 }
 
-async function getPathsFromOpenAI(answers: Record<string, AnswerModel>, totalDays: number, startDay: number, mainStep: MainStepModel) : Promise<OptionModel[]> {
+async function getPathsFromOpenAI(answers: Record<string, AnswerModel>, 
+  totalDays: number, 
+  startDay: number, 
+  mainStep: MainStepModel) : Promise<OptionModel[]> {
 
   // object of information to open ai to make me paths 
-  const infoForOpenAI : InfoForOpenAI = {
+  const infoForOpenAI : InfoForOpenAIModel = {
     "goal": {
       "title": mainStep.title,
       "description": mainStep.description,
@@ -608,74 +614,22 @@ async function getPathsFromOpenAI(answers: Record<string, AnswerModel>, totalDay
     ...answers
   }
 
-  console.log('infoForOpenAI', infoForOpenAI)
+  const openAIPaths = await openAIService.generatePaths(infoForOpenAI)
+  console.log('openAIPaths: ', openAIPaths)
 
-  // example of open ai stracture answer i expect
-  const openAIPaths : OpenAIPathsModel[] = [
-      {
-        title: 'Path1',
-        description: 'path1-description',
-        icon: '<i class="fa-solid fa-code-branch"></i>', 
-        value: [
-          {
-            title: 'path1-step1',
-            description: 'path1-step1-description', 
-            days: 35
-          },
-          {
-            title: 'path1-step2',
-            description: 'path1-step1-description', 
-            days: 60
-          }
-      ], 
-    },
 
-    { 
-      title: 'Path2',
-      description: 'path2-description',
-      icon: '<i class="fa-solid fa-code-merge"></i>',  
-      value: [
-        {
-          title: 'path2-step1',
-          description: 'path2-step1-description',  
-          days: 90
-        }
-      ], 
-    },
-
-    {
-      title: 'Path3', 
-      description: 'path3-description',
-      icon: '<i class="fa-solid fa-code-fork"></i>',  
-      value: [
-        {
-          title: 'path3-step1',
-          description: 'path3-step1-description', 
-          days: 10
-        },
-        {
-          title: 'path3-step2',
-          description: 'path3-step1-description', 
-          days: 62
-        },
-        { 
-          title: 'path3-step3',
-          description: 'path3-step3-description', 
-          days: 20
-        }
-      ], 
-    },
-  ]
 
   // then convert the answers into options
   const options : OptionModel[] = openAIPaths.map(path => {
-
+    
+    let startStepDay = startDay
     const updatedPathValue : StepModel[] = path.value.map(step => {
+
       const updatedStep : StepModel = {
         id: utilService.createId(),
         title: step.title,
         description: step.description,
-        end: startDay + step.days,
+        end: startStepDay += step.days,
         parentId: mainStep.id,
         image: '',
       }
@@ -684,6 +638,8 @@ async function getPathsFromOpenAI(answers: Record<string, AnswerModel>, totalDay
 
     return {...path, value: updatedPathValue}
   })
+
+  console.log('openAIOptions: ', options)
 
   return  options
 }
@@ -712,6 +668,11 @@ async function addImagesFromOpenAI(steps: StepModel[]): Promise<StepModel[]> {
   // 5. Return steps with updated images
   return steps.map(step => ({...step, image: updatedOpenAiAnswer[step.id]}))
 }
+
+
+
+
+
 
 
 

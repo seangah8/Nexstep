@@ -15,3 +15,28 @@ export interface StepModel {
     image: string
     end: number
 }
+
+export interface AnswerModel{
+  label: string
+  value: string
+  meaning: string
+}
+
+interface GoalInfoModel {
+  title: string
+  description: string
+  days_to_complete: number
+}
+
+
+export interface InfoForOpenAIModel {
+  goal: GoalInfoModel
+  answers: Record<string, AnswerModel>
+}
+
+export interface OpenAIPathsModel {
+  title: string
+  description: string
+  icon: string
+  value: {title: string, description: string, days: number}[]
+}

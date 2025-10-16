@@ -1,8 +1,9 @@
-import { ReactElement } from "react"
-import { MainStepModel, OptionModal } from "../../models/timeline.models"
+import parse from 'html-react-parser'
+import { ReactNode } from "react"
+import { MainStepModel, OptionModel } from "../../models/timeline.models"
 
 interface HoverOptionModalProps{
-    option: OptionModal | null
+    option: OptionModel | null
     mainStep: MainStepModel
     today: number
 }
@@ -12,11 +13,10 @@ export function HoverOptionModal({option, mainStep, today} : HoverOptionModalPro
     const startDay = Math.max(mainStep.start, today)
     const totalDays = mainStep.end - startDay
 
-    function convertStringToElement(str: string): string | ReactElement {
+    function convertStringToElement(str: string): string | ReactNode {
         const shouldConvert = str.trim().startsWith('<')
         if (!shouldConvert) return str
-
-        return <span dangerouslySetInnerHTML={{ __html: str }} />
+        return parse(str)
     }
 
     return(

@@ -65,6 +65,7 @@
         justify-content: space-between;
 
         .contaxt{
+            width: 100%;
             padding: 10px;
             display: flex;
 
@@ -114,7 +115,7 @@
                 ul{
                     margin: 0;
                     padding: 10px;
-                    height: 90%;
+                    height: 85%;
                     list-style: none;
 
                     .step{

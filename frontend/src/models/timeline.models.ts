@@ -56,15 +56,15 @@ export interface AnswerModel{
   meaning: string
 }
 
-interface GoalInfo {
+interface GoalInfoModel {
   title: string
   description: string
   days_to_complete: number
 }
 
-export interface InfoForOpenAI {
-  goal: GoalInfo
-  [key: string]: AnswerModel | GoalInfo
+export interface InfoForOpenAIModel {
+  goal: GoalInfoModel
+  [key: string]: AnswerModel | GoalInfoModel
 }
 
 export interface OpenAIPathsModel {

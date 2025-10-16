@@ -4430,3 +4430,212 @@ Error: User not found
 12.10.2025, 1:44:18 - INFO - Visited route | /
 12.10.2025, 1:44:53 - INFO - Visited route | /:userId
 12.10.2025, 1:44:53 - INFO - Visited route | /
+12.10.2025, 5:37:28 - INFO - Up and running on http://localhost:3000
+14.10.2025, 2:37:54 - INFO - Up and running on http://localhost:3000
+14.10.2025, 2:58:25 - INFO - Up and running on http://localhost:3000
+14.10.2025, 2:58:35 - INFO - Up and running on http://localhost:3000
+14.10.2025, 3:01:26 - INFO - Up and running on http://localhost:3000
+14.10.2025, 3:22:42 - INFO - Visited route | /login
+14.10.2025, 3:22:42 - INFO - User login: | {"_id":"68e41f4a31af4416b81fe6c8","username":"u4"}
+14.10.2025, 3:22:42 - INFO - Visited route | /:userId
+14.10.2025, 3:22:42 - INFO - Visited route | /
+14.10.2025, 3:22:44 - INFO - Visited route | /:userId
+14.10.2025, 3:22:44 - INFO - Visited route | /
+14.10.2025, 3:38:55 - INFO - Up and running on http://localhost:3000
+14.10.2025, 3:39:09 - INFO - Up and running on http://localhost:3000
+14.10.2025, 3:50:00 - INFO - Up and running on http://localhost:3000
+14.10.2025, 4:04:25 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:28:12 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:29:21 - INFO - Visited route | /:userId
+14.10.2025, 5:29:22 - INFO - Visited route | /
+14.10.2025, 5:31:29 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:31:32 - INFO - Visited route | /:userId
+14.10.2025, 5:31:32 - INFO - Visited route | /
+14.10.2025, 5:33:12 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:33:23 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:35:25 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:35:49 - INFO - Visited route | /:userId
+14.10.2025, 5:35:49 - INFO - Visited route | /
+14.10.2025, 5:38:38 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:41:44 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:41:49 - INFO - Visited route | /:userId
+14.10.2025, 5:41:49 - INFO - Visited route | /
+14.10.2025, 5:45:03 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:45:16 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:45:18 - INFO - Visited route | /:userId
+14.10.2025, 5:45:18 - INFO - Visited route | /
+14.10.2025, 5:46:51 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:48:49 - INFO - Up and running on http://localhost:3000
+14.10.2025, 5:57:47 - INFO - Up and running on http://localhost:3000
+14.10.2025, 6:02:12 - INFO - Up and running on http://localhost:3000
+14.10.2025, 6:02:25 - INFO - Up and running on http://localhost:3000
+14.10.2025, 6:06:02 - INFO - Visited route | /:userId
+14.10.2025, 6:06:02 - INFO - Visited route | /
+14.10.2025, 6:06:23 - INFO - Visited route | /:userId
+14.10.2025, 6:06:23 - INFO - Visited route | /
+14.10.2025, 6:06:27 - INFO - Visited route | /:userId
+14.10.2025, 6:06:27 - INFO - Visited route | /
+14.10.2025, 6:07:47 - INFO - Visited route | /:userId
+14.10.2025, 6:07:47 - INFO - Visited route | /
+14.10.2025, 19:58:53 - INFO - Up and running on http://localhost:3000
+14.10.2025, 20:00:10 - INFO - Visited route | /login
+14.10.2025, 20:00:10 - INFO - User login: | {"_id":"68e41f4a31af4416b81fe6c8","username":"u4"}
+14.10.2025, 20:00:10 - INFO - Visited route | /:userId
+14.10.2025, 20:00:11 - INFO - Visited route | /
+14.10.2025, 20:00:12 - INFO - Visited route | /:userId
+14.10.2025, 20:00:13 - INFO - Visited route | /
+14.10.2025, 20:00:27 - INFO - Visited route | /paths
+14.10.2025, 20:04:42 - INFO - Visited route | /
+14.10.2025, 20:05:37 - INFO - Visited route | /
+14.10.2025, 20:08:03 - INFO - Up and running on http://localhost:3000
+14.10.2025, 20:09:20 - INFO - Up and running on http://localhost:3000
+14.10.2025, 20:09:26 - INFO - Visited route | /:userId
+14.10.2025, 20:09:26 - INFO - Visited route | /
+14.10.2025, 20:09:29 - INFO - Visited route | /:userId
+14.10.2025, 20:09:29 - INFO - Visited route | /
+14.10.2025, 20:09:33 - INFO - Visited route | /:userId
+14.10.2025, 20:09:33 - INFO - Visited route | /
+14.10.2025, 20:09:36 - INFO - Visited route | /:userId
+14.10.2025, 20:09:36 - INFO - Visited route | /
+14.10.2025, 20:11:03 - INFO - Visited route | /paths
+14.10.2025, 21:02:33 - INFO - Up and running on http://localhost:3000
+14.10.2025, 21:02:39 - INFO - Visited route | /:userId
+14.10.2025, 21:02:39 - INFO - Visited route | /paths
+14.10.2025, 21:02:39 - INFO - Visited route | /
+14.10.2025, 21:02:52 - INFO - Visited route | /:userId
+14.10.2025, 21:02:52 - INFO - Visited route | /
+14.10.2025, 21:03:11 - INFO - Visited route | /paths
+14.10.2025, 21:14:04 - INFO - Up and running on http://localhost:3000
+14.10.2025, 21:14:13 - INFO - Up and running on http://localhost:3000
+14.10.2025, 21:14:28 - INFO - Visited route | /:userId
+14.10.2025, 21:14:28 - INFO - Visited route | /paths
+14.10.2025, 21:14:28 - INFO - Visited route | /
+14.10.2025, 21:14:34 - INFO - Visited route | /:userId
+14.10.2025, 21:14:34 - INFO - Visited route | /paths
+14.10.2025, 21:14:34 - INFO - Visited route | /
+14.10.2025, 21:15:15 - ERROR - OpenAI did not return an array
+14.10.2025, 22:03:13 - INFO - Up and running on http://localhost:3000
+14.10.2025, 22:03:15 - INFO - Visited route | /:userId
+14.10.2025, 22:03:15 - INFO - Visited route | /
+14.10.2025, 22:03:24 - INFO - Visited route | /paths
+14.10.2025, 22:03:56 - ERROR - OpenAI did not return an array
+14.10.2025, 22:07:55 - INFO - Up and running on http://localhost:3000
+14.10.2025, 22:07:59 - INFO - Visited route | /:userId
+14.10.2025, 22:08:00 - INFO - Visited route | /
+14.10.2025, 22:08:07 - INFO - Visited route | /paths
+14.10.2025, 22:08:57 - ERROR - OpenAI did not return an array
+14.10.2025, 22:14:50 - INFO - Up and running on http://localhost:3000
+14.10.2025, 22:14:53 - INFO - Visited route | /:userId
+14.10.2025, 22:14:53 - INFO - Visited route | /
+14.10.2025, 22:15:05 - INFO - Visited route | /paths
+14.10.2025, 22:21:04 - INFO - Visited route | /
+14.10.2025, 22:21:52 - INFO - Visited route | /
+14.10.2025, 22:21:53 - INFO - Visited route | /
+14.10.2025, 22:21:53 - INFO - Visited route | /
+14.10.2025, 22:21:55 - INFO - Visited route | /
+14.10.2025, 22:21:55 - INFO - Visited route | /
+14.10.2025, 22:21:56 - INFO - Visited route | /
+14.10.2025, 22:21:56 - INFO - Visited route | /
+14.10.2025, 22:21:57 - INFO - Visited route | /
+14.10.2025, 22:21:58 - INFO - Visited route | /
+14.10.2025, 22:21:58 - INFO - Visited route | /
+14.10.2025, 22:21:59 - INFO - Visited route | /
+14.10.2025, 22:22:01 - INFO - Visited route | /
+16.10.2025, 10:12:10 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:15:55 - INFO - Visited route | /login
+16.10.2025, 10:15:55 - INFO - User login: | {"_id":"68e41f4a31af4416b81fe6c8","username":"u4"}
+16.10.2025, 10:15:55 - INFO - Visited route | /:userId
+16.10.2025, 10:15:55 - INFO - Visited route | /
+16.10.2025, 10:15:58 - INFO - Visited route | /:userId
+16.10.2025, 10:15:58 - INFO - Visited route | /
+16.10.2025, 10:16:25 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:16:38 - INFO - Visited route | /:userId
+16.10.2025, 10:16:39 - INFO - Visited route | /
+16.10.2025, 10:16:49 - INFO - Visited route | /:userId
+16.10.2025, 10:16:50 - INFO - Visited route | /
+16.10.2025, 10:16:53 - INFO - Visited route | /:userId
+16.10.2025, 10:16:54 - INFO - Visited route | /
+16.10.2025, 10:16:57 - INFO - Visited route | /:userId
+16.10.2025, 10:16:58 - INFO - Visited route | /
+16.10.2025, 10:16:59 - INFO - Visited route | /:userId
+16.10.2025, 10:16:59 - INFO - Visited route | /
+16.10.2025, 10:17:31 - INFO - Visited route | /:userId
+16.10.2025, 10:17:32 - INFO - Visited route | /
+16.10.2025, 10:19:59 - INFO - Visited route | /
+16.10.2025, 10:21:30 - INFO - Visited route | /
+16.10.2025, 10:21:32 - INFO - Visited route | /
+16.10.2025, 10:21:35 - INFO - Visited route | /
+16.10.2025, 10:21:36 - INFO - Visited route | /
+16.10.2025, 10:21:37 - INFO - Visited route | /
+16.10.2025, 10:21:38 - INFO - Visited route | /
+16.10.2025, 10:21:38 - INFO - Visited route | /
+16.10.2025, 10:21:39 - INFO - Visited route | /
+16.10.2025, 10:21:40 - INFO - Visited route | /
+16.10.2025, 10:21:41 - INFO - Visited route | /
+16.10.2025, 10:21:42 - INFO - Visited route | /
+16.10.2025, 10:22:39 - INFO - Visited route | /paths
+16.10.2025, 10:30:34 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:32:47 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:38:16 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:41:12 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:41:17 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:41:18 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:41:20 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:41:23 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:50:15 - INFO - Up and running on http://localhost:3000
+16.10.2025, 10:50:23 - INFO - Visited route | /
+16.10.2025, 10:50:33 - INFO - Visited route | /
+16.10.2025, 10:50:56 - INFO - Visited route | /paths
+16.10.2025, 10:54:41 - INFO - Visited route | /:userId
+16.10.2025, 10:54:41 - INFO - Visited route | /paths
+16.10.2025, 10:54:41 - INFO - Visited route | /
+16.10.2025, 10:56:18 - INFO - Up and running on http://localhost:3000
+16.10.2025, 11:18:27 - INFO - Up and running on http://localhost:3000
+16.10.2025, 11:18:32 - INFO - Visited route | /:userId
+16.10.2025, 11:18:32 - INFO - Visited route | /paths
+16.10.2025, 11:18:32 - INFO - Visited route | /
+16.10.2025, 11:20:47 - INFO - Visited route | /
+16.10.2025, 11:20:51 - INFO - Visited route | /
+16.10.2025, 11:20:52 - INFO - Visited route | /
+16.10.2025, 11:20:53 - INFO - Visited route | /
+16.10.2025, 11:27:21 - INFO - Visited route | /
+16.10.2025, 11:27:22 - INFO - Visited route | /
+16.10.2025, 11:30:59 - INFO - Visited route | /:userId
+16.10.2025, 11:30:59 - INFO - Visited route | /
+16.10.2025, 11:31:00 - INFO - Visited route | /
+16.10.2025, 11:32:45 - INFO - Visited route | /paths
+16.10.2025, 11:34:44 - INFO - Visited route | /
+16.10.2025, 11:36:14 - INFO - Visited route | /paths
+16.10.2025, 11:52:52 - INFO - Visited route | /:userId
+16.10.2025, 11:52:52 - INFO - Visited route | /
+16.10.2025, 11:54:28 - INFO - Visited route | /paths
+16.10.2025, 11:58:03 - INFO - Visited route | /
+16.10.2025, 12:11:50 - INFO - Up and running on http://localhost:3000
+16.10.2025, 12:11:53 - INFO - Visited route | /:userId
+16.10.2025, 12:11:53 - INFO - Visited route | /
+16.10.2025, 12:12:21 - INFO - Visited route | /paths
+16.10.2025, 12:16:11 - INFO - Visited route | /
+16.10.2025, 12:16:23 - INFO - Visited route | /
+16.10.2025, 12:16:25 - INFO - Visited route | /
+16.10.2025, 12:16:29 - INFO - Visited route | /
+16.10.2025, 12:16:30 - INFO - Visited route | /
+16.10.2025, 12:16:31 - INFO - Visited route | /
+16.10.2025, 12:16:34 - INFO - Visited route | /
+16.10.2025, 12:16:35 - INFO - Visited route | /
+16.10.2025, 12:17:10 - INFO - Up and running on http://localhost:3000
+16.10.2025, 12:17:12 - INFO - Visited route | /
+16.10.2025, 12:17:13 - INFO - Visited route | /
+16.10.2025, 12:17:13 - INFO - Visited route | /
+16.10.2025, 12:19:42 - INFO - Visited route | /
+16.10.2025, 12:19:43 - INFO - Visited route | /
+16.10.2025, 12:19:45 - INFO - Visited route | /
+16.10.2025, 12:19:46 - INFO - Visited route | /
+16.10.2025, 12:19:47 - INFO - Visited route | /
+16.10.2025, 12:19:48 - INFO - Visited route | /
+16.10.2025, 12:19:48 - INFO - Visited route | /
+16.10.2025, 12:19:49 - INFO - Visited route | /
+16.10.2025, 12:19:50 - INFO - Visited route | /
+16.10.2025, 12:19:55 - INFO - Visited route | /
+16.10.2025, 12:22:10 - INFO - Visited route | /
+16.10.2025, 12:22:40 - INFO - Visited route | /paths
+16.10.2025, 12:24:45 - INFO - Visited route | /
