@@ -9,9 +9,9 @@ export const timelineActions = {
 }
 
 
-async function createTimeline() : Promise<void> {
+async function createTimeline(title:string , description:string, imageUrl:string|null, daysAmount:number) : Promise<void> {
     try {
-        const timeline = await timelineService.add()
+        const timeline = await timelineService.add(title, description, imageUrl, daysAmount)
         store.dispatch({
             type: TimelineActionsType.SET_TIMELINE,
             timeline

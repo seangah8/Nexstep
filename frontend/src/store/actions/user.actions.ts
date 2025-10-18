@@ -2,6 +2,7 @@ import { store } from "../store"
 import { UserActionsType } from "../interfaces/user.store.ts";
 import { CredentialsModel } from "../../models/user.models.ts";
 import { userService } from "../../services/user.service.ts";
+import { TimelineActionsType } from "../interfaces/timeline.store.ts";
 
 export const userActions = {
     login,
@@ -42,6 +43,10 @@ async function logout() : Promise<void> {
         store.dispatch({
             type: UserActionsType.SET_USER,
             loggedInUser: null
+        })
+        store.dispatch({
+            type: TimelineActionsType.SET_TIMELINE,
+            timeline: null
         })
     } catch (err) {
         console.log('Cannot logout', err)

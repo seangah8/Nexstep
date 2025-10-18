@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { RootState } from '../store/store'
 import { CredentialsModel } from '../models/user.models'
 import { LoginSignup } from "../cmps/UserPage/LoginSignup"
@@ -9,7 +10,10 @@ import { timelineService } from '../services/timeline.service'
 import { timelineActions } from '../store/actions/timeline.actions'
 
 
+
 export function UserPage(){
+
+    const navigate = useNavigate()
 
     const loggedInUser = useSelector((storeState : RootState) => 
         storeState.userModule.loggedInUser)
@@ -19,9 +23,10 @@ export function UserPage(){
 
     async function loadTimeline(){
         if(loggedInUser){
-            const timeline : TimelineModel = 
+            const timeline : TimelineModel | null = 
                 await timelineService.get(loggedInUser._id)
-            timelineActions.saveTimeline(timeline)
+            if(!timeline) navigate('/welcome')
+            else timelineActions.saveTimeline(timeline)
         }
     }
 
@@ -33,7 +38,7 @@ export function UserPage(){
     async function onSignup(ev: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel): Promise<void>{
         ev.preventDefault()
         await userActions.signup(credentials)
-        timelineActions.createTimeline()
+        navigate('/welcome')
     }
 
     return(

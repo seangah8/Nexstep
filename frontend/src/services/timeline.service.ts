@@ -39,16 +39,21 @@ async function query(): Promise<TimelineModel[]> {
 }
 
 // get by owner id
-async function get(ownerId : string) : Promise<TimelineModel> {
-  return await httpService.get(`timeline/${ownerId}`)
+async function get(ownerId : string) : Promise<TimelineModel | null> {
+  try{
+    const timeline = await httpService.get(`timeline/${ownerId}`)
+    return timeline
+  } catch(err){
+    return null
+  }
 }
 
 async function remove() : Promise<void> {
   await httpService.delete(`timeline`)
 }
 
-async function add() : Promise<TimelineModel> {
-  return await httpService.post('timeline')
+async function add(title:string , description:string, imageUrl:string|null, daysAmount:number) : Promise<TimelineModel> {
+  return await httpService.post('timeline', {title, description, imageUrl, daysAmount})
 }
 
 async function update(timeline : TimelineModel) : Promise<TimelineModel> {

@@ -5,8 +5,11 @@ import { TimelineModel } from "../models/timeline.models.ts"
 import { timelineService } from "../services/timeline.service.ts"
 import { timelineActions } from "../store/actions/timeline.actions.ts"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export function TimelinePage() {
+
+  const navigate = useNavigate()
 
   const loggedInUser = useSelector((storeState: RootState) => 
     storeState.userModule.loggedInUser)
@@ -21,9 +24,10 @@ export function TimelinePage() {
 
   async function loadTimeline(){
     if(loggedInUser){
-      const timeline : TimelineModel = 
+      const timeline : TimelineModel | null = 
         await timelineService.get(loggedInUser._id)
-      timelineActions.saveTimeline(timeline)
+      if(!timeline) navigate('/welcome')
+      else timelineActions.saveTimeline(timeline)
     }
   }
 

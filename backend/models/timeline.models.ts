@@ -40,3 +40,10 @@ export interface OpenAIPathsModel {
   icon: string
   value: {title: string, description: string, days: number}[]
 }
+
+export interface TimelineCredentialsModel {
+    title: string
+    description: string
+    imageUrl: string | null
+    daysAmount: number
+}

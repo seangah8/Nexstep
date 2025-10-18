@@ -1,0 +1,208 @@
+@use './vars';
+
+.welcome-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10vh;
+
+    .context{
+        height: 50vh;
+        padding: 0 25% 0 25%;
+
+        .page-0{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5vh;
+
+            h3{
+                text-align: center;
+                font-weight: 500;
+            }
+        }
+
+        .page-1{
+            height: 100%;
+            width: 40vw;
+            display: flex;
+            flex-direction: column;
+
+            h3{
+                height: 20%;
+                text-align: center;
+                font-weight: 500;
+            }
+
+            .inputs{
+                height: 80%;
+                width: 100%;
+                display: flex;
+
+                .text-inputs{
+                    height: 100%;
+                    width: 60%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    input{
+                        height: 20px;
+                        padding: 10px;
+                        outline: none;
+                        border: solid vars.$green 2px;
+                        border-radius: 10px;
+                        font-family: "Saira Condensed", sans-serif;
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                        color: vars.$green;
+                    }
+
+                    textarea{
+                        flex-shrink: 0;
+                        height: 200px;
+                        resize:none;
+                        padding: 5px;
+                        border: solid vars.$green 2px;
+                        border-radius: 10px;
+                        font-family: "Saira Condensed", sans-serif;
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                        color: vars.$green;
+
+                        &::-webkit-scrollbar {
+                            width: 6px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: none
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background-color: #006769;
+                            border-radius: 6px;
+                        }
+
+                        &::-webkit-scrollbar-thumb:hover {
+                            background-color: #004d4d;
+                        }
+                    }
+                }
+
+                .image-input{
+                    height: 100%;
+                    width: 40%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .image-area{
+                        cursor: pointer;
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: vars.$green;
+
+                        &:hover{
+                            background-color: vars.$dark-green;
+                        }
+                    }
+
+                    img{
+                        width: 95%;
+                        height: 95%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    i{
+                        color: white;
+                    }
+                }
+
+            }
+
+
+        }
+
+
+        .page-2{
+            height: 100%;
+            width: 40vw;
+            font-size: 2rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+
+            input{
+                height: 25px;
+                width: 80px;
+                padding: 10px;
+                outline: none;
+                border: solid vars.$green 2px;
+                border-radius: 10px;
+                font-family: "Saira Condensed", sans-serif;
+                font-size: 2rem;
+                font-weight: 500;
+                color: vars.$green;
+                text-align: center;
+                
+                &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                }
+            }
+        }
+    }
+
+    .back-arrow, .forward-arrow{
+        cursor: pointer;
+        font-size: 3rem;
+
+        &:hover{
+            color: vars.$dark-green;
+        }
+    }
+
+    .button-area{
+        position: absolute;
+        bottom: 15vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .create-button{
+        cursor: pointer;
+        background-color: vars.$green;
+        font-size: 1.6rem;
+        color: white;
+        font-family: "Saira Condensed", sans-serif;
+        font-weight: 400;
+        border-radius: 10px;
+        padding: 0 30px 0 30px;
+
+        &:hover{
+            background-color: vars.$dark-green;
+        }
+
+        &:disabled{
+            cursor: default;
+            opacity: 50%;
+
+            &:hover{
+                background-color: vars.$green;
+            }
+        }
+    }
+}

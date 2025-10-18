@@ -6,6 +6,7 @@ import { store } from './store/store'
 
 import { TimelinePage } from "./pages/TimelinePage"
 import { UserPage } from "./pages/UserPage"
+import { WelcomePage } from './pages/WelcomePage'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path='/' element={<TimelinePage />} />
             <Route path='/timeline' element={<TimelinePage />} />
             <Route path='/user' element={<UserPage />} />
+            <Route path='/welcome' element={<WelcomePage />}/>
           </Routes>
         </Router>
       </Provider>

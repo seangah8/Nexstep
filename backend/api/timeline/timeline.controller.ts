@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { loggerService } from '../../services/logger.service'
 import { timelineService } from './timeline.service'
-import { TimelineModel } from '../../models/timeline.models'
+import { TimelineCredentialsModel, TimelineModel } from '../../models/timeline.models'
 import { asyncLocalStorage } from '../../services/als.service'
 import { AlsStoreModel } from '../../models/alsStore.models'
 
@@ -27,7 +27,8 @@ export async function getTimelineByUserId(req: Request, res: Response): Promise<
   }
 }
 
-export async function addTimeline(req: Request, res: Response): Promise<void> {
+export async function addTimeline(req: Request<{}, {}, TimelineCredentialsModel>, res: Response): Promise<void> {
+  const timelineCredentials = req.body
   const alsStore = asyncLocalStorage.getStore() as AlsStoreModel
   const loggedinUserId = alsStore.loggedinUser?._id
   try {
@@ -38,12 +39,12 @@ export async function addTimeline(req: Request, res: Response): Promise<void> {
     const newTimeline : Omit<TimelineModel,'_id'> = {
       steps: [
         {
-          id: 'idUserGoal', 
-          title:'Users Goal', 
+          id: 'userGoalId', 
+          title: timelineCredentials.title, 
           parentId: null, 
-          end: today + 1000, 
-          description: 'goal description', 
-          image: defultStepImage
+          end: today + timelineCredentials.daysAmount, 
+          description: timelineCredentials.description, 
+          image: timelineCredentials.imageUrl ?? defultStepImage
         }
       ],
       ownerId: loggedinUserId,

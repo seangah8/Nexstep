@@ -15,7 +15,7 @@ export enum TimelineActionsType {
 // define the structure of the SET_TIMELINE action
 interface SetTimelineAction {
     type: TimelineActionsType.SET_TIMELINE
-    timeline: TimelineModel
+    timeline: TimelineModel | null
 }
 
 // Combine all timeline-related actions into a single type
