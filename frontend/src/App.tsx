@@ -33,16 +33,19 @@ export default App
 
 /*
 
-Things need to be add
+Things need to be fixed
 
-1. make function that gather all the info for ai when getting into path options
-2. make function that fake gadering the ai path options and appy on code
-3. learn how to use open ai api
-4. signup to use open ai api
-5. add open ai to project
+0. steps images supporte also svgs -> then when user choose path generate svgs for steps
+1. make so user cant set main step to over 99,999 days
+2. add loading circle on screen on actions (especially ai loading)
+3. make modal that warn hidden overwriting when using the mentor on step
+4. menu modal close when not clicking on it
 
-a. add ai
-b. add welcom/starting page
+5. when user back to the web and pass a step modal will ask if it did it 
+  -> if not move the step into today + 1 (move other steps if needed)
+6. at the end of welcome page tell in create modal button what missing if there is
+7. add mentor options that asks what the user already know (+ maby more options)
+8. add tutorial screenshot
 
 
 

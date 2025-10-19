@@ -5044,3 +5044,71 @@ Error: timeline not found
 18.10.2025, 4:22:17 - INFO - Visited route | /
 18.10.2025, 4:22:17 - INFO - Visited route | /:userId
 18.10.2025, 4:22:17 - INFO - Visited route | /
+18.10.2025, 4:23:36 - INFO - Visited route | /
+18.10.2025, 4:29:13 - INFO - Up and running on http://localhost:3000
+18.10.2025, 4:35:56 - INFO - Up and running on http://localhost:3000
+18.10.2025, 4:39:36 - INFO - Visited route | /
+18.10.2025, 4:39:44 - INFO - Visited route | /
+18.10.2025, 23:38:19 - INFO - Up and running on http://localhost:3000
+18.10.2025, 23:52:32 - INFO - Visited route | /login
+18.10.2025, 23:52:32 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+18.10.2025, 23:52:32 - INFO - Visited route | /:userId
+18.10.2025, 23:52:33 - INFO - Visited route | /
+18.10.2025, 23:52:35 - INFO - Visited route | /:userId
+18.10.2025, 23:52:35 - INFO - Visited route | /
+18.10.2025, 23:52:41 - INFO - Visited route | /
+18.10.2025, 23:56:27 - INFO - Visited route | /
+19.10.2025, 0:22:12 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:22:15 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:22:26 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:22:38 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:23:00 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:23:22 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:23:33 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:23:50 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:24:10 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:24:18 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:24:21 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:25:47 - INFO - Visited route | /:userId
+19.10.2025, 0:25:47 - INFO - Visited route | /
+19.10.2025, 0:25:51 - INFO - Visited route | /:userId
+19.10.2025, 0:25:51 - INFO - Visited route | /
+19.10.2025, 0:26:23 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:26:30 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:31:28 - ERROR - 400 Invalid value: 'standard'. Supported values are: 'low', 'medium', 'high', and 'auto'.
+19.10.2025, 0:31:28 - ERROR - 400 Invalid value: 'standard'. Supported values are: 'low', 'medium', 'high', and 'auto'.
+19.10.2025, 0:31:29 - ERROR - 400 Invalid value: 'standard'. Supported values are: 'low', 'medium', 'high', and 'auto'.
+19.10.2025, 0:31:29 - ERROR - 400 Invalid value: 'standard'. Supported values are: 'low', 'medium', 'high', and 'auto'.
+19.10.2025, 0:31:30 - ERROR - 400 Invalid value: 'standard'. Supported values are: 'low', 'medium', 'high', and 'auto'.
+19.10.2025, 0:31:48 - ERROR - 400 Invalid value: 'standard'. Supported values are: 'low', 'medium', 'high', and 'auto'.
+19.10.2025, 0:40:33 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:42:24 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:42:29 - ERROR - 400 Invalid value: '256x256'. Supported values are: '1024x1024', '1024x1536', '1536x1024', and 'auto'.
+19.10.2025, 0:45:39 - INFO - Up and running on http://localhost:3000
+19.10.2025, 0:45:44 - ERROR - 403 Your organization must be verified to use the model `gpt-image-1-mini`. Please go to: https://platform.openai.com/settings/organization/general and click on Verify Organization. If you just verified, it can take up to 15 minutes for access to propagate.
+19.10.2025, 0:56:49 - ERROR - 403 Your organization must be verified to use the model `gpt-image-1-mini`. Please go to: https://platform.openai.com/settings/organization/general and click on Verify Organization. If you just verified, it can take up to 15 minutes for access to propagate.
+19.10.2025, 1:08:37 - INFO - Up and running on http://localhost:3000
+19.10.2025, 1:08:43 - ERROR - 403 Your organization must be verified to use the model `gpt-image-1-mini`. Please go to: https://platform.openai.com/settings/organization/general and click on Verify Organization. If you just verified, it can take up to 15 minutes for access to propagate.
+19.10.2025, 1:11:28 - INFO - Up and running on http://localhost:3000
+19.10.2025, 1:11:46 - ERROR - OpenAI did not return an image URL
+19.10.2025, 1:11:47 - ERROR - 403 Your organization must be verified to use the model `gpt-image-1-mini`. Please go to: https://platform.openai.com/settings/organization/general and click on Verify Organization. If you just verified, it can take up to 15 minutes for access to propagate.
+19.10.2025, 1:15:28 - INFO - Up and running on http://localhost:3000
+19.10.2025, 1:15:34 - ERROR - 403 Your organization must be verified to use the model `gpt-image-1-mini`. Please go to: https://platform.openai.com/settings/organization/general and click on Verify Organization. If you just verified, it can take up to 15 minutes for access to propagate.
+19.10.2025, 1:20:40 - INFO - Visited route | /:userId
+19.10.2025, 1:20:40 - INFO - Visited route | /
+19.10.2025, 1:29:33 - INFO - Visited route | /:userId
+19.10.2025, 1:29:33 - INFO - Visited route | /
+19.10.2025, 1:29:37 - INFO - Visited route | /:userId
+19.10.2025, 1:29:37 - INFO - Visited route | /
+19.10.2025, 1:32:22 - INFO - Visited route | /:userId
+19.10.2025, 1:32:22 - INFO - Visited route | /
+19.10.2025, 1:32:43 - ERROR - OpenAI did not return an image URL
+19.10.2025, 1:33:24 - INFO - Up and running on http://localhost:3000
+19.10.2025, 1:33:41 - ERROR - OpenAI did not return an image URL
+19.10.2025, 2:52:32 - INFO - Up and running on http://localhost:3000
+19.10.2025, 2:52:40 - INFO - Visited route | /:userId
+19.10.2025, 2:52:40 - INFO - Visited route | /
+19.10.2025, 2:52:42 - ERROR - 400 Unknown parameter: 'response_format'.
+19.10.2025, 3:12:35 - INFO - Up and running on http://localhost:3000
+19.10.2025, 3:15:05 - INFO - Visited route | /:userId
+19.10.2025, 3:15:05 - INFO - Visited route | /

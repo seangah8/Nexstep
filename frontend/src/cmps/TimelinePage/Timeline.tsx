@@ -11,6 +11,7 @@ import { timelineActions } from "../../store/actions/timeline.actions";
 import { TodayPointer } from "./TodayPointer";
 import { Mentor } from "./Mentor";
 import { HoverOptionModal } from "./HoverOptionModal";
+import { openAIService } from "../../services/openai.service";
 
 
 interface TimelineProps{
@@ -247,46 +248,51 @@ export function Timeline( { timeline } : TimelineProps) {
     return digitCount > 5 ? 2.5 - ((digitCount - 5) / 8) : 2.5
   }
 
-function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
-  let updatedSteps: StepModel[] = [...timeline.steps]
-  let newSteps: StepModel[] = [...steps]
+  function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
+    let updatedSteps: StepModel[] = [...timeline.steps]
+    let newSteps: StepModel[] = [...steps]
 
-  // validate new steps to be under the main step
-  newSteps = newSteps.map(step => {
-    if (step.end > mainStep.end || step.end < mainStep.start || step.end < today) 
-      throw new Error('Invalid step date')
-    return { ...step, parentId: mainStep.id }
-  })
+    // validate new steps to be under the main step
+    newSteps = newSteps.map(step => {
+      if (step.end > mainStep.end || step.end < mainStep.start || step.end < today) 
+        throw new Error('Invalid step date')
+      return { ...step, parentId: mainStep.id }
+    })
 
-  let isThereLastStep = false
+    let isThereLastStep = false
 
-  // delete all steps under the current main step - if not done yet
-  timeline.steps.forEach(step => {
-    if(step.end === mainStep.end && step.id !== mainStep.id) isThereLastStep = true
-    if (step.parentId === mainStep.id && step.end < mainStep.end && step.end >= today)
-      updatedSteps = timelineService.deleteStep(updatedSteps, step, today)
-  })
+    // delete all steps under the current main step - if not done yet
+    timeline.steps.forEach(step => {
+      if(step.end === mainStep.end && step.id !== mainStep.id) isThereLastStep = true
+      if (step.parentId === mainStep.id && step.end < mainStep.end && step.end >= today)
+        updatedSteps = timelineService.deleteStep(updatedSteps, step, today)
+    })
 
-  // if step was empty - add last child step
-  if(!isThereLastStep){
-    const lastChild : StepModel = {            
-      id: utilService.createId(),
-      parentId: mainStep.id,
-      title: mainStep.title,
-      description: mainStep.description,
-      image: mainStep.image,
-      end: mainStep.end
+    // if step was empty - add last child step
+    if(!isThereLastStep){
+      const lastChild : StepModel = {            
+        id: utilService.createId(),
+        parentId: mainStep.id,
+        title: mainStep.title,
+        description: mainStep.description,
+        image: mainStep.image,
+        end: mainStep.end
+      }
+
+      updatedSteps = [...updatedSteps, lastChild]
     }
 
-    updatedSteps = [...updatedSteps, lastChild]
+    // add new steps
+    updatedSteps = [...updatedSteps, ...newSteps]
+
+    // update timeline steps
+    onSetSteps(updatedSteps)
   }
 
-  // add new steps
-  updatedSteps = [...updatedSteps, ...newSteps]
-
-  // update timeline steps
-  onSetSteps(updatedSteps)
-}
+  async function generateImageAI() {
+    const url = await openAIService.generateImageTest()
+    console.log('genarated image URL: ', url)
+  }
 
 
   if(!stepsToShow) return <h2>Loading...</h2>
@@ -417,7 +423,7 @@ function replaceSubStepsWithMentorSteps(steps: StepModel[]): void {
 
       </div>
 
-      
+      <button onClick={generateImageAI}>Generat AI Image</button>
 
     </section>
   )

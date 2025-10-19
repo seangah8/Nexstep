@@ -1,10 +1,12 @@
 import OpenAI from "openai"
 import { AnswerModel, InfoForOpenAIModel, OpenAIPathsModel } from "../../models/timeline.models"
+import { utilService } from "../../services/util.service"
 
 const OPEN_AI = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export const openAIService = {
     test,
+    testImage,
     paths,
 }
 
@@ -21,14 +23,30 @@ async function test(): Promise<string> {
     return answerStr
 }
 
-// things needs improvements:
-// 1. in descriptions, insted of "You will build responsive, ..." for example i prefer it like "build a responsive, ..."
-// 2. make svgs sizes all the time the same: 40px width and 40px hieght (no more no less) 
+
+async function testImage() {
+  const answer = await OPEN_AI.images.generate({
+    model: "gpt-image-1-mini",
+    prompt: "A minimal flat-style rocket icon launching",
+    size: "1024x1024",
+    n: 1,
+    quality: "low"
+  })
+
+  const b64 = answer.data? answer.data[0]?.b64_json : undefined
+  if (!b64) throw new Error("No base64 image returned")
+    
+  const [url] = await utilService.uploadBase64Images([b64])
+  console.log("✅ Cloudinary URL:", url)
+  return url
+}
+
+
+
+
 
 
 async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsModel[]> {
-
-  console.log('infoForOpenAI ✅', infoForOpenAI)
 
   const completion = await OPEN_AI.chat.completions.create({
     model: "gpt-5",

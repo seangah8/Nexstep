@@ -7,11 +7,21 @@ import { InfoForOpenAIModel } from '../../models/timeline.models';
 
 export async function openAITest(req: Request, res: Response): Promise<void> {
   try {
-    const answer = await openAIService.test() // string
+    const answer : string = await openAIService.test()
     res.send(answer)
   } catch (err: any) {
     loggerService.error(err.message)
     res.status(400).send(`Couldn't test open ai`)
+  }
+}
+
+export async function generateImageTest(req: Request, res: Response): Promise<void> {
+  try {
+    const answer : string  = await openAIService.testImage()
+    res.send(answer)
+  } catch (err: any) {
+    loggerService.error(err.message)
+    res.status(400).send(`Couldn't generate image`)
   }
 }
 
