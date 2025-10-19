@@ -11,7 +11,6 @@ import { timelineActions } from "../../store/actions/timeline.actions";
 import { TodayPointer } from "./TodayPointer";
 import { Mentor } from "./Mentor";
 import { HoverOptionModal } from "./HoverOptionModal";
-import { openAIService } from "../../services/openai.service";
 
 
 interface TimelineProps{
@@ -289,11 +288,6 @@ export function Timeline( { timeline } : TimelineProps) {
     onSetSteps(updatedSteps)
   }
 
-  async function generateImageAI() {
-    const url = await openAIService.generateImageTest()
-    console.log('genarated image URL: ', url)
-  }
-
 
   if(!stepsToShow) return <h2>Loading...</h2>
 
@@ -422,8 +416,6 @@ export function Timeline( { timeline } : TimelineProps) {
         }
 
       </div>
-
-      <button onClick={generateImageAI}>Generat AI Image</button>
 
     </section>
   )

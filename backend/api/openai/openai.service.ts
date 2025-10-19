@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-import { AnswerModel, InfoForOpenAIModel, OpenAIPathsModel } from "../../models/timeline.models"
+import { AnswerModel, InfoForOpenAIModel, OpenAIPathsModel, StepModel } from "../../models/timeline.models"
 import { utilService } from "../../services/util.service"
 
 const OPEN_AI = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
@@ -8,6 +8,7 @@ export const openAIService = {
     test,
     testImage,
     paths,
+    insertImages,
 }
 
 async function test(): Promise<string> {
@@ -33,23 +34,20 @@ async function testImage() {
     quality: "low"
   })
 
-  const b64 = answer.data? answer.data[0]?.b64_json : undefined
+  const b64 = answer.data?.[0]?.b64_json
   if (!b64) throw new Error("No base64 image returned")
     
-  const [url] = await utilService.uploadBase64Images([b64])
-  console.log("✅ Cloudinary URL:", url)
-  return url
+  const imageUrl = await utilService.uploadBase64Image(b64)
+  console.log("✅ Cloudinary URL:", imageUrl)
+  return imageUrl
 }
 
 
-
-
-
-
+// takes around 30-60 seconds
 async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsModel[]> {
 
   const completion = await OPEN_AI.chat.completions.create({
-    model: "gpt-5",
+    model: "gpt-5-mini",
     messages: [
       {
         role: "system",
@@ -61,20 +59,21 @@ async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsMode
         role: "user",
         content: `
           Here is the user's profile and preferences as JSON:
-          ${JSON.stringify(infoForOpenAI, null, 2)}
+          ${JSON.stringify(infoForOpenAI)}
 
-          Generate 2 possible paths. Each path must:
+          Generate 3-6 possible paths. Each path must:
 
           - Have a **'title'** (1–3 words), **'description'**, and an **'icon'** property that contains a valid **inline SVG string**.  
-            ⚠️ Icon requirements:
-              • Must use a single color (no gradients or multiple colors).  
-              • Must have **no background** (transparent background).  
-              • Must include xmlns, width, height, and viewBox attributes.  
-              • Must be **exactly** \`width="40"\` and \`height="40"\`.  
-              • Must be self-contained and optimized (<15 elements).  
-              • Should visually represent the mood/theme of the path.
+SVG rules:
+  • Must include: xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24".
+  • Use only basic shapes: <path>, <circle>, <rect>, <line>, or <polygon>.  
+  • Use only **stroke** and **fill="none"** (no gradients, no multiple colors, no text).  
+  • Keep it under **10 elements** total.
+  • Style: minimal, flat, icon-like — similar to [Lucide](https://lucide.dev/icons/) or [Feather Icons](https://feathericons.com/).
+  • Example (rocket icon):
+    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2 2 4 6 4 9 0 3-2 7-4 9-2-2-4-6-4-9 0-3 2-7 4-9z"/><circle cx="12" cy="9" r="1.5"/><path d="M8 13l-3 2M16 13l3 2"/><path d="M12 20v2"/></svg>'
 
-          - Contain a **'value'** array of 1 to 4 steps.  
+          - Contain a **'value'** array of 2 to 10 steps.  
           - Each step must include:  
             • **'title'**: 1–3 words only  
             • **'description'**:  
@@ -119,3 +118,36 @@ async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsMode
 
   return parsed.paths
 }
+
+
+// takes around 10-20 seconds
+async function insertImages(steps: StepModel[]): Promise<StepModel[]> {
+
+  const updatedSteps = await Promise.all(
+    steps.map(async (step) => {
+      const prompt = `
+        Minimal flat illustration representing the following goal:
+        Title: "${step.title}"
+        Description: "${step.description}"
+        Style: flat icon, simple background, no text, soft colors, clear symbolism.
+      `
+
+      const answer = await OPEN_AI.images.generate({
+        model: "gpt-image-1-mini",
+        prompt,
+        size: "1024x1024",
+        n: 1,
+        quality: "low",
+      })
+
+      const b64 = answer.data?.[0]?.b64_json
+      if (!b64) throw new Error(`No base64 image returned for step "${step.title}"`)
+
+      const imageUrl = await utilService.uploadBase64Image(b64)
+      return {...step, image: imageUrl }
+    })
+  )
+
+  return updatedSteps
+}
+

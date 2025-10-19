@@ -47,7 +47,7 @@ export function HoverOptionModal({option, mainStep, today} : HoverOptionModalPro
 
                         <div className="path-text">
                             <div className="icon-background">
-                                <h3>{convertStringToElement(option.icon)}</h3>
+                                {convertStringToElement(option.icon)}
                             </div>
                             <h4>{option.title}</h4>
                             <p>{option.description}</p>

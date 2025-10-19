@@ -1,10 +1,11 @@
-import { InfoForOpenAIModel, OpenAIPathsModel } from "../models/timeline.models"
+import { InfoForOpenAIModel, OpenAIPathsModel, StepModel } from "../models/timeline.models"
 import { httpService } from "./http.service"
 
 export const openAIService = {
     openAITest,
     generateImageTest,
     generatePaths,
+    InsertStepsImages,
 }
 
 async function openAITest(): Promise<string> {
@@ -16,7 +17,12 @@ async function generateImageTest() : Promise<string> {
 }
 
 async function generatePaths(InfoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsModel[]> {
-  const paths = await httpService.post(`openai/paths`, InfoForOpenAI)
+  const paths : OpenAIPathsModel[] = await httpService.post(`openai/paths`, InfoForOpenAI)
   return paths
+}
+
+async function InsertStepsImages(steps: StepModel[]): Promise<StepModel[]> {
+  const updatedSteps : StepModel[] = await httpService.post(`openai/steps-images`, steps)
+  return updatedSteps
 }
 

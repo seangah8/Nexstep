@@ -650,14 +650,8 @@ async function getPathsFromOpenAI(answers: Record<string, AnswerModel>,
 }
 
 async function addImagesFromOpenAI(steps: StepModel[]): Promise<StepModel[]> {
-  // open ai generating urls for steps images
-  const openAiAnswer: StepModel[] = steps.map(step => ({...step, image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png'}))
-  
-  // save images in cloud and change urls to these permenante urls
-  const imageUrls = openAiAnswer.map(step => step.image)
-  const uploadedUrls = await utilService.uploadImagesByUrls(imageUrls)
-  const updatedSteps: StepModel[] = openAiAnswer.map((step, idx) => ({...step, image: uploadedUrls[idx]}))
-  
+  const updatedSteps : StepModel[] = await openAIService.InsertStepsImages(steps)
+  console.log('stepsWithImages', updatedSteps)
   return updatedSteps
 }
 
