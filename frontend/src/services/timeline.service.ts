@@ -28,7 +28,6 @@ export const timelineService = {
   formatDateFromEnd,
   updateParentsExceptEnd,
   updateLastChildrensExceptEnd,
-  getTrianglePoints,
   getPathsFromOpenAI,
   addImagesFromOpenAI,
 }
@@ -572,37 +571,6 @@ function updateLastChildrensExceptEnd(
   return allSteps
 }
 
-interface PointModel {
-  x: number
-  y: number
-}
-
-function getTrianglePoints(angleDeg : number, size : number) 
-  : {tip: PointModel, left: PointModel, right: PointModel}{
-    const angleRad = angleDeg * Math.PI / 180;
-    const baseAngle = 140 * Math.PI / 180; // total angle at the tip (between the base corners)
-    const tipLength = size; // from center to tip
-    const baseLength = size / 2; // from center to each base corner
-
-    // Tip point (forward)
-    const tip = {
-        x: Math.cos(angleRad) * tipLength,
-        y: Math.sin(angleRad) * tipLength
-    };
-
-    // Base points (angled left and right from the tip)
-    const left = {
-        x: Math.cos(angleRad + baseAngle / 2) * baseLength,
-        y: Math.sin(angleRad + baseAngle / 2) * baseLength
-    };
-
-    const right = {
-        x: Math.cos(angleRad - baseAngle / 2) * baseLength,
-        y: Math.sin(angleRad - baseAngle / 2) * baseLength
-    };
-
-    return {tip, left, right};
-}
 
 async function getPathsFromOpenAI(answers: Record<string, AnswerModel>, 
   totalDays: number, 

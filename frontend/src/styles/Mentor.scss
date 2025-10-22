@@ -41,8 +41,12 @@
             justify-content: center;
             background-color: vars.$dark-green-2;
             color:  white;
-            font-size: 0rem;
+            font-size: 1rem;
             transition: opacity 0.3s ease, transform 0.2s ease;
+
+            h3{
+                font-weight: 400;
+            }
         }
     }
 }

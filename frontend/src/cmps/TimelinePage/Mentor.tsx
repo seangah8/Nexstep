@@ -4,6 +4,7 @@ import { MentorChat } from "./MentorChat"
 import { MentorSelectors } from "./MentorSelectors"
 import { AnswerModel, MainStepModel, MentorQuestionModel, OptionModel, StepModel } from "../../models/timeline.models"
 import { getMentorQuestions } from "../../storage/mentorQuestions"
+import { LoadingCircle } from "../General/LoadingCircle"
 
 interface MentorProps{
     isMentorOpen: boolean
@@ -30,6 +31,7 @@ export function Mentor({
     const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModel[]>(getMentorQuestions())
     const [question, setQuestion] = useState<string>(mentorQuestions[0].question)
     const [options, setOptions] = useState<OptionModel[]>(mentorQuestions[0].options)
+    const [loadingApi, setLoadingApi] = useState<number | null>(null)
 
 
     // after each time the user pick an option
@@ -89,13 +91,17 @@ export function Mentor({
             return acc
         }, {} as Record<string, AnswerModel>)
 
+        setLoadingApi(90)
         const paths = await timelineService
             .getPathsFromOpenAI(answers, totalDays, startDay, mainStep)
+        setLoadingApi(null)
         setOptions(paths)
     }
 
     async function onChossingPath(steps : StepModel[]){
+        setLoadingApi(20)
         const stepsWithImages = await timelineService.addImagesFromOpenAI(steps)
+        setLoadingApi(null)
         replaceSteps(stepsWithImages)
         setIsMentorOpen(false)
     }
@@ -131,6 +137,13 @@ export function Mentor({
                     setHoveredOption={setHoveredOption}
                 />
             }
+
+            {   loadingApi &&
+                <LoadingCircle
+                    howManySeconds={loadingApi}
+                />
+            }
+
 
         </section>
     )

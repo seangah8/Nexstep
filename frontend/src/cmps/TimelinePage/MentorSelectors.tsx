@@ -7,7 +7,7 @@ import {
 } from 'chart.js'
 import { utilService } from '../../services/util.service'
 import { ReactElement, useEffect, useState } from 'react'
-import { OptionModal, StepModel } from '../../models/timeline.models'
+import { OptionModel, StepModel } from '../../models/timeline.models'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -16,9 +16,9 @@ interface MentorSelectorsProps {
   selectorsRadius: number
   iconsPathRadius: number
   iconsRadius: number
-  options: OptionModal[]
+  options: OptionModel[]
   onClickOption: (answer : string | StepModel[]) => void
-  setHoveredOption: (option : OptionModal | null) => void
+  setHoveredOption: (option : OptionModel | null) => void
 }
 
 export function MentorSelectors({
@@ -84,7 +84,6 @@ export function MentorSelectors({
   function convertStringToElement(str: string): string | ReactElement {
     const shouldConvert = str.trim().startsWith('<')
     if (!shouldConvert) return str
-
     return <span dangerouslySetInnerHTML={{ __html: str }} />
   }
 
@@ -174,7 +173,7 @@ export function MentorSelectors({
                   opacity: isVisible ? 1 : 0,
                 }}
               >
-                {convertStringToElement(dt.icon)}
+                <h3>{convertStringToElement(dt.icon)}</h3>
               </div>
             )
           })
