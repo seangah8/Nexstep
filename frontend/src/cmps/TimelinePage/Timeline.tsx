@@ -174,6 +174,7 @@ export function Timeline( { timeline } : TimelineProps) {
 
 
         // borders
+        newEnd = Math.min(newEnd, today + 365 * 100)
         if (newEnd <= minEnd)
           newEnd = minEnd + 1
         else if (newEnd >= maxEnd)
