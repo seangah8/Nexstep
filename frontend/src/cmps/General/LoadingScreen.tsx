@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { utilService } from "../../services/util.service";
 
-interface LoadingCircleProps {
+interface LoadingScreenProps {
   howManySeconds: number;
 }
 
-export function LoadingCircle({ howManySeconds }: LoadingCircleProps) {
+export function LoadingScreen({ howManySeconds }: LoadingScreenProps) {
   const [millisecondsWaiting, setMillisecondsWaiting] = useState(0);
   const [percentage, setPercentage] = useState(0);
 

@@ -5396,3 +5396,109 @@ Error: timeline not found
 24.10.2025, 0:11:49 - INFO - Visited route | /
 24.10.2025, 0:11:50 - INFO - Visited route | /
 24.10.2025, 0:11:52 - INFO - Visited route | /
+24.10.2025, 0:15:05 - INFO - Visited route | /
+24.10.2025, 0:15:06 - INFO - Visited route | /
+24.10.2025, 0:15:10 - INFO - Visited route | /
+24.10.2025, 0:15:11 - INFO - Visited route | /
+24.10.2025, 0:20:18 - INFO - Up and running on http://localhost:3000
+24.10.2025, 0:22:22 - INFO - Up and running on http://localhost:3000
+24.10.2025, 0:23:16 - INFO - Up and running on http://localhost:3000
+24.10.2025, 0:24:49 - INFO - Visited route | /login
+24.10.2025, 0:24:50 - INFO - User login: | {"_id":"68f2ea44f742eaeb6a1c5d51","username":"u8"}
+24.10.2025, 0:24:50 - INFO - Visited route | /:userId
+24.10.2025, 0:24:50 - ERROR - while finding timeline by user: 68f2ea44f742eaeb6a1c5d51 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:24:50 - ERROR - timeline not found!
+24.10.2025, 0:26:34 - INFO - Visited route | /
+24.10.2025, 0:26:59 - INFO - Visited route | /:userId
+24.10.2025, 0:27:00 - INFO - Visited route | /
+24.10.2025, 0:34:49 - INFO - Visited route | /
+24.10.2025, 0:35:13 - INFO - Visited route | /login
+24.10.2025, 0:35:13 - INFO - User login: | {"_id":"68f2eba7f742eaeb6a1c5d52","username":"u9"}
+24.10.2025, 0:35:13 - INFO - Visited route | /:userId
+24.10.2025, 0:35:13 - INFO - Visited route | /
+24.10.2025, 0:35:23 - INFO - Visited route | /login
+24.10.2025, 0:35:23 - ERROR - while finding user by username: u10 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:35:23 - ERROR - Failed to login: Unknown username
+24.10.2025, 0:35:31 - INFO - Visited route | /signup
+24.10.2025, 0:35:31 - DEBUG - auth.service - signup with username: u10
+24.10.2025, 0:35:31 - ERROR - while finding user by username: u10 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:35:31 - DEBUG - auth.route - new account created: {"username":"u10","_id":"68fa9fa3475ef6726e13e1f5"}
+24.10.2025, 0:35:31 - INFO - User signup: | {"_id":"68fa9fa3475ef6726e13e1f5","username":"u10"}
+24.10.2025, 0:35:32 - INFO - Visited route | /:userId
+24.10.2025, 0:35:32 - ERROR - while finding timeline by user: 68fa9fa3475ef6726e13e1f5 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:35:32 - ERROR - timeline not found!
+24.10.2025, 0:35:49 - INFO - Visited route | /
+24.10.2025, 0:36:08 - INFO - Visited route | /:userId
+24.10.2025, 0:36:08 - INFO - Visited route | /
+24.10.2025, 0:37:08 - INFO - Visited route | /signup
+24.10.2025, 0:37:08 - DEBUG - auth.service - signup with username: u11
+24.10.2025, 0:37:08 - ERROR - while finding user by username: u11 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:37:08 - DEBUG - auth.route - new account created: {"username":"u11","_id":"68faa004475ef6726e13e1f7"}
+24.10.2025, 0:37:08 - INFO - User signup: | {"_id":"68faa004475ef6726e13e1f7","username":"u11"}
+24.10.2025, 0:37:08 - INFO - Visited route | /:userId
+24.10.2025, 0:37:08 - ERROR - while finding timeline by user: 68faa004475ef6726e13e1f7 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:37:08 - ERROR - timeline not found!
+24.10.2025, 0:37:22 - INFO - Visited route | /
+24.10.2025, 0:38:38 - ERROR - terminated
+24.10.2025, 0:39:34 - INFO - Visited route | /
+24.10.2025, 0:40:10 - INFO - Visited route | /:userId
+24.10.2025, 0:40:10 - INFO - Visited route | /
+24.10.2025, 0:40:27 - INFO - Visited route | /login
+24.10.2025, 0:40:27 - ERROR - while finding user by username: u12 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:40:27 - ERROR - Failed to login: Unknown username
+24.10.2025, 0:40:30 - INFO - Visited route | /signup
+24.10.2025, 0:40:30 - DEBUG - auth.service - signup with username: u12
+24.10.2025, 0:40:30 - ERROR - while finding user by username: u12 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:40:30 - DEBUG - auth.route - new account created: {"username":"u12","_id":"68faa0ce475ef6726e13e1f9"}
+24.10.2025, 0:40:30 - INFO - User signup: | {"_id":"68faa0ce475ef6726e13e1f9","username":"u12"}
+24.10.2025, 0:40:30 - INFO - Visited route | /:userId
+24.10.2025, 0:40:30 - ERROR - while finding timeline by user: 68faa0ce475ef6726e13e1f9 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 0:40:30 - ERROR - timeline not found!
+24.10.2025, 0:40:55 - INFO - Visited route | /
+24.10.2025, 0:40:55 - INFO - Visited route | /:userId
+24.10.2025, 0:40:55 - INFO - Visited route | /

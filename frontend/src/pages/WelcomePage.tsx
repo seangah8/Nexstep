@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { utilService } from "../services/util.service"
 import { timelineActions } from "../store/actions/timeline.actions"
+import { LoadingScreen } from "../cmps/General/LoadingScreen"
 
 export function WelcomePage(){
 
@@ -12,6 +13,7 @@ export function WelcomePage(){
     const [imageUrl, setImageUrl] = useState<string | null>(null)
     const [daysAmount, setDaysAmount] = useState<number>(100)
     const [page, setPage] = useState<number>(0)
+    const [loadingApi, setLoadingApi] = useState<number | null>(null)
 
     function onClickBack(){
         setPage(prev=>prev-1)
@@ -45,7 +47,10 @@ export function WelcomePage(){
     }
 
     async function onCreateNewTimeline(){
+        const waitingTime = imageUrl ? 3 : 25
+        setLoadingApi(waitingTime)
         await timelineActions.createTimeline(title, description, imageUrl, daysAmount)
+        setLoadingApi(null)
         navigation('/timeline')
     }
 
@@ -143,6 +148,13 @@ export function WelcomePage(){
                     </button>
                 </div>
 
+            }
+
+
+            {   loadingApi &&
+                <LoadingScreen
+                    howManySeconds={loadingApi}
+                />
             }
 
         </section>

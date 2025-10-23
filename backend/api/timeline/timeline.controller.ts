@@ -4,6 +4,7 @@ import { timelineService } from './timeline.service'
 import { TimelineCredentialsModel, TimelineModel } from '../../models/timeline.models'
 import { asyncLocalStorage } from '../../services/als.service'
 import { AlsStoreModel } from '../../models/alsStore.models'
+import { openAIService } from '../openai/openai.service'
 
 export async function getTimelines(req: Request, res: Response): Promise<void> {
   try {
@@ -35,7 +36,6 @@ export async function addTimeline(req: Request<{}, {}, TimelineCredentialsModel>
     if(!loggedinUserId) throw new Error('no user logged in')
     const todaysDate = new Date()
     const today = Math.floor(todaysDate.getTime() / (1000 * 60 * 60 * 24))
-    const defultStepImage = 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png'
     const newTimeline : Omit<TimelineModel,'_id'> = {
       steps: [
         {
@@ -44,12 +44,16 @@ export async function addTimeline(req: Request<{}, {}, TimelineCredentialsModel>
           parentId: null, 
           end: today + timelineCredentials.daysAmount, 
           description: timelineCredentials.description, 
-          image: timelineCredentials.imageUrl ?? defultStepImage
+          image: timelineCredentials.imageUrl ?? ''
         }
       ],
       ownerId: loggedinUserId,
       createdAt: today
     }
+
+    // if user did not put initiate image, open ai will create one
+    if(newTimeline.steps[0].image === '')
+      newTimeline.steps = await openAIService.insertImages(newTimeline.steps)
 
     const timeline = await timelineService.add(newTimeline)
     res.send(timeline)

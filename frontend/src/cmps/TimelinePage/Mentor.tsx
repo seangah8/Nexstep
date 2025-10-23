@@ -4,7 +4,7 @@ import { MentorChat } from "./MentorChat"
 import { MentorSelectors } from "./MentorSelectors"
 import { AnswerModel, MainStepModel, MentorQuestionModel, OptionModel, StepModel } from "../../models/timeline.models"
 import { getMentorQuestions } from "../../storage/mentorQuestions"
-import { LoadingCircle } from "../General/LoadingCircle"
+import { LoadingScreen } from "../General/LoadingScreen"
 
 interface MentorProps{
     isMentorOpen: boolean
@@ -139,7 +139,7 @@ export function Mentor({
             }
 
             {   loadingApi &&
-                <LoadingCircle
+                <LoadingScreen
                     howManySeconds={loadingApi}
                 />
             }
