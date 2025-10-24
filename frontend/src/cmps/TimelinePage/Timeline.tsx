@@ -333,6 +333,7 @@ export function Timeline( { timeline } : TimelineProps) {
                   svgRef = {timelineSvgRef}
                   dragging = {dragging}
                   isMentorOpen={isMentorOpen}
+                  isStepHovered={hoveredStep?.id === step.id}
                   onSetSteps = {onSetSteps}
                   onSetMainStep = {onSetMainStep}
                   onSetEditModal = {onSetEditModal}

@@ -8,6 +8,7 @@ const colorMain1Dark3 = root.getPropertyValue('--main1-dark3')
 const colorMain2 = root.getPropertyValue('--main2')
 const colorMain2Dark1 = root.getPropertyValue('--main2-dark1')
 const colorMain3 = root.getPropertyValue('--main3')
+const colorMain3Dark1 = root.getPropertyValue('--main3-dark1')
 
 export const colorService = {
     colorBackground,
@@ -18,4 +19,5 @@ export const colorService = {
     colorMain2,
     colorMain2Dark1,
     colorMain3,
+    colorMain3Dark1,
 } 

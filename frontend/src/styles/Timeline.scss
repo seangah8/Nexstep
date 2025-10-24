@@ -22,15 +22,6 @@
 
             span{ line-height:1; }
         }
-
-        .step-circle {
-            transition: transform 0.15s ease;
-            transform-origin: center;
-
-            &:hover {
-                transform: scale(1.03);
-            }
-        }
     }
 
     .timeline-modals{

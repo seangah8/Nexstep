@@ -20,6 +20,7 @@ interface stepPreviewProps{
     svgRef : React.RefObject<SVGSVGElement | null>
     dragging : DraggingModel | null
     isMentorOpen : boolean
+    isStepHovered: boolean
     onSetSteps: (newSteps : StepModel[]) => void
     onSetMainStep: (mainStep : MainStepModel) => void
     onSetEditModal: (newEditModal : EditModalModel) => void
@@ -43,6 +44,7 @@ export function StepPreview({
     svgRef,
     dragging,
     isMentorOpen,
+    isStepHovered,
     onSetSteps,
     onSetMainStep,
     onSetEditModal,
@@ -64,6 +66,21 @@ export function StepPreview({
         fadeTimeSeconds 
     } = timelineService.getTimelineUISettings()
 
+
+    const baseColor = step.end < today
+        ? colorService.colorMain3
+        : isMentorOpen
+        ? colorService.colorMain2
+        : colorService.colorMain1
+
+    const darkColor = step.end < today
+        ? colorService.colorMain3Dark1
+        : isMentorOpen
+        ? colorService.colorMain2Dark1
+        : colorService.colorMain1Dark1
+
+    const currentStrokeColor = isStepHovered ? darkColor : baseColor
+    const currentFillColor = isStepHovered ? darkColor : baseColor
 
     async function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
         console.log('selectStep', { ...selectStep, start: prevEnd })
@@ -116,7 +133,7 @@ export function StepPreview({
             parentId: nextStep.parentId,
             title: 'new',
             description: '',
-            image: 'https://images.icon-icons.com/1558/PNG/512/353412-flag_107497.png',
+            image: 'src/assets/flag_icon.png',
             end: newStepEnd
         }
         
@@ -196,8 +213,8 @@ export function StepPreview({
         <g
             onClick={() => onSelectStep(step, prevEnd, stepsToShow)}
             onWheel={event => handleZoomIn(event, step, prevEnd, stepsToShow)}
+            style={{cursor:'pointer'}}
         >
-            
             <defs>
                 <clipPath id={`circleClip-${step.id}`}>
                     <circle
@@ -209,27 +226,32 @@ export function StepPreview({
             </defs>
             
             <path
-                onMouseDown={event =>handleRightClickOnPath(event, step, prevEnd)}
-                d={utilService.describeArc(svgCenter.x, 
-                svgCenter.y, 
-                radius, 
-                stepLocation.angleRange.start, 
-                stepLocation.angleRange.end)}
-                stroke={step.end < today 
-                    ? colorService.colorMain3 
-                    : isMentorOpen 
-                        ? colorService.colorMain2 
-                        : colorService.colorMain1
-                }
-                strokeWidth={strokeWidth}
-                fill='none'
-                strokeLinecap="round" 
+                onMouseDown={event => handleRightClickOnPath(event, step, prevEnd)}
+                onMouseEnter={() => onSetHoveredStep(step)}
+                onMouseLeave={() => onSetHoveredStep(null)}
+                d={utilService.describeArc(
+                    svgCenter.x,
+                    svgCenter.y,
+                    radius,
+                    stepLocation.angleRange.start,
+                    stepLocation.angleRange.end
+                )}
+                stroke={currentStrokeColor}
+                strokeWidth={isStepHovered ? strokeWidth * 1.05 : strokeWidth}
+                fill="none"
+                strokeLinecap="round"
+                // transform={`scale(${isStepHovered ? 0.2 : 1})`}
+                style={{
+                    transformOrigin: `${svgCenter.x}px ${svgCenter.y}px`,
+                    transition:
+                        "transform 0.1s ease-out, stroke-width 0.1s ease-out, stroke 0.1s ease-out",
+                }}
             />
+
             <g
-                className="step-circle"
-                onMouseEnter={()=>onSetHoveredStep(step)}
-                onMouseLeave={()=>onSetHoveredStep(null)}
-                onMouseDown={event =>handleRightDown(event, step)}
+                onMouseEnter={() => onSetHoveredStep(step)}
+                onMouseLeave={() => onSetHoveredStep(null)}
+                onMouseDown={event => handleRightDown(event, step)}
                 onMouseUp={event => handleRightUpInsideStep(event, step, prevEnd, nextStep)}
             >
                 {/* outer circle */}
@@ -237,27 +259,40 @@ export function StepPreview({
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius}
-                    fill={step.end < today ? colorService.colorMain3 :  isMentorOpen ? colorService.colorMain2 : colorService.colorMain1}
-                    stroke={step.end < today ? colorService.colorMain3 :  isMentorOpen ? colorService.colorMain2 : colorService.colorMain1}
-                    strokeWidth='2'
+                    fill={currentFillColor}
+                    stroke={darkColor}
+                    strokeWidth="2"
+                    transform={`scale(${isStepHovered ? 1.05 : 1})`}
+                    style={{
+                        transformOrigin: `${stepLocation.circleLocation.x}px ${stepLocation.circleLocation.y}px`,
+                        transition:
+                            "transform 0.1s ease-out, fill 0.1s ease-out, stroke 0.1s ease-out",
+                    }}
                 />
                 {/* inner circle */}
                 <circle
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius - circlesPadding}
-                    fill={colorService.colorBackground}
-                    // stroke="black"
-                    // strokeWidth='2'
+                    fill={baseColor}
+                    style={{
+                        transition: "fill 0.1s ease-out",
+                    }}
                 />
+                {/* image */}
                 <image
                     href={step.image}
                     x={stepLocation.circleLocation.x - circlesRadius}
                     y={stepLocation.circleLocation.y - circlesRadius}
-                    width={circlesRadius*2}
-                    height={circlesRadius*2}
+                    width={circlesRadius * 2}
+                    height={circlesRadius * 2}
                     clipPath={`url(#circleClip-${step.id})`}
                     preserveAspectRatio="xMidYMid slice"
+                    transform={`scale(${isStepHovered ? 1.05 : 1})`}
+                    style={{
+                        transformOrigin: `${stepLocation.circleLocation.x}px ${stepLocation.circleLocation.y}px`,
+                        transition: "transform 0.1s ease-out",
+                    }}
                 />
             </g>
         </g>
