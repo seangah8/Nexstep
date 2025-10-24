@@ -8,6 +8,7 @@ import {
 import { utilService } from '../../services/util.service'
 import { ReactElement, useEffect, useState } from 'react'
 import { OptionModel, StepModel } from '../../models/timeline.models'
+import { colorService } from '../../services/color.service'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -39,12 +40,12 @@ export function MentorSelectors({
       {
         label: 'My First Dataset',
         data: Array(options.length).fill(1),
-        backgroundColor: '#006769',     
-        hoverBackgroundColor: '#00393a',
+        backgroundColor: colorService.colorMain1,     
+        hoverBackgroundColor: colorService.colorMain1Dark2,
         hoverOffset: 30,
         borderWidth: 5,
-        borderColor: '#fbd9bd',
-        hoverBorderColor: '#fbd9bd',
+        borderColor: colorService.colorBackground,
+        hoverBorderColor: colorService.colorBackground,
       },
     ],
   }

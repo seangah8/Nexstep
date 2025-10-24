@@ -10,14 +10,14 @@
 @use './Mentor.scss';
 @use './HoverOptionModal.scss';
 @use './WelcomePage.scss';
-@use './LoadingCircle.scss';
+@use './LoadingScreen.scss';
 
 
 
 
 body{
     margin: 0;
-    background-color: vars.$warm;
+    background-color: var(--background);
     font-family: "Saira Condensed", sans-serif;
     h1, h2, h3, h4, h5, h6, p{margin: 0;}
     button, a{cursor: pointer;};

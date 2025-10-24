@@ -56,12 +56,12 @@
                         height: 20px;
                         padding: 10px;
                         outline: none;
-                        border: solid vars.$green 2px;
+                        border: solid var(--main1) 2px;
                         border-radius: 10px;
                         font-family: "Saira Condensed", sans-serif;
                         font-size: 1.4rem;
                         font-weight: 500;
-                        color: vars.$green;
+                        color: var(--main1);
                     }
 
                     textarea{
@@ -69,12 +69,12 @@
                         height: 200px;
                         resize:none;
                         padding: 5px;
-                        border: solid vars.$green 2px;
+                        border: solid var(--main1) 2px;
                         border-radius: 10px;
                         font-family: "Saira Condensed", sans-serif;
                         font-size: 1.2rem;
                         font-weight: 500;
-                        color: vars.$green;
+                        color: var(--main1);
 
                         &::-webkit-scrollbar {
                             width: 6px;
@@ -110,10 +110,10 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        background-color: vars.$green;
+                        background-color: var(--main1);
 
                         &:hover{
-                            background-color: vars.$dark-green;
+                            background-color: var(--main1-dark1);
                         }
                     }
 
@@ -149,12 +149,12 @@
                 width: 80px;
                 padding: 10px;
                 outline: none;
-                border: solid vars.$green 2px;
+                border: solid var(--main1) 2px;
                 border-radius: 10px;
                 font-family: "Saira Condensed", sans-serif;
                 font-size: 2rem;
                 font-weight: 500;
-                color: vars.$green;
+                color: var(--main1);
                 text-align: center;
                 
                 &::-webkit-inner-spin-button {
@@ -169,7 +169,7 @@
         font-size: 3rem;
 
         &:hover{
-            color: vars.$dark-green;
+            color: var(--main1-dark1);
         }
     }
 
@@ -184,7 +184,7 @@
 
     .create-button{
         cursor: pointer;
-        background-color: vars.$green;
+        background-color: var(--main1);
         font-size: 1.6rem;
         color: white;
         font-family: "Saira Condensed", sans-serif;
@@ -193,7 +193,7 @@
         padding: 0 30px 0 30px;
 
         &:hover{
-            background-color: vars.$dark-green;
+            background-color: var(--main1-dark1);
         }
 
         &:disabled{
@@ -201,7 +201,7 @@
             opacity: 50%;
 
             &:hover{
-                background-color: vars.$green;
+                background-color: var(--main1);
             }
         }
     }

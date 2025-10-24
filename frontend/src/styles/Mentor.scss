@@ -9,14 +9,16 @@
         position: absolute;
         z-index: 1;
         border-radius: 50%;
-        background-color: vars.$dark-green;
+        background-color: var(--main1-dark1);
         transition: background-color 0.3s ease;
 
         &:hover{
-            background-color: vars.$dark-green-2;
+            background-color: var(--main1-dark2);
         }
 
         .text-area{
+            position: relative;
+            top: -5px;
             height: 100%;
             padding: 5px;
             display: flex;
@@ -29,6 +31,11 @@
             span{
                 font-weight: 600;
             }
+
+            img{
+                width: 70px;
+                height: 70px;
+            }
         }
     }
 
@@ -39,7 +46,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: vars.$dark-green-2;
+            background-color: var(--main1-dark2);
             color:  white;
             font-size: 1rem;
             transition: opacity 0.3s ease, transform 0.2s ease;

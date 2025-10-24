@@ -11,6 +11,7 @@ import { timelineActions } from "../../store/actions/timeline.actions";
 import { TodayPointer } from "./TodayPointer";
 import { Mentor } from "./Mentor";
 import { HoverOptionModal } from "./HoverOptionModal";
+import { colorService } from "../../services/color.service";
 
 
 interface TimelineProps{
@@ -349,7 +350,7 @@ export function Timeline( { timeline } : TimelineProps) {
           })()}
         </svg>
 
-        <p className="main-step-days" style={today > mainStep.end ? {color: '#c69a3c'} : {}}>
+        <p className="main-step-days" style={today > mainStep.end ? {color: colorService.colorMain3} : {}}>
           <span style={{fontSize: `${daysFontRems(mainStep.end - mainStep.start)}rem`}}>
             {mainStep.end - mainStep.start}
           </span>

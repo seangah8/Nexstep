@@ -5,7 +5,7 @@
     height: 100%;
 
     .hexagon-background{
-        background-color: vars.$dark-green;
+        background-color: var(--main1-dark1);
         width: 100%;
         height: 90%;
         clip-path: polygon(
@@ -59,7 +59,7 @@
         top: 0;
         height: 100vh;
         width: 35%;
-        background-color: vars.$dark-green;
+        background-color: var(--main1-dark1);
         color: white;
         display: flex;
         justify-content: space-between;
@@ -81,7 +81,7 @@
                 .icon-background{
                     width: 75px;
                     height: 75px;
-                    background-color: vars.$dark-green-2;
+                    background-color: var(--main1-dark2);
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
@@ -109,7 +109,7 @@
                 height: 90vh;
                 padding: 10px;
                 padding-bottom: 20px;
-                background-color: vars.$dark-green-2;
+                background-color: var(--main1-dark2);
                 border-radius: 10px;
 
                 ul{
@@ -175,14 +175,14 @@
         .transition-background-left{
             width: 5px;
             height: 100%;
-            background: linear-gradient(90deg, vars.$warm, vars.$dark-green)
+            background: linear-gradient(90deg, var(--background), var(--main1-dark1))
 
         }
 
         .transition-background-right{
             width: 5px;
             height: 100%;
-            background: linear-gradient(-90deg, vars.$warm, vars.$dark-green)
+            background: linear-gradient(-90deg, var(--background), var(--main1-dark1))
 
         }
 

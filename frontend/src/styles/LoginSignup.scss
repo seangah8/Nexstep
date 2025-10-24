@@ -32,25 +32,25 @@
             width: 50%;
             padding: 0px 10px 0px 10px;
             outline: none;
-            border: solid vars.$green 2px;
+            border: solid var(--main1) 2px;
             border-radius: 10px;
             font-family: "Saira Condensed", sans-serif;
             font-size: 1.4rem;
             font-weight: 500;
-            color: vars.$green;
+            color: var(--main1);
         }
 
         button{
             margin-top: 20px;
             width: 50%;
             height: 30px;
-            background-color: vars.$green;
+            background-color: var(--main1);
             color: white;
             border-color: transparent;
             border-radius: 10px;
 
             &:hover{
-                background-color: vars.$dark-green;
+                background-color: var(--main1-dark1);
             }
         }
     }

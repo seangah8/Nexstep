@@ -1,6 +1,6 @@
 @use './vars';
 
 .app{
-    color: vars.$green;
+    color: var(--main1);
     font-size: 1.5rem;
 }

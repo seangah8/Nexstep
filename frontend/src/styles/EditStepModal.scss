@@ -10,11 +10,11 @@
         right: 15px;
         background-color: transparent;
         border: none;
-        color: vars.$green;
+        color: var(--main1);
         font-size: larger;
 
         &:hover{
-            color: vars.$dark-green;
+            color: var(--main1-dark1);
         }
     }
 
@@ -48,7 +48,7 @@
             margin-bottom: 15px;
             width: 115px;
             height: 115px;
-            background-color: vars.$green;
+            background-color: var(--main1);
             align-self: center;
             display: flex;
             align-items: center;
@@ -76,12 +76,12 @@
             width: 50%;
             padding: 10px;
             outline: none;
-            border: solid vars.$green 2px;
+            border: solid var(--main1) 2px;
             border-radius: 10px;
             font-family: "Saira Condensed", sans-serif;
             font-size: 1.4rem;
             font-weight: 500;
-            color: vars.$green;
+            color: var(--main1);
         }
 
         textarea{
@@ -89,12 +89,12 @@
             height: 150px;
             resize:none;
             padding: 5px;
-            border: solid vars.$green 2px;
+            border: solid var(--main1) 2px;
             border-radius: 10px;
             font-family: "Saira Condensed", sans-serif;
             font-size: 1.2rem;
             font-weight: 500;
-            color: vars.$green;
+            color: var(--main1);
 
             &::-webkit-scrollbar {
                 width: 6px;
@@ -143,22 +143,22 @@
                 height: 30px;
                 border-color: transparent;
                 border-radius: 15px;
-                background-color: vars.$green;
+                background-color: var(--main1);
                 color: white;
                 font-family: "Saira Condensed", sans-serif;
                 font-size: 1rem;
 
                 &:hover{
-                    background-color: vars.$dark-green;
+                    background-color: var(--main1-dark1);
                 }
             }
 
 
             .delete-button{
-                background-color: vars.$red;
+                background-color: var(--main2);
 
                 &:hover{
-                    background-color: vars.$dark-red;
+                    background-color: var(--main2-dark1);
                 }
             }
 

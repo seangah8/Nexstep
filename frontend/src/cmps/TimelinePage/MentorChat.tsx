@@ -52,7 +52,7 @@ export function MentorChat({
                 {
                     isMentorOpen 
                     ? textToReactElement(question)
-                    : <i className="fa-solid fa-leaf"></i>
+                    : <img src="src/assets/nextep_icon.png" alt='nextep_icon'/>
                 }
                 
             </div>

@@ -24,7 +24,7 @@
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background-color: vars.$gold;
+        background-color: var(--main1-dark1);
     }
 
     .arc {
@@ -33,7 +33,7 @@
         background: conic-gradient(
             from -40deg,
             transparent 0deg 80deg, /* transparent half */
-            #006769 80deg 360deg /* visible half */
+            var(--main1) 80deg 360deg /* visible half */
         );
         -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0);
         mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0);

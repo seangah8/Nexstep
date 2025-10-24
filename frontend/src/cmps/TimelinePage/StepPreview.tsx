@@ -1,4 +1,5 @@
 import { EditModalModel, MainStepModel, StepModel, DraggingModel } from "../../models/timeline.models"
+import { colorService } from "../../services/color.service"
 import { timelineService } from "../../services/timeline.service"
 import { utilService } from "../../services/util.service"
 
@@ -53,7 +54,16 @@ export function StepPreview({
 } : stepPreviewProps){
 
     // Load UI settings from timeline service
-    const { svgCenter, radius, spaceDeg, strokeWidth, circlesRadius, circlesPadding, fadeTimeSeconds } = timelineService.getTimelineUISettings()
+    const { 
+        svgCenter, 
+        radius, 
+        spaceDeg, 
+        strokeWidth, 
+        circlesRadius, 
+        circlesPadding, 
+        fadeTimeSeconds 
+    } = timelineService.getTimelineUISettings()
+
 
     async function onSelectStep(selectStep: StepModel, prevEnd: number, stepsToShow: StepModel[]) {
         console.log('selectStep', { ...selectStep, start: prevEnd })
@@ -205,7 +215,12 @@ export function StepPreview({
                 radius, 
                 stepLocation.angleRange.start, 
                 stepLocation.angleRange.end)}
-                stroke={step.end < today ? '#c69a3c' :  isMentorOpen ? "#702228" : "#006769"}
+                stroke={step.end < today 
+                    ? colorService.colorMain3 
+                    : isMentorOpen 
+                        ? colorService.colorMain2 
+                        : colorService.colorMain1
+                }
                 strokeWidth={strokeWidth}
                 fill='none'
                 strokeLinecap="round" 
@@ -222,8 +237,8 @@ export function StepPreview({
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius}
-                    fill={step.end < today ? '#987323ff' :  isMentorOpen ? "#702228" : "#015758ff"}
-                    stroke={step.end < today ? '#987323ff' :  isMentorOpen ? "#702228" : "#015758ff"}
+                    fill={step.end < today ? colorService.colorMain3 :  isMentorOpen ? colorService.colorMain2 : colorService.colorMain1}
+                    stroke={step.end < today ? colorService.colorMain3 :  isMentorOpen ? colorService.colorMain2 : colorService.colorMain1}
                     strokeWidth='2'
                 />
                 {/* inner circle */}
@@ -231,7 +246,7 @@ export function StepPreview({
                     cx={stepLocation.circleLocation.x}
                     cy={stepLocation.circleLocation.y}
                     r={circlesRadius - circlesPadding}
-                    fill='#daa88b'
+                    fill={colorService.colorBackground}
                     // stroke="black"
                     // strokeWidth='2'
                 />

@@ -5502,3 +5502,51 @@ Error: timeline not found
 24.10.2025, 0:40:55 - INFO - Visited route | /
 24.10.2025, 0:40:55 - INFO - Visited route | /:userId
 24.10.2025, 0:40:55 - INFO - Visited route | /
+24.10.2025, 4:53:50 - INFO - Visited route | /:userId
+24.10.2025, 4:53:50 - INFO - Visited route | /
+24.10.2025, 5:10:33 - INFO - Visited route | /:userId
+24.10.2025, 5:10:33 - INFO - Visited route | /
+24.10.2025, 5:29:10 - INFO - Visited route | /:userId
+24.10.2025, 5:29:10 - INFO - Visited route | /
+24.10.2025, 5:29:13 - INFO - Visited route | /:userId
+24.10.2025, 5:29:13 - INFO - Visited route | /
+24.10.2025, 5:35:22 - INFO - Visited route | /:userId
+24.10.2025, 5:35:22 - INFO - Visited route | /
+24.10.2025, 5:35:51 - INFO - Visited route | /:userId
+24.10.2025, 5:35:51 - INFO - Visited route | /
+24.10.2025, 5:35:57 - INFO - Visited route | /:userId
+24.10.2025, 5:35:57 - INFO - Visited route | /
+24.10.2025, 5:36:05 - INFO - Visited route | /:userId
+24.10.2025, 5:36:06 - INFO - Visited route | /
+24.10.2025, 5:38:27 - INFO - Visited route | /
+24.10.2025, 5:38:55 - INFO - Visited route | /signup
+24.10.2025, 5:38:55 - DEBUG - auth.service - signup with username: u13
+24.10.2025, 5:38:55 - ERROR - while finding user by username: u13 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 5:38:55 - DEBUG - auth.route - new account created: {"username":"u13","_id":"68fae6bf475ef6726e13e1fb"}
+24.10.2025, 5:38:55 - INFO - User signup: | {"_id":"68fae6bf475ef6726e13e1fb","username":"u13"}
+24.10.2025, 5:38:56 - INFO - Visited route | /:userId
+24.10.2025, 5:38:56 - ERROR - while finding timeline by user: 68fae6bf475ef6726e13e1fb | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+24.10.2025, 5:38:56 - ERROR - timeline not found!
+24.10.2025, 5:40:08 - INFO - Visited route | /
+24.10.2025, 5:40:26 - INFO - Visited route | /:userId
+24.10.2025, 5:40:26 - INFO - Visited route | /
+24.10.2025, 5:43:27 - INFO - Visited route | /paths
+24.10.2025, 5:45:36 - INFO - Visited route | /steps-images
+24.10.2025, 5:45:56 - INFO - Visited route | /
+24.10.2025, 5:46:09 - INFO - Visited route | /
+24.10.2025, 5:46:23 - INFO - Visited route | /:userId
+24.10.2025, 5:46:23 - INFO - Visited route | /
+24.10.2025, 5:46:38 - INFO - Visited route | /
+24.10.2025, 5:48:39 - INFO - Visited route | /:userId
+24.10.2025, 5:48:40 - INFO - Visited route | /
+24.10.2025, 5:49:15 - INFO - Visited route | /
