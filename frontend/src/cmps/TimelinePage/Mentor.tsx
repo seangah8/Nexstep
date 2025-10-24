@@ -25,7 +25,6 @@ export function Mentor({
     
 } : MentorProps){
 
-
     const { svgSize, mentorRadiusClose, selectorsRadius, iconsPathRadius, iconsRadius, chatRadiuse } = timelineService.getTimelineUISettings()
     const mentorRadius = isMentorOpen ? svgSize : mentorRadiusClose
     const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModel[]>(getMentorQuestions())
@@ -33,6 +32,7 @@ export function Mentor({
     const [options, setOptions] = useState<OptionModel[]>(mentorQuestions[0].options)
     const [loadingApi, setLoadingApi] = useState<number | null>(null)
 
+    const isMainStepFinished = mainStep.end < today
 
     // after each time the user pick an option
     useEffect(() => {
@@ -53,7 +53,7 @@ export function Mentor({
             let newSteps = mentorQuestions[mentorQuestions.length - 1].answer
             // check the answer indeed an array (steps)
             if(Array.isArray(newSteps))
-                onChossingPath(newSteps)
+                onChoosingPath(newSteps)
         }
 
     }, [mentorQuestions])
@@ -72,7 +72,9 @@ export function Mentor({
     }
 
     function toggleSelectors(){
-        setIsMentorOpen(prev=>!prev)
+        isMainStepFinished 
+            ? setIsMentorOpen(false)
+            : setIsMentorOpen(prev=>!prev)
         clearAnswers()
     }
 
@@ -98,7 +100,7 @@ export function Mentor({
         setOptions(paths)
     }
 
-    async function onChossingPath(steps : StepModel[]){
+    async function onChoosingPath(steps : StepModel[]){
         setLoadingApi(20)
         const stepsWithImages = await timelineService.addImagesFromOpenAI(steps)
         setLoadingApi(null)
@@ -122,6 +124,7 @@ export function Mentor({
                 mentorRadius={mentorRadius}
                 chatRadiuse={chatRadiuse}
                 question={question}
+                isMainStepFinished={isMainStepFinished}
                 toggleSelectors={toggleSelectors}
             />
 

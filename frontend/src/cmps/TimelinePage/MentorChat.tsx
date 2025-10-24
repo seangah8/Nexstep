@@ -1,10 +1,12 @@
 import { ReactElement } from 'react'
+import { colorService } from '../../services/color.service'
 
 interface MentorChatProps{
     isMentorOpen: boolean
     mentorRadius: number
     chatRadiuse: number
     question: string
+    isMainStepFinished : boolean
     toggleSelectors: () => void
 }
 
@@ -13,9 +15,12 @@ export function MentorChat({
     mentorRadius, 
     chatRadiuse, 
     question,
+    isMainStepFinished,
     toggleSelectors
 
 } : MentorChatProps){
+
+    
 
     function textToReactElement(text: string): ReactElement {
         // Regular expression to find *...* parts
@@ -38,8 +43,8 @@ export function MentorChat({
 
 
     return(
-        <section className="mentor-chat" 
-        onClick={()=>toggleSelectors()}
+        <section className={`mentor-chat ${isMainStepFinished ? 'finished' : 'unfinished'}`}
+            onClick={()=>toggleSelectors()}
             style={{
                 width: chatRadiuse,
                 height: chatRadiuse,

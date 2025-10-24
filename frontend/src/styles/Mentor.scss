@@ -9,11 +9,18 @@
         position: absolute;
         z-index: 1;
         border-radius: 50%;
-        background-color: var(--main1-dark1);
         transition: background-color 0.3s ease;
 
-        &:hover{
-            background-color: var(--main1-dark2);
+        &.unfinished {
+            background-color: var(--main1-dark1); // Or use your colorService variable
+            &:hover {
+                background-color: var(--main1-dark2);
+            }
+        }
+
+        &.finished {
+            cursor: default;
+            background-color: var(--main3);
         }
 
         .text-area{
@@ -37,6 +44,8 @@
                 height: 70px;
             }
         }
+
+
     }
 
     .mentor-selectors{

@@ -43,17 +43,18 @@ extras
 6. add tutorial screenshot
 
 design
-1. make path+step geting bigger when hovering
-2. change the font style and sizes of text
-3. make the loading screen better 
-4. make the menu better
+1. make path+step geting bigger when hovering ✅
+2. make mentor blue and unclickble on finished main step
+3. change the font style and sizes of text
+4. make the loading screen better 
+5. make the menu better
 
-5. make the background cooler
-6. make the opem ai images fite to the theme
-7. make the paths icon fron open ai better looking even mabye covert to images
-8. make profile + signup/login page look better
-9. make welcome page look better when converting 
-10. make edit+hover modals mabye look better as well
+6. make the background cooler
+7. make the opem ai images fite to the theme
+8. make the paths icon fron open ai better looking even mabye covert to images
+9. make profile + signup/login page look better
+10. make welcome page look better when converting 
+11. make edit+hover modals mabye look better as well
 
 a. design
 b. create ai answer better + more options?
