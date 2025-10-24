@@ -1,14 +1,14 @@
 @use './vars';
 
-.loading-circle{
+.loading-screen{
     z-index: 2;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: white;
-    opacity: 70%;
+    background-color: var(--background);
+    opacity: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,10 +21,10 @@
     .loading-dot{
         z-index: 1;
         position: absolute;
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
-        background-color: var(--main1-dark1);
+        background-color: var(--main1-dark2);
     }
 
     .arc {

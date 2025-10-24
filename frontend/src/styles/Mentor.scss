@@ -12,7 +12,7 @@
         transition: background-color 0.3s ease;
 
         &.unfinished {
-            background-color: var(--main1-dark1); // Or use your colorService variable
+            background-color: var(--main1-dark1);
             &:hover {
                 background-color: var(--main1-dark2);
             }

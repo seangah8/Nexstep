@@ -44,8 +44,7 @@ extras
 
 design
 1. make path+step geting bigger when hovering ✅
-2. make mentor blue and unclickble on finished main step
-3. change the font style and sizes of text
+2. make mentor blue and unclickble on finished main step ✅
 4. make the loading screen better 
 5. make the menu better
 

@@ -1,5 +1,4 @@
 import { ReactElement } from 'react'
-import { colorService } from '../../services/color.service'
 
 interface MentorChatProps{
     isMentorOpen: boolean
