@@ -3,10 +3,12 @@
 .hover-option-modal{
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
 
     .hexagon-background{
         background-color: var(--main1-dark1);
-        width: 100%;
+        width: 461px;
         height: 90%;
         clip-path: polygon(
             50% 0%,   /* top middle */

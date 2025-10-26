@@ -96,7 +96,7 @@ export function Mentor({
         setLoadingApi(90)
         const paths = await timelineService
             .getPathsFromOpenAI(answers, totalDays, startDay, mainStep)
-        // setLoadingApi(null)
+        setLoadingApi(null)
         setOptions(paths)
     }
 

@@ -24,19 +24,9 @@ export function LoadingScreen({ howManySeconds }: LoadingScreenProps) {
   const dotLocation = utilService.getCirclePoint(barSize, dotAngle, barXPos, barYPos)
 
   useEffect(() => {
-
-    const totalMs = howManySeconds * 1000
     const interval = setInterval(() => {
-      setMillisecondsWaiting((prev) => {
-        const next = prev + 20;
-        if (next >= totalMs) {
-          clearInterval(interval)
-          return totalMs
-        }
-        return next
-      })
+      setMillisecondsWaiting(prev =>  prev + 20)
     }, 20)
-
     return () => clearInterval(interval)
   }, [])
 
