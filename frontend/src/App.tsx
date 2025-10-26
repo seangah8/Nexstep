@@ -52,11 +52,12 @@ design
 6. make the menu better
 7. make the background cooler
 
-8. make the opem ai images fite to the theme
-9. make the paths icon fron open ai better looking even mabye covert to images
-10. make profile + signup/login page look better
-11. make welcome page look better when converting 
-12. make edit+hover modals mabye look better as well
+8. make the paths icon fron open ai better looking even mabye covert to images
+9. make the opem ai images fite to the theme
+10. make edit+hover modals mabye look better as well
+11. make profile + signup/login page look better
+12. make welcome page look better when converting 
+
 
 a. design
 b. create ai answer better + more options?

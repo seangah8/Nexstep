@@ -19,28 +19,29 @@ export function Menu(){
     return(
         <section className='menu'>
             <button onClick={()=>setIsOpen(prev=>!prev)}>
-                <i className="fa-solid fa-bars"></i>
+                <img className={`image ${isOpen ? 'turned' : ''}`}
+                    src="src/assets/nextep_icon_black.png" 
+                    alt="nextep-logo" 
+                />
             </button>
 
             {
-                isOpen && 
-                <section className='menu-window'>
-
+                <section className={`menu-window ${isOpen ? 'visible' : ''}`}>
                     <NavLink onClick={()=>setIsOpen(false)} to="/timeline">
                         <i className="fa-regular fa-calendar"></i>
-                        Timeline
+                        <p>Timeline</p>
                     </NavLink> 
 
                     <NavLink onClick={()=>setIsOpen(false)} to="/user">
                         <i className="fa-regular fa-user"></i>
-                        {loggedInUser ? 'Profile' : 'Login'}
+                        <p>{loggedInUser ? 'Profile' : 'Login'}</p>
                     </NavLink> 
 
                     { 
                     loggedInUser && 
                     <NavLink onClick={onLogout} to="/user">
                         <i className="fa-solid fa-right-from-bracket"></i>
-                        Logout
+                        <p>Logout</p>
                     </NavLink> 
                     }
                 </section>
