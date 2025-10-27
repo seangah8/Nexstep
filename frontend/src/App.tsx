@@ -7,12 +7,14 @@ import { store } from './store/store'
 import { TimelinePage } from "./pages/TimelinePage"
 import { UserPage } from "./pages/UserPage"
 import { WelcomePage } from './pages/WelcomePage'
+import { NextepBackground } from './cmps/General/NextepBackground'
 
 
 function App() {
 
   return (
     <section className='app'>
+      <NextepBackground/>
       <Provider store={store}>
         <Router>
           <Menu/>
@@ -49,12 +51,13 @@ design
 4. make the loading screen better ✅
 
 5. fix timeline and models be in acuurate size in diffrent rezolutions ✅
-6. make the menu better
-7. make the background cooler
+6. make the menu better ✅
 
+7. make the background cooler
 8. make the paths icon fron open ai better looking even mabye covert to images
 9. make the opem ai images fite to the theme
 10. make edit+hover modals mabye look better as well
+
 11. make profile + signup/login page look better
 12. make welcome page look better when converting 
 

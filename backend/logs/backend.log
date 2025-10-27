@@ -5702,3 +5702,44 @@ Error: timeline not found
 26.10.2025, 5:20:05 - INFO - Visited route | /:userId
 26.10.2025, 5:20:05 - INFO - Visited route | /
 26.10.2025, 6:20:19 - INFO - Visited route | /
+26.10.2025, 16:34:07 - INFO - Up and running on http://localhost:3000
+26.10.2025, 20:25:10 - INFO - Up and running on http://localhost:3000
+26.10.2025, 20:27:54 - INFO - Visited route | /login
+26.10.2025, 20:27:54 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+26.10.2025, 20:27:54 - INFO - Visited route | /:userId
+26.10.2025, 20:27:54 - INFO - Visited route | /
+26.10.2025, 20:27:57 - INFO - Visited route | /:userId
+26.10.2025, 20:27:57 - INFO - Visited route | /
+26.10.2025, 20:27:59 - INFO - Visited route | /
+27.10.2025, 15:49:01 - INFO - Visited route | /:userId
+27.10.2025, 15:49:01 - INFO - Visited route | /
+27.10.2025, 15:49:07 - INFO - Visited route | /
+27.10.2025, 16:06:15 - INFO - Visited route | /:userId
+27.10.2025, 16:06:15 - INFO - Visited route | /
+27.10.2025, 16:06:40 - INFO - Visited route | /:userId
+27.10.2025, 16:06:41 - INFO - Visited route | /
+27.10.2025, 16:07:35 - INFO - Visited route | /login
+27.10.2025, 16:07:35 - ERROR - while finding user by username:  | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+27.10.2025, 16:07:35 - ERROR - Failed to login: Unknown username
+27.10.2025, 16:07:44 - INFO - Visited route | /login
+27.10.2025, 16:07:44 - ERROR - Failed to login: Unknown username
+27.10.2025, 16:07:44 - ERROR - while finding user by username: asdas | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+27.10.2025, 16:07:54 - INFO - Visited route | /login
+27.10.2025, 16:07:54 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+27.10.2025, 16:07:55 - INFO - Visited route | /:userId
+27.10.2025, 16:07:55 - INFO - Visited route | /
+27.10.2025, 16:08:01 - INFO - Visited route | /:userId
+27.10.2025, 16:08:02 - INFO - Visited route | /
+27.10.2025, 16:08:05 - INFO - Visited route | /
+27.10.2025, 16:08:09 - INFO - Visited route | /
+27.10.2025, 16:08:10 - INFO - Visited route | /
