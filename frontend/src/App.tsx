@@ -49,17 +49,18 @@ design
 1. make path+step geting bigger when hovering ✅
 2. make mentor blue and unclickble on finished main step ✅
 4. make the loading screen better ✅
-
 5. fix timeline and models be in acuurate size in diffrent rezolutions ✅
 6. make the menu better ✅
+7. make the background cooler ✅
 
-7. make the background cooler
-8. make the paths icon fron open ai better looking even mabye covert to images
-9. make the opem ai images fite to the theme
-10. make edit+hover modals mabye look better as well
+8. make edit+hover modals mabye look better as well
+9. make profile + signup/login page look better
+10. make welcome page look better when converting 
+11. make the paths icon fron open ai better looking even mabye covert to images
+12. make the opem ai images fite to the theme
 
-11. make profile + signup/login page look better
-12. make welcome page look better when converting 
+
+
 
 
 a. design

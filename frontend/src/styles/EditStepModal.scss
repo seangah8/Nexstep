@@ -126,7 +126,9 @@
             }
 
             input[type="checkbox"] {
+                cursor: pointer;
                 width: 30px;
+                accent-color: var(--main1);
             }
         }
 

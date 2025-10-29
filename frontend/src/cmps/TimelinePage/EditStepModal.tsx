@@ -2,6 +2,8 @@ import { FormEvent, useEffect, useState } from "react"
 import { StepModel, MainStepModel, EditModalModel } from "../../models/timeline.models"
 import { timelineService } from "../../services/timeline.service"
 import { utilService } from "../../services/util.service"
+import dayjs, { Dayjs } from 'dayjs'
+import { DatePicker } from "../General/DatePicker"
 
 interface EditStepModalProps{
     editModal : EditModalModel
@@ -26,9 +28,11 @@ export function EditStepModal({
 
     const [stepToEdit, setStepToEdit] = useState<StepModel>(editModal.step)
     const [changeAllEnds, setChangeAllEnds] = useState<boolean>(false)
+    const [dateValue, setDateValue] = useState<Dayjs | null>(null)
 
     useEffect(()=>{
       setStepToEdit(editModal.step)
+      setDateValue(dayjs(timelineService.formatDateFromEnd(editModal.step.end)))
     },[editModal])
 
     useEffect(()=>{
@@ -39,8 +43,10 @@ export function EditStepModal({
     // after dragging step - update edit step due
     useEffect(()=>{
       const updatedStep = allSteps.find(step => step.id === stepToEdit.id)
-      if(updatedStep && updatedStep.end !== stepToEdit.end)
+      if(updatedStep && updatedStep.end !== stepToEdit.end) {
         setStepToEdit({...stepToEdit, end: updatedStep.end})
+        setDateValue(dayjs(timelineService.formatDateFromEnd(updatedStep.end)))
+      }
     },[allSteps])
 
     function handleChange({target} : {target: HTMLInputElement | HTMLTextAreaElement}) : void {
@@ -61,6 +67,16 @@ export function EditStepModal({
           }
       }
       setStepToEdit(prev => ({ ...prev, [field]: value }))
+    }
+
+    function handleDateChange(newValue: Dayjs | null) {
+      if (newValue) {
+        const dateStr = newValue.format('YYYY-MM-DD')
+        const date = new Date(dateStr)
+        const end = Math.floor(date.getTime() / (1000 * 60 * 60 * 24))
+        setStepToEdit(prev => ({ ...prev, end }))
+        setDateValue(newValue)
+      }
     }
 
     function onUpdateStep(event: FormEvent<HTMLFormElement>) : void{
@@ -230,12 +246,11 @@ export function EditStepModal({
             <div className="date-area">
 
                 <label htmlFor="end">Due </label>
-                <input
-                  id="end"
-                  type="date"
-                  value={timelineService.formatDateFromEnd(stepToEdit.end)}
-                  onChange={handleChange}
+                <DatePicker
+                  value={dateValue}
+                  onChange={handleDateChange}
                   name="end"
+                  id="end"
                 />
 
                 <label htmlFor="change-all">Change All</label>
