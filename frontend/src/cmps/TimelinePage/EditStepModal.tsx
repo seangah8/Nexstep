@@ -210,7 +210,7 @@ export function EditStepModal({
         <section className="edit-step-modal">
 
           <button className="exit-button" onClick={()=>onSetEditModal(null)}>
-            X
+            <i className="fa-solid fa-xmark"></i>
           </button>
 
           <form onSubmit={onUpdateStep}>
@@ -253,7 +253,7 @@ export function EditStepModal({
                   id="end"
                 />
 
-                <label htmlFor="change-all">Change All</label>
+                <label htmlFor="change-all">Shift All</label>
                 <input
                   id="change-all"
                   type="checkbox"

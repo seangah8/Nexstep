@@ -52,12 +52,11 @@ design
 5. fix timeline and models be in acuurate size in diffrent rezolutions ✅
 6. make the menu better ✅
 7. make the background cooler ✅
+8. make edit modal look better ✅
 
-8. make edit+hover modals mabye look better as well
-9. make profile + signup/login page look better
-10. make welcome page look better when converting 
-11. make the paths icon fron open ai better looking even mabye covert to images
-12. make the opem ai images fite to the theme
+9. make welcome page look better when converting ✅
+10. make the paths icon fron open ai better looking even mabye covert to images
+11. make the opem ai images fite to the theme
 
 
 

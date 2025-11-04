@@ -5814,3 +5814,67 @@ Error: User not found
 29.10.2025, 3:40:12 - INFO - Visited route | /
 29.10.2025, 3:40:13 - INFO - Visited route | /
 29.10.2025, 3:40:27 - INFO - Visited route | /
+29.10.2025, 3:41:25 - INFO - Visited route | /
+29.10.2025, 3:42:50 - INFO - Visited route | /
+29.10.2025, 3:42:52 - INFO - Visited route | /
+29.10.2025, 3:44:34 - INFO - Visited route | /
+29.10.2025, 3:48:13 - INFO - Visited route | /
+29.10.2025, 3:57:53 - INFO - Visited route | /
+29.10.2025, 3:57:53 - INFO - Visited route | /
+29.10.2025, 3:57:58 - INFO - Visited route | /
+29.10.2025, 3:58:00 - INFO - Visited route | /
+29.10.2025, 3:58:03 - INFO - Visited route | /
+29.10.2025, 4:01:37 - INFO - Visited route | /
+29.10.2025, 4:01:40 - INFO - Visited route | /
+29.10.2025, 4:01:51 - INFO - Visited route | /
+29.10.2025, 4:02:18 - INFO - Visited route | /
+29.10.2025, 4:02:56 - INFO - Visited route | /
+29.10.2025, 4:04:30 - INFO - Visited route | /
+29.10.2025, 4:05:09 - INFO - Visited route | /
+29.10.2025, 4:05:28 - INFO - Visited route | /
+29.10.2025, 4:06:02 - INFO - Visited route | /
+29.10.2025, 4:06:25 - INFO - Visited route | /
+29.10.2025, 4:06:27 - INFO - Visited route | /
+29.10.2025, 4:06:37 - INFO - Visited route | /
+29.10.2025, 4:06:43 - INFO - Visited route | /
+29.10.2025, 4:06:55 - INFO - Visited route | /
+29.10.2025, 4:06:58 - INFO - Visited route | /
+29.10.2025, 4:07:10 - INFO - Visited route | /
+29.10.2025, 4:22:02 - INFO - Visited route | /
+29.10.2025, 4:22:08 - INFO - Visited route | /
+29.10.2025, 4:23:40 - INFO - Visited route | /:userId
+29.10.2025, 4:23:40 - INFO - Visited route | /:userId
+29.10.2025, 4:23:40 - INFO - Visited route | /
+29.10.2025, 4:23:40 - INFO - Visited route | /
+29.10.2025, 4:23:50 - INFO - Visited route | /
+5.11.2025, 0:59:08 - INFO - Up and running on http://localhost:3000
+5.11.2025, 1:05:21 - INFO - Visited route | /login
+5.11.2025, 1:05:21 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+5.11.2025, 1:05:22 - INFO - Visited route | /:userId
+5.11.2025, 1:05:22 - INFO - Visited route | /
+5.11.2025, 1:05:24 - INFO - Visited route | /:userId
+5.11.2025, 1:05:24 - INFO - Visited route | /
+5.11.2025, 1:05:57 - INFO - Visited route | /signup
+5.11.2025, 1:05:57 - DEBUG - auth.service - signup with username: u12
+5.11.2025, 1:05:57 - ERROR - Failed to signup: Username already taken
+5.11.2025, 1:06:05 - INFO - Visited route | /signup
+5.11.2025, 1:06:05 - DEBUG - auth.service - signup with username: u13
+5.11.2025, 1:06:05 - ERROR - Failed to signup: Username already taken
+5.11.2025, 1:06:12 - DEBUG - auth.service - signup with username: u14
+5.11.2025, 1:06:12 - INFO - Visited route | /signup
+5.11.2025, 1:06:12 - ERROR - while finding user by username: u14 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+5.11.2025, 1:06:12 - DEBUG - auth.route - new account created: {"username":"u14","_id":"690a86e4523813a79d0c09a3"}
+5.11.2025, 1:06:12 - INFO - User signup: | {"_id":"690a86e4523813a79d0c09a3","username":"u14"}
+5.11.2025, 1:06:12 - INFO - Visited route | /:userId
+5.11.2025, 1:06:12 - ERROR - while finding timeline by user: 690a86e4523813a79d0c09a3 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+5.11.2025, 1:06:12 - ERROR - timeline not found!

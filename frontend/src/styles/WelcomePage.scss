@@ -7,20 +7,35 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10vh;
+    position: relative;
+
+    .context-wrapper{
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
 
     .context{
-        height: 50vh;
-        padding: 0 25% 0 25%;
+        height: 300vh;
+        width: 100%;
+        max-width: 100vw;
+        transition: transform 0.6s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         .page-0{
-            height: 100%;
+            height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 5vh;
+            padding: 0 25% 0 25%;
 
             h3{
                 text-align: center;
@@ -29,12 +44,21 @@
         }
 
         .page-1{
-            height: 100%;
-            width: 40vw;
+            height: 100vh;
+            width: 100%;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 25% 0 25%;
+
+            .page-1-content{
+                height: 50%;
+            }
 
             h3{
+                position: relative;
+                top: -5%;
                 height: 20%;
                 text-align: center;
                 font-weight: 500;
@@ -42,7 +66,7 @@
 
             .inputs{
                 height: 80%;
-                width: 100%;
+                width: 40vw;
                 display: flex;
 
                 .text-inputs{
@@ -136,50 +160,68 @@
 
 
         .page-2{
-            height: 100%;
-            width: 40vw;
-            font-size: 2rem;
+            height: 100vh;
+            width: 100%;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 0 25% 0 25%;
 
-            input{
-                height: 25px;
-                width: 80px;
-                padding: 10px;
-                outline: none;
-                border: solid var(--main1) 2px;
-                border-radius: 10px;
-                font-family: "Saira Condensed", sans-serif;
+            .page-2-content{
                 font-size: 2rem;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                justify-content: center;
                 font-weight: 500;
-                color: var(--main1);
-                text-align: center;
-                
-                &::-webkit-inner-spin-button {
-                    -webkit-appearance: none;
+
+                input{
+                    height: 25px;
+                    width: 80px;
+                    padding: 10px;
+                    outline: none;
+                    border: solid var(--main1) 2px;
+                    border-radius: 10px;
+                    font-family: "Saira Condensed", sans-serif;
+                    font-size: 2rem;
+                    font-weight: 500;
+                    color: var(--main1);
+                    text-align: center;
+                    
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                    }
                 }
+            }
+
+            .button-area{
+                position: relative;
+                bottom: -20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }
 
     .back-arrow, .forward-arrow{
+        position: absolute;
         cursor: pointer;
         font-size: 3rem;
+        z-index: 10;
 
         &:hover{
             color: var(--main1-dark1);
         }
     }
 
-    .button-area{
-        position: absolute;
-        bottom: 15vh;
-        width: 100vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .back-arrow{
+        top: 2vh;
+    }
+
+    .forward-arrow{
+        bottom: 2vh;
     }
 
     .create-button{
@@ -204,5 +246,8 @@
                 background-color: var(--main1);
             }
         }
+    }
+    .mark{
+        color: var(--main3-bright1);
     }
 }

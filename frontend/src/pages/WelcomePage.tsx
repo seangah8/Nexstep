@@ -63,91 +63,85 @@ export function WelcomePage(){
                 </div>
             }
 
-            <div className="context">
-
-                {   page === 0 &&
+            <div className="context-wrapper">
+                <div className="context" style={{ transform: `translateY(-${page * 100}vh)` }}>
                     <section className="page-0">
-                        <h2>Welcome to Nextep</h2>
+                        <h2>Welcome to <span className="mark">Nextep</span></h2>
                         <h3>where your ambitions turn into action. Every step you take here brings you closer to the future you want.</h3>
                     </section>
-                }
 
-                {   page === 1 &&
                     <section className="page-1">
-                        <h3>tell us about that thing you are trying to achive</h3>
-                        <div className="inputs">
+                        <div className="page-1-content">
+                            <h3>tell us about that thing you are trying to <span className="mark">achive</span></h3>
+                            <div className="inputs">
 
-                            <div className="text-inputs">
-                                <input 
-                                    type="text"
-                                    placeholder="Goal Title"
-                                    value={title}
-                                    name='title'
-                                    onChange={handleChange}
-                                />
-                                <textarea 
-                                    placeholder="Goal Description"
-                                    value={description}
-                                    name='description'
-                                    onChange={handleChange}
-                                />
+                                <div className="text-inputs">
+                                    <input 
+                                        type="text"
+                                        placeholder="Goal Title"
+                                        value={title}
+                                        name='title'
+                                        onChange={handleChange}
+                                    />
+                                    <textarea 
+                                        placeholder="Goal Description"
+                                        value={description}
+                                        name='description'
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                <div className="image-input">
+                                    <label htmlFor="image">
+                                        <div className="image-area">
+                                            {imageUrl == null
+                                            ? <i className="fa-solid fa-image"></i>
+                                            : <img src={imageUrl} alt="goal-image"/>
+                                            }
+                                        </div>
+                                    </label>
+                                    <input
+                                        id='image'
+                                        type="file"
+                                        onChange={handleChange}
+                                        name="image"
+                                        style={{display: 'none'}}
+                                    />
+                                </div>
                             </div>
-
-                            <div className="image-input">
-                                <label htmlFor="image">
-                                    <div className="image-area">
-                                        {imageUrl == null
-                                         ? <i className="fa-solid fa-image"></i>
-                                         : <img src={imageUrl} alt="goal-image"/>
-                                        }
-                                    </div>
-                                </label>
-                                <input
-                                    id='image'
-                                    type="file"
-                                    onChange={handleChange}
-                                    name="image"
-                                    style={{display: 'none'}}
-                                />
-                            </div>
-
                         </div>
+
                         
                     </section>
-                }
 
-                {   page === 2 &&
                     <section className="page-2">
-                        <span>You will conquer you goal in</span>
-                        <input
-                            type="number"
-                            value={String(daysAmount)}
-                            name="days"
-                            onChange={handleChange}
-                        />
-                        <span>days.</span>
+                        <div className="page-2-content">
+                            <span>You <span className="mark">will</span> conquer you goal in</span>
+                            <input
+                                type="number"
+                                value={String(daysAmount)}
+                                name="days"
+                                onChange={handleChange}
+                            />
+                            <span>days.</span>
+                        </div>
+                        <div className="button-area">
+                            <button 
+                                className="create-button" 
+                                disabled={title === '' || description === ''}
+                                onClick={onCreateNewTimeline}
+                            >
+                                Create Timeline
+                            </button>
+                        </div>
                     </section>
-                }
-
+                </div>
             </div>
 
             {
                 <div className="forward-arrow" style={ page < 2 ? {visibility: 'visible'} : {visibility: 'hidden'}}>
                     <i className="fa-solid fa-circle-chevron-down" onClick={onClickForward}></i>
                 </div>
-            }
-
-            { page === 2 &&
-                <div className="button-area">
-                    <button 
-                        className="create-button" 
-                        disabled={title === '' || description === ''}
-                        onClick={onCreateNewTimeline}
-                    >
-                        Create Timeline!
-                    </button>
-                </div>
-
             }
 
 
