@@ -55,7 +55,7 @@ design
 8. make edit modal look better ✅
 
 9. make welcome page look better when converting ✅
-10. make the paths icon fron open ai better looking even mabye covert to images
+10. make the paths icon fron open ai better looking ✅
 11. make the opem ai images fite to the theme
 
 
