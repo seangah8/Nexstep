@@ -8,14 +8,25 @@
     width: 100vw;
     height: 100vh;
     background-color: var(--background);
-    opacity: 80%;
+    opacity: 90%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 3rem;
+
+    .loading-circle-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     h1{
-
         font-size: 1.8rem;
+        position: absolute;
     }
 
     .loading-dot{
@@ -37,5 +48,10 @@
         );
         -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0);
         mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0);
+    }
+
+    .loading-text {
+        font-size: 2rem;
+        color: var(--main1);
     }
 }

@@ -30,7 +30,7 @@ export function Mentor({
     const [mentorQuestions, setMentorQuestions] = useState<MentorQuestionModel[]>(getMentorQuestions())
     const [question, setQuestion] = useState<string>(mentorQuestions[0].question)
     const [options, setOptions] = useState<OptionModel[]>(mentorQuestions[0].options)
-    const [loadingApi, setLoadingApi] = useState<number | null>(null)
+    const [loadingApi, setLoadingApi] = useState<{seconds :number, textType: string} | null>(null)
 
     const isMainStepFinished = mainStep.end < today
 
@@ -93,7 +93,7 @@ export function Mentor({
             return acc
         }, {} as Record<string, AnswerModel>)
 
-        setLoadingApi(100)
+        setLoadingApi({seconds: 100, textType: 'paths'})
         const paths = await timelineService
             .getPathsFromOpenAI(answers, totalDays, startDay, mainStep)
         setLoadingApi(null)
@@ -101,7 +101,7 @@ export function Mentor({
     }
 
     async function onChoosingPath(steps : StepModel[]){
-        setLoadingApi(20)
+        setLoadingApi({seconds: 20, textType: 'choose-path'})
         const stepsWithImages = await timelineService.addImagesFromOpenAI(steps)
         setLoadingApi(null)
         replaceSteps(stepsWithImages)
@@ -143,7 +143,8 @@ export function Mentor({
 
             {   loadingApi &&
                 <LoadingScreen
-                    howManySeconds={loadingApi}
+                    howManySeconds={loadingApi.seconds}
+                    loadingText={loadingApi.textType}
                 />
             }
 

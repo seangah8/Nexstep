@@ -131,7 +131,6 @@ async function insertImages(steps: StepModel[]): Promise<StepModel[]> {
       Description: "${step.description}"
       
       STYLE RULES:
-      • background must be dark gray, illustration must be bright red-pink gradient color.
       • No text or typography
       `
       

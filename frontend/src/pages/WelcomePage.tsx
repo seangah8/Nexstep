@@ -13,7 +13,7 @@ export function WelcomePage(){
     const [imageUrl, setImageUrl] = useState<string | null>(null)
     const [daysAmount, setDaysAmount] = useState<number>(100)
     const [page, setPage] = useState<number>(0)
-    const [loadingApi, setLoadingApi] = useState<number | null>(null)
+    const [loadingApi, setLoadingApi] = useState<{seconds :number, textType: string} | null>(null)
 
     function onClickBack(){
         setPage(prev=>prev-1)
@@ -48,7 +48,7 @@ export function WelcomePage(){
 
     async function onCreateNewTimeline(){
         const waitingTime = imageUrl ? 3 : 25
-        setLoadingApi(waitingTime)
+        setLoadingApi({seconds: waitingTime, textType: 'create-timeline'})
         await timelineActions.createTimeline(title, description, imageUrl, daysAmount)
         setLoadingApi(null)
         navigation('/timeline')
@@ -147,7 +147,8 @@ export function WelcomePage(){
 
             {   loadingApi &&
                 <LoadingScreen
-                    howManySeconds={loadingApi}
+                    howManySeconds={loadingApi.seconds}
+                    loadingText={loadingApi.textType}
                 />
             }
 

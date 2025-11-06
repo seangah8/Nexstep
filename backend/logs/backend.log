@@ -6199,3 +6199,52 @@ Error: timeline not found
 6.11.2025, 6:49:02 - INFO - Visited route | /paths
 6.11.2025, 6:51:14 - INFO - Visited route | /steps-images
 6.11.2025, 6:51:29 - INFO - Visited route | /
+6.11.2025, 7:04:00 - INFO - Visited route | /paths
+7.11.2025, 0:17:31 - INFO - Up and running on http://localhost:3000
+7.11.2025, 0:18:54 - INFO - Visited route | /login
+7.11.2025, 0:18:54 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+7.11.2025, 0:18:54 - INFO - Visited route | /:userId
+7.11.2025, 0:18:55 - INFO - Visited route | /
+7.11.2025, 0:18:56 - INFO - Visited route | /:userId
+7.11.2025, 0:18:56 - INFO - Visited route | /
+7.11.2025, 0:22:10 - INFO - Up and running on http://localhost:3000
+7.11.2025, 0:22:35 - INFO - Visited route | /paths
+7.11.2025, 0:51:46 - INFO - Visited route | /paths
+7.11.2025, 0:53:13 - INFO - Visited route | /paths
+7.11.2025, 0:54:32 - INFO - Visited route | /paths
+7.11.2025, 0:55:00 - INFO - Visited route | /paths
+7.11.2025, 0:57:46 - INFO - Visited route | /login
+7.11.2025, 0:57:46 - ERROR - while finding user by username: u16 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+7.11.2025, 0:57:46 - ERROR - Failed to login: Unknown username
+7.11.2025, 0:57:49 - INFO - Visited route | /signup
+7.11.2025, 0:57:49 - DEBUG - auth.service - signup with username: u16
+7.11.2025, 0:57:49 - ERROR - while finding user by username: u16 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+7.11.2025, 0:57:49 - DEBUG - auth.route - new account created: {"username":"u16","_id":"690d27edefd86276fa108c24"}
+7.11.2025, 0:57:49 - INFO - User signup: | {"_id":"690d27edefd86276fa108c24","username":"u16"}
+7.11.2025, 0:57:50 - INFO - Visited route | /:userId
+7.11.2025, 0:57:50 - ERROR - while finding timeline by user: 690d27edefd86276fa108c24 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+7.11.2025, 0:57:50 - ERROR - timeline not found!
+7.11.2025, 0:59:08 - INFO - Visited route | /
+7.11.2025, 0:59:28 - INFO - Visited route | /:userId
+7.11.2025, 0:59:28 - INFO - Visited route | /
+7.11.2025, 0:59:56 - INFO - Visited route | /paths
+7.11.2025, 1:01:38 - INFO - Visited route | /steps-images
+7.11.2025, 1:01:59 - INFO - Visited route | /
+7.11.2025, 1:09:37 - INFO - Visited route | /:userId
+7.11.2025, 1:09:37 - INFO - Visited route | /steps-images
+7.11.2025, 1:09:38 - INFO - Visited route | /
