@@ -93,7 +93,7 @@ export function Mentor({
             return acc
         }, {} as Record<string, AnswerModel>)
 
-        setLoadingApi(90)
+        setLoadingApi(100)
         const paths = await timelineService
             .getPathsFromOpenAI(answers, totalDays, startDay, mainStep)
         setLoadingApi(null)

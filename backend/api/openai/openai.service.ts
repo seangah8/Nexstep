@@ -64,18 +64,13 @@ async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsMode
           Generate 3-6 possible paths. Each path must:
 
           - Have a **'title'** (1–3 words), **'description'**, and an **'icon'** property that contains a valid **inline SVG string**.  
-SVG RULES:
-• Must include: xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24".
-• Use <path>, <circle>, <rect>, <line>, or <polygon> only.
-• Use fill="currentColor" (solid icon, no strokes, no gradients, no text).
-• Keep it simple and centered (under 8 shapes total).
-• The icon must visually match the main idea of the title — pick a simple symbol that best represents it (e.g., “science” → atom or flask, “space” → rocket, “government” → building, “learning” → book).
-• Prefer small, recognizable silhouettes (e.g., rocket for space, flask for science, briefcase for business, book for learning).
-• If concept is abstract, combine two objects (e.g., rocket + person for “Citizen Astronaut”).
-• Output only the <svg> element.
+          SVG RULES:
+            • Must include: xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24".
+            • The icon must visually match the main idea of the title — pick a simple symbol that best represents it (e.g., “science” → atom or flask, “space” → rocket, “government” → building, “learning” → book).
+            • Output only the <svg> element.
 
-Example (rocket icon):
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 2C9 5 8 9 8 13l-2 2v3l3-1 2 2h2l2-2 3 1v-3l-2-2c0-4-1-8-4-11zM12 9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/> </svg>
+            Example (rocket icon):
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 2C9 5 8 9 8 13l-2 2v3l3-1 2 2h2l2-2 3 1v-3l-2-2c0-4-1-8-4-11zM12 9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/> </svg>
 
           - Contain a **'value'** array of 2 to 10 steps.  
           - Each step must include:  
@@ -129,12 +124,17 @@ async function insertImages(steps: StepModel[]): Promise<StepModel[]> {
 
   const updatedSteps = await Promise.all(
     steps.map(async (step) => {
+
       const prompt = `
-        Minimal flat illustration representing the following goal:
-        Title: "${step.title}"
-        Description: "${step.description}"
-        Style: flat icon, simple background, no text, soft colors, clear symbolism.
+      Create an illustration for the following goal:
+      Title: "${step.title}"
+      Description: "${step.description}"
+      
+      STYLE RULES:
+      • background must be dark gray, illustration must be bright red-pink gradient color.
+      • No text or typography
       `
+      
 
       const answer = await OPEN_AI.images.generate({
         model: "gpt-image-1-mini",

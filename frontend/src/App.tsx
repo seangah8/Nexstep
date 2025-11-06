@@ -56,7 +56,7 @@ design
 
 9. make welcome page look better when converting ✅
 10. make the paths icon fron open ai better looking ✅
-11. make the opem ai images fite to the theme
+11. make the open ai images fit with app theme ✅
 
 
 

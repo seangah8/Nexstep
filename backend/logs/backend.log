@@ -5962,3 +5962,240 @@ Error: timeline not found
 5.11.2025, 6:39:09 - INFO - Visited route | /:userId
 5.11.2025, 6:39:10 - INFO - Visited route | /
 5.11.2025, 6:39:15 - INFO - Visited route | /paths
+5.11.2025, 23:26:12 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:26:51 - INFO - Visited route | /login
+5.11.2025, 23:26:52 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+5.11.2025, 23:26:52 - INFO - Visited route | /:userId
+5.11.2025, 23:26:52 - INFO - Visited route | /
+5.11.2025, 23:26:53 - INFO - Visited route | /:userId
+5.11.2025, 23:26:53 - INFO - Visited route | /
+5.11.2025, 23:27:00 - INFO - Visited route | /
+5.11.2025, 23:27:52 - INFO - Visited route | /paths
+5.11.2025, 23:34:35 - INFO - Visited route | /steps-images
+5.11.2025, 23:34:57 - INFO - Visited route | /
+5.11.2025, 23:37:14 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:39:58 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:40:11 - INFO - Visited route | /paths
+5.11.2025, 23:42:48 - INFO - Visited route | /steps-images
+5.11.2025, 23:43:08 - INFO - Visited route | /
+5.11.2025, 23:48:00 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:48:06 - INFO - Visited route | /paths
+5.11.2025, 23:50:28 - INFO - Visited route | /steps-images
+5.11.2025, 23:50:51 - INFO - Visited route | /
+5.11.2025, 23:52:19 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:52:30 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:52:34 - INFO - Visited route | /paths
+5.11.2025, 23:54:09 - INFO - Visited route | /steps-images
+5.11.2025, 23:54:26 - INFO - Visited route | /
+5.11.2025, 23:54:58 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:55:15 - INFO - Visited route | /paths
+5.11.2025, 23:57:28 - INFO - Visited route | /steps-images
+5.11.2025, 23:57:44 - INFO - Visited route | /
+5.11.2025, 23:58:10 - INFO - Visited route | /
+5.11.2025, 23:59:21 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:59:39 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:59:47 - INFO - Up and running on http://localhost:3000
+5.11.2025, 23:59:53 - INFO - Visited route | /paths
+6.11.2025, 0:01:19 - INFO - Visited route | /steps-images
+6.11.2025, 0:01:36 - INFO - Visited route | /
+6.11.2025, 0:01:56 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:02:16 - INFO - Visited route | /paths
+6.11.2025, 0:04:34 - INFO - Visited route | /steps-images
+6.11.2025, 0:04:51 - INFO - Visited route | /
+6.11.2025, 0:08:43 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:08:49 - INFO - Visited route | /paths
+6.11.2025, 0:10:45 - INFO - Visited route | /steps-images
+6.11.2025, 0:11:02 - INFO - Visited route | /
+6.11.2025, 0:11:28 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:12:37 - INFO - Visited route | /paths
+6.11.2025, 0:14:38 - INFO - Visited route | /steps-images
+6.11.2025, 0:14:54 - INFO - Visited route | /
+6.11.2025, 0:20:55 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:21:00 - INFO - Visited route | /paths
+6.11.2025, 0:23:18 - INFO - Visited route | /steps-images
+6.11.2025, 0:23:39 - INFO - Visited route | /
+6.11.2025, 0:26:17 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:26:23 - INFO - Visited route | /paths
+6.11.2025, 0:27:53 - INFO - Visited route | /paths
+6.11.2025, 0:29:28 - INFO - Visited route | /steps-images
+6.11.2025, 0:29:52 - INFO - Visited route | /
+6.11.2025, 0:36:20 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:36:27 - INFO - Visited route | /paths
+6.11.2025, 0:42:22 - INFO - Visited route | /steps-images
+6.11.2025, 0:42:39 - INFO - Visited route | /
+6.11.2025, 0:47:33 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:47:41 - INFO - Visited route | /paths
+6.11.2025, 0:49:41 - INFO - Visited route | /steps-images
+6.11.2025, 0:50:00 - INFO - Visited route | /
+6.11.2025, 0:56:38 - INFO - Up and running on http://localhost:3000
+6.11.2025, 0:56:45 - INFO - Visited route | /paths
+6.11.2025, 0:58:57 - INFO - Visited route | /steps-images
+6.11.2025, 0:59:14 - INFO - Visited route | /
+6.11.2025, 1:07:05 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:07:10 - INFO - Visited route | /paths
+6.11.2025, 1:09:04 - INFO - Visited route | /steps-images
+6.11.2025, 1:09:22 - INFO - Visited route | /
+6.11.2025, 1:10:33 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:12:16 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:12:28 - INFO - Visited route | /paths
+6.11.2025, 1:14:46 - INFO - Visited route | /steps-images
+6.11.2025, 1:15:03 - INFO - Visited route | /
+6.11.2025, 1:15:47 - INFO - Visited route | /
+6.11.2025, 1:15:47 - INFO - Visited route | /
+6.11.2025, 1:17:17 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:17:21 - INFO - Visited route | /paths
+6.11.2025, 1:19:47 - INFO - Visited route | /steps-images
+6.11.2025, 1:20:03 - INFO - Visited route | /
+6.11.2025, 1:21:01 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:21:06 - INFO - Visited route | /paths
+6.11.2025, 1:22:45 - INFO - Visited route | /steps-images
+6.11.2025, 1:23:01 - INFO - Visited route | /
+6.11.2025, 1:23:52 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:24:39 - INFO - Up and running on http://localhost:3000
+6.11.2025, 1:24:43 - INFO - Visited route | /paths
+6.11.2025, 1:26:16 - INFO - Visited route | /steps-images
+6.11.2025, 1:26:32 - INFO - Visited route | /
+6.11.2025, 5:44:03 - INFO - Up and running on http://localhost:3000
+6.11.2025, 5:47:36 - INFO - Up and running on http://localhost:3000
+6.11.2025, 5:47:48 - INFO - Up and running on http://localhost:3000
+6.11.2025, 5:47:50 - INFO - Up and running on http://localhost:3000
+6.11.2025, 5:47:59 - INFO - Visited route | /login
+6.11.2025, 5:47:59 - INFO - User login: | {"_id":"68f2ad84121982f2e6eba302","username":"u6"}
+6.11.2025, 5:47:59 - INFO - Visited route | /:userId
+6.11.2025, 5:48:00 - INFO - Visited route | /
+6.11.2025, 5:48:01 - INFO - Visited route | /:userId
+6.11.2025, 5:48:01 - INFO - Visited route | /
+6.11.2025, 5:48:08 - INFO - Visited route | /paths
+6.11.2025, 5:50:21 - INFO - Visited route | /steps-images
+6.11.2025, 5:50:39 - INFO - Visited route | /
+6.11.2025, 5:51:44 - INFO - Up and running on http://localhost:3000
+6.11.2025, 5:51:50 - INFO - Visited route | /steps-images
+6.11.2025, 5:51:53 - INFO - Visited route | /:userId
+6.11.2025, 5:51:53 - INFO - Visited route | /
+6.11.2025, 5:51:57 - INFO - Visited route | /paths
+6.11.2025, 5:53:36 - INFO - Visited route | /steps-images
+6.11.2025, 5:53:50 - INFO - Visited route | /
+6.11.2025, 5:53:55 - INFO - Visited route | /
+6.11.2025, 5:53:56 - INFO - Visited route | /
+6.11.2025, 5:53:58 - INFO - Visited route | /
+6.11.2025, 5:55:20 - INFO - Up and running on http://localhost:3000
+6.11.2025, 5:55:21 - INFO - Visited route | /steps-images
+6.11.2025, 5:55:23 - INFO - Visited route | /:userId
+6.11.2025, 5:55:24 - INFO - Visited route | /
+6.11.2025, 5:55:38 - INFO - Visited route | /paths
+6.11.2025, 5:57:20 - INFO - Visited route | /steps-images
+6.11.2025, 5:57:41 - INFO - Visited route | /
+6.11.2025, 6:00:10 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:02:47 - INFO - Visited route | /paths
+6.11.2025, 6:04:24 - INFO - Visited route | /steps-images
+6.11.2025, 6:04:40 - INFO - Visited route | /
+6.11.2025, 6:06:59 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:07:04 - INFO - Visited route | /paths
+6.11.2025, 6:08:35 - INFO - Visited route | /steps-images
+6.11.2025, 6:08:54 - INFO - Visited route | /
+6.11.2025, 6:08:59 - INFO - Visited route | /
+6.11.2025, 6:09:00 - INFO - Visited route | /
+6.11.2025, 6:09:01 - INFO - Visited route | /
+6.11.2025, 6:09:02 - INFO - Visited route | /
+6.11.2025, 6:09:03 - INFO - Visited route | /
+6.11.2025, 6:09:04 - INFO - Visited route | /
+6.11.2025, 6:09:05 - INFO - Visited route | /
+6.11.2025, 6:09:06 - INFO - Visited route | /
+6.11.2025, 6:09:08 - INFO - Visited route | /
+6.11.2025, 6:09:09 - INFO - Visited route | /
+6.11.2025, 6:09:32 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:09:50 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:10:20 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:10:26 - INFO - Visited route | /paths
+6.11.2025, 6:12:44 - INFO - Visited route | /steps-images
+6.11.2025, 6:12:59 - INFO - Visited route | /
+6.11.2025, 6:13:40 - INFO - Visited route | /
+6.11.2025, 6:13:41 - INFO - Visited route | /
+6.11.2025, 6:13:42 - INFO - Visited route | /
+6.11.2025, 6:13:43 - INFO - Visited route | /
+6.11.2025, 6:13:44 - INFO - Visited route | /
+6.11.2025, 6:13:49 - INFO - Visited route | /
+6.11.2025, 6:13:49 - INFO - Visited route | /
+6.11.2025, 6:13:51 - INFO - Visited route | /
+6.11.2025, 6:13:52 - INFO - Visited route | /
+6.11.2025, 6:13:53 - INFO - Visited route | /
+6.11.2025, 6:13:54 - INFO - Visited route | /
+6.11.2025, 6:13:56 - INFO - Visited route | /
+6.11.2025, 6:13:56 - INFO - Visited route | /
+6.11.2025, 6:13:57 - INFO - Visited route | /
+6.11.2025, 6:13:58 - INFO - Visited route | /
+6.11.2025, 6:14:00 - INFO - Visited route | /
+6.11.2025, 6:14:51 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:14:56 - INFO - Visited route | /paths
+6.11.2025, 6:16:21 - INFO - Visited route | /steps-images
+6.11.2025, 6:16:38 - INFO - Visited route | /
+6.11.2025, 6:18:03 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:18:22 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:18:46 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:18:54 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:18:59 - INFO - Visited route | /paths
+6.11.2025, 6:20:04 - INFO - Visited route | /steps-images
+6.11.2025, 6:20:24 - INFO - Visited route | /
+6.11.2025, 6:21:29 - INFO - Visited route | /
+6.11.2025, 6:25:40 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:25:44 - INFO - Visited route | /paths
+6.11.2025, 6:26:34 - INFO - Visited route | /steps-images
+6.11.2025, 6:26:52 - INFO - Visited route | /
+6.11.2025, 6:27:13 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:27:19 - INFO - Visited route | /paths
+6.11.2025, 6:28:32 - INFO - Visited route | /steps-images
+6.11.2025, 6:28:50 - INFO - Visited route | /
+6.11.2025, 6:29:33 - INFO - Visited route | /login
+6.11.2025, 6:29:33 - INFO - User login: | {"_id":"68fae6bf475ef6726e13e1fb","username":"u13"}
+6.11.2025, 6:29:33 - INFO - Visited route | /:userId
+6.11.2025, 6:29:34 - INFO - Visited route | /
+6.11.2025, 6:29:36 - INFO - Visited route | /:userId
+6.11.2025, 6:29:36 - INFO - Visited route | /
+6.11.2025, 6:30:02 - INFO - Visited route | /paths
+6.11.2025, 6:31:00 - INFO - Visited route | /steps-images
+6.11.2025, 6:31:23 - INFO - Visited route | /
+6.11.2025, 6:32:31 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:32:51 - INFO - Visited route | /
+6.11.2025, 6:32:51 - INFO - Visited route | /
+6.11.2025, 6:32:52 - INFO - Visited route | /
+6.11.2025, 6:32:53 - INFO - Visited route | /
+6.11.2025, 6:33:26 - INFO - Visited route | /signup
+6.11.2025, 6:33:26 - DEBUG - auth.service - signup with username: u14
+6.11.2025, 6:33:26 - ERROR - Failed to signup: Username already taken
+6.11.2025, 6:33:31 - INFO - Visited route | /signup
+6.11.2025, 6:33:31 - DEBUG - auth.service - signup with username: u15
+6.11.2025, 6:33:31 - ERROR - while finding user by username: u15 | User not found
+Error: User not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:56:34)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\user\user.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.11.2025, 6:33:31 - DEBUG - auth.route - new account created: {"username":"u15","_id":"690c251b019fe13808b555a8"}
+6.11.2025, 6:33:32 - INFO - User signup: | {"_id":"690c251b019fe13808b555a8","username":"u15"}
+6.11.2025, 6:33:32 - INFO - Visited route | /:userId
+6.11.2025, 6:33:32 - ERROR - while finding timeline by user: 690c251b019fe13808b555a8 | timeline not found
+Error: timeline not found
+    at Object.<anonymous> (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:34:26)
+    at Generator.next (<anonymous>)
+    at fulfilled (C:\Users\seang\Documents\Study\React\Nextep\backend\api\timeline\timeline.service.ts:5:58)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+6.11.2025, 6:33:32 - ERROR - timeline not found!
+6.11.2025, 6:35:26 - INFO - Visited route | /
+6.11.2025, 6:35:40 - INFO - Visited route | /:userId
+6.11.2025, 6:35:40 - INFO - Visited route | /
+6.11.2025, 6:35:54 - INFO - Visited route | /paths
+6.11.2025, 6:38:18 - INFO - Visited route | /steps-images
+6.11.2025, 6:38:35 - INFO - Visited route | /
+6.11.2025, 6:41:10 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:41:16 - INFO - Visited route | /paths
+6.11.2025, 6:43:25 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:43:32 - INFO - Visited route | /paths
+6.11.2025, 6:45:26 - INFO - Visited route | /steps-images
+6.11.2025, 6:45:42 - INFO - Visited route | /
+6.11.2025, 6:48:12 - INFO - Visited route | /paths
+6.11.2025, 6:48:53 - INFO - Up and running on http://localhost:3000
+6.11.2025, 6:48:55 - INFO - Visited route | /:userId
+6.11.2025, 6:48:55 - INFO - Visited route | /
+6.11.2025, 6:49:02 - INFO - Visited route | /paths
+6.11.2025, 6:51:14 - INFO - Visited route | /steps-images
+6.11.2025, 6:51:29 - INFO - Visited route | /
