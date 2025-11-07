@@ -62,9 +62,9 @@ export function HoverOptionModal({option, mainStep, today} : HoverOptionModalPro
                             
                             <ul>
                                 {option.value.map(step => {
-                                    const precantage = 100* ((step.end - startDay) / totalDays)
+                                    const precantage = 91 * ((step.end - startDay) / totalDays) + 3
                                     return(
-                                    <div key={step.id} className="step" style={{top: `calc(${precantage}% + 4% - 25px)`}}>
+                                    <div key={step.id} className="step" style={{top: `${precantage}%`}}>
                                         <i className="fa-solid fa-circle"></i>
                                         <li key={step.id}>
                                             {step.title}

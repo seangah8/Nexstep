@@ -35,6 +35,7 @@
             h3{
                 font-size: 2.5rem;
                 margin-top: 5%;
+                margin-bottom: 3%;
             }
 
             h4{
@@ -117,11 +118,12 @@
                 ul{
                     margin: 0;
                     padding: 10px;
-                    height: 70%;
+                    height: 100%;
                     list-style: none;
 
                     .step{
-                        position: relative;
+                        right: 20px;
+                        position: absolute;
                         display: flex;
                         flex-direction: row-reverse;
                         justify-content: end;

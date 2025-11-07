@@ -2,6 +2,7 @@ import { MentorQuestionModel } from "../models/timeline.models";
 
 export function getMentorQuestions(): MentorQuestionModel[] {
   const mentorQuestions: MentorQuestionModel[] = [
+
     {
       question: 'How many *hours per week* are you willing to work on this goal?',
       key: 'time_commitment',
@@ -67,96 +68,47 @@ export function getMentorQuestions(): MentorQuestionModel[] {
       ],
       answer: null,
     },
+
     {
-      question: 'Do you prefer a *steady* path or one that takes *bold* leaps forward?',
-      key: 'risk_style',
-      label: 'Approach to risk and pace',
-      meaning:
-        'Represents the user’s attitude toward risk and how they want their progress to unfold — steady and predictable or bold and high-impact.',
-      options: [
+      "question": "What is your current *experience* level with this goal?",
+      "key": "experience_level",
+      "label": "Experience level for this goal",
+      "meaning": "Represents how familiar the user already is with the goal. Helps shape the difficulty, pacing, and depth of the path steps so they match the user’s real starting point.",
+      "options": [
         {
-          icon: '<i class="fa-solid fa-shield-halved"></i>',
-          title: 'Conservative',
-          value: 'conservative_path_low_risk',
-          description:
-            'You’ll take a steady path where each step is secure and well-planned. Progress will build through reliability, patience, and proven methods. It’s the safest way forward — less excitement, but a strong chance of reaching your goal.',
+          "icon": '<i class="fa-solid fa-book"></i>',
+          "title": "Complete Beginner",
+          "value": "experience_complete_beginner",
+          "description": "You’re starting from scratch, with little to no prior exposure. This path will begin with simple, approachable steps that build confidence and clarity before introducing anything complex. It’s the perfect place to grow steadily and safely."
         },
         {
-          icon: '<i class="fa-solid fa-scale-balanced"></i>',
-          title: 'Balanced',
-          value: 'balanced_path_moderate_risk',
-          description:
-            'You’ll move forward with a mix of caution and confidence. Some moments will call for careful judgment, others for bold action — and you’ll know how to find that middle ground. This path offers stable progress with just enough flexibility to grow.',
+          "icon": '<i class="fa-solid fa-chess-pawn"></i>',
+          "title": "Basic Familiarity",
+          "value": "experience_basic_familiarity",
+          "description": "You have a light understanding of the area and some awareness of its core ideas. Maybe you’ve explored a bit, tried small actions, or gained a general sense of what the journey involves. This path will reinforce your foundation while helping you build steady confidence and direction."
         },
         {
-          icon: '<i class="fa-solid fa-compass"></i>',
-          title: 'Adaptive',
-          value: 'adaptive_path_flexible_strategy',
-          description:
-            'You’ll stay flexible, learning to adjust your course as conditions change. Not every move will be perfect, but each one will teach you something useful. This mindset will help you turn uncertainty into opportunity while staying grounded.',
+          "icon": '<i class="fa-solid fa-chess-knight"></i>',
+          "title": "Intermediate",
+          "value": "experience_intermediate",
+          "description": "You have practical experience and know your way around the basics. You’re ready for more structured progress, more challenging tasks, and deeper refinement to push past plateaus and expand your capabilities."
         },
         {
-          icon: '<i class="fa-solid fa-fire"></i>',
-          title: 'Bold',
-          value: 'bold_path_high_risk_high_reward',
-          description:
-            'You’ll take daring steps and trust your instincts when opportunity appears. Some risks may not pay off, but the lessons will sharpen your strategy and courage. It’s a path for those who seek growth through challenge and action.',
+          "icon": '<i class="fa-solid fa-chess-rook"></i>',
+          "title": "Advanced",
+          "value": "experience_advanced",
+          "description": "You’re already skilled, with meaningful experience. This path will focus on mastery, efficiency, and sharpening your strengths through higher-level strategies and specialized techniques that match your expertise."
         },
         {
-          icon: '<i class="fa-solid fa-rocket"></i>',
-          title: 'Adventurous',
-          value: 'adventurous_path_risk_taker',
-          description:
-            'You’ll chase your goal with passion and fearless creativity, venturing beyond what’s familiar. The rewards can be extraordinary, but the path won’t always be predictable or guaranteed. It’s a journey for dreamers who accept risk as the price of discovery.',
-        },
+          "icon": '<i class="fa-solid fa-chess-queen"></i>',
+          "title": "Professional",
+          "value": "experience_expert_professional",
+          "description": "You operate at a high level with deep knowledge and proven experience. This path will challenge you with visionary goals, optimization strategies, and ways to scale your impact. It’s about breakthroughs, innovation, and pushing the limits of what’s possible."
+        }
       ],
-      answer: null,
+      "answer": null
     },
-    {
-      question: 'How do you prefer your *workflow*?',
-      key: 'workflow_style',
-      label: 'Preferred pace and structure of work',
-      meaning:
-        'Represents how the user likes to approach tasks — from slow, detailed planning to fast, iterative action cycles.',
-      options: [
-        {
-          icon: '<i class="fa-solid fa-shield"></i>',
-          title: 'Meticulous',
-          value: 'meticulous_workflow_precise_and_slow',
-          description:
-            'You’ll move through your goals with patience and precision. Each step will be carefully thought out, leaving little room for mistakes. It’ll be a path of mastery — slower, but deeply rewarding as every detail falls into place.',
-        },
-        {
-          icon: '<i class="fa-solid fa-lines-leaning"></i>',
-          title: 'Deliberate',
-          value: 'deliberate_workflow_intentional_and_steady',
-          description:
-            'You’ll take time to plan and act with intention. Progress will come from thoughtful choices and steady focus. Each step will feel meaningful, guided by clarity rather than urgency.',
-        },
-        {
-          icon: '<i class="fa-solid fa-scale-balanced"></i>',
-          title: 'Balanced',
-          value: 'balanced_workflow_mixed_pace',
-          description:
-            'You’ll find a rhythm between careful planning and forward motion. Some steps will take time, others will move quickly — all at a pace that feels natural. This balance will keep your growth steady and sustainable.',
-        },
-        {
-          icon: '<i class="fa-solid fa-feather-pointed"></i>',
-          title: 'Fast Paced',
-          value: 'fast_paced_workflow_high_momentum',
-          description:
-            'You’ll keep momentum high, turning ideas into action without hesitation. Progress will come from motion, experimentation, and learning as you go. This approach will bring energy, variety, and a sense of constant movement toward your goal.',
-        },
-        {
-          icon: '<i class="fa-solid fa-bolt"></i>',
-          title: 'Iterative',
-          value: 'iterative_workflow_test_and_improve',
-          description:
-            'You’ll advance through frequent cycles of testing, improving, and refining. Each small win will teach you something new and sharpen your next move. Over time, these quick iterations will evolve into powerful, lasting progress.',
-        },
-      ],
-      answer: null,
-    },
+
     {
       question: '*Solo* focus or *team* energy - what drives you?',
       key: 'collaboration_style',
@@ -188,6 +140,93 @@ export function getMentorQuestions(): MentorQuestionModel[] {
       ],
       answer: null,
     },
+
+    {
+      question: 'Do you prefer a *steady* path or one that takes *bold* leaps forward?',
+      key: 'risk_style',
+      label: 'Approach to risk and pace',
+      meaning:
+        'Represents the user’s attitude toward risk and how they want their progress to unfold — steady and predictable or bold and high-impact.',
+      options: [
+        {
+          icon: '<i class="fa-solid fa-shield"></i>',
+          title: 'Conservative',
+          value: 'conservative_path_low_risk',
+          description:
+            'You’ll take a steady path where each step is secure and well-planned. Progress will build through reliability, patience, and proven methods. It’s the safest way forward — less excitement, but a strong chance of reaching your goal.',
+        },
+        {
+          icon: '<i class="fa-solid fa-scale-balanced"></i>',
+          title: 'Balanced',
+          value: 'balanced_path_moderate_risk',
+          description:
+            'You’ll move forward with a mix of caution and confidence. Some moments will call for careful judgment, others for bold action — and you’ll know how to find that middle ground. This path offers stable progress with just enough flexibility to grow.',
+        },
+        {
+          icon: '<i class="fa-solid fa-compass"></i>',
+          title: 'Adaptive',
+          value: 'adaptive_path_flexible_strategy',
+          description:
+            'You’ll stay flexible, learning to adjust your course as conditions change. Not every move will be perfect, but each one will teach you something useful. This mindset will help you turn uncertainty into opportunity while staying grounded.',
+        },
+        {
+          icon: '<i class="fa-solid fa-fire"></i>',
+          title: 'Bold',
+          value: 'bold_path_high_risk_high_reward',
+          description:
+            'You’ll take daring steps and trust your instincts when opportunity appears. Some risks may not pay off, but the lessons will sharpen your strategy and courage. It’s a path for those who seek growth through challenge and action.',
+        },
+        {
+          icon: '<i class="fa-solid fa-mountain-sun"></i>',
+          title: 'Adventurous',
+          value: 'adventurous_path_risk_taker',
+          description:
+            'You’ll chase your goal with passion and fearless creativity, venturing beyond what’s familiar. The rewards can be extraordinary, but the path won’t always be predictable or guaranteed. It’s a journey for dreamers who accept risk as the price of discovery.',
+        },
+      ],
+      answer: null,
+    },
+
+    {
+      "question": "What *pace* of transformation feels right for you?",
+      "key": "pace_speed",
+      "label": "Preferred transformation pace",
+      "meaning": "Defines how fast or gradual the user wants their journey to feel. This influences the size of each step, the level of intensity, and the approximate total number of steps the final path may contain.",
+      "options": [
+        {
+          "icon": '<i class="fa-solid fa-otter"></i>',
+          "title": "Gradual Pace",
+          "value": "pace_gradual",
+          "description": "You prefer a slower progression with fewer, larger steps. Each step is broad and long-lasting, giving you plenty of time to focus deeply before moving to the next phase."
+        },
+        {
+          "icon": '<i class="fa-solid fa-person-hiking"></i>',
+          "title": "Steady Pace",
+          "value": "pace_steady",
+          "description": "You want a relaxed but consistent rhythm. Steps are moderately sized and spaced out, giving you a comfortable amount of time to complete each one without rush."
+        },
+        {
+          "icon": '<i class="fa-solid fa-sailboat"></i>',
+          "title": "Balanced Pace",
+          "value": "pace_balanced",
+          "description": "You prefer an even distribution of progress — a reasonable number of steps with a healthy balance between duration and momentum. Neither too slow nor too fast."
+        },
+        {
+          "icon": '<i class="fa-solid fa-helicopter"></i>',
+          "title": "Elevated Pace",
+          "value": "pace_elevated",
+          "description": "You want faster forward movement with more frequent steps. Each step is smaller and transitions come sooner, keeping momentum active and engaging."
+        },
+        {
+          "icon": '<i class="fa-solid fa-rocket"></i>',
+          "title": "Intensive Pace",
+          "value": "pace_intensive",
+          "description": "You prefer rapid progression with many short steps. The journey moves quickly, with frequent milestones and continuous change, ideal for fast transformation."
+        }
+      ],
+      "answer": null
+    },
+    
     {
         question: 'What *path* suits you best?',
         key: '',

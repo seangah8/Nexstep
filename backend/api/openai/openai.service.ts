@@ -72,7 +72,7 @@ async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsMode
             Example (rocket icon):
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 2C9 5 8 9 8 13l-2 2v3l3-1 2 2h2l2-2 3 1v-3l-2-2c0-4-1-8-4-11zM12 9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/> </svg>
 
-          - Contain a **'value'** array of 2 to 10 steps.  
+          - Contain a **'value'** array of 2 to 15 steps.  
           - Each step must include:  
             • **'title'**: 1–3 words only  
             • **'description'**:  
@@ -81,8 +81,37 @@ async function paths(infoForOpenAI: InfoForOpenAIModel): Promise<OpenAIPathsMode
                 - The goal must correspond to the time budget. For example, if a step has 60 days, describe a result that realistically takes ~60 days (e.g., "Apply to ~300 targeted roles and refine your materials based on feedback").  
                 - If the step is the **final step**, its description must acknowledge the remaining time and describe how to use it *until the end of the plan* (e.g., "After shipping your portfolio, spend the remaining weeks applying and iterating until day ${infoForOpenAI.goal.days_to_complete}").
 
-          - The total days of all steps in a path must not exceed ${infoForOpenAI.goal.days_to_complete-3} days total.
-          - The two paths must represent clearly different strategies (e.g., conservative vs bold, solo vs collaborative).
+          - The total days of all steps in a path must not exceed ${infoForOpenAI.goal.days_to_complete-2} days total.
+          - The paths must represent clearly different strategies.
+
+          - Use the user's weekly time commitment as a strict constraint in both directions: 
+            when hours are limited, reduce scope and use smaller foundational steps, but when 
+            hours are high, expand the plan with deeper learning, larger projects, broader 
+            skill coverage, and more ambitious milestones that fully utilize the user's available time.
+          - Use the user's experience level to choose the starting point of each path: beginners start with fundamentals, advanced users skip basics, professionals begin with high-level or specialized steps.
+          - Use the user's collaboration style to decide whether steps should be designed for solo work, collaborative tasks, or a mix of both.
+          - Use the user’s risk style as a continuous spectrum of creativity: the more the user leans toward the 
+            adventurous end, the more the path must depart from conventional “by-the-book” methods and 
+            instead introduce fresh, surprising, unconventional, or abnormal strategies that a 
+            typical person would not consider; the more the user leans toward the conservative end, 
+            the more the path should follow stable, traditional, predictable methods, with balanced and 
+            adaptive options sitting naturally between predictability and creativity.
+            Risk style affects the boldness and creativity of the strategy, but it must never reduce or 
+            override the user's actual weekly time capacity; even conservative paths should fully utilize 
+            the user's available hours and produce a realistic amount of progress for that time.
+          - Treat the user's chosen transformation pace as a strict rule for step count: 
+            a gradual or slow pace must produce fewer large steps (2–5 total), 
+            a balanced pace should produce a moderate number of steps (4–8), 
+            and an elevated or intensive pace must produce many smaller steps (8–15). 
+            However, step count must always respect the total days available: 
+            each step must last at least one full day, steps cannot overlap, 
+            and the maximum possible number of steps for any plan is the total days minus two; 
+            if the chosen pace would exceed this limit, scale the step count down to the 
+            maximum feasible number while keeping the relative pacing intention.
+
+
+
+
 
           Do NOT include explanations, comments, or any text outside the JSON in your response.
 
