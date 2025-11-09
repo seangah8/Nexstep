@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node server.ts",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn server.ts"
   },
   "keywords": [],

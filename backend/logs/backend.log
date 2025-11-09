@@ -6496,3 +6496,13 @@ Error: timeline not found
 9.11.2025, 20:04:28 - INFO - Visited route | /
 9.11.2025, 20:04:30 - INFO - Visited route | /:userId
 9.11.2025, 20:04:31 - INFO - Visited route | /
+9.11.2025, 20:06:22 - INFO - Visited route | /login
+9.11.2025, 20:06:22 - INFO - User login: | {"_id":"6910d628fa48e6508b79b30d","username":"u1"}
+9.11.2025, 20:06:23 - INFO - Visited route | /:userId
+9.11.2025, 20:06:23 - INFO - Visited route | /
+9.11.2025, 20:06:24 - INFO - Visited route | /:userId
+9.11.2025, 20:06:24 - INFO - Visited route | /
+9.11.2025, 20:06:26 - INFO - Visited route | /
+9.11.2025, 20:06:27 - INFO - Visited route | /
+9.11.2025, 21:35:58 - INFO - Up and running on http://localhost:3000
+9.11.2025, 21:43:33 - INFO - Up and running on http://localhost:3000
