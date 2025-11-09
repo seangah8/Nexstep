@@ -1,6 +1,6 @@
 import { MongoClient, Db, Collection, Document } from 'mongodb'
 import { loggerService } from './logger.service'
-import { configLocal } from '../config/local.config'
+import { configDB } from '../config/db.config'
 
 export const dbService = {
 	getCollection,
@@ -23,8 +23,8 @@ async function _connect(): Promise<Db> {
 	if (dbConn) return dbConn
 
 	try {
-		const client : MongoClient = await MongoClient.connect(configLocal.dbURL)
-		dbConn = client.db(configLocal.dbName)
+		const client : MongoClient = await MongoClient.connect(configDB.dbURL)
+		dbConn = client.db(configDB.dbName)
 		return dbConn
 	} catch (err: any) {
 		loggerService.error('Cannot Connect to DB', err)
