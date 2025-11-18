@@ -20,7 +20,11 @@ app.use(cookieParser())
 
 
 const corsOptions = {
-  origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
+  origin: [
+    'http://127.0.0.1:5173', 
+    'http://localhost:5173',
+    'https://nexstep-mocha.vercel.app',
+  ],
   credentials: true,
 }
 app.use(cors(corsOptions))
