@@ -56,7 +56,7 @@ export function MentorChat({
                 {
                     isMentorOpen 
                     ? textToReactElement(question)
-                    : <img src="src/assets/nextep_icon.png" alt='nextep_icon'/>
+                    : <img src="/nextep_icon.png" alt='nextep_icon'/>
                 }
                 
             </div>

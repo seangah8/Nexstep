@@ -20,7 +20,7 @@ export function Menu(){
         <section className='menu'>
             <button onClick={()=>setIsOpen(prev=>!prev)}>
                 <img className={`image ${isOpen ? 'turned' : ''}`}
-                    src="src/assets/nextep_icon_black.png" 
+                    src="/nextep_icon_black.png" 
                     alt="nextep-logo" 
                 />
             </button>

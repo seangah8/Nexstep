@@ -8,7 +8,7 @@ export function NextepBackground(){
         <section className="nextep-background">
             {
                 countArr.map((_, index) => 
-                    <img key={index} src="src/assets/nextep_icon.png" alt="nextep-logo"/>
+                    <img key={index} src="/nextep_icon.png" alt="nextep-logo"/>
                 )
             }
         </section>
