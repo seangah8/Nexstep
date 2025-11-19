@@ -8,6 +8,7 @@ import { userActions } from '../store/actions/user.actions'
 import { TimelineModel } from '../models/timeline.models'
 import { timelineService } from '../services/timeline.service'
 import { timelineActions } from '../store/actions/timeline.actions'
+import { useState } from 'react'
 
 
 
@@ -21,6 +22,8 @@ export function UserPage(){
     const timeline = useSelector((storeState : RootState) => 
         storeState.timelineModule.timeline)
 
+    const [isLoading, setIsLoading] = useState(false) 
+
     async function loadTimeline(){
         if(loggedInUser){
             const timeline : TimelineModel | null = 
@@ -30,15 +33,25 @@ export function UserPage(){
         }
     }
 
-    function onLogin(ev: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel) : void{
+    async function onLogin(ev: React.FormEvent<HTMLFormElement>, credentials: CredentialsModel): Promise<void> {
         ev.preventDefault()
-        userActions.login(credentials)
+        setIsLoading(true)
+
+        try { await userActions.login(credentials) } 
+        catch (err) { console.error("Login failed:", err) } 
+        finally { setIsLoading(false) }
     }
+
 
     async function onSignup(ev: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel): Promise<void>{
         ev.preventDefault()
-        await userActions.signup(credentials)
-        navigate('/welcome')
+        setIsLoading(true)
+        try { 
+            await userActions.signup(credentials)
+            navigate('/welcome')
+        } 
+        catch (err) { console.error("Signup failed:", err) } 
+        finally { setIsLoading(false) }
     }
 
     return(
@@ -53,6 +66,7 @@ export function UserPage(){
                 /> 
 
                 : <LoginSignup
+                    isLoading={isLoading}
                     onLogin={onLogin}
                     onSignup={onSignup}
                 />

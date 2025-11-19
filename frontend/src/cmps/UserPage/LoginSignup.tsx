@@ -3,11 +3,12 @@ import { CredentialsModel } from "../../models/user.models"
 import { userService } from "../../services/user.service"
 
 interface LoginProps{
+    isLoading : boolean
     onLogin : (event: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel) => void
     onSignup : (event: React.FormEvent<HTMLFormElement> ,credentials : CredentialsModel) => void
 }
 
-export function LoginSignup( { onLogin, onSignup } : LoginProps ){
+export function LoginSignup( { isLoading, onLogin, onSignup } : LoginProps ){
 
     const [credentials, setCredentials] = useState<CredentialsModel>(
         userService.getEmptyCredentials()
@@ -52,7 +53,9 @@ export function LoginSignup( { onLogin, onSignup } : LoginProps ){
                     />
                 </div>
 
-                <button>{signingUp ? `Signup` : `Login`}</button>
+                <button disabled={isLoading} style={isLoading ? {opacity: 0.5} : {}}>
+                    {isLoading ? 'Loading...' : signingUp ? `Signup` : `Login`}
+                </button>
             </form>
 
             <a onClick={toggleLoginSignup}>
