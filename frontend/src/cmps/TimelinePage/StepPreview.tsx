@@ -131,9 +131,9 @@ export function StepPreview({
         const newStep : StepModel = {
             id: utilService.createId(),
             parentId: nextStep.parentId,
-            title: 'new',
+            title: 'New Step',
             description: '',
-            image: 'src/assets/flag_icon.png',
+            image: '/flag_icon.png',
             end: newStepEnd
         }
         
