@@ -37,13 +37,8 @@ async function signup(req: Request<{}, {}, CredentialsModel>, res: Response): Pr
     res.json(user)
 
   } catch (err) {
-    const error = err as Error
-    console.error('FULL SIGNUP ERROR:', error) // logs in Render
-  
-    res.status(400).send({
-      err: error.message,
-      stack: error.stack // optional (remove later)
-    })
+    loggerService.error('Failed to signup: ' + (err as Error).message)
+    res.status(400).send({ err: 'Failed to signup' })
   }
 }
 
