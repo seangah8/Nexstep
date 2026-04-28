@@ -23,7 +23,10 @@ async function _connect(): Promise<Db> {
 	if (dbConn) return dbConn
 
 	try {
-		const client : MongoClient = await MongoClient.connect(configDB.dbURL)
+		const client : MongoClient = await MongoClient.connect(configDB.dbURL, {
+			tls: true,
+			serverSelectionTimeoutMS: 5000,
+		})
 		dbConn = client.db(configDB.dbName)
 		return dbConn
 	} catch (err: any) {
